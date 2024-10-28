@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ExampleComponent from '@/components/ExampleComponent/ExampleComponent';
-import useExamplePageLogic from '@/pages/ExamplePage/ExamplePageHooks';
-import useExamplePageStyles from '@/pages/ExamplePage/ExamplePageStyles';
+import ExampleComponent from '@/components/ExampleComponent';
+import useExamplePageLogic from '@/pages/ExamplePage/useExamplePage';
+import useExamplePageStyles from '@/pages/ExamplePage/styles';
 
 const ExamplePage = (): React.ReactElement => {
   const { t } = useTranslation();

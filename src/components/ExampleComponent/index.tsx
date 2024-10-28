@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography, TextField, Button } from '@mui/material';
 
-import useExampleComponentLogic from '@/components/ExampleComponent/ExampleComponentHooks';
+import useExampleComponentLogic from '@/components/ExampleComponent/useExampleComponent';
 
 const ExampleComponent = (): React.ReactElement => {
   const { t } = useTranslation();

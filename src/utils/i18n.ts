@@ -10,14 +10,6 @@ const resources = {
       greeting: 'Hello',
     },
   },
-  ua: {
-    translation: {
-      pageTitle: 'Сторінка Прикладу',
-      name: 'Ім’я',
-      submitExample: 'Відправити',
-      greeting: 'Привіт',
-    },
-  },
 };
 
 i18n.use(initReactI18next).init({
