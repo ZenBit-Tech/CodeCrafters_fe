@@ -22,15 +22,15 @@ const Logo: React.FC<LogoProps> = ({
 
   return (
     <LogoContainer>
-      <MainImage src={mainImage} alt={t('logo')} />
+      <MainImage src={mainImage} alt={t('altText.logo')} />
       <CornerImage
         src={topLeftImage}
-        alt={t('key')}
+        alt={t('altText.key')}
         sx={{ top: '-13px', left: '10px' }}
       />
       <CornerImage
         src={bottomRightImage}
-        alt={t('lock')}
+        alt={t('altText.lock')}
         sx={{ bottom: '-10px', right: '0px' }}
       />
     </LogoContainer>

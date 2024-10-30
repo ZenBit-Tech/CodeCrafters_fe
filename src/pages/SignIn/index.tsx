@@ -29,10 +29,10 @@ const SignInPage: React.FC = () => {
 
         <Box sx={rightBoxStyles}>
           <Typography variant="h4" gutterBottom>
-            {t('welcomeMessage')}
+            {t('signin.welcomeMessage')}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            {t('signInInstructions')}
+            {t('signin.instructions')}
           </Typography>
         </Box>
       </Box>
