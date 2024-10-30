@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { COLORS } from './constants/colors';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
@@ -10,19 +11,19 @@ declare module '@mui/material/Button' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#7367F0',
-      light: 'rgba(219, 218, 222, 1)',
+      main: COLORS.main.dark,
     },
     secondary: {
-      main: '#4B465C',
-      light: 'rgba(75, 70, 92, 0.08)',
-      contrastText: 'rgba(255, 255, 255, 1)',
+      main: COLORS.text.dark,
     },
   },
   typography: {
     fontSize: 15,
     fontWeightLight: 400,
     fontFamily: '"Public Sans", sans-serif',
+  },
+  shape: {
+    borderRadius: 6,
   },
   components: {
     MuiButton: {
@@ -33,9 +34,9 @@ const theme = createTheme({
             fontWeight: 500,
             textTransform: 'none',
             backgroundColor: theme.palette.primary.main,
-            borderRadius: 6,
+            borderRadius: theme.shape.borderRadius,
             padding: '10px 20px',
-            color: theme.palette.primary.contrastText,
+            color: COLORS.text.white,
           }),
         },
         {
@@ -49,6 +50,27 @@ const theme = createTheme({
           }),
         },
       ],
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '& label': {
+            color: COLORS.text.light,
+          },
+          color: COLORS.text.light,
+          borderRadius: theme.shape.borderRadius,
+        }),
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: COLORS.green,
+          '&.Mui-checked': {
+            color: COLORS.green,
+          },
+        },
+      },
     },
   },
 });
