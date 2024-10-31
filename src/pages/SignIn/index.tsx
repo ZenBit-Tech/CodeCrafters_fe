@@ -20,7 +20,7 @@ const SignInPage: React.FC = () => {
   const { email, error, handleEmailChange, handleSubmit, config } = useSignIn();
 
   return (
-    <Container maxWidth={false} sx={containerStyles}>
+    <Container maxWidth={false} sx={containerStyles} disableGutters>
       <Box sx={mainBoxStyles}>
         <Box sx={leftBoxStyles}>
           <Logo
