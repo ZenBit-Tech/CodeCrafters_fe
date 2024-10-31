@@ -17,6 +17,8 @@ const resources = {
       signin: {
         welcomeMessage: 'Welcome to Smartporters! 👋',
         instructions: 'Please sign in to your account and start the delivery',
+        email: 'Email',
+        submit: 'Sign In',
       },
     },
   },

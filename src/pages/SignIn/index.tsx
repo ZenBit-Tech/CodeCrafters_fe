@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Typography, Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 import loginLogo from '@/assets/login/logo.svg';
 import keyLogo from '@/assets/login/key.png';
@@ -11,13 +10,17 @@ import {
   mainBoxStyles,
   leftBoxStyles,
   rightBoxStyles,
+  inputBoxStyles,
 } from '@/pages/SignIn/styles';
+import TextInput from '@/components/TextInput';
+import Button from '@/components/Button';
+import useSignIn from '@/pages/SignIn/useSignIn';
 
 const SignInPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { email, error, handleEmailChange, handleSubmit, config } = useSignIn();
 
   return (
-    <Container maxWidth={false} sx={containerStyles} disableGutters>
+    <Container maxWidth={false} sx={containerStyles}>
       <Box sx={mainBoxStyles}>
         <Box sx={leftBoxStyles}>
           <Logo
@@ -28,12 +31,28 @@ const SignInPage: React.FC = () => {
         </Box>
 
         <Box sx={rightBoxStyles}>
-          <Typography variant="h4" gutterBottom>
-            {t('signin.welcomeMessage')}
+          <Typography gutterBottom variant={config.welcomeMessage.variant}>
+            {config.welcomeMessage.text}
           </Typography>
-          <Typography variant="body1" gutterBottom>
-            {t('signin.instructions')}
+          <Typography gutterBottom variant={config.instructions.variant}>
+            {config.instructions.text}
           </Typography>
+          <Box sx={inputBoxStyles}>
+            <TextInput
+              label={config.emailInput.label}
+              type={config.emailInput.type}
+              value={email}
+              onChange={handleEmailChange}
+              error={!!error}
+              helperText={error}
+            />
+            <Button
+              label={config.submitButton.label}
+              variant={config.submitButton.variant}
+              fullWidth
+              onClick={handleSubmit}
+            />
+          </Box>
         </Box>
       </Box>
     </Container>
