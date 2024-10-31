@@ -1,8 +1,9 @@
+import React from 'react';
 import {
   Button as MuiButton,
   ButtonProps as MuiButtonProps,
 } from '@mui/material';
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 export interface ButtonProps extends Omit<MuiButtonProps, 'variant'> {
