@@ -1,4 +1,5 @@
 import React from 'react';
+import ExampleComponent from '@/components/ExampleComponent';
 import useExamplePageStyles from '@/pages/ExamplePage/styles';
 import useExamplePageLogic from '@/pages/ExamplePage/useExamplePage';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +12,7 @@ const ExamplePage = (): React.ReactElement => {
   return (
     <div className={classes.container}>
       <h1>{t(title)}</h1>
+      <ExampleComponent />
     </div>
   );
 };
