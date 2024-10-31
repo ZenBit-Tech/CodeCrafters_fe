@@ -1,43 +1,76 @@
 import { createTheme } from '@mui/material/styles';
+import { COLORS } from './constants/colors';
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    customColors: {
-      border: string;
-    };
-  }
-  interface PaletteOptions {
-    customColors?: {
-      border?: string;
-    };
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    lined: true;
+    colored: true;
   }
 }
 
 const theme = createTheme({
   palette: {
-    background: {
-      default: '#FFFFFF',
-      paper: '#F8F7FA',
+    primary: {
+      main: COLORS.main.dark,
     },
-    text: {
-      primary: '#4B465C',
-    },
-    customColors: {
-      border: '#7367F0',
+    secondary: {
+      main: COLORS.text.dark,
     },
   },
   typography: {
-    h4: {
-      fontSize: '26px',
-      fontWeight: 600,
-      fontFamily: 'Public Sans',
-      color: '#4B465C',
+    fontSize: 15,
+    fontWeightLight: 400,
+    fontFamily: '"Public Sans", sans-serif',
+  },
+  shape: {
+    borderRadius: 6,
+  },
+  components: {
+    MuiButton: {
+      variants: [
+        {
+          props: { variant: 'colored' },
+          style: ({ theme }) => ({
+            fontWeight: 500,
+            textTransform: 'none',
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: theme.shape.borderRadius,
+            padding: '10px 20px',
+            color: COLORS.text.white,
+          }),
+        },
+        {
+          props: { variant: 'lined' },
+          style: ({ theme }) => ({
+            fontWeight: 500,
+            textTransform: 'none',
+            backgroundColor: 'transparent',
+            color: theme.palette.primary.main,
+            border: `1px solid ${theme.palette.primary.main}`,
+          }),
+        },
+      ],
     },
-    body1: {
-      fontSize: '15px',
-      fontWeight: 400,
-      fontFamily: 'Public Sans',
-      color: '#4B465C',
+    MuiTextField: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '& label': {
+            color: COLORS.text.light,
+          },
+          color: COLORS.text.light,
+          borderRadius: theme.shape.borderRadius,
+        }),
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: COLORS.green,
+          '&.Mui-checked': {
+            color: COLORS.green,
+          },
+        },
+      },
     },
   },
 });

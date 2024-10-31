@@ -1,8 +1,8 @@
+import { ThemeProvider } from '@mui/material/styles';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@emotion/react';
 
 import 'normalize.css';
 import App from '@/App';
