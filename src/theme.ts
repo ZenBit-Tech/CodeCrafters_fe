@@ -1,10 +1,12 @@
 import { createTheme } from '@mui/material/styles';
 import { COLORS } from './constants/colors';
+import { FONT } from './constants/font';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     lined: true;
     colored: true;
+    grey: true;
   }
 }
 
@@ -18,9 +20,9 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontSize: 15,
-    fontWeightLight: 400,
-    fontFamily: '"Public Sans", sans-serif',
+    fontSize: FONT.fontSize.medium,
+    fontWeightLight: FONT.fontWeight.small,
+    fontFamily: FONT.family,
   },
   shape: {
     borderRadius: 6,
@@ -31,23 +33,31 @@ const theme = createTheme({
         {
           props: { variant: 'colored' },
           style: ({ theme }) => ({
-            fontWeight: 500,
+            fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: theme.palette.primary.main,
             borderRadius: theme.shape.borderRadius,
-            padding: '10px 20px',
             color: COLORS.text.white,
           }),
         },
         {
           props: { variant: 'lined' },
           style: ({ theme }) => ({
-            fontWeight: 500,
+            fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: 'transparent',
             color: theme.palette.primary.main,
             border: `1px solid ${theme.palette.primary.main}`,
           }),
+        },
+        {
+          props: { variant: 'grey' },
+          style: {
+            fontWeight: FONT.fontWeight.medium,
+            textTransform: 'none',
+            backgroundColor: COLORS.status.completed.bg,
+            color: COLORS.status.completed.text,
+          },
         },
       ],
     },
