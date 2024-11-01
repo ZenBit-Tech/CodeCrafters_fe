@@ -1,16 +1,17 @@
 import React from 'react';
-import { Box, Typography, IconButton } from '@mui/material';
 import NoteIcon from '@mui/icons-material/Note';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Status from '../Status';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import { Box, Typography, IconButton } from '@mui/material';
+import { StatusEnum } from '@/constants/status';
 
 interface DetailedRouteRowProps {
   city: string;
   time: string;
-  status: 'completed' | 'failed' | 'not_arrived' | 'at_risk' | 'upcoming';
+  status: StatusEnum;
 }
 
 const DetailedRouteRow: React.FC<DetailedRouteRowProps> = ({

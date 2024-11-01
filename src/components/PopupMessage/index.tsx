@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button';
 import {
   Dialog,
   DialogActions,
@@ -9,7 +10,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import Button from '../Button';
 
 interface PopupMessageProps {
   open: boolean;
@@ -29,8 +29,8 @@ const PopupMessage: React.FC<PopupMessageProps> = ({
   heading,
   mainMessage,
   subMessage,
-  cancelText = 'Cancel',
-  confirmText = 'Delete',
+  cancelText,
+  confirmText,
 }) => {
   const { t } = useTranslation();
 

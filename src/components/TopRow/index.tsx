@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import React, { useMemo } from 'react';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import PeopleIcon from '@mui/icons-material/People';
 import LocationIcon from '@mui/icons-material/LocationOn';
+import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
@@ -14,14 +14,18 @@ interface CategoryProps {
 }
 
 const CategoryRow: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const categories: CategoryProps[] = [
-    { icon: <CalendarTodayIcon />, label: t('Date management') },
-    { icon: <LuggageIcon />, label: t('Order management') },
-    { icon: <PeopleIcon />, label: t('Driver management') },
-    { icon: <LocationIcon />, label: t('Route management') },
-  ];
+  const categories: CategoryProps[] = useMemo(
+    () => [
+      { icon: <CalendarTodayIcon />, label: t('Date management') },
+      { icon: <LuggageIcon />, label: t('Order management') },
+      { icon: <PeopleIcon />, label: t('Driver management') },
+      { icon: <LocationIcon />, label: t('Route management') },
+    ],
+    [i18n.language]
+  );
+
   return (
     <Box
       display="flex"

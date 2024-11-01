@@ -1,10 +1,10 @@
 import React from 'react';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NoteIcon from '@mui/icons-material/Note';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { Box, IconButton, Typography } from '@mui/material';
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 
 interface RouteInfoProps {
   routeTime: string;

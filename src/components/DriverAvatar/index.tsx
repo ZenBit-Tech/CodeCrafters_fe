@@ -1,7 +1,7 @@
+import React from 'react';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { Avatar } from '@mui/material';
-import React from 'react';
 
 interface DriverAvatarProps {
   firstName: string;

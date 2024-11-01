@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
-import DriverAvatar from '../DriverAvatar';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Status from '../Status';
+import DriverAvatar from '../DriverAvatar';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import Status from '../Status';
+import { StatusEnum } from '@/constants/status';
+import { Box, IconButton, Typography } from '@mui/material';
 
 interface RoutesRowProps {
   routeId: string;
@@ -17,7 +18,7 @@ interface RoutesRowProps {
   stopsCount: number;
   workingHours: string;
   distance: number;
-  status: 'completed' | 'failed' | 'not_arrived' | 'at_risk' | 'upcoming';
+  status: StatusEnum;
 }
 
 const RoutesRow: React.FC<RoutesRowProps> = ({

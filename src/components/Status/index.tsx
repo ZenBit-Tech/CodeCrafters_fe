@@ -3,9 +3,10 @@ import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import { StatusEnum } from '@/constants/status';
 
 interface StatusProps {
-  status: 'completed' | 'failed' | 'not_arrived' | 'at_risk' | 'upcoming';
+  status: StatusEnum;
 }
 
 const Status: React.FC<StatusProps> = ({ status }) => {
