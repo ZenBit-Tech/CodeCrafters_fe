@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Container, Typography, Box } from '@mui/material';
 
 import loginLogo from '@/assets/login/logo.svg';
@@ -17,7 +18,8 @@ import Button from '@/components/Button';
 import useSignIn from '@/pages/SignIn/useSignIn';
 
 const SignInPage: React.FC = () => {
-  const { email, error, handleEmailChange, handleSubmit, config } = useSignIn();
+  const { email, error, handleEmailChange, handleSubmit } = useSignIn();
+  const { t } = useTranslation();
 
   return (
     <Container maxWidth={false} sx={containerStyles} disableGutters>
@@ -31,24 +33,24 @@ const SignInPage: React.FC = () => {
         </Box>
 
         <Box sx={rightBoxStyles}>
-          <Typography gutterBottom variant={config.welcomeMessage.variant}>
-            {config.welcomeMessage.text}
+          <Typography gutterBottom variant="h1">
+            {t('signin.welcomeMessage')}
           </Typography>
-          <Typography gutterBottom variant={config.instructions.variant}>
-            {config.instructions.text}
+          <Typography gutterBottom variant="body1">
+            {t('signin.instructions')}
           </Typography>
           <Box sx={inputBoxStyles}>
             <TextInput
-              label={config.emailInput.label}
-              type={config.emailInput.type}
+              label={t('signin.email')}
+              type="email"
               value={email}
               onChange={handleEmailChange}
               error={!!error}
               helperText={error}
             />
             <Button
-              label={config.submitButton.label}
-              variant={config.submitButton.variant}
+              label={t('signin.submit')}
+              variant="colored"
               fullWidth
               onClick={handleSubmit}
             />

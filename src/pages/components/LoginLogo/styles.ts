@@ -1,6 +1,10 @@
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
+interface CornerImageProps {
+  position: 'topLeft' | 'bottomRight';
+}
+
 export const LogoContainer = styled(Box)({
   position: 'relative',
   width: '100%',
@@ -19,7 +23,9 @@ export const MainImage = styled('img')({
   left: 0,
 });
 
-export const CornerImage = styled('img')(({ theme }) => ({
+export const CornerImage = styled('img', {
+  shouldForwardProp: (prop) => prop !== 'position',
+})<CornerImageProps>(({ theme, position }) => ({
   position: 'absolute',
   width: '58px',
   height: '58px',
@@ -27,4 +33,12 @@ export const CornerImage = styled('img')(({ theme }) => ({
   borderRadius: '50%',
   border: `1px solid ${theme.palette.primary.main}`,
   backgroundColor: theme.palette.background.default,
+  ...(position === 'topLeft' && {
+    top: '-13px',
+    left: '10px',
+  }),
+  ...(position === 'bottomRight' && {
+    bottom: '-10px',
+    right: '0px',
+  }),
 }));

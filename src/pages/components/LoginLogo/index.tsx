@@ -22,14 +22,8 @@ const Logo: React.FC<LogoProps> = ({
 
   const config = {
     mainImageAlt: t('altText.logo'),
-    topLeftImage: {
-      alt: t('altText.key'),
-      sx: { top: '-13px', left: '10px' },
-    },
-    bottomRightImage: {
-      alt: t('altText.lock'),
-      sx: { bottom: '-10px', right: '0px' },
-    },
+    topLeftImageAlt: t('altText.key'),
+    bottomRightImageAlt: t('altText.lock'),
   };
 
   return (
@@ -37,13 +31,13 @@ const Logo: React.FC<LogoProps> = ({
       <MainImage src={mainImage} alt={config.mainImageAlt} />
       <CornerImage
         src={topLeftImage}
-        alt={config.topLeftImage.alt}
-        sx={config.topLeftImage.sx}
+        alt={config.topLeftImageAlt}
+        position="topLeft"
       />
       <CornerImage
         src={bottomRightImage}
-        alt={config.bottomRightImage.alt}
-        sx={config.bottomRightImage.sx}
+        alt={config.bottomRightImageAlt}
+        position="bottomRight"
       />
     </LogoContainer>
   );
