@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, Theme, Interpolation } from '@mui/material/styles';
 import { COLORS } from './constants/colors';
 
 declare module '@mui/material/Button' {
@@ -16,11 +16,23 @@ const theme = createTheme({
     secondary: {
       main: COLORS.text.dark,
     },
+    background: {
+      default: COLORS.background.logoBlock,
+      paper: COLORS.text.white,
+    },
   },
   typography: {
     fontSize: 15,
     fontWeightLight: 400,
     fontFamily: '"Public Sans", sans-serif',
+    h1: {
+      fontSize: '26px',
+      fontWeight: 600,
+    },
+    body1: {
+      fontSize: '15px',
+      fontWeight: 400,
+    },
   },
   shape: {
     borderRadius: 6,
@@ -30,7 +42,7 @@ const theme = createTheme({
       variants: [
         {
           props: { variant: 'colored' },
-          style: ({ theme }) => ({
+          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
             fontWeight: 500,
             textTransform: 'none',
             backgroundColor: theme.palette.primary.main,
@@ -41,7 +53,7 @@ const theme = createTheme({
         },
         {
           props: { variant: 'lined' },
-          style: ({ theme }) => ({
+          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
             fontWeight: 500,
             textTransform: 'none',
             backgroundColor: 'transparent',
@@ -53,7 +65,7 @@ const theme = createTheme({
     },
     MuiTextField: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme }): Interpolation<{ theme: Theme }> => ({
           '& label': {
             color: COLORS.text.light,
           },

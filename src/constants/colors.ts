@@ -10,4 +10,7 @@ export const COLORS = {
     dark: 'rgb(115, 103, 240)',
     light: 'rgba(115, 103, 240, 0.16)',
   },
+  background: {
+    logoBlock: 'rgb(248, 247, 250)',
+  },
 };
