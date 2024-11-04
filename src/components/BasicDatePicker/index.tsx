@@ -5,13 +5,19 @@ import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
 import { Dayjs } from 'dayjs';
 
-const BasicDatePicker: React.FC<DatePickerProps<Dayjs>> = (props) => {
+interface BasicDatePickerProps extends DatePickerProps<Dayjs> {
+  dataFormat: string;
+}
+
+const BasicDatePicker: React.FC<BasicDatePickerProps> = ({
+  dataFormat,
+  ...props
+}) => {
   const { t } = useTranslation();
-  const dateFormat = t('MM/DD/YYYY');
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker label={dateFormat} {...props} />
+      <DatePicker label={t(dataFormat)} {...props} />
     </LocalizationProvider>
   );
 };
