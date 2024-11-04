@@ -6,7 +6,7 @@ import DashboardLayout from '@/components/Layout/DashboardLayout';
 import DashboardPage from '@/pages/DashboardPage';
 
 const router = createBrowserRouter([
-  // { index: true, element: <ExamplePage /> },
+  { index: true, element: <ExamplePage /> },
   {
     path: '/',
     element: <RootLayout />,
