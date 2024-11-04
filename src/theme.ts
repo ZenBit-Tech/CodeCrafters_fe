@@ -38,6 +38,7 @@ const theme = createTheme({
             backgroundColor: theme.palette.primary.main,
             borderRadius: theme.shape.borderRadius,
             color: COLORS.text.white,
+            whiteSpace: 'nowrap',
           }),
         },
         {
@@ -48,6 +49,7 @@ const theme = createTheme({
             backgroundColor: 'transparent',
             color: theme.palette.primary.main,
             border: `1px solid ${theme.palette.primary.main}`,
+            whiteSpace: 'nowrap',
           }),
         },
         {
@@ -57,6 +59,7 @@ const theme = createTheme({
             textTransform: 'none',
             backgroundColor: COLORS.status.completed.bg,
             color: COLORS.status.completed.text,
+            whiteSpace: 'nowrap',
           },
         },
       ],

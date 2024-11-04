@@ -4,6 +4,7 @@ import ExamplePage from '@/pages/ExamplePage';
 import RootLayout from '@/components/Layout/RootLayout';
 import DashboardLayout from '@/components/Layout/DashboardLayout';
 import DashboardPage from '@/pages/DashboardPage';
+import CompanyListPage from '@/pages/CompanyListPage';
 
 const router = createBrowserRouter([
   { index: true, element: <ExamplePage /> },
@@ -12,13 +13,11 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+        path: '/',
         element: <DashboardLayout />,
         children: [
-          { path: '/', element: <DashboardPage /> },
-          // { path: 'orders', element: <OrdersPage /> },
-          // { path: 'routes', element: <RoutesPage /> },
-          // { path: 'settings', element: <SettingsPage /> },
-          // { path: 'company-list', element: <CompanyListPage /> },
+          { index: true, element: <DashboardPage /> },
+          { path: 'company-list', element: <CompanyListPage /> },
         ],
       },
     ],

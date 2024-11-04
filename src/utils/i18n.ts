@@ -8,11 +8,24 @@ const resources = {
       name: 'Name',
       submitExample: 'Submit',
       greeting: 'Hello',
+      companyName: 'COMPANY NAME',
+      action: 'ACTIONS',
+      search: {
+        label: 'Search',
+        placeholder: 'Search…',
+        noResults: 'No companies found.',
+      },
+      button: {
+        addNewCompany: '+ Add New Company',
+      },
       navigation: {
         dashboard: 'Dashboard',
         orders: 'Orders',
         routes: 'Routes',
         settings: 'Settings',
+        companyList: 'Company List',
+      },
+      pages: {
         companyList: 'Company List',
       },
     },

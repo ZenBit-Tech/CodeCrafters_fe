@@ -8,6 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LuggageIcon from '@mui/icons-material/Luggage';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ListIcon from '@mui/icons-material/List';
+import theme from '@/theme';
 import { assets } from '@/assets/assets';
 
 const RootLayout: React.FC = () => {
@@ -16,22 +17,22 @@ const RootLayout: React.FC = () => {
   const NAVIGATION: Navigation = React.useMemo(
     () => [
       {
-        segment: '/orders',
+        segment: 'orders',
         title: t('navigation.orders'),
         icon: <LuggageIcon />,
       },
       {
-        segment: '/routes',
+        segment: 'routes',
         title: t('navigation.routes'),
         icon: <LocationOnIcon />,
       },
       {
-        segment: '/settings',
+        segment: 'settings',
         title: t('navigation.settings'),
         icon: <SettingsIcon />,
       },
       {
-        segment: '/company-list',
+        segment: 'company-list',
         title: t('navigation.companyList'),
         icon: <ListIcon />,
       },
@@ -58,7 +59,7 @@ const RootLayout: React.FC = () => {
   };
 
   return (
-    <AppProvider navigation={NAVIGATION} branding={BRANDING}>
+    <AppProvider navigation={NAVIGATION} branding={BRANDING} theme={theme}>
       <Outlet />
     </AppProvider>
   );
