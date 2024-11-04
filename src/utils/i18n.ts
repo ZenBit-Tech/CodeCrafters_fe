@@ -9,6 +9,13 @@ const resources = {
       submitExample: 'Submit',
       greeting: 'Hello',
     },
+    navigation: {
+      dashboard: 'Dashboard',
+      orders: 'Orders',
+      routes: 'Routes',
+      settings: 'Settings',
+      companyList: 'Company List',
+    },
   },
 };
 
