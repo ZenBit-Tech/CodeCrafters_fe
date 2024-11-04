@@ -4,8 +4,8 @@ import { AppProvider } from '@toolpad/core/react-router-dom';
 import type { Navigation } from '@toolpad/core';
 import { useTranslation } from 'react-i18next';
 
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import LuggageIcon from '@mui/icons-material/Luggage';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ListIcon from '@mui/icons-material/List';
 import { assets } from '@/assets/assets';
@@ -18,12 +18,12 @@ const RootLayout: React.FC = () => {
       {
         segment: '/orders',
         title: t('navigation.orders'),
-        icon: <ShoppingCartIcon />,
+        icon: <LuggageIcon />,
       },
       {
         segment: '/routes',
         title: t('navigation.routes'),
-        icon: <DashboardIcon />,
+        icon: <LocationOnIcon />,
       },
       {
         segment: '/settings',

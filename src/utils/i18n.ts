@@ -8,13 +8,13 @@ const resources = {
       name: 'Name',
       submitExample: 'Submit',
       greeting: 'Hello',
-    },
-    navigation: {
-      dashboard: 'Dashboard',
-      orders: 'Orders',
-      routes: 'Routes',
-      settings: 'Settings',
-      companyList: 'Company List',
+      navigation: {
+        dashboard: 'Dashboard',
+        orders: 'Orders',
+        routes: 'Routes',
+        settings: 'Settings',
+        companyList: 'Company List',
+      },
     },
   },
 };
