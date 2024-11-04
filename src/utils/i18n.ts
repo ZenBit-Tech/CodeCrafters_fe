@@ -8,6 +8,18 @@ const resources = {
       name: 'Name',
       submitExample: 'Submit',
       greeting: 'Hello',
+
+      altText: {
+        logo: 'Logo',
+        key: 'Key',
+        lock: 'Lock',
+      },
+      signin: {
+        welcomeMessage: 'Welcome to Smartporters! 👋',
+        instructions: 'Please sign in to your account and start the delivery',
+        email: 'Email',
+        submit: 'Sign In',
+      },
     },
   },
 };
