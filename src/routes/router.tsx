@@ -2,10 +2,18 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import SignInPage from '@/pages/SignIn';
 import OrdersPage from '@/pages/Orders';
+import ProtectedRoute from '@/pages/components/ProtectedRoute';
 
 const router = createBrowserRouter([
-  { index: true, element: <SignInPage /> },
-  { path: 'orders', element: <OrdersPage /> },
+  {
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <SignInPage />
+      </ProtectedRoute>
+    ),
+  },
+  { path: '/orders', element: <OrdersPage /> },
 ]);
 
 export default router;

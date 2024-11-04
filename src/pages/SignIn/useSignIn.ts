@@ -1,9 +1,10 @@
+// src/pages/SignIn/useSignIn.ts
+
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
 import axios from '@/utils/axiosInstance';
+import { useDispatch } from 'react-redux';
 import { setAccessToken } from '@/store/slices/authSlice';
 
 interface UseSignInReturnType {
@@ -21,13 +22,13 @@ const useSignIn = (): UseSignInReturnType => {
 
   const [email, setEmail] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [invitationToken, setinvitationToken] = useState<string | null>(null);
+  const [invitationToken, setInvitationToken] = useState<string | null>(null);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get('inviteToken');
     if (token) {
-      setinvitationToken(token);
+      setInvitationToken(token);
     } else {
       setError(t('Invalid or missing invite token.'));
     }
@@ -59,6 +60,7 @@ const useSignIn = (): UseSignInReturnType => {
       const { token } = response.data;
 
       if (token) {
+        localStorage.setItem('accessToken', token);
         dispatch(setAccessToken(token));
         navigate('/orders');
       } else {
