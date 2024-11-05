@@ -1,5 +1,8 @@
 import React from 'react';
-import Button from '../Button';
+import { useTranslation } from 'react-i18next';
+
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 import {
   Dialog,
   DialogActions,
@@ -7,9 +10,8 @@ import {
   DialogTitle,
   Typography,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
+
+import Button from '../Button';
 
 interface PopupMessageProps {
   open: boolean;

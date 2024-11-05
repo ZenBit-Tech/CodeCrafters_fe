@@ -1,9 +1,11 @@
 import React from 'react';
-import CustomCheckbox from '../Checkbox';
-import DriverAvatar from '../DriverAvatar';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { Box, Typography } from '@mui/material';
+
+import CustomCheckbox from '../Checkbox';
+import DriverAvatar from '../DriverAvatar';
 
 interface OrderRowProps {
   date: string;

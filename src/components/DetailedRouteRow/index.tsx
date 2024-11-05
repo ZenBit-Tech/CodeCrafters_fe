@@ -1,12 +1,14 @@
 import React from 'react';
-import NoteIcon from '@mui/icons-material/Note';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Status from '../Status';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { Box, Typography, IconButton } from '@mui/material';
 import { StatusEnum } from '@/constants/status';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import NoteIcon from '@mui/icons-material/Note';
+import { Box, IconButton, Typography } from '@mui/material';
+
+import Status from '../Status';
 
 interface DetailedRouteRowProps {
   city: string;

@@ -1,11 +1,13 @@
 import React from 'react';
-import DriverAvatar from '../DriverAvatar';
+
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Typography } from '@mui/material';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
+
+import DriverAvatar from '../DriverAvatar';
 
 interface DriverInfoProps {
   firstName: string;
