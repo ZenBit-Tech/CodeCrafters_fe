@@ -1,10 +1,9 @@
-// src/pages/SignIn/useSignIn.ts
-
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from '@/utils/axiosInstance';
 import { useDispatch } from 'react-redux';
+
+import axios from '@/utils/axiosInstance';
 import { setAccessToken } from '@/store/slices/authSlice';
 
 interface UseSignInReturnType {
@@ -60,7 +59,6 @@ const useSignIn = (): UseSignInReturnType => {
       const { token } = response.data;
 
       if (token) {
-        localStorage.setItem('accessToken', token);
         dispatch(setAccessToken(token));
         navigate('/orders');
       } else {

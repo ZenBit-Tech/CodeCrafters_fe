@@ -1,20 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import exampleReducer from '@/store/slices/exampleSlice';
-import authReducer, { setAccessToken } from '@/store/slices/authSlice';
+import authReducer from '@/store/slices/authSlice';
+import persistConfig from '@/store/persistConfig';
 
-const loadAccessToken = (): string => {
-  return localStorage.getItem('accessToken') || '';
-};
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     example: exampleReducer,
-    auth: authReducer,
+    auth: persistedReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-store.dispatch(setAccessToken(loadAccessToken()));
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
