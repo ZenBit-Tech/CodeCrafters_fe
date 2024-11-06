@@ -8,17 +8,25 @@ const resources = {
       name: 'Name',
       submitExample: 'Submit',
       greeting: 'Hello',
-
-      altText: {
-        logo: 'Logo',
-        key: 'Key',
-        lock: 'Lock',
+      companyName: 'COMPANY NAME',
+      action: 'ACTIONS',
+      search: {
+        label: 'Search',
+        placeholder: 'Search…',
+        noResults: 'No companies found.',
       },
-      signin: {
-        welcomeMessage: 'Welcome to Smartporters! 👋',
-        instructions: 'Please sign in to your account and start the delivery',
-        email: 'Email',
-        submit: 'Sign In',
+      button: {
+        addNewCompany: '+ Add New Company',
+      },
+      navigation: {
+        dashboard: 'Dashboard',
+        orders: 'Orders',
+        routes: 'Routes',
+        settings: 'Settings',
+        companyList: 'Company List',
+      },
+      pages: {
+        companyList: 'Company List',
       },
     },
   },
