@@ -1,5 +1,13 @@
 import React, { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import Button from '@/components/Button';
+import CompanyItem from '@/components/CompanyItem';
+import TextInput from '@/components/TextInput';
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
   Box,
   Divider,
@@ -7,14 +15,6 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Button from '@/components/Button';
-import TextInput from '@/components/TextInput';
-import CompanyItem from '@/components/CompanyItem';
-import { useTranslation } from 'react-i18next';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 
 interface Company {
   id: number;
