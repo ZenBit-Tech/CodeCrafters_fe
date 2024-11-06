@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import LuggageIcon from '@mui/icons-material/Luggage';
-import PeopleIcon from '@mui/icons-material/People';
-import LocationIcon from '@mui/icons-material/LocationOn';
-import { Box, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import LocationIcon from '@mui/icons-material/LocationOn';
+import LuggageIcon from '@mui/icons-material/Luggage';
+import PeopleIcon from '@mui/icons-material/People';
+import { Box, IconButton, Typography } from '@mui/material';
 
 interface CategoryProps {
   icon: React.ReactNode;

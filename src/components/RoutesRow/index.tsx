@@ -1,13 +1,15 @@
 import React from 'react';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import Status from '../Status';
-import DriverAvatar from '../DriverAvatar';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { StatusEnum } from '@/constants/status';
+import EditIcon from '@mui/icons-material/Edit';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Typography } from '@mui/material';
+
+import DriverAvatar from '../DriverAvatar';
+import Status from '../Status';
 
 interface RoutesRowProps {
   routeId: string;

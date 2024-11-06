@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { StatusEnum } from '@/constants/status';
+import { Box, Typography } from '@mui/material';
 
 interface StatusProps {
   status: StatusEnum;

@@ -1,4 +1,5 @@
-import { createTheme, Theme, Interpolation } from '@mui/material/styles';
+import { createTheme, Interpolation, Theme } from '@mui/material/styles';
+
 import { COLORS } from './constants/colors';
 
 declare module '@mui/material/Button' {
