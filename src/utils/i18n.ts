@@ -15,6 +15,9 @@ const resources = {
         settings: 'Settings',
         companyList: 'Company List',
       },
+      orders: {
+        welcome: 'Orders page',
+      },
     },
   },
 };
