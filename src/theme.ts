@@ -1,4 +1,4 @@
-import { createTheme, Theme, Interpolation } from '@mui/material/styles';
+import { createTheme, Interpolation, Theme } from '@mui/material/styles';
 
 import { COLORS } from './constants/colors';
 import { FONT } from './constants/font';
@@ -7,6 +7,7 @@ declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
     lined: true;
     colored: true;
+    grey: true;
   }
 }
 
@@ -18,7 +19,7 @@ const theme = createTheme({
     },
     secondary: {
       main: COLORS.text.dark,
-      dark: COLORS.text.prelight,
+      dark: COLORS.text.extraLight,
       light: COLORS.text.border,
     },
     background: {
@@ -32,7 +33,7 @@ const theme = createTheme({
     fontFamily: FONT.family,
     h1: {
       fontSize: '26px',
-      fontWeight: 600,
+      fontWeight: FONT.fontWeight.large,
     },
     h2: {
       fontSize: FONT.fontSize.extraLarge,
@@ -40,8 +41,8 @@ const theme = createTheme({
       color: COLORS.text.dark,
     },
     body1: {
-      fontSize: '15px',
-      fontWeight: 400,
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.small,
     },
     body2: {
       fontSize: FONT.fontSize.medium,
@@ -68,24 +69,32 @@ const theme = createTheme({
       variants: [
         {
           props: { variant: 'colored' },
-          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
-            fontWeight: 500,
+          style: ({ theme }) => ({
+            fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: theme.palette.primary.main,
             borderRadius: theme.shape.borderRadius,
-            padding: '10px 20px',
             color: COLORS.text.white,
           }),
         },
         {
           props: { variant: 'lined' },
-          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
-            fontWeight: 500,
+          style: ({ theme }) => ({
+            fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: 'transparent',
             color: theme.palette.primary.main,
             border: `1px solid ${theme.palette.primary.main}`,
           }),
+        },
+        {
+          props: { variant: 'grey' },
+          style: {
+            fontWeight: FONT.fontWeight.medium,
+            textTransform: 'none',
+            backgroundColor: COLORS.status.completed.bg,
+            color: COLORS.status.completed.text,
+          },
         },
       ],
     },
