@@ -1,6 +1,8 @@
 import React from 'react';
 
+
 import ExampleComponent from '@/components/ExampleComponent';
+
 import useExamplePageLogic from '@/pages/ExamplePage/useExamplePage';
 import useExamplePageStyles from '@/pages/ExamplePage/styles';
 
