@@ -1,6 +1,7 @@
 import React from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+
+import { TextField, TextFieldProps } from '@mui/material';
 
 export type TextInputProps = Omit<TextFieldProps, 'label'> & {
   label: string;
