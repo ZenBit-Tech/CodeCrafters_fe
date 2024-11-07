@@ -1,5 +1,3 @@
-import 'normalize.css';
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
@@ -8,7 +6,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import App from '@/App';
 
-import i18n from '@/utils/i18n';
 import { persistor, store } from '@/store/store';
 
 import theme from '@/theme';
