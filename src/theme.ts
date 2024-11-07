@@ -1,5 +1,7 @@
 import { createTheme, Theme, Interpolation } from '@mui/material/styles';
+
 import { COLORS } from './constants/colors';
+import { FONT } from './constants/font';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
@@ -12,9 +14,12 @@ const theme = createTheme({
   palette: {
     primary: {
       main: COLORS.main.dark,
+      light: COLORS.main.light,
     },
     secondary: {
       main: COLORS.text.dark,
+      dark: COLORS.text.prelight,
+      light: COLORS.text.border,
     },
     background: {
       default: COLORS.background.logoBlock,
@@ -22,16 +27,37 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontSize: 15,
-    fontWeightLight: 400,
-    fontFamily: '"Public Sans", sans-serif',
+    fontSize: FONT.fontSize.medium,
+    fontWeightLight: FONT.fontWeight.small,
+    fontFamily: FONT.family,
     h1: {
       fontSize: '26px',
       fontWeight: 600,
     },
+    h2: {
+      fontSize: FONT.fontSize.extraLarge,
+      fontWeight: FONT.fontWeight.large,
+      color: COLORS.text.dark,
+    },
     body1: {
       fontSize: '15px',
       fontWeight: 400,
+    },
+    body2: {
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.large,
+      color: COLORS.text.dark,
+    },
+    subtitle1: {
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.small,
+      color: COLORS.text.dark,
+    },
+
+    subtitle2: {
+      fontSize: FONT.fontSize.small,
+      fontWeight: FONT.fontWeight.small,
+      color: COLORS.text.light,
     },
   },
   shape: {
