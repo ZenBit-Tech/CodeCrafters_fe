@@ -20,6 +20,9 @@ const resources = {
         email: 'Email',
         submit: 'Sign In',
       },
+      orders: {
+        welcome: 'Orders page',
+      },
     },
   },
 };
