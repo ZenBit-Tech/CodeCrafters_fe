@@ -25,8 +25,8 @@ const resources = {
         settings: 'Settings',
         companyList: 'Company List',
       },
-      pages: {
-        companyList: 'Company List',
+      orders: {
+        welcome: 'Orders page',
       },
     },
   },
