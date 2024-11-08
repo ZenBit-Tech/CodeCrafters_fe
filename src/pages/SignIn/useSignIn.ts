@@ -60,7 +60,7 @@ const useSignIn = (): UseSignInReturnType => {
 
       if (token) {
         dispatch(setAccessToken(token));
-        navigate('/orders');
+        navigate('/');
       } else {
         setError(t('Failed to receive access token.'));
       }

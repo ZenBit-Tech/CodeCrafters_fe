@@ -12,7 +12,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   if (accessToken) {
-    return <Navigate to="/orders" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
