@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { getCompanies } from '@/services/companyService';
 
@@ -17,7 +17,7 @@ const useCompanies = (
   const [companies, setCompanies] = useState<Company[]>([]);
   const [total, setTotal] = useState(0);
 
-  const fetchCompanies = async (): Promise<void> => {
+  const fetchCompanies = useCallback(async (): Promise<void> => {
     try {
       const { data, total } = await getCompanies(
         page,
@@ -31,11 +31,11 @@ const useCompanies = (
     } catch (error) {
       console.error('Failed to fetch companies:', error);
     }
-  };
+  }, [page, pageSize, searchTerm, sortOrder]);
 
   useEffect(() => {
     fetchCompanies();
-  }, [page, searchTerm, sortOrder, fetchCompanies]);
+  }, [fetchCompanies]);
 
   return { companies, total };
 };
