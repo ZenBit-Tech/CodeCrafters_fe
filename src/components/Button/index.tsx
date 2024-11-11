@@ -8,7 +8,7 @@ import {
 
 export interface ButtonProps extends Omit<MuiButtonProps, 'variant'> {
   label: string;
-  variant: 'outlined' | 'contained' | 'text' | 'colored' | 'lined' | 'grey';
+  variant: 'text' | 'outlined' | 'contained' | 'colored' | 'lined' | 'grey';
 }
 
 const Button: React.FC<ButtonProps> = ({ label, variant, ...props }) => {

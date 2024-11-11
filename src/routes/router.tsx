@@ -5,12 +5,10 @@ import RootLayout from '@/components/Layout/RootLayout';
 import CompanyListPage from '@/pages/CompanyListPage';
 import ProtectedRoute from '@/pages/components/ProtectedRoute';
 import DashboardPage from '@/pages/DashboardPage';
-import ExamplePage from '@/pages/ExamplePage';
 import OrdersPage from '@/pages/Orders';
 import SignInPage from '@/pages/SignIn';
 
 const router = createBrowserRouter([
-  { index: true, element: <ExamplePage /> },
   {
     path: '/',
     element: <RootLayout />,
@@ -22,7 +20,10 @@ const router = createBrowserRouter([
             path: '/',
             element: <DashboardPage />,
           },
-          { path: 'company-list', element: <CompanyListPage /> },
+          {
+            path: 'company-list',
+            element: <CompanyListPage />,
+          },
         ],
       },
     ],

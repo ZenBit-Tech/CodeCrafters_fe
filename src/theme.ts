@@ -5,8 +5,8 @@ import { FONT } from './constants/font';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
-    lined: true;
     colored: true;
+    lined: true;
     grey: true;
   }
 }
@@ -37,7 +37,7 @@ const theme = createTheme({
       variants: [
         {
           props: { variant: 'colored' },
-          style: ({ theme }) => ({
+          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
             fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: theme.palette.primary.main,
@@ -47,7 +47,7 @@ const theme = createTheme({
         },
         {
           props: { variant: 'lined' },
-          style: ({ theme }) => ({
+          style: ({ theme }): Interpolation<{ theme: Theme }> => ({
             fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: 'transparent',
@@ -57,12 +57,12 @@ const theme = createTheme({
         },
         {
           props: { variant: 'grey' },
-          style: {
+          style: (): Interpolation<{ theme: Theme }> => ({
             fontWeight: FONT.fontWeight.medium,
             textTransform: 'none',
             backgroundColor: COLORS.status.completed.bg,
             color: COLORS.status.completed.text,
-          },
+          }),
         },
       ],
     },

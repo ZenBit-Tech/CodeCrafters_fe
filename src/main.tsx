@@ -1,5 +1,3 @@
-import 'normalize.css';
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
@@ -8,9 +6,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import App from '@/App';
 import { persistor, store } from '@/store/store';
-import theme from '@/theme';
 import i18n from '@/utils/i18n';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
+
+import theme from './theme';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
