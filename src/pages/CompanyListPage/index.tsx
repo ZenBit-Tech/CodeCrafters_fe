@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/Button';
@@ -16,53 +16,20 @@ import {
   Typography,
 } from '@mui/material';
 
-interface Company {
-  id: number;
-  name: string;
-  email: string;
-}
+import useCompanies from './useCompanies';
+import usePaginationAndSorting from './usePaginationAndSorting';
 
 const CompanyListPage: React.FC = () => {
   const { t } = useTranslation();
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
-  const companies: Company[] = [
-    { id: 1, name: 'Company Alpha', email: 'alpha@company.com' },
-    { id: 2, name: 'Company Beta', email: 'beta@company.com' },
-    { id: 3, name: 'Company Gamma', email: 'gamma@company.com' },
-  ];
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-  };
-
-  const sortedAndFilteredCompanies = useMemo(() => {
-    const filtered = companies.filter((company) =>
-      company.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    const sorted = filtered.sort((a, b) => {
-      const nameA = a.name.toLowerCase();
-      const nameB = b.name.toLowerCase();
-
-      if (nameA < nameB) return sortOrder === 'asc' ? -1 : 1;
-      if (nameA > nameB) return sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-
-    return sorted;
-  }, [companies, searchTerm, sortOrder]);
-
-  const handleEdit = (id: number) => {
-    console.log(`Edit: ${id}`);
-  };
-
-  const handleNavigate = (id: number) => {
-    console.log(`More: ${id}`);
-  };
+  const {
+    page,
+    sortOrder,
+    searchTerm,
+    handleSearchChange,
+    handlePageChange,
+    toggleSortOrder,
+  } = usePaginationAndSorting();
+  const { companies, total } = useCompanies(page, 10, searchTerm, sortOrder);
 
   return (
     <Box
@@ -94,7 +61,11 @@ const CompanyListPage: React.FC = () => {
               height: '100%',
             },
             '& .MuiFormLabel-root': {
-              transform: 'translate(14px, 8px) scale(1)',
+              transform: 'translate(14px, 9px) scale(1)',
+            },
+            '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+              transform: 'translate(14px, -9px) scale(0.75)',
+              maxWidth: 'calc(133% - 32px)',
             },
           }}
         />
@@ -121,9 +92,7 @@ const CompanyListPage: React.FC = () => {
             {t('companyName')}
           </Typography>
           <IconButton
-            onClick={() =>
-              setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-            }
+            onClick={toggleSortOrder}
             aria-label="toggle sort order"
             sx={{
               height: '100%',
@@ -147,17 +116,27 @@ const CompanyListPage: React.FC = () => {
         </Typography>
       </Box>
       <Box mb={2}>
-        {sortedAndFilteredCompanies.map((company) => (
-          <CompanyItem
-            key={company.id}
-            company={company}
-            onEdit={handleEdit}
-            onNavigate={handleNavigate}
-          />
-        ))}
+        {companies && companies.length > 0 ? (
+          companies.map((company) => (
+            <CompanyItem
+              key={company.id}
+              company={company}
+              onEdit={() => console.log(`Edit: ${company.id}`)}
+              onNavigate={() => console.log(`More: ${company.id}`)}
+            />
+          ))
+        ) : (
+          <Typography>No companies yet</Typography>
+        )}
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Pagination count={10} shape="rounded" color="primary" />
+        <Pagination
+          count={Math.ceil(total / 10)}
+          page={page}
+          onChange={handlePageChange}
+          shape="rounded"
+          color="primary"
+        />
       </Box>
     </Box>
   );

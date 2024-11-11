@@ -13,7 +13,7 @@ const DashboardLayout: React.FC = () => {
         },
       }}
     >
-      <PageContainer>
+      <PageContainer title="">
         <Outlet />
       </PageContainer>
     </ToolpadDashboardLayout>
