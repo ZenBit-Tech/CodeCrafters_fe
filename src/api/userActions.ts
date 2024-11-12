@@ -1,8 +1,9 @@
-import { Dispatch } from '@reduxjs/toolkit';
-import axiosInstance from '@/utils/axiosInstance';
 import { toast } from 'react-toastify';
-import { setAccessToken } from '@/store/slices/authSlice';
+import { Dispatch } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+import axiosInstance from '@/utils/axiosInstance';
+import { setAccessToken } from '@/store/slices/authSlice';
 
 export const sendLoginLink = (email: string) => async (): Promise<boolean> => {
   try {
