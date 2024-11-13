@@ -15,7 +15,7 @@ const NotFoundPage: React.FC = () => {
   const { t } = useTranslation();
 
   const handleRedirect = (): void => {
-    navigate('/dashboard');
+    navigate('/');
   };
 
   return (

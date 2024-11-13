@@ -27,12 +27,7 @@ const AppRouter: React.FC = () => {
       ),
       children: [
         {
-          path: 'dashboard',
-          element: (
-            <ProtectedRoute isAllowed={isAuthenticated}>
-              <DashboardLayout />
-            </ProtectedRoute>
-          ),
+          element: <DashboardLayout />,
           children: [
             {
               index: true,

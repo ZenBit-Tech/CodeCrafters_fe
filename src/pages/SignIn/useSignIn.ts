@@ -40,7 +40,7 @@ const useSignIn = (
     const accessToken = params.get('accessToken');
     if (accessToken) {
       dispatch(verifyToken(accessToken));
-      navigate('/dashboard');
+      navigate('/');
     }
   }, [dispatch, navigate]);
 
