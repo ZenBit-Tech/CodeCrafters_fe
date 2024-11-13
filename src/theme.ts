@@ -15,9 +15,12 @@ const theme = createTheme({
   palette: {
     primary: {
       main: COLORS.main.dark,
+      light: COLORS.main.light,
     },
     secondary: {
       main: COLORS.text.dark,
+      dark: COLORS.text.extraLight,
+      light: COLORS.text.border,
     },
     background: {
       default: COLORS.background.logoBlock,
@@ -28,6 +31,35 @@ const theme = createTheme({
     fontSize: FONT.fontSize.medium,
     fontWeightLight: FONT.fontWeight.small,
     fontFamily: FONT.family,
+    h1: {
+      fontSize: '26px',
+      fontWeight: FONT.fontWeight.large,
+    },
+    h2: {
+      fontSize: FONT.fontSize.extraLarge,
+      fontWeight: FONT.fontWeight.large,
+      color: COLORS.text.dark,
+    },
+    body1: {
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.small,
+    },
+    body2: {
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.large,
+      color: COLORS.text.dark,
+    },
+    subtitle1: {
+      fontSize: FONT.fontSize.medium,
+      fontWeight: FONT.fontWeight.small,
+      color: COLORS.text.dark,
+    },
+
+    subtitle2: {
+      fontSize: FONT.fontSize.small,
+      fontWeight: FONT.fontWeight.small,
+      color: COLORS.text.light,
+    },
   },
   shape: {
     borderRadius: 6,

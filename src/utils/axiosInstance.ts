@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = store.getState().auth.accessToken;
+    const accessToken = store.getState().auth.token;
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (error.response === 403 && error.response.status === 401) {
       store.dispatch(logout());
       history.push('/');
     }

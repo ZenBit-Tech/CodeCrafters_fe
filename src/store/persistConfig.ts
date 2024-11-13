@@ -6,7 +6,7 @@ import { AuthState } from '@/store/slices/authSlice';
 const persistConfig: PersistConfig<AuthState> = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken'],
+  whitelist: ['token', 'role', 'isAuthenticated'],
 };
 
 export default persistConfig;

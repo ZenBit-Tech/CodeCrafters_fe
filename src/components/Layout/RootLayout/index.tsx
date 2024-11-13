@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Outlet } from 'react-router-dom';
 
 import { assets } from '@/assets/assets';
+import theme from '@/theme';
 import ListIcon from '@mui/icons-material/List';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LuggageIcon from '@mui/icons-material/Luggage';
@@ -58,7 +59,7 @@ const RootLayout: React.FC = () => {
   };
 
   return (
-    <AppProvider navigation={NAVIGATION} branding={BRANDING}>
+    <AppProvider navigation={NAVIGATION} branding={BRANDING} theme={theme}>
       <Outlet />
     </AppProvider>
   );
