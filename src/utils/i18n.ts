@@ -32,6 +32,7 @@ const resources = {
       adminList: {
         title: 'Admin List',
         companyName: 'Company Name LTD',
+        clientDetails: 'DETAILS',
         clientName: 'Client name:',
         email: 'Email:',
         editButton: 'Edit',

@@ -27,7 +27,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
       <Divider />
 
       <Box mt={3}>
-        <FlexBox justifyContent="flex-start">
+        <Typography variant="subtitle2">
+          {t('adminList.clientDetails')}
+        </Typography>
+
+        <FlexBox justifyContent="flex-start" mt={1}>
           <Typography variant="body2">{t('adminList.clientName')}</Typography>
           <Typography variant="subtitle1">{clientName}</Typography>
         </FlexBox>
