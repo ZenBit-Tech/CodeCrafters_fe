@@ -43,6 +43,10 @@ const resources = {
         pagination: 'Showing {{start}} to {{end}} of {{total}} users',
         prev: 'Previous',
         next: 'Next',
+        altText: {
+          edit: 'Edit Icon',
+          delete: 'Delete Icon',
+        },
       },
     },
   },

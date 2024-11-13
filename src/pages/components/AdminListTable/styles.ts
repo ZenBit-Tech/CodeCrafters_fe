@@ -108,3 +108,13 @@ export const TableTitle = styled(Typography)({
   fontSize: FONT.fontSize.medium,
   color: COLORS.text.dark,
 });
+
+export const DeleteIcon = styled('img')({
+  width: '22px',
+  height: '22px',
+});
+
+export const EditIcon = styled('img')({
+  width: '22px',
+  height: '22px',
+});

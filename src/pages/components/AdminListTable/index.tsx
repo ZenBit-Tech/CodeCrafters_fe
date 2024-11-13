@@ -7,9 +7,9 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 
+import editIcon from '@/assets/icons/edit.svg';
+import deleteIcon from '@/assets/icons/delete.svg';
 import Button from '@/components/Button';
 import TextInput from '@/components/TextInput';
 import {
@@ -25,6 +25,8 @@ import {
   StyledPaginationButton,
   StyledPaginationItem,
   ScrollContainer,
+  EditIcon,
+  DeleteIcon,
 } from '@/pages/components/AdminListTable/styles';
 
 interface Admin {
@@ -110,10 +112,13 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
             </FlexBox>
             <Box>
               <IconButton>
-                <EditIcon />
+                <EditIcon src={editIcon} alt={t('adminList.altText.edit')} />
               </IconButton>
               <IconButton>
-                <DeleteIcon />
+                <DeleteIcon
+                  src={deleteIcon}
+                  alt={t('adminList.altText.delete')}
+                />
               </IconButton>
             </Box>
           </AdminListItem>
