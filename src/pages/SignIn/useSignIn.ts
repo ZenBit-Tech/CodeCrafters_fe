@@ -7,15 +7,16 @@ import { AppDispatch } from '@/store/store';
 import { sendLoginLink, verifyToken } from '@/api/userActions';
 import { SignInFormData, UseSignInReturnType } from '@/interfaces/SignIn';
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
 const useSignIn = (
   navigate: ReturnType<typeof useNavigate>,
   dispatch: AppDispatch
 ): UseSignInReturnType => {
-  const { t } = useTranslation();
   const [attemptCount, setAttemptCount] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const { t } = useTranslation();
 
   const {
     control,
