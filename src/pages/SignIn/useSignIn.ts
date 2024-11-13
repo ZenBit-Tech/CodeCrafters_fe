@@ -1,77 +1,93 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import axios from '@/utils/axiosInstance';
-import { setAccessToken } from '@/store/slices/authSlice';
+import { AppDispatch } from '@/store/store';
+import { sendLoginLink, verifyToken } from '@/api/userActions';
+import { SignInFormData, UseSignInReturnType } from '@/interfaces/SignIn';
 
-interface UseSignInReturnType {
-  email: string;
-  error: string | null;
-  handleEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-}
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-const useSignIn = (): UseSignInReturnType => {
+const useSignIn = (
+  navigate: ReturnType<typeof useNavigate>,
+  dispatch: AppDispatch
+): UseSignInReturnType => {
+  const [attemptCount, setAttemptCount] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+
   const { t } = useTranslation();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const [email, setEmail] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
-  const [invitationToken, setInvitationToken] = useState<string | null>(null);
+  const {
+    control,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors, isValid },
+    watch,
+  } = useForm<SignInFormData>({
+    mode: 'onBlur',
+    defaultValues: { email: '' },
+  });
+
+  const emailValue = watch('email');
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const token = queryParams.get('inviteToken');
-    if (token) {
-      setInvitationToken(token);
-    } else {
-      setError(t('Invalid or missing invite token.'));
+    clearErrors('email');
+  }, [emailValue, clearErrors]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const accessToken = params.get('accessToken');
+    if (accessToken) {
+      dispatch(verifyToken(accessToken));
+      navigate('/');
     }
-  }, [location.search, t]);
+  }, [dispatch, navigate]);
 
-  const handleEmailChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setEmail(event.target.value);
-  };
+  const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
+    if (isLocked) return;
 
-  const handleSubmit = async (): Promise<void> => {
-    if (!email) {
-      setError(t('Email is required'));
-      return;
-    }
-    if (!invitationToken) {
-      setError(t('Invalid or missing invite token.'));
-      return;
-    }
+    const { email } = data;
 
-    setError(null);
+    const isSent = await sendLoginLink(email)();
 
-    try {
-      const response = await axios.get(`/auth/${email}`, {
-        params: { invitationToken },
+    if (!isSent) {
+      setAttemptCount((prev) => prev + 1);
+      setError('email', {
+        type: 'manual',
+        message: t('signin.error.incorrectEmail'),
       });
+    }
 
-      const { token } = response.data;
-
-      if (token) {
-        dispatch(setAccessToken(token));
-        navigate('/');
-      } else {
-        setError(t('Failed to receive access token.'));
-      }
-    } catch {
-      setError(
-        t('Authentication failed. Please check your invite token and email.')
-      );
+    if (attemptCount + 1 >= 5) {
+      setIsLocked(true);
     }
   };
 
-  return { email, error, handleEmailChange, handleSubmit };
+  const getHelperText = (): string | undefined => {
+    if (isLocked) {
+      return '';
+    }
+    if (errors.email) {
+      return errors.email.message;
+    }
+    return '';
+  };
+
+  const clearErrorOnChange = (): void => clearErrors('email');
+
+  return {
+    control,
+    handleSubmit,
+    errors,
+    isValid,
+    isLocked,
+    onSubmit,
+    getHelperText,
+    emailRegex,
+    clearErrorOnChange,
+  };
 };
 
 export default useSignIn;

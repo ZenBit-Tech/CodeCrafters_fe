@@ -83,13 +83,13 @@ const PopupMessage: React.FC<PopupMessageProps> = ({
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', marginBottom: 2 }}>
         <Button
-          label={cancelText}
+          label={cancelText || ''}
           onClick={onClose}
           variant="grey"
           sx={{ width: '25%' }}
         ></Button>
         <Button
-          label={confirmText}
+          label={confirmText || ''}
           onClick={onConfirm}
           variant="colored"
           sx={{ width: '25%' }}
