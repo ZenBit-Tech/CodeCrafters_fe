@@ -26,6 +26,7 @@ interface UseAdminListReturnType {
 }
 
 const useAdminList = (): UseAdminListReturnType => {
+  //TODO add real data when BE will be ready
   const [admins] = useState<Admin[]>(
     Array.from({ length: 50 }, (_, index) => ({
       id: index,
