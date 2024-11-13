@@ -19,7 +19,6 @@ import {
   ListHeader,
   AdminListItem,
   FlexBox,
-  StyledAvatar,
   PaginationContainer,
   PaginationInfo,
   StyledPaginationButton,
@@ -28,6 +27,7 @@ import {
   EditIcon,
   DeleteIcon,
 } from '@/pages/components/AdminListTable/styles';
+import DriverAvatar from '@/components/DriverAvatar';
 
 interface Admin {
   id: number;
@@ -35,8 +35,13 @@ interface Admin {
   email: string;
 }
 
+interface PaginatedAdmin extends Admin {
+  firstName: string;
+  lastName: string;
+}
+
 interface AdminListTableProps {
-  paginatedAdmins: Admin[];
+  paginatedAdmins: PaginatedAdmin[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   itemsPerPage: number;
@@ -46,7 +51,6 @@ interface AdminListTableProps {
   pageCount: number;
   startIndex: number;
   endIndex: number;
-  getInitials: (name: string) => string;
 }
 
 const AdminListTable: React.FC<AdminListTableProps> = ({
@@ -60,7 +64,6 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
   pageCount,
   startIndex,
   endIndex,
-  getInitials,
 }) => {
   const { t } = useTranslation();
 
@@ -102,7 +105,10 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
         {paginatedAdmins.map((admin) => (
           <AdminListItem key={admin.id}>
             <FlexBox>
-              <StyledAvatar>{getInitials(admin.name)}</StyledAvatar>
+              <DriverAvatar
+                firstName={admin.firstName}
+                lastName={admin.lastName}
+              ></DriverAvatar>
               <Box>
                 <TableTitle>{admin.name}</TableTitle>
                 <Typography variant="subtitle2" color="textSecondary">

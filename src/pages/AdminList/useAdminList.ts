@@ -6,6 +6,11 @@ interface Admin {
   email: string;
 }
 
+interface PaginatedAdmin extends Admin {
+  firstName: string;
+  lastName: string;
+}
+
 interface UseAdminListReturnType {
   admins: Admin[];
   searchQuery: string;
@@ -14,18 +19,17 @@ interface UseAdminListReturnType {
   setPage: (page: number) => void;
   itemsPerPage: number;
   setItemsPerPage: (count: number) => void;
-  paginatedAdmins: Admin[];
+  paginatedAdmins: PaginatedAdmin[];
   pageCount: number;
   startIndex: number;
   endIndex: number;
-  getInitials: (name: string) => string;
 }
 
 const useAdminList = (): UseAdminListReturnType => {
   const [admins] = useState<Admin[]>(
     Array.from({ length: 50 }, (_, index) => ({
       id: index,
-      name: `Shamus Tuttle ${index + 1}`,
+      name: `Shamus Tuttle${index + 1}`,
       email: `Nicklaus.Balistreri${index + 1}@hotmail.com`,
     }))
   );
@@ -40,17 +44,16 @@ const useAdminList = (): UseAdminListReturnType => {
 
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedAdmins = filteredAdmins.slice(startIndex, endIndex);
-  const pageCount = Math.ceil(filteredAdmins.length / itemsPerPage);
 
-  const getInitials = (name: string): string => {
-    const nameParts = name.split(' ');
-    const initials =
-      nameParts.length >= 2
-        ? `${nameParts[0][0]}${nameParts[1][0]}`
-        : nameParts[0][0];
-    return initials.toUpperCase();
-  };
+  const paginatedAdmins = filteredAdmins
+    .slice(startIndex, endIndex)
+    .map((admin) => {
+      const [firstName, ...lastNameParts] = admin.name.split(' ');
+      const lastName = lastNameParts.join(' ');
+      return { ...admin, firstName, lastName };
+    });
+
+  const pageCount = Math.ceil(filteredAdmins.length / itemsPerPage);
 
   useEffect(() => {
     if (page > pageCount) {
@@ -70,7 +73,6 @@ const useAdminList = (): UseAdminListReturnType => {
     pageCount,
     startIndex,
     endIndex,
-    getInitials,
   };
 };
 

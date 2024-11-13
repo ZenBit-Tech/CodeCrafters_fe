@@ -27,7 +27,6 @@ const AdminListPage: React.FC = () => {
     pageCount,
     startIndex,
     endIndex,
-    getInitials,
   } = useAdminList();
 
   return (
@@ -58,7 +57,6 @@ const AdminListPage: React.FC = () => {
               pageCount={pageCount}
               startIndex={startIndex}
               endIndex={endIndex}
-              getInitials={getInitials}
             />
           </StyledMainBox>
         </MainBox>
