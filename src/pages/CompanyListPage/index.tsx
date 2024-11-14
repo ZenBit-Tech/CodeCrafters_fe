@@ -126,7 +126,7 @@ const CompanyListPage: React.FC = () => {
             />
           ))
         ) : (
-          <Typography>No companies yet</Typography>
+          <Typography>{t('noCompanies')}</Typography>
         )}
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

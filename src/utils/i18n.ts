@@ -10,6 +10,7 @@ const resources = {
       greeting: 'Hello',
       companyName: 'COMPANY NAME',
       action: 'ACTIONS',
+      noCompanies: 'No companies yet',
       search: {
         label: 'Search',
         placeholder: 'Search…',

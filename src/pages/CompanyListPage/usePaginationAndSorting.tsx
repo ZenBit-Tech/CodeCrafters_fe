@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 const usePaginationAndSorting = (initialSortOrder: 'asc' | 'desc' = 'asc') => {
-  const [page, setPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState(initialSortOrder);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>(initialSortOrder);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
