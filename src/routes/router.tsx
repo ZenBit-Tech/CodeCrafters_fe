@@ -9,6 +9,7 @@ import ProtectedRoute from '@/pages/components/ProtectedRoute';
 import DashboardPage from '@/pages/DashboardPage';
 import OrdersPage from '@/pages/Orders';
 import SignInPage from '@/pages/SignIn';
+import AdminListPage from '@/pages/AdminList';
 import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
 
@@ -49,6 +50,8 @@ const AppRouter: React.FC = () => {
             },
           ],
         },
+        { path: '/admin-list', element: <AdminListPage /> },
+
         {
           path: '*',
           element: <NotFoundPage />,

@@ -65,6 +65,27 @@ const resources = {
       orders: {
         welcome: 'Orders page',
       },
+      adminList: {
+        title: 'Admin List',
+        companyName: '{{companyName}}',
+        clientName: '{{clientName}}',
+        clientEmail: '{{clientEmail}}',
+        clientDetails: 'DETAILS',
+        name: 'Client name:',
+        email: 'Email:',
+        editButton: 'Edit',
+        searchPlaceholder: 'Search',
+        addAdminButton: 'Add New Admin',
+        adminName: 'ADMIN NAME',
+        actions: 'ACTIONS',
+        pagination: 'Showing {{start}} to {{end}} of {{total}} users',
+        prev: 'Previous',
+        next: 'Next',
+        altText: {
+          edit: 'Edit Icon',
+          delete: 'Delete Icon',
+        },
+      },
     },
   },
 };
