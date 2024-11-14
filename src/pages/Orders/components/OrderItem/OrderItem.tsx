@@ -30,7 +30,8 @@ const OrderItem: FC<OrderItemInterface> = ({
   return (
     <Box sx={orderRow(routeId === null)}>
       <Typography sx={collectionDateStyles}>
-        {collectionDate.getDate()} {MONTHS[collectionDate.getMonth()]}{' '}
+        {collectionDate.getDate()}
+        {MONTHS[collectionDate.getMonth()]}
         {collectionDate.getFullYear()}
       </Typography>
       <Box sx={{ width: '140px' }}></Box>
