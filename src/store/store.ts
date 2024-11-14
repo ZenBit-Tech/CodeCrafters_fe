@@ -1,16 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 
 import exampleReducer from '@/store/slices/exampleSlice';
 import authReducer from '@/store/slices/authSlice';
-import persistConfig from '@/store/persistConfig';
-
-const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     example: exampleReducer,
-    auth: persistedReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

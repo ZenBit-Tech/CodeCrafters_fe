@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
+
 
 import ExampleComponent from '@/components/ExampleComponent';
 import useExamplePageStyles from '@/pages/ExamplePage/styles';
