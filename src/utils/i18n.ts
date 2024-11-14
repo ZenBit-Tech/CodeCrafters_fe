@@ -67,9 +67,11 @@ const resources = {
       },
       adminList: {
         title: 'Admin List',
-        companyName: 'Company Name LTD',
+        companyName: '{{companyName}}',
+        clientName: '{{clientName}}',
+        clientEmail: '{{clientEmail}}',
         clientDetails: 'DETAILS',
-        clientName: 'Client name:',
+        name: 'Client name:',
         email: 'Email:',
         editButton: 'Edit',
         searchPlaceholder: 'Search',

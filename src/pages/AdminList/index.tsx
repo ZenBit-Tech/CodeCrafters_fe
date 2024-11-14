@@ -32,9 +32,10 @@ const AdminListPage: React.FC = () => {
     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} height="100%">
       <SideBox>
         <AdminSidebar
-          companyName={t('adminList.companyName')}
-          clientName="John Doe"
-          clientEmail="vaftog@vultulkir.org"
+          // Replace with real data
+          companyName={t('Company Name LTD')}
+          clientName={t('John Doe')}
+          clientEmail={t('vaftog@vultulkir.org')}
         />
       </SideBox>
 

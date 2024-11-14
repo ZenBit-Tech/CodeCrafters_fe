@@ -32,7 +32,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({
         </Typography>
 
         <FlexBox justifyContent="flex-start" mt={1}>
-          <Typography variant="body2">{t('adminList.clientName')}</Typography>
+          <Typography variant="body2">{t('adminList.name')}</Typography>
           <Typography variant="subtitle1">{clientName}</Typography>
         </FlexBox>
 
