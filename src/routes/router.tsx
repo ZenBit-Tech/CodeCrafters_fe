@@ -4,9 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import DashboardLayout from '@/components/Layout/DashboardLayout';
 import RootLayout from '@/components/Layout/RootLayout';
-import DashboardPage from '@/pages/DashboardPage';
-import SignInPage from '@/pages/SignIn';
+import CompanyListPage from '@/pages/CompanyListPage';
 import ProtectedRoute from '@/pages/components/ProtectedRoute';
+import DashboardPage from '@/pages/DashboardPage';
+import OrdersPage from '@/pages/Orders';
+import SignInPage from '@/pages/SignIn';
 import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
 
@@ -36,6 +38,14 @@ const AppRouter: React.FC = () => {
                   <DashboardPage />
                 </ProtectedRoute>
               ),
+            },
+            {
+              path: 'company-list',
+              element: <CompanyListPage />,
+            },
+            {
+              path: 'orders',
+              element: <OrdersPage />,
             },
           ],
         },

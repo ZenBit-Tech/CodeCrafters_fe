@@ -24,7 +24,7 @@ const CategoryRow: React.FC = () => {
       { icon: <PeopleIcon />, label: t('Driver management') },
       { icon: <LocationIcon />, label: t('Route management') },
     ],
-    [i18n.language]
+    [i18n.language, t]
   );
 
   return (

@@ -8,6 +8,18 @@ const resources = {
       name: 'Name',
       submitExample: 'Submit',
       greeting: 'Hello',
+
+      companyName: 'COMPANY NAME',
+      action: 'ACTIONS',
+      noCompanies: 'No companies yet',
+      search: {
+        label: 'Search',
+        placeholder: 'Search…',
+        noResults: 'No companies found.',
+      },
+      button: {
+        addNewCompany: '+ Add New Company',
+
       altText: {
         logo: 'Logo',
         key: 'Key',
@@ -42,6 +54,7 @@ const resources = {
           incorrectEmail: 'Email incorrect.',
           required: 'Email is required.',
         },
+
       },
       navigation: {
         dashboard: 'Dashboard',
