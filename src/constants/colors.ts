@@ -1,5 +1,7 @@
 export const COLORS = {
   green: 'rgb(40, 199, 111)',
+  purple: '#7367F0',
+  lightPurple: '#E8DEF829',
   text: {
     border: 'rgb(75, 70, 92, 0.2)',
     extraLight: 'rgb(75, 70, 92, 0.08)',
