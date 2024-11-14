@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Typography, Select, Avatar, PaginationItem } from '@mui/material';
+import { Box, Typography, Select, PaginationItem } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
@@ -14,7 +14,7 @@ export const ActionsContainer = styled(Box)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'stretch',
     gap: theme.spacing(1),
   },
 }));
@@ -28,6 +28,9 @@ export const ListHeader = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   padding: theme.spacing(1.5),
   borderRadius: theme.shape.borderRadius,
+  [theme.breakpoints.down('sm')]: {
+    gap: theme.spacing(0.5),
+  },
 }));
 
 export const ScrollContainer = styled(Box)(({ theme }) => ({
@@ -40,6 +43,7 @@ export const ScrollContainer = styled(Box)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   [theme.breakpoints.down('sm')]: {
     maxHeight: '50vh',
+    padding: theme.spacing(1),
   },
 }));
 
@@ -54,21 +58,23 @@ export const AdminListItem = styled(Box)(({ theme }) => ({
   '&:last-child': {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: theme.spacing(1),
+  },
 }));
 
-export const StyledAvatar = styled(Avatar)(({ theme }) => ({
-  marginRight: theme.spacing(2),
-  backgroundColor: theme.palette.primary.light,
-  color: theme.palette.primary.main,
-  fontWeight: FONT.fontWeight.large,
-  fontSize: FONT.fontSize.medium,
-}));
-
-export const FlexBox = styled(Box)({
+export const FlexBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: '16px',
-});
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    gap: theme.spacing(1),
+  },
+}));
 
 export const PaginationContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -76,7 +82,8 @@ export const PaginationContainer = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(1.5),
   [theme.breakpoints.down('sm')]: {
-    maxHeight: '50vh',
+    flexDirection: 'column',
+    gap: theme.spacing(1),
   },
 }));
 
@@ -85,6 +92,9 @@ export const StyledPaginationButton = styled('span')(({ theme }) => ({
   fontWeight: FONT.fontWeight.small,
   fontSize: FONT.fontSize.medium,
   color: COLORS.text.dark,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: FONT.fontSize.small,
+  },
 }));
 
 export const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
@@ -97,24 +107,38 @@ export const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
 }));
 
-export const PaginationInfo = styled(Typography)({
+export const PaginationInfo = styled(Typography)(({ theme }) => ({
   fontWeight: FONT.fontWeight.small,
   fontSize: FONT.fontSize.small,
   color: COLORS.text.dark,
-});
+  [theme.breakpoints.down('sm')]: {
+    textAlign: 'center',
+  },
+}));
 
-export const TableTitle = styled(Typography)({
+export const TableTitle = styled(Typography)(({ theme }) => ({
   fontWeight: FONT.fontWeight.large,
   fontSize: FONT.fontSize.medium,
   color: COLORS.text.dark,
-});
+  [theme.breakpoints.down('sm')]: {
+    fontSize: FONT.fontSize.small,
+  },
+}));
 
 export const DeleteIcon = styled('img')({
   width: '22px',
   height: '22px',
+  '@media (max-width:600px)': {
+    width: '18px',
+    height: '18px',
+  },
 });
 
 export const EditIcon = styled('img')({
   width: '22px',
   height: '22px',
+  '@media (max-width:600px)': {
+    width: '18px',
+    height: '18px',
+  },
 });
