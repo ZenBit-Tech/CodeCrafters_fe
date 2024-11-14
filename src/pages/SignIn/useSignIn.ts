@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { AppDispatch } from '@/store/store';
@@ -16,12 +15,9 @@ const useSignIn = (
   const [attemptCount, setAttemptCount] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
 
-  const { t } = useTranslation();
-
   const {
     control,
     handleSubmit,
-    setError,
     clearErrors,
     formState: { errors, isValid },
     watch,
@@ -54,10 +50,6 @@ const useSignIn = (
 
     if (!isSent) {
       setAttemptCount((prev) => prev + 1);
-      setError('email', {
-        type: 'manual',
-        message: t('signin.error.incorrectEmail'),
-      });
     }
 
     if (attemptCount + 1 >= 5) {
