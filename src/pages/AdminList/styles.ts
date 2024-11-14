@@ -4,13 +4,6 @@ import { Box, Typography } from '@mui/material';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 
-export const PageContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  height: '100vh',
-  boxSizing: 'border-box',
-  padding: theme.spacing(2),
-}));
-
 export const SideBox = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '30%',

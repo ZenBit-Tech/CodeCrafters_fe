@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Stack } from '@mui/material';
 
 import {
-  PageContainer,
   SideBox,
   MainBox,
   TitleTypography,
@@ -30,38 +29,36 @@ const AdminListPage: React.FC = () => {
   } = useAdminList();
 
   return (
-    <PageContainer>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} height="100%">
-        <SideBox>
-          <AdminSidebar
-            companyName={t('adminList.companyName')}
-            clientName="John Doe"
-            clientEmail="vaftog@vultulkir.org"
+    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} height="100%">
+      <SideBox>
+        <AdminSidebar
+          companyName={t('adminList.companyName')}
+          clientName="John Doe"
+          clientEmail="vaftog@vultulkir.org"
+        />
+      </SideBox>
+
+      <MainBox>
+        <TitleContainer>
+          <TitleTypography>{t('adminList.title')}</TitleTypography>
+        </TitleContainer>
+
+        <StyledMainBox>
+          <AdminListTable
+            paginatedAdmins={paginatedAdmins}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            itemsPerPage={itemsPerPage}
+            setItemsPerPage={setItemsPerPage}
+            page={page}
+            setPage={setPage}
+            pageCount={pageCount}
+            startIndex={startIndex}
+            endIndex={endIndex}
           />
-        </SideBox>
-
-        <MainBox>
-          <TitleContainer>
-            <TitleTypography>{t('adminList.title')}</TitleTypography>
-          </TitleContainer>
-
-          <StyledMainBox>
-            <AdminListTable
-              paginatedAdmins={paginatedAdmins}
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              itemsPerPage={itemsPerPage}
-              setItemsPerPage={setItemsPerPage}
-              page={page}
-              setPage={setPage}
-              pageCount={pageCount}
-              startIndex={startIndex}
-              endIndex={endIndex}
-            />
-          </StyledMainBox>
-        </MainBox>
-      </Stack>
-    </PageContainer>
+        </StyledMainBox>
+      </MainBox>
+    </Stack>
   );
 };
 
