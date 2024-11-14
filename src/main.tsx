@@ -8,10 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import App from '@/App';
 
-import i18n from '@/utils/i18n';
 import { persistor, store } from '@/store/store';
-import theme from '@/theme';
-import { ThemeProvider } from '@mui/material/styles';
+import i18n from '@/utils/i18n';
+import { ThemeProvider } from '@mui/material';
+
+import theme from './theme';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

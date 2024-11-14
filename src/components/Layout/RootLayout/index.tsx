@@ -17,22 +17,22 @@ const RootLayout: React.FC = () => {
   const NAVIGATION: Navigation = React.useMemo(
     () => [
       {
-        segment: '/orders',
+        segment: 'orders',
         title: t('navigation.orders'),
         icon: <LuggageIcon />,
       },
       {
-        segment: '/routes',
+        segment: 'routes',
         title: t('navigation.routes'),
         icon: <LocationOnIcon />,
       },
       {
-        segment: '/settings',
+        segment: 'settings',
         title: t('navigation.settings'),
         icon: <SettingsIcon />,
       },
       {
-        segment: '/company-list',
+        segment: 'company-list',
         title: t('navigation.companyList'),
         icon: <ListIcon />,
       },
@@ -51,7 +51,7 @@ const RootLayout: React.FC = () => {
         <img
           src={assets.logoText}
           alt="Second Logo"
-          style={{ height: '40px', marginLeft: '8px' }}
+          style={{ maxWidth: '200px', marginLeft: '8px' }}
         />
       </div>
     ),
