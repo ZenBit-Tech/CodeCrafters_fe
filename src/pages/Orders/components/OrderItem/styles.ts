@@ -1,10 +1,12 @@
 import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 import { SxProps, Theme } from '@mui/material/styles';
 
 export const orderRow: (isNew: boolean) => SxProps<Theme> = (isNew) => {
   return {
     width: '1236px',
     display: 'flex',
+    marginBottom: '-1px',
     alignItems: 'center',
     justifyContent: 'space-between',
     background: isNew ? COLORS.lightPurple : '#FFF',
@@ -25,6 +27,25 @@ export const customerBlock: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-evenly',
+  position: 'relative',
+
+  '&:hover': {
+    '& .popup': {
+      display: 'block',
+    },
+  },
+};
+
+export const popup: SxProps<Theme> = {
+  backgroundColor: '#fff',
+  position: 'absolute',
+  textAlign: 'center',
+  top: '-60px',
+  padding: '8px',
+  zIndex: 9,
+  border: '1px solid #ccc',
+  display: 'none',
+  ...FONT,
 };
 
 export const luggageStyles: SxProps<Theme> = {
@@ -38,6 +59,10 @@ export const customerAvatar: SxProps<Theme> = {
 };
 
 export const collectionDateStyles: SxProps<Theme> = {
+  width: '140px',
+};
+
+export const collectionTimeStyles: SxProps<Theme> = {
   width: '140px',
 };
 

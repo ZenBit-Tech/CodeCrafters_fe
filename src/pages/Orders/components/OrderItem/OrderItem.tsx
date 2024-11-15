@@ -1,4 +1,7 @@
-import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
+import {
+  OrderItemInterface,
+  OrderStatuses,
+} from '@/pages/Orders/components/OrderItem/types';
 import { MONTHS } from '@/constants/moths';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -12,11 +15,15 @@ import {
   routeBlock,
   luggageStyles,
   statusBlock,
+  collectionTimeStyles,
+  popup,
 } from '@/pages/Orders/components/OrderItem/styles';
 import { FC } from 'react';
 
 const OrderItem: FC<OrderItemInterface> = ({
   collectionDate,
+  collectionTimeStart,
+  collectionTimeEnd,
   collectionAddress,
   customer,
   status,
@@ -24,17 +31,23 @@ const OrderItem: FC<OrderItemInterface> = ({
   routeId,
 }) => {
   const { t } = useTranslation();
-  const customerNames: string[] = customer.fullName.split('');
-  const routeIdView = routeId === null ? 'NEW' : routeId;
+  const customerNames: string[] = customer.full_name.split('');
+  const routeIdView = !routeId ? 'NEW' : routeId.id;
+
+  const date = new Date(collectionDate);
+  const timeStart = new Date(collectionTimeStart);
+  const timeEnd = new Date(collectionTimeEnd);
 
   return (
-    <Box sx={orderRow(routeId === null)}>
+    <Box sx={orderRow(!routeId)}>
       <Typography sx={collectionDateStyles}>
-        {collectionDate.getDate()}
-        {MONTHS[collectionDate.getMonth()]}
-        {collectionDate.getFullYear()}
+        {date.getDate()}
+        {MONTHS[date.getMonth()]}
+        {date.getFullYear()}
       </Typography>
-      <Box sx={{ width: '140px' }}></Box>
+      <Typography sx={collectionTimeStyles}>
+        {timeStart.getHours()}:00 - {timeEnd.getHours()}:00
+      </Typography>
       <Typography sx={collectionAddressStyles}>
         {t(collectionAddress)}
       </Typography>
@@ -48,17 +61,22 @@ const OrderItem: FC<OrderItemInterface> = ({
         })}
       </Box>
       <Box sx={customerBlock}>
+        <Box className="popup" sx={popup}>
+          <Typography>{t(customer.full_name)}</Typography>
+          <Typography>{t(customer.phone_number)}</Typography>
+          <Typography>{t(customer.email)}</Typography>
+        </Box>
         <DriverAvatar
           firstName={customerNames[0]}
           lastName={customerNames[1]}
         />
         <Box>
-          <Typography>{t(customer.fullName)}</Typography>
-          <Typography>{t(customer.phoneNumber)}</Typography>
+          <Typography>{t(customer.full_name)}</Typography>
+          <Typography>{t(customer.phone_number)}</Typography>
         </Box>
       </Box>
       <Box sx={statusBlock}>
-        <Status status={status} />
+        <Status status={OrderStatuses[status]} />
       </Box>
       <Typography sx={routeBlock}>{t(`${routeIdView}`)}</Typography>
     </Box>

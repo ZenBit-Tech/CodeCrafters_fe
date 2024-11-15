@@ -1,5 +1,13 @@
 import { StatusEnum } from '@/constants/status';
 
+export const OrderStatuses: Record<string, StatusEnum> = {
+  Completed: StatusEnum.COMPLETED,
+  Failed: StatusEnum.FAILED,
+  'Not arrived': StatusEnum.NOT_ARRIVED,
+  'At Risk': StatusEnum.AT_RISK,
+  Upcoming: StatusEnum.UPCOMING,
+};
+
 export enum LuggageTypes {
   SMALL = 'small',
   MIDDLE = 'middle',
@@ -12,17 +20,20 @@ interface Luggage {
   luggage_type: LuggageTypes;
 }
 
-interface Customer {
-  fullName: string;
-  phoneNumber: string;
+export interface Customer {
+  full_name: string;
+  phone_number: string;
   email: string;
 }
 
 export interface OrderItemInterface {
+  id: number;
   collectionDate: Date;
+  collectionTimeStart: Date;
+  collectionTimeEnd: Date;
   collectionAddress: string;
   luggages: Luggage[];
   customer: Customer;
   status: StatusEnum;
-  routeId: number | string | null;
+  routeId: { id: number } | null;
 }
