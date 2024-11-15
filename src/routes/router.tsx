@@ -12,6 +12,7 @@ import SignInPage from '@/pages/SignIn';
 import AdminListPage from '@/pages/AdminList';
 import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
+import ExamplePage from '@/pages/ExamplePage';
 
 const AppRouter: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -58,6 +59,7 @@ const AppRouter: React.FC = () => {
         },
       ],
     },
+    { path: '/example-page', element: <ExamplePage /> },
   ]);
 
   return <RouterProvider router={router} />;
