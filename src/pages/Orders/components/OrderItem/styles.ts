@@ -52,6 +52,9 @@ export const luggageStyles: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  '& .MuiTypography-root': {
+    fontSize: '14px',
+  },
 };
 
 export const customerAvatar: SxProps<Theme> = {

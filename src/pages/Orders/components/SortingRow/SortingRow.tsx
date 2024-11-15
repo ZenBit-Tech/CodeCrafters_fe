@@ -88,7 +88,7 @@ const SortingRow: FC = () => {
           onChange={(event) => updateFilter(event.target.value)}
           label="choose status"
         >
-          <MenuItem value="STATUS">{t('STATUS')}</MenuItem>
+          <MenuItem value="STATUS">{t('ALL STATUSES')}</MenuItem>
           <MenuItem value="UPCOMING">{t('Upcoming')}</MenuItem>
           <MenuItem value="FAILED">{t('Failed')}</MenuItem>
           <MenuItem value="COMPLETED">{t('Completed')}</MenuItem>

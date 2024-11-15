@@ -31,7 +31,7 @@ const OrderItem: FC<OrderItemInterface> = ({
   routeId,
 }) => {
   const { t } = useTranslation();
-  const customerNames: string[] = customer.full_name.split('');
+  const customerNames: string[] = customer.full_name.split(' ');
   const routeIdView = !routeId ? 'NEW' : routeId.id;
 
   const date = new Date(collectionDate);
@@ -41,9 +41,7 @@ const OrderItem: FC<OrderItemInterface> = ({
   return (
     <Box sx={orderRow(!routeId)}>
       <Typography sx={collectionDateStyles}>
-        {date.getDate()}
-        {MONTHS[date.getMonth()]}
-        {date.getFullYear()}
+        {date.getDate()} {MONTHS[date.getMonth()]} {date.getFullYear()}
       </Typography>
       <Typography sx={collectionTimeStyles}>
         {timeStart.getHours()}:00 - {timeEnd.getHours()}:00
@@ -55,7 +53,7 @@ const OrderItem: FC<OrderItemInterface> = ({
         {luggages.map((luggage) => {
           return (
             <Typography key={luggage.id}>
-              {t(`${luggage.luggage_type}, ${luggage.luggage_weight}`)}
+              {t(`${luggage.luggage_type}, ${luggage.luggage_weight}kg`)}
             </Typography>
           );
         })}
