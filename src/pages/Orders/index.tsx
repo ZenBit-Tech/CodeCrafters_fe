@@ -3,6 +3,7 @@ import OrderItem from '@/pages/Orders/components/OrderItem/OrderItem';
 import SortingRow from '@/pages/Orders/components/SortingRow/SortingRow';
 import { Box, Pagination } from '@mui/material';
 import { useOrdersPagination } from './useOrdersPagination';
+import SearchOrders from './components/SearchOrders';
 
 function OrdersPage(): React.ReactElement {
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
@@ -10,6 +11,7 @@ function OrdersPage(): React.ReactElement {
 
   return (
     <div>
+      <SearchOrders />
       <SortingRow />
       {viewOrdersData.orders.map((order) => (
         <OrderItem
