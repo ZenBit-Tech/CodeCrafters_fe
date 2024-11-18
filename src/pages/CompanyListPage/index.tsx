@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import CompanyItem from '@/components/CompanyItem';
@@ -30,6 +31,7 @@ const CompanyListPage: React.FC = () => {
     toggleSortOrder,
   } = usePaginationAndSorting();
   const { companies, total } = useCompanies(page, 10, searchTerm, sortOrder);
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -122,7 +124,7 @@ const CompanyListPage: React.FC = () => {
               key={company.id}
               company={company}
               onEdit={() => console.log(`Edit: ${company.id}`)}
-              onNavigate={() => console.log(`More: ${company.id}`)}
+              onNavigate={() => navigate(`/company-list/${company.id}`)}
             />
           ))
         ) : (

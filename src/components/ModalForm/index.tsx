@@ -1,7 +1,12 @@
-import React, { FC, useState } from 'react';
-import Button from '../Button';
+import React, { FC } from 'react';
 import { Box, Typography } from '@mui/material';
-import { formWrapper, formContainer } from './styles';
+
+import Button from '@/components/Button';
+import {
+  formWrapper,
+  formContainer,
+  EditIcon,
+} from '@/components/ModalForm/styles';
 
 const openButtons = {
   createButtonElement: function (label: string, handleOpen: () => void) {
@@ -9,7 +14,7 @@ const openButtons = {
   },
   createImageButton: function (image: string, handleOpen: () => void) {
     return (
-      <img
+      <EditIcon
         src={image}
         style={{ cursor: 'pointer' }}
         alt="edit"
@@ -24,18 +29,21 @@ const ModalForm: FC<{
   btnContent: string;
   children: React.ReactNode;
   formTitle: string;
-}> = ({ isOpenBtn, btnContent, children, formTitle }) => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
-
+  isOpened: boolean;
+  setIsOpened: (open: boolean) => void;
+}> = ({
+  isOpenBtn,
+  btnContent,
+  children,
+  formTitle,
+  isOpened,
+  setIsOpened,
+}) => {
   return (
     <>
       {isOpenBtn
-        ? openButtons.createButtonElement(btnContent, () =>
-            setIsOpened(!isOpened)
-          )
-        : openButtons.createImageButton(btnContent, () =>
-            setIsOpened(!isOpened)
-          )}
+        ? openButtons.createButtonElement(btnContent, () => setIsOpened(true))
+        : openButtons.createImageButton(btnContent, () => setIsOpened(true))}
       {isOpened && (
         <Box sx={formWrapper}>
           <Box sx={formContainer}>
@@ -52,7 +60,7 @@ const ModalForm: FC<{
               <Button
                 label="X"
                 variant="grey"
-                onClick={() => setIsOpened(!isOpened)}
+                onClick={() => setIsOpened(false)}
               />
             </Typography>
             {children}

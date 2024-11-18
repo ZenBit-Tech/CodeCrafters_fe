@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
     const accessToken = store.getState().auth.token;
 
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `${accessToken}`;
     }
     return config;
   },
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response === 403 && error.response.status === 401) {
+    if (error.response && error.response.status === 401) {
       store.dispatch(logout());
       history.push('/');
     }
