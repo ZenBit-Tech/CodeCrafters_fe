@@ -3,6 +3,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-family: Arial, sans-serif;
+    margin-bottom: 100px;
   }
   
   .react-calendar__tile {
@@ -19,7 +20,6 @@
   
   .react-calendar__tile--active {
     background-color: #E8DEF8;
-    height: 160px;
   }
   
   .react-calendar__month-view__weekdays {
