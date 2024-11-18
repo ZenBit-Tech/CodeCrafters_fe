@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
 
 import Button from '@/components/Button';
 import CompanyItem from '@/components/CompanyItem';
@@ -138,6 +139,7 @@ const CompanyListPage: React.FC = () => {
           color="primary"
         />
       </Box>
+      <ToastContainer />
     </Box>
   );
 };
