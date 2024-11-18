@@ -11,7 +11,10 @@ const resources = {
 
       companyName: 'COMPANY NAME',
       action: 'ACTIONS',
-      noCompanies: 'No companies yet',
+      company: {
+        fetchErorr: 'Failed to fetch the company list. Please try again later.',
+        noCompanies: 'No companies yet',
+      },
       search: {
         label: 'Search',
         placeholder: 'Search…',
@@ -19,7 +22,7 @@ const resources = {
       },
       button: {
         addNewCompany: '+ Add New Company',
-
+      },
       altText: {
         logo: 'Logo',
         key: 'Key',
@@ -54,7 +57,6 @@ const resources = {
           incorrectEmail: 'Email incorrect.',
           required: 'Email is required.',
         },
-
       },
       navigation: {
         dashboard: 'Dashboard',
