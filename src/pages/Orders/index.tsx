@@ -5,13 +5,13 @@ import { Box, Pagination } from '@mui/material';
 import { useOrdersPagination } from './useOrdersPagination';
 
 function OrdersPage(): React.ReactElement {
-  const { viewData, currentPage, totalPages, fetchOrders } =
+  const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
 
   return (
     <div>
       <SortingRow />
-      {viewData.orders.map((order) => (
+      {viewOrdersData.orders.map((order) => (
         <OrderItem
           key={order.id}
           id={order.id}
