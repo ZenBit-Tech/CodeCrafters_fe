@@ -22,7 +22,7 @@ export const useOrdersPagination = () => {
       });
       dispatch(setParamsPage(page));
     },
-    [dispatch, params.sortBy.encoded, params.filterBy]
+    [dispatch, params.sortBy.encoded, params.filterBy, params.search]
   );
 
   useEffect(() => {
