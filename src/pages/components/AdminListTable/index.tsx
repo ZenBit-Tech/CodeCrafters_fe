@@ -1,16 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Box,
-  IconButton,
-  MenuItem,
-  Pagination,
-  Typography,
-} from '@mui/material';
+import { Box, MenuItem, Pagination, Typography } from '@mui/material';
 
-import editIcon from '@/assets/icons/edit.svg';
-import deleteIcon from '@/assets/icons/delete.svg';
-import Button from '@/components/Button';
 import TextInput from '@/components/TextInput';
 import {
   StyledSelect,
@@ -24,34 +15,13 @@ import {
   StyledPaginationButton,
   StyledPaginationItem,
   ScrollContainer,
-  EditIcon,
-  DeleteIcon,
 } from '@/pages/components/AdminListTable/styles';
 import DriverAvatar from '@/components/DriverAvatar';
-
-interface Admin {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface PaginatedAdmin extends Admin {
-  firstName: string;
-  lastName: string;
-}
-
-interface AdminListTableProps {
-  paginatedAdmins: PaginatedAdmin[];
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  itemsPerPage: number;
-  setItemsPerPage: (count: number) => void;
-  page: number;
-  setPage: (page: number) => void;
-  pageCount: number;
-  startIndex: number;
-  endIndex: number;
-}
+import AddNewAdmin from '@/pages/components/AddNewAdmin';
+import { AdminListTableProps } from '@/interfaces/AdminList';
+import useAdminList from '@/pages/AdminList/useAdminList';
+import UpdateAdmin from '@/pages/components/UpdateAdmin';
+import DeleteAdmin from '@/pages/components/DeleteAdmin';
 
 const AdminListTable: React.FC<AdminListTableProps> = ({
   paginatedAdmins,
@@ -64,8 +34,11 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
   pageCount,
   startIndex,
   endIndex,
+  companyId,
+  refreshAdmins,
 }) => {
   const { t } = useTranslation();
+  const { filteredAdmins } = useAdminList();
 
   return (
     <div>
@@ -88,10 +61,9 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Button
-            variant="colored"
-            label={t('adminList.addAdminButton')}
-            sx={{ py: '6px' }}
+          <AddNewAdmin
+            companyId={Number(companyId)}
+            refreshAdmins={refreshAdmins}
           />
         </FlexBox>
       </ActionsContainer>
@@ -110,23 +82,21 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
                 lastName={admin.lastName}
               ></DriverAvatar>
               <Box>
-                <TableTitle>{admin.name}</TableTitle>
+                <TableTitle>{admin.full_name}</TableTitle>
                 <Typography variant="subtitle2" color="textSecondary">
                   {admin.email}
                 </Typography>
               </Box>
             </FlexBox>
-            <Box>
-              <IconButton>
-                <EditIcon src={editIcon} alt={t('adminList.altText.edit')} />
-              </IconButton>
-              <IconButton>
-                <DeleteIcon
-                  src={deleteIcon}
-                  alt={t('adminList.altText.delete')}
-                />
-              </IconButton>
-            </Box>
+            <FlexBox>
+              <UpdateAdmin
+                userId={admin.id}
+                full_name={admin.full_name}
+                email={admin.email}
+                refreshAdmins={refreshAdmins}
+              />
+              <DeleteAdmin adminId={admin.id} refreshAdmins={refreshAdmins} />
+            </FlexBox>
           </AdminListItem>
         ))}
       </ScrollContainer>
@@ -135,8 +105,8 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
         <PaginationInfo>
           {t('adminList.pagination', {
             start: startIndex + 1,
-            end: Math.min(endIndex, paginatedAdmins.length),
-            total: paginatedAdmins.length,
+            end: Math.min(endIndex, filteredAdmins.length),
+            total: filteredAdmins.length,
           })}
         </PaginationInfo>
         <Pagination
