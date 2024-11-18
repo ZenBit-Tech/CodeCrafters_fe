@@ -6,7 +6,7 @@ import { RootState } from '@/store/store';
 
 export const useOrdersPagination = () => {
   const dispatch = useDispatch();
-  const { viewData, params } = useSelector(
+  const { viewOrdersData, params } = useSelector(
     (store: RootState) => store.ordersPageSlice
   );
 
@@ -28,9 +28,9 @@ export const useOrdersPagination = () => {
   }, [fetchOrders]);
 
   return {
-    viewData,
-    currentPage: viewData.page,
-    totalPages: viewData.pagesCount,
+    viewOrdersData,
+    currentPage: viewOrdersData.page,
+    totalPages: viewOrdersData.pagesCount,
     fetchOrders,
   };
 };

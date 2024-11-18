@@ -29,8 +29,6 @@ export const getOrders = async ({
     store.dispatch(setViewData(orders.data));
 
     if (!orders.data) throw new Error();
-
-    return orders.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       toast(error.response?.data.message, { type: 'error' });

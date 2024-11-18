@@ -1,9 +1,11 @@
 import { RootState } from '@/store/store';
 import './styles.css';
 import { useSelector } from 'react-redux';
+import { FC } from 'react';
 
-const Loader = () => {
+const Loader: FC = () => {
   const isVisible = useSelector((store: RootState) => store.loader.isVisible);
+
   return (
     <>
       {isVisible && (

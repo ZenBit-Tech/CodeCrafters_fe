@@ -1,4 +1,23 @@
-export const ORDERS_SORTS = {
+interface OrdersSortsInterface {
+  collection_date: {
+    asc: string;
+    desc: string;
+  };
+  collection_address: {
+    asc: string;
+    desc: string;
+  };
+  customer: {
+    asc: string;
+    desc: string;
+  };
+  route: {
+    asc: string;
+    desc: string;
+  };
+}
+
+export const ORDERS_SORTS: OrdersSortsInterface = {
   collection_date: {
     asc: encodeURIComponent(JSON.stringify({ collection_date: 'ASC' })),
     desc: encodeURIComponent(JSON.stringify({ collection_date: 'DESC' })),

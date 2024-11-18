@@ -5,8 +5,8 @@ import {
   setParamsSortBy,
 } from '@/store/slices/ordersPageSlice';
 import { ORDERS_SORTS } from '@/constants/ordersSorts';
-import { getOrders } from '../../api/getOrders';
 import { RootState } from '@/store/store';
+import { getOrders } from '@/pages/Orders/api/getOrders';
 
 interface ParamsType {
   sortBy: {

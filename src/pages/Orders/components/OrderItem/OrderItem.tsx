@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   OrderItemInterface,
   OrderStatuses,
@@ -18,7 +19,6 @@ import {
   collectionTimeStyles,
   popup,
 } from '@/pages/Orders/components/OrderItem/styles';
-import { FC } from 'react';
 
 const OrderItem: FC<OrderItemInterface> = ({
   collectionDate,
@@ -32,7 +32,7 @@ const OrderItem: FC<OrderItemInterface> = ({
 }) => {
   const { t } = useTranslation();
   const customerNames: string[] = customer.full_name.split(' ');
-  const routeIdView = !routeId ? 'NEW' : routeId.id;
+  const routeIdView = !routeId ? t('NEW') : routeId.id;
 
   const date = new Date(collectionDate);
   const timeStart = new Date(collectionTimeStart);
@@ -44,7 +44,8 @@ const OrderItem: FC<OrderItemInterface> = ({
         {date.getDate()} {MONTHS[date.getMonth()]} {date.getFullYear()}
       </Typography>
       <Typography sx={collectionTimeStyles}>
-        {timeStart.getHours()}:00 - {timeEnd.getHours()}:00
+        {timeStart.getHours()}:{timeStart.getMinutes()} - {timeEnd.getHours()}:
+        {timeEnd.getMinutes()}
       </Typography>
       <Typography sx={collectionAddressStyles}>
         {t(collectionAddress)}

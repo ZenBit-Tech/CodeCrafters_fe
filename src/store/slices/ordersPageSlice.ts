@@ -15,7 +15,7 @@ interface OrderPageState {
     filterBy: string;
     page: number;
   };
-  viewData: {
+  viewOrdersData: {
     orders: {
       id: number;
       collection_date: Date;
@@ -50,7 +50,7 @@ const initialState: OrderPageState = {
     filterBy: 'STATUS',
     page: 1,
   },
-  viewData: {
+  viewOrdersData: {
     orders: [],
     pagesCount: 1,
     page: 1,
@@ -61,7 +61,7 @@ const orderPageSlice = createSlice({
   name: 'orderPageSlice',
   initialState,
   reducers: {
-    setViewData(
+    setViewOrdersData(
       store,
       action: PayloadAction<{
         orders: [];
@@ -69,7 +69,7 @@ const orderPageSlice = createSlice({
         page: number;
       }>
     ) {
-      store.viewData = action.payload;
+      store.viewOrdersData = action.payload;
     },
     setParamsPage(store, action: PayloadAction<number>) {
       store.params.page = action.payload;
@@ -90,6 +90,10 @@ const orderPageSlice = createSlice({
   },
 });
 
-export const { setViewData, setParamsFilter, setParamsPage, setParamsSortBy } =
-  orderPageSlice.actions;
+export const {
+  setViewOrdersData,
+  setParamsFilter,
+  setParamsPage,
+  setParamsSortBy,
+} = orderPageSlice.actions;
 export default orderPageSlice.reducer;
