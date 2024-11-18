@@ -1,8 +1,5 @@
 import { StatusEnum } from '@/constants/status';
-import {
-  Customer,
-  LuggageTypes,
-} from '@/pages/Orders/components/OrderItem/types';
+import { Customer, LuggageTypes } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface OrderPageState {
@@ -12,6 +9,7 @@ interface OrderPageState {
       value: 'ASC' | 'DESC';
       encoded: string;
     };
+    search: string;
     filterBy: string;
     page: number;
   };
@@ -47,6 +45,7 @@ const initialState: OrderPageState = {
       value: 'DESC',
       encoded: '%7B%22collection_date%22%3A%22DESC%22%7D',
     },
+    search: '',
     filterBy: 'STATUS',
     page: 1,
   },
@@ -87,6 +86,9 @@ const orderPageSlice = createSlice({
     ) {
       store.params.sortBy = action.payload;
     },
+    setSearchBy(store, action: PayloadAction<string>) {
+      store.params.search = action.payload;
+    },
   },
 });
 
@@ -95,5 +97,6 @@ export const {
   setParamsFilter,
   setParamsPage,
   setParamsSortBy,
+  setSearchBy,
 } = orderPageSlice.actions;
 export default orderPageSlice.reducer;

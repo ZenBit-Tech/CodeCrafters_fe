@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   setParamsFilter,
   setParamsSortBy,
@@ -8,7 +9,7 @@ import { ORDERS_SORTS } from '@/constants/ordersSorts';
 import { RootState } from '@/store/store';
 import { getOrders } from '@/pages/Orders/api/getOrders';
 
-interface ParamsType {
+interface SortingParamsType {
   sortBy: {
     type: string;
     value: 'ASC' | 'DESC';
@@ -18,7 +19,7 @@ interface ParamsType {
 }
 
 interface UseSortOrdersReturn {
-  params: ParamsType;
+  params: SortingParamsType;
   toggleSortOrder: (sortType: keyof typeof ORDERS_SORTS) => void;
   updateFilter: (filterValue: string) => void;
 }
@@ -43,6 +44,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
       getOrders({
         sortBy: ORDERS_SORTS[sortType][isAscending ? 'asc' : 'desc'],
         filter: params.filterBy,
+        search: params.search,
         page: 1,
         companyId: 1,
       });

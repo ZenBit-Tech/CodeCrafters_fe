@@ -1,11 +1,9 @@
 import { FC } from 'react';
-import {
-  OrderItemInterface,
-  OrderStatuses,
-} from '@/pages/Orders/components/OrderItem/types';
-import { MONTHS } from '@/constants/moths';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+
+import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
+import { MONTHS } from '@/constants/moths';
 import DriverAvatar from '@/components/DriverAvatar';
 import Status from '@/components/Status';
 import {
@@ -19,6 +17,7 @@ import {
   collectionTimeStyles,
   popup,
 } from '@/pages/Orders/components/OrderItem/styles';
+import { OrderStatuses } from '@/interfaces/interfaces';
 
 const OrderItem: FC<OrderItemInterface> = ({
   collectionDate,
@@ -32,7 +31,7 @@ const OrderItem: FC<OrderItemInterface> = ({
 }) => {
   const { t } = useTranslation();
   const customerNames: string[] = customer.full_name.split(' ');
-  const routeIdView = !routeId ? t('NEW') : routeId.id;
+  const routeIdView: string = !routeId ? t('NEW') : t(`${routeId.id}`);
 
   const date = new Date(collectionDate);
   const timeStart = new Date(collectionTimeStart);

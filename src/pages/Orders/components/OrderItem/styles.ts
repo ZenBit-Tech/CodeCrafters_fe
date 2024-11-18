@@ -9,7 +9,7 @@ export const orderRow: (isNew: boolean) => SxProps<Theme> = (isNew) => {
     marginBottom: '-1px',
     alignItems: 'center',
     justifyContent: 'space-between',
-    background: isNew ? COLORS.lightPurple : '#FFF',
+    background: isNew ? COLORS.lightPurple : COLORS.white,
     padding: '10px 25px',
     border: isNew ? `1px solid ${COLORS.purple}` : '0px',
     color: COLORS.text.medium,
@@ -37,13 +37,13 @@ export const customerBlock: SxProps<Theme> = {
 };
 
 export const popup: SxProps<Theme> = {
-  backgroundColor: '#fff',
+  backgroundColor: COLORS.white,
   position: 'absolute',
   textAlign: 'center',
   top: '-60px',
   padding: '8px',
   zIndex: 9,
-  border: '1px solid #ccc',
+  border: `1px solid ${COLORS.text.light}`,
   display: 'none',
   ...FONT,
 };

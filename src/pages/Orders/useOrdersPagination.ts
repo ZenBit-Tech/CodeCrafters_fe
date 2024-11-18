@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from './api/getOrders';
+
 import { setParamsPage } from '@/store/slices/ordersPageSlice';
 import { RootState } from '@/store/store';
+import { getOrders } from './api/getOrders';
 
 export const useOrdersPagination = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const useOrdersPagination = () => {
       getOrders({
         sortBy: params.sortBy.encoded,
         filter: params.filterBy,
+        search: params.search,
         page,
         companyId: 1,
       });

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Box, Pagination } from '@mui/material';
+
 import OrderItem from '@/pages/Orders/components/OrderItem/OrderItem';
 import SortingRow from '@/pages/Orders/components/SortingRow/SortingRow';
-import { Box, Pagination } from '@mui/material';
 import { useOrdersPagination } from './useOrdersPagination';
 import SearchOrders from './components/SearchOrders';
+import { paginationWrapper } from './styles';
 
 function OrdersPage(): React.ReactElement {
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
@@ -27,9 +29,7 @@ function OrdersPage(): React.ReactElement {
           collectionTimeEnd={order.collection_time_end}
         />
       ))}
-      <Box
-        sx={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}
-      >
+      <Box sx={paginationWrapper}>
         <Pagination
           count={totalPages}
           page={currentPage}

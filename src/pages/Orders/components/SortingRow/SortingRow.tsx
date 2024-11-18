@@ -1,15 +1,22 @@
 import { FC } from 'react';
 import { Box, IconButton, MenuItem, Select, Typography } from '@mui/material';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useTranslation } from 'react-i18next';
+
+import { useSortOrders } from './useSortOrders';
 import {
   iconButtonStyles,
   sortingContainer,
   sortingTextStyles,
   sortingRow,
+  selectBoxContainer,
+  selectStyles,
+  routeBlock,
+  collectionAddressStyles,
+  clientBlockStyles,
+  luggagesBlockStyles,
 } from './styles';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useTranslation } from 'react-i18next';
-import { useSortOrders } from './useSortOrders';
 
 const SortingRow: FC = () => {
   const { t } = useTranslation();
@@ -17,7 +24,7 @@ const SortingRow: FC = () => {
 
   return (
     <Box sx={sortingRow}>
-      <Box sx={{ ...sortingContainer, width: '140px' }}>
+      <Box sx={sortingContainer}>
         <Typography sx={sortingTextStyles}>{t('COLLECTION DATE')}</Typography>
         <IconButton
           onClick={() => toggleSortOrder('collection_date')}
@@ -32,10 +39,10 @@ const SortingRow: FC = () => {
           )}
         </IconButton>
       </Box>
-      <Box sx={{ ...sortingContainer, width: '140px' }}>
+      <Box sx={sortingContainer}>
         <Typography sx={sortingTextStyles}>{t('COLLECTION TIME')}</Typography>
       </Box>
-      <Box sx={{ ...sortingContainer, width: '324px', paddingLeft: '24px' }}>
+      <Box sx={collectionAddressStyles}>
         <Typography sx={sortingTextStyles}>
           {t('COLLECTION ADDRESS')}
         </Typography>
@@ -52,10 +59,10 @@ const SortingRow: FC = () => {
           )}
         </IconButton>
       </Box>
-      <Box sx={{ ...sortingContainer, width: '130px' }}>
+      <Box sx={luggagesBlockStyles}>
         <Typography sx={sortingTextStyles}>{t('LUGGAGE SIZE')}</Typography>
       </Box>
-      <Box sx={{ ...sortingContainer, width: '210px' }}>
+      <Box sx={clientBlockStyles}>
         <Typography sx={sortingTextStyles}>{t('CLIENT')}</Typography>
         <IconButton
           onClick={() => toggleSortOrder('customer')}
@@ -70,20 +77,9 @@ const SortingRow: FC = () => {
           )}
         </IconButton>
       </Box>
-      <Box
-        sx={{
-          ...sortingContainer,
-          width: '156px',
-          display: 'flex',
-          justifyContent: 'start',
-        }}
-      >
+      <Box sx={selectBoxContainer}>
         <Select
-          sx={{
-            border: 'none',
-            marginRight: '5px',
-            '& fieldset': { border: 'none' },
-          }}
+          sx={selectStyles}
           value={params.filterBy}
           onChange={(event) => updateFilter(event.target.value)}
           label="choose status"
@@ -96,7 +92,7 @@ const SortingRow: FC = () => {
           <MenuItem value="NOT_ARRIVED">{t('Not Arrived')}</MenuItem>
         </Select>
       </Box>
-      <Box sx={{ ...sortingContainer, width: '126px' }}>
+      <Box sx={routeBlock}>
         <Typography sx={sortingTextStyles}>{t('ROUTE')}</Typography>
         <IconButton
           onClick={() => toggleSortOrder('route')}

@@ -1,12 +1,17 @@
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FC } from 'react';
 import { Box, TextField } from '@mui/material';
-import searchIcon from '@/assets/icons/search.svg';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 
-const SearchOrders = () => {
+import searchIcon from '@/assets/icons/search.svg';
+import { useSearchOrders } from './useSearch';
+import { formWrapper, searchInputStyles } from './styles';
+
+const SearchOrders: FC = () => {
   const methods = useForm<{ search: string }>();
+  const { sendRequestByParams } = useSearchOrders();
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+    <Box sx={formWrapper}>
       <FormProvider {...methods}>
         <img
           style={{ cursor: 'pointer' }}
@@ -14,6 +19,7 @@ const SearchOrders = () => {
           alt="searchIcon"
           onClick={methods.handleSubmit((data) => {
             console.log(data);
+            sendRequestByParams(data.search);
           })}
         />
         <Controller
@@ -21,11 +27,7 @@ const SearchOrders = () => {
           control={methods.control}
           render={({ field: { value, onChange } }) => (
             <TextField
-              sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none',
-                },
-              }}
+              sx={searchInputStyles}
               value={value}
               onChange={onChange}
               label={'search'}
