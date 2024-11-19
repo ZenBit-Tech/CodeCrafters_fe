@@ -1,19 +1,43 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
-import { COLORS } from '@/constants/colors';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 
 import Button from '../Button';
 import { formContainer, formWrapper } from './styles';
 
+const openButtons = {
+  createButtonElement: function (label: string, handleOpen: () => void) {
+    return <Button label={label} variant="colored" onClick={handleOpen} />;
+  },
+  createImageButton: function (
+    IconComponent: React.ElementType,
+    handleOpen: () => void
+  ) {
+    return (
+      <IconButton onClick={handleOpen}>
+        <IconComponent />
+      </IconButton>
+    );
+  },
+};
+
 const ModalForm: FC<{
-  isOpened: boolean;
-  onClose: () => void;
-  formTitle: string;
+  isOpenBtn: boolean;
+  btnContent: string | React.ElementType;
   children: React.ReactNode;
-}> = ({ isOpened, onClose, formTitle, children }) => {
+  formTitle: string;
+}> = ({ isOpenBtn, btnContent, children, formTitle }) => {
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+
   return (
     <>
+      {isOpenBtn
+        ? openButtons.createButtonElement(btnContent as string, () =>
+            setIsOpened(!isOpened)
+          )
+        : openButtons.createImageButton(btnContent as React.ElementType, () =>
+            setIsOpened(!isOpened)
+          )}
       {isOpened && (
         <Box sx={formWrapper}>
           <Box sx={formContainer}>
@@ -24,15 +48,13 @@ const ModalForm: FC<{
                 marginBottom: '40px',
                 display: 'flex',
                 justifyContent: 'space-between',
-                color: COLORS.text.dark,
               }}
             >
               {formTitle}
               <Button
                 label="X"
                 variant="grey"
-                onClick={onClose}
-                sx={{ minWidth: '32px' }}
+                onClick={() => setIsOpened(!isOpened)}
               />
             </Typography>
             {children}

@@ -19,15 +19,7 @@ interface CreateCompanyForm {
   name: string;
 }
 
-const AddNewCompany = ({
-  fetchCompanies,
-  isOpened,
-  onClose,
-}: {
-  fetchCompanies: () => void;
-  isOpened: boolean;
-  onClose: () => void;
-}) => {
+const AddNewCompany = ({ fetchCompanies }: { fetchCompanies: () => void }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -56,7 +48,6 @@ const AddNewCompany = ({
 
       toast(t('company.successMessage'), { type: 'success' });
       fetchCompanies();
-      onClose();
       reset();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -68,60 +59,57 @@ const AddNewCompany = ({
   };
 
   return (
-    <>
-      <ModalForm
-        isOpened={isOpened}
-        onClose={onClose}
-        formTitle={t('modal.addCompanyTitle')}
-      >
-        <form onSubmit={handleSubmit(sendData)}>
-          <TextInput
-            className="input"
-            label={t('form.organizationName')}
-            sx={input}
-            inputProps={{
-              ...register('name', {
-                required: t('form.validation.companyNameRequired'),
-              }),
-            }}
-            error={!!errors.name}
-            helperText={errors.name?.message}
+    <ModalForm
+      isOpenBtn={true}
+      btnContent={t('button.addNewCompany')}
+      formTitle={t('modal.addCompanyTitle')}
+    >
+      <form onSubmit={handleSubmit(sendData)}>
+        <TextInput
+          className="input"
+          label={t('form.organizationName')}
+          sx={input}
+          inputProps={{
+            ...register('name', {
+              required: t('form.validation.companyNameRequired'),
+            }),
+          }}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+        <TextInput
+          className="input"
+          label={t('form.email')}
+          sx={input}
+          inputProps={{
+            ...register('email', {
+              required: t('form.validation.emailRequired'),
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: t('form.validation.invalidEmail'),
+              },
+            }),
+          }}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
+        <div>
+          <Button
+            className="addBtn"
+            type="submit"
+            label={t('button.add')}
+            variant="colored"
           />
-          <TextInput
-            className="input"
-            label={t('form.email')}
-            sx={input}
-            inputProps={{
-              ...register('email', {
-                required: t('form.validation.emailRequired'),
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: t('form.validation.invalidEmail'),
-                },
-              }),
+          <Button
+            label={t('button.cancel')}
+            variant="grey"
+            onClick={() => {
+              reset();
             }}
-            error={!!errors.email}
-            helperText={errors.email?.message}
           />
-          <div>
-            <Button
-              className="addBtn"
-              type="submit"
-              label={t('button.add')}
-              variant="colored"
-            />
-            <Button
-              label={t('button.cancel')}
-              variant="grey"
-              onClick={() => {
-                reset();
-                onClose();
-              }}
-            />
-          </div>
-        </form>
-      </ModalForm>
-    </>
+        </div>
+      </form>
+    </ModalForm>
   );
 };
 

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 
-import Button from '@/components/Button';
 import CompanyItem from '@/components/CompanyItem';
 import TextInput from '@/components/TextInput';
 import { COLORS } from '@/constants/colors';
@@ -18,17 +17,11 @@ import {
 } from '@mui/material';
 
 import AddNewCompany from './AddCompany/AddNewCompany';
-import UpdateCompany from './UpdateCompany/UpdateCompany';
 import useCompanies from './useCompanies';
 import usePaginationAndSorting from './usePaginationAndSorting';
 
 const CompanyListPage: React.FC = () => {
   const { t } = useTranslation();
-  const [selectedCompanyId, setSelectedCompanyId] = useState<number | null>(
-    null
-  );
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   const {
     page,
@@ -44,27 +37,6 @@ const CompanyListPage: React.FC = () => {
     searchTerm,
     sortOrder
   );
-
-  const selectedCompany =
-    companies.find((company) => company.id === selectedCompanyId) || null;
-
-  const handleEditClick = (id: number) => {
-    setSelectedCompanyId(id);
-    setEditModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setSelectedCompanyId(null);
-    setEditModalOpen(false);
-  };
-
-  const handleAddModalOpen = () => {
-    setAddModalOpen(true);
-  };
-
-  const handleAddModalClose = () => {
-    setAddModalOpen(false);
-  };
 
   return (
     <Box
@@ -106,11 +78,7 @@ const CompanyListPage: React.FC = () => {
             },
           }}
         />
-        <Button
-          onClick={handleAddModalOpen}
-          variant="colored"
-          label={t('button.addNewCompany')}
-        ></Button>
+        <AddNewCompany fetchCompanies={fetchCompanies} />
       </Box>
 
       <Divider />
@@ -165,7 +133,7 @@ const CompanyListPage: React.FC = () => {
             <CompanyItem
               key={company.id}
               company={company}
-              onEdit={handleEditClick}
+              fetchCompanies={fetchCompanies}
               onNavigate={() => console.log(`More: ${company.id}`)}
             />
           ))
@@ -183,24 +151,6 @@ const CompanyListPage: React.FC = () => {
           color="primary"
         />
       </Box>
-
-      {isAddModalOpen && (
-        <AddNewCompany
-          isOpened={true}
-          fetchCompanies={fetchCompanies}
-          onClose={handleAddModalClose}
-        />
-      )}
-
-      {isEditModalOpen && selectedCompanyId && (
-        <UpdateCompany
-          isOpened={!!selectedCompanyId}
-          companyId={selectedCompanyId}
-          companyData={selectedCompany || { name: '', email: '' }}
-          fetchCompanies={fetchCompanies}
-          onClose={handleModalClose}
-        />
-      )}
 
       <ToastContainer />
     </Box>
