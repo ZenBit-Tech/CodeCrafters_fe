@@ -4,9 +4,11 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
 } from 'react';
 import { TileContentFunc } from 'react-calendar';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 interface MarkDatesInterface {
   tileContent: ReactNode | TileContentFunc;
@@ -18,20 +20,27 @@ export const useMarkDates = (): MarkDatesInterface => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dates, setDates] = useState<Record<string, number>>({});
 
-  useEffect(() => {
-    const fetchDates = async () => {
+  const fetchDates = useCallback(
+    async (dateStartString: string, companyId: number): Promise<void> => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/orders/by-dates?date=2024-11-18T00:00:00.000Z&comanyId=1`
+          `${import.meta.env.VITE_BASE_URL}/orders/by-dates?date=${dateStartString}&comanyId=${companyId}`
         );
         setDates(response.data);
       } catch (error) {
-        console.error('Error fetching dates:', error);
+        if (error instanceof AxiosError) {
+          toast(error.response?.data.message, { type: 'error' });
+        } else {
+          toast('Something went wrong', { type: 'error' });
+        }
       }
-    };
+    },
+    []
+  );
 
-    fetchDates();
-  }, []);
+  useEffect(() => {
+    fetchDates(new Date().toISOString(), 1);
+  }, [fetchDates]);
 
   const tileContent = ({ date }: { date: Date }) => {
     const formattedDate = date.toISOString().split('T')[0];

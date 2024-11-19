@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns/index';
 import DateManager from './Calendar';
-import CreateRouteProgressBar from '../components/CreateRouteProgressBar';
+import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 
-export default function DateManagementPage() {
+export const DateManagementPage: FC = () => {
   return (
     <>
       <CreateRouteProgressBar />
@@ -10,4 +12,6 @@ export default function DateManagementPage() {
       <CreateRouteButtons />
     </>
   );
-}
+};
+
+export default DateManagementPage;
