@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 
@@ -17,11 +17,19 @@ import {
   Typography,
 } from '@mui/material';
 
+import AddNewCompany from './AddCompany/AddNewCompany';
+import UpdateCompany from './UpdateCompany/UpdateCompany';
 import useCompanies from './useCompanies';
 import usePaginationAndSorting from './usePaginationAndSorting';
 
 const CompanyListPage: React.FC = () => {
   const { t } = useTranslation();
+  const [selectedCompanyId, setSelectedCompanyId] = useState<number | null>(
+    null
+  );
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isAddModalOpen, setAddModalOpen] = useState(false);
+
   const {
     page,
     sortOrder,
@@ -30,7 +38,33 @@ const CompanyListPage: React.FC = () => {
     handlePageChange,
     toggleSortOrder,
   } = usePaginationAndSorting();
-  const { companies, total } = useCompanies(page, 10, searchTerm, sortOrder);
+  const { companies, total, fetchCompanies } = useCompanies(
+    page,
+    10,
+    searchTerm,
+    sortOrder
+  );
+
+  const selectedCompany =
+    companies.find((company) => company.id === selectedCompanyId) || null;
+
+  const handleEditClick = (id: number) => {
+    setSelectedCompanyId(id);
+    setEditModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setSelectedCompanyId(null);
+    setEditModalOpen(false);
+  };
+
+  const handleAddModalOpen = () => {
+    setAddModalOpen(true);
+  };
+
+  const handleAddModalClose = () => {
+    setAddModalOpen(false);
+  };
 
   return (
     <Box
@@ -54,7 +88,7 @@ const CompanyListPage: React.FC = () => {
           label={t('search.label')}
           value={searchTerm}
           onChange={handleSearchChange}
-          placeholder={t('search.placeholder')}
+          placeholder=""
           sx={{
             marginRight: 2,
             padding: 0,
@@ -62,7 +96,9 @@ const CompanyListPage: React.FC = () => {
               height: '100%',
             },
             '& .MuiFormLabel-root': {
-              transform: 'translate(14px, 9px) scale(1)',
+              transform: searchTerm
+                ? 'translate(14px, -9px) scale(0.75)'
+                : 'translate(14px, 9px) scale(1)',
             },
             '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
               transform: 'translate(14px, -9px) scale(0.75)',
@@ -70,9 +106,15 @@ const CompanyListPage: React.FC = () => {
             },
           }}
         />
-        <Button variant="colored" label={t('button.addNewCompany')}></Button>
+        <Button
+          onClick={handleAddModalOpen}
+          variant="colored"
+          label={t('button.addNewCompany')}
+        ></Button>
       </Box>
+
       <Divider />
+
       <Box
         sx={{
           display: 'flex',
@@ -116,13 +158,14 @@ const CompanyListPage: React.FC = () => {
           {t('action')}
         </Typography>
       </Box>
+
       <Box mb={2}>
         {companies && companies.length > 0 ? (
           companies.map((company) => (
             <CompanyItem
               key={company.id}
               company={company}
-              onEdit={() => console.log(`Edit: ${company.id}`)}
+              onEdit={handleEditClick}
               onNavigate={() => console.log(`More: ${company.id}`)}
             />
           ))
@@ -130,6 +173,7 @@ const CompanyListPage: React.FC = () => {
           <Typography>{t('noCompanies')}</Typography>
         )}
       </Box>
+
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Pagination
           count={Math.ceil(total / 10)}
@@ -139,6 +183,25 @@ const CompanyListPage: React.FC = () => {
           color="primary"
         />
       </Box>
+
+      {isAddModalOpen && (
+        <AddNewCompany
+          isOpened={true}
+          fetchCompanies={fetchCompanies}
+          onClose={handleAddModalClose}
+        />
+      )}
+
+      {isEditModalOpen && selectedCompanyId && (
+        <UpdateCompany
+          isOpened={!!selectedCompanyId}
+          companyId={selectedCompanyId}
+          companyData={selectedCompany || { name: '', email: '' }}
+          fetchCompanies={fetchCompanies}
+          onClose={handleModalClose}
+        />
+      )}
+
       <ToastContainer />
     </Box>
   );

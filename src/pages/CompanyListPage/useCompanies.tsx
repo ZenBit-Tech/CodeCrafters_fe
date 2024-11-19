@@ -40,6 +40,6 @@ const useCompanies = (
     fetchCompanies();
   }, [fetchCompanies]);
 
-  return { companies, total };
+  return { companies, total, fetchCompanies };
 };
 export default useCompanies;

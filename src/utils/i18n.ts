@@ -11,10 +11,7 @@ const resources = {
 
       companyName: 'COMPANY NAME',
       action: 'ACTIONS',
-      company: {
-        fetchErorr: 'Failed to fetch the company list. Please try again later.',
-        noCompanies: 'No companies yet',
-      },
+      noCompanies: 'No companies yet',
       search: {
         label: 'Search',
         placeholder: 'Search…',
@@ -22,6 +19,30 @@ const resources = {
       },
       button: {
         addNewCompany: '+ Add New Company',
+        add: 'Add',
+        update: 'Update',
+        cancel: 'Cancel',
+        close: 'Close',
+      },
+      modal: {
+        addCompanyTitle: 'Add company',
+        updateCompanyTitle: 'Update company',
+      },
+      form: {
+        organizationName: 'Organization name',
+        email: 'Email',
+        validation: {
+          companyNameRequired: "Company name can't be empty",
+          emailRequired: "Email can't be empty",
+          invalidEmail: 'String should be email',
+          invalidData: 'Invalid data. Please check the fields.',
+        },
+      },
+      company: {
+        successMessage: 'Company created successfully',
+        updateSuccessMessage: 'Company updated successfully',
+        error: 'Failed to create company',
+        updateError: 'Failed to update company',
       },
       altText: {
         logo: 'Logo',
@@ -67,6 +88,27 @@ const resources = {
       },
       orders: {
         welcome: 'Orders page',
+      },
+      adminList: {
+        title: 'Admin List',
+        companyName: '{{companyName}}',
+        clientName: '{{clientName}}',
+        clientEmail: '{{clientEmail}}',
+        clientDetails: 'DETAILS',
+        name: 'Client name:',
+        email: 'Email:',
+        editButton: 'Edit',
+        searchPlaceholder: 'Search',
+        addAdminButton: 'Add New Admin',
+        adminName: 'ADMIN NAME',
+        actions: 'ACTIONS',
+        pagination: 'Showing {{start}} to {{end}} of {{total}} users',
+        prev: 'Previous',
+        next: 'Next',
+        altText: {
+          edit: 'Edit Icon',
+          delete: 'Delete Icon',
+        },
       },
     },
   },
