@@ -1,14 +1,20 @@
-import { useState } from 'react';
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-import '@/pages/DateManagment/Calendar/styles.css';
+import { useMarkDates } from './useMarkDates';
+import './styles.css';
 
-export default function DateManager() {
-  const [date, setDate] = useState(new Date());
+const MyCalendar = () => {
+  const { tileContent, selectedDate, setSelectedDate } = useMarkDates();
 
   return (
-    <div>
-      <Calendar onChange={setDate} value={date} locale="en-EN" />
-    </div>
+    <Calendar
+      onChange={setSelectedDate}
+      value={selectedDate}
+      tileContent={tileContent}
+      locale="en-EN"
+    />
   );
-}
+};
+
+export default MyCalendar;
