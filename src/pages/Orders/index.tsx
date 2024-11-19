@@ -33,7 +33,7 @@ function OrdersPage(): React.ReactElement {
         <Pagination
           count={totalPages}
           page={currentPage}
-          onChange={(event, value) => fetchOrders(value)}
+          onChange={(_, value) => fetchOrders(value)}
           shape="rounded"
           color="primary"
         />
