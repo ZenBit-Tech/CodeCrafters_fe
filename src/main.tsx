@@ -7,7 +7,7 @@ import 'normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from '@/App';
-
+import '@/constants/colors.css';
 import { persistor, store } from '@/store/store';
 import i18n from '@/utils/i18n';
 import { ThemeProvider } from '@mui/material';

@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #575757b0;
+  background-color: var(--gray);
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@
   animation: bblFadInOut 1.8s infinite ease-in-out;
 }
 .loader {
-  color: #fff;
+  color: var(--white);
   font-size: 7px;
   position: relative;
   text-indent: -9999em;
