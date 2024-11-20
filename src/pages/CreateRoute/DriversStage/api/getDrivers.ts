@@ -16,7 +16,7 @@ export const getDrivers = async (
     store.dispatch(setDrivers(response.data));
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast('Something went wrong');
+      toast('Something went wrong', { type: 'error' });
     }
   }
 };
