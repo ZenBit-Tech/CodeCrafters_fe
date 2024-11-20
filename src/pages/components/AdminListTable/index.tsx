@@ -17,11 +17,13 @@ import {
   ScrollContainer,
 } from '@/pages/components/AdminListTable/styles';
 import DriverAvatar from '@/components/DriverAvatar';
-import AddNewAdmin from '@/pages/components/AddNewAdmin';
 import { AdminListTableProps } from '@/interfaces/AdminList';
 import useAdminList from '@/pages/AdminList/useAdminList';
-import UpdateAdmin from '@/pages/components/UpdateAdmin';
 import DeleteAdmin from '@/pages/components/DeleteAdmin';
+import AdminForm from '@/pages/components/AdminForm';
+import { addAdmin, updateAdmin } from '@/api/adminActions';
+import editIcon from '@/assets/edit.png';
+import { ITEMS_PER_PAGE_OPTIONS } from '@/constants/constants';
 
 const AdminListTable: React.FC<AdminListTableProps> = ({
   paginatedAdmins,
@@ -48,7 +50,7 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
           onChange={(e) => setItemsPerPage(Number(e.target.value))}
           size="small"
         >
-          {[10, 20, 30].map((value) => (
+          {ITEMS_PER_PAGE_OPTIONS.map((value) => (
             <MenuItem key={value} value={value}>
               {value}
             </MenuItem>
@@ -61,8 +63,10 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <AddNewAdmin
-            companyId={Number(companyId)}
+          <AdminForm
+            formTitle={t('addNewAdmin.title')}
+            buttonContent={`+ ${t('addNewAdmin.button')}`}
+            onSubmit={async (data) => await addAdmin(data, companyId)}
             refreshAdmins={refreshAdmins}
           />
         </FlexBox>
@@ -89,10 +93,15 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
               </Box>
             </FlexBox>
             <FlexBox>
-              <UpdateAdmin
-                userId={admin.id}
-                full_name={admin.full_name}
-                email={admin.email}
+              <AdminForm
+                isEditing
+                formTitle={t('updateAdmin.title')}
+                buttonContent={editIcon}
+                initialValues={{
+                  full_name: admin.full_name,
+                  email: admin.email,
+                }}
+                onSubmit={async (data) => await updateAdmin(data, admin.id)}
                 refreshAdmins={refreshAdmins}
               />
               <DeleteAdmin adminId={admin.id} refreshAdmins={refreshAdmins} />
