@@ -2,8 +2,6 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import ExampleComponent from '@/components/ExampleComponent';
-import useExamplePageStyles from '@/pages/ExamplePage/styles';
 import useExamplePageLogic from '@/pages/ExamplePage/useExamplePage';
 import AddNewAdmin from './AddNewAdmin/AddNewAdmin';
 import UpdateAdmin from './UpdateAdmin/UpdateAdmin';
@@ -14,12 +12,10 @@ import UpdateCompany from './UpdateCompany/UpdateCompany';
 const ExamplePage = (): React.ReactElement => {
   const { t } = useTranslation();
   const { title } = useExamplePageLogic();
-  const classes = useExamplePageStyles();
 
   return (
-    <div className={classes.container}>
+    <div>
       <h1>{t(title)}</h1>
-      <ExampleComponent />
       <AddNewAdmin companyId={1} />
       <UpdateAdmin userId={2} />
       <DeleteAdmin adminId={2} />
