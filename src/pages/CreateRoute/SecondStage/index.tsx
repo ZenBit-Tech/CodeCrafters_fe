@@ -1,4 +1,3 @@
-import { useOrdersPagination } from '@/pages/Orders/useOrdersPagination';
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import { Box, Pagination } from '@mui/material';
@@ -6,6 +5,7 @@ import { paginationWrapper } from './styles';
 import OrderManagementCard from './components/OrderManagementCard';
 import OrdersManagementSearch from './components/OrdersManagementSearch/index';
 import OrdersManagementSort from './components/OrdersManagementSort';
+import { useOrdersPagination } from './useOrdersPagination';
 
 const SecondStagePage = () => {
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =

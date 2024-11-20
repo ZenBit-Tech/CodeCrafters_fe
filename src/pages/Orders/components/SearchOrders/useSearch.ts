@@ -19,6 +19,7 @@ export const useSearchOrders: UseSearchType = () => {
       filter: params.filterBy,
       page: 1,
       companyId: 1,
+      isNew: false,
     });
   };
 

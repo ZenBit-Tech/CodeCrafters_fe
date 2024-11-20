@@ -47,6 +47,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
         search: params.search,
         page: 1,
         companyId: 1,
+        isNew: true,
       });
     },
     [dispatch, params.sortBy.value, params.filterBy]
@@ -61,6 +62,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
         filter: filterValue,
         page: 1,
         companyId: 1,
+        isNew: true,
       });
     },
     [dispatch, params.sortBy.encoded]

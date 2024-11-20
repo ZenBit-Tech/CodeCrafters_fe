@@ -13,6 +13,7 @@ interface GetOrdersParams {
   search?: string;
   page: number;
   companyId: number;
+  isNew: boolean;
 }
 
 export const getOrders = async ({
@@ -21,6 +22,7 @@ export const getOrders = async ({
   search,
   page,
   companyId,
+  isNew,
 }: GetOrdersParams): Promise<void> => {
   try {
     store.dispatch(
@@ -33,7 +35,7 @@ export const getOrders = async ({
     store.dispatch(setisVisible(true));
 
     const orders: AxiosResponse = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/orders/?sortBy=${sortBy}${filter !== 'STATUS' ? `&filterBy=${filter}` : ''}${!search ? '' : `&search=${search}`}&page=${page}&companyId=${companyId}?isNew=false`,
+      `${import.meta.env.VITE_BASE_URL}/orders/?sortBy=${sortBy}${filter !== 'STATUS' ? `&filterBy=${filter}` : ''}&isNew=${isNew}${!search ? '' : `&search=${search}`}&page=${page}&companyId=${companyId}`,
       {
         headers: {
           authorization: store.getState().auth.token,
