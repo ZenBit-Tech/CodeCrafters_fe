@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { deleteAdmin } from '@/api/adminActions';
 import { useTranslation } from 'react-i18next';
+import { TFunction } from 'i18next';
+
+import { deleteAdmin } from '@/api/adminActions';
+
+export interface UseDeleteAdminReturn {
+  isOpened: boolean;
+  handleOpen: () => void;
+  handleClose: () => void;
+  deleteAdminRequest: () => Promise<void>;
+  t: TFunction<'translation', undefined>;
+}
 
 export const useDeleteAdmin = (
   adminId: number,
   refreshAdmins: () => Promise<void>
-) => {
+): UseDeleteAdminReturn => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const { t } = useTranslation();
 
@@ -13,13 +23,9 @@ export const useDeleteAdmin = (
   const handleClose = (): void => setIsOpened(false);
 
   const deleteAdminRequest = async (): Promise<void> => {
-    try {
-      await deleteAdmin(adminId);
-      await refreshAdmins();
-      handleClose();
-    } catch (error) {
-      console.error('Failed to delete admin:', error);
-    }
+    await deleteAdmin(adminId);
+    await refreshAdmins();
+    handleClose();
   };
 
   return {
