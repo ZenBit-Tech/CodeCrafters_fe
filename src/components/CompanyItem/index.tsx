@@ -2,7 +2,7 @@ import React from 'react';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import UpdateCompany from '@/pages/CompanyListPage/UpdateCompany/UpdateCompany';
+import CompanyForm from '@/pages/CompanyListPage/CompanyForm/CompanyForm';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box, IconButton, Typography } from '@mui/material';
 
@@ -52,10 +52,11 @@ const CompanyItem: React.FC<CompanyItemProps> = ({
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <UpdateCompany
+        <CompanyForm
+          mode="update"
+          fetchCompanies={fetchCompanies}
           companyId={company.id}
           companyData={company}
-          fetchCompanies={fetchCompanies}
         />
         <IconButton onClick={() => onNavigate(company.id)}>
           <ArrowForwardIcon />

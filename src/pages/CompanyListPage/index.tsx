@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import AddNewCompany from './AddCompany/AddNewCompany';
+import CompanyForm from './CompanyForm/CompanyForm';
 import useCompanies from './useCompanies';
 import usePaginationAndSorting from './usePaginationAndSorting';
 
@@ -78,7 +78,7 @@ const CompanyListPage: React.FC = () => {
             },
           }}
         />
-        <AddNewCompany fetchCompanies={fetchCompanies} />
+        <CompanyForm mode="create" fetchCompanies={fetchCompanies} />
       </Box>
 
       <Divider />

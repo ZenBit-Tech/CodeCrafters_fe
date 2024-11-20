@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react';
 
 import { Box, IconButton, Typography } from '@mui/material';
 
-import Button from '../Button';
 import { formContainer, formWrapper } from './styles';
+import Button from '../Button';
 
 const openButtons = {
   createButtonElement: function (label: string, handleOpen: () => void) {
@@ -55,6 +55,7 @@ const ModalForm: FC<{
                 label="X"
                 variant="grey"
                 onClick={() => setIsOpened(!isOpened)}
+                sx={{ minWidth: '32px' }}
               />
             </Typography>
             {children}
