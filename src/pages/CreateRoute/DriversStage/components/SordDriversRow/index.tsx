@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -11,7 +12,7 @@ import {
 } from './styles';
 import { useSortDrivers } from './useSortDrivers';
 
-const SortDriversRow = () => {
+const SortDriversRow: FC = () => {
   const { setSorting, sortBy } = useSortDrivers();
 
   return (

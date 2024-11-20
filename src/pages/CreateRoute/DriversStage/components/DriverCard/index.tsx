@@ -1,10 +1,12 @@
-import { Box, Typography } from '@mui/material';
-import { driverRowStyles, customerBlock, popup } from './styles.ts';
-import DriverAvatar from '@/components/DriverAvatar/index.tsx';
-import { t } from 'i18next';
-import { Customer } from '@/interfaces/interfaces.ts';
 import { FC } from 'react';
+import { Box, Typography } from '@mui/material';
+import { t } from 'i18next';
+
+import DriverAvatar from '@/components/DriverAvatar/index.tsx';
+import { Customer } from '@/interfaces/interfaces.ts';
 import CustomCheckbox from '@/components/Checkbox/index.tsx';
+
+import { driverRowStyles, customerBlock, popup } from './styles.ts';
 
 const DriverCard: FC<{ customer: Customer }> = ({ customer }) => {
   const customerNames: string[] = customer.full_name.split(' ');

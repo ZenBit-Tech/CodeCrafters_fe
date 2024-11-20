@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { FC } from 'react';
 import { Box } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
@@ -6,15 +6,10 @@ import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import DriverCard from './components/DriverCard';
 import SearchDrivers from './components/SearchDrivers';
 import SortDriversRow from './components/SordDriversRow';
-import { getDrivers } from './api/getDrivers';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { useExportDrivers } from './useGetDrivers';
 
-const DriversStagePage = () => {
-  const { drivers } = useSelector((store: RootState) => store.drivers);
-  useEffect(() => {
-    getDrivers('DESC', '');
-  }, []);
+const DriversStagePage: FC = () => {
+  const { drivers } = useExportDrivers();
 
   return (
     <Box>

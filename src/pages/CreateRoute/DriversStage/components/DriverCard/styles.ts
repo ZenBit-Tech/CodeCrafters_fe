@@ -1,6 +1,7 @@
+import { SxProps, Theme } from '@mui/material';
+
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { SxProps, Theme } from '@mui/material';
 
 export const driverRowStyles: SxProps<Theme> = {
   width: '1126px',

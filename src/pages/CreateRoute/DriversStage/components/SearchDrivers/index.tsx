@@ -1,11 +1,12 @@
+import { FC } from 'react';
 import { Box, TextField } from '@mui/material';
-import { formWrapper, searchInputStyles } from './styles';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
 import { useSearchDrivers } from './useSearchDrivers';
+import { formWrapper, searchInputStyles } from './styles';
 
-const SearchDrivers = () => {
+const SearchDrivers: FC = () => {
   const methods = useForm<{ search: string }>();
   const { getDriversBySearch } = useSearchDrivers();
 
