@@ -86,12 +86,13 @@ const resources = {
           delete: 'Delete Icon',
         },
       },
-      addNewAdmin: {
+      adminForm: {
         button: 'Add new admin',
         title: 'Add new admin',
         fullName: 'Admin name',
         email: 'Email',
         add: 'Add',
+        update: 'Update',
         cancel: 'Cancel',
         errors: {
           emptyFullName: "Admin full name can't be empty",
@@ -99,17 +100,12 @@ const resources = {
           invalidEmail: 'String should have email format',
         },
       },
+      addNewAdmin: {
+        button: 'Add new admin',
+        title: 'Add new admin',
+      },
       updateAdmin: {
         title: 'Update Admin',
-        fullName: 'Admin full name',
-        email: 'Email',
-        update: 'Update',
-        cancel: 'Cancel',
-        errors: {
-          emptyFullName: "Admin name can't be empty",
-          emptyEmail: "Email can't be empty",
-          invalidEmail: 'Invalid email address',
-        },
       },
       deleteAdmin: {
         heading: 'Delete Admin',
@@ -119,6 +115,7 @@ const resources = {
         confirmText: 'Delete',
       },
       adminApi: {
+        fetch_failed: 'Failed to fetch admins data',
         created_successfully: 'Admin created successfully',
         create_failed: 'Failed to create admin',
         updated_successfully: 'Admin data updated successfully',
