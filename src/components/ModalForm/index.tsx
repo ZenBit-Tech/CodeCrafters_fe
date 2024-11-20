@@ -9,10 +9,16 @@ import {
 } from '@/components/ModalForm/styles';
 
 const openButtons = {
-  createButtonElement: function (label: string, handleOpen: () => void) {
+  createButtonElement: function (
+    label: string,
+    handleOpen: () => void
+  ): React.JSX.Element {
     return <Button label={label} variant="colored" onClick={handleOpen} />;
   },
-  createImageButton: function (image: string, handleOpen: () => void) {
+  createImageButton: function (
+    image: string,
+    handleOpen: () => void
+  ): React.JSX.Element {
     return (
       <EditIcon
         src={image}
