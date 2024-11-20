@@ -3,9 +3,11 @@ import { formWrapper, searchInputStyles } from './styles';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
+import { useSearchDrivers } from './useSearchDrivers';
 
 const SearchDrivers = () => {
   const methods = useForm<{ search: string }>();
+  const { getDriversBySearch } = useSearchDrivers();
 
   return (
     <Box sx={formWrapper}>
@@ -14,9 +16,9 @@ const SearchDrivers = () => {
           style={{ cursor: 'pointer' }}
           src={searchIcon}
           alt="searchIcon"
-          onClick={methods.handleSubmit((data) => {
-            console.log(data);
-          })}
+          onClick={methods.handleSubmit((data) =>
+            getDriversBySearch(data.search)
+          )}
         />
         <Controller
           name="search"

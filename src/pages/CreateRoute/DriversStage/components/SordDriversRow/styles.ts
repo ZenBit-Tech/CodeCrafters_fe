@@ -4,9 +4,9 @@ import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 
 export const sortingRow: SxProps<Theme> = {
-  width: '1238px',
+  width: '1126px',
   background: COLORS.white,
-  padding: '10px 25px 10px 85px',
+  padding: '10px 25px 10px 110px',
   display: 'flex',
   justifyContent: 'space-between',
 };

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Box } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
@@ -5,48 +6,31 @@ import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import DriverCard from './components/DriverCard';
 import SearchDrivers from './components/SearchDrivers';
 import SortDriversRow from './components/SordDriversRow';
+import { getDrivers } from './api/getDrivers';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 const DriversStagePage = () => {
+  const { drivers } = useSelector((store: RootState) => store.drivers);
+  useEffect(() => {
+    getDrivers('DESC', '');
+  }, []);
+
   return (
     <Box>
       <CreateRouteProgressBar />
       <SearchDrivers />
       <SortDriversRow />
-      <DriverCard
-        customer={{
-          full_name: 'John Doe',
-          phone_number: '+38065656565',
-          email: 'john.doe@gmail.com',
-        }}
-      />
-      <DriverCard
-        customer={{
-          full_name: 'John Doe',
-          phone_number: '+38065656565',
-          email: 'john.doe@gmail.com',
-        }}
-      />
-      <DriverCard
-        customer={{
-          full_name: 'John Doe',
-          phone_number: '+38065656565',
-          email: 'john.doe@gmail.com',
-        }}
-      />
-      <DriverCard
-        customer={{
-          full_name: 'John Doe',
-          phone_number: '+38065656565',
-          email: 'john.doe@gmail.com',
-        }}
-      />{' '}
-      <DriverCard
-        customer={{
-          full_name: 'John Doe',
-          phone_number: '+38065656565',
-          email: 'john.doe@gmail.com',
-        }}
-      />
+      {drivers.map((driver) => (
+        <DriverCard
+          key={driver.email}
+          customer={{
+            full_name: driver.full_name,
+            phone_number: driver.phone_number,
+            email: driver.email,
+          }}
+        />
+      ))}
       <CreateRouteButtons />
     </Box>
   );
