@@ -20,7 +20,7 @@ const SortDriversRow: FC = () => {
       <Box sx={sortingContainer}>
         <Typography sx={sortingTextStyles}>{t('DRIVER')}</Typography>
         <IconButton
-          onClick={() => setSorting()}
+          onClick={setSorting}
           aria-label="toggle sort order"
           sx={iconButtonStyles}
         >
