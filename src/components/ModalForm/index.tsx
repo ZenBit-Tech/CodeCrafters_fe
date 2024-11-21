@@ -1,9 +1,8 @@
 import React, { FC, useState } from 'react';
-
-import { Box, IconButton, Typography } from '@mui/material';
-
-import { formContainer, formWrapper } from './styles';
 import Button from '../Button';
+import { Box, IconButton, Typography } from '@mui/material';
+import { formWrapper, formContainer } from './styles';
+
 
 const openButtons = {
   createButtonElement: function (label: string, handleOpen: () => void) {
