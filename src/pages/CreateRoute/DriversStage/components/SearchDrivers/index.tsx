@@ -3,12 +3,12 @@ import { Box, TextField } from '@mui/material';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
-import { useSearchOrders } from './useSearch';
+import { useSearchDrivers } from './useSearchDrivers';
 import { formWrapper, searchInputStyles } from './styles';
 
-const SearchOrders: FC = () => {
+const SearchDrivers: FC = () => {
   const methods = useForm<{ search: string }>();
-  const { sendRequestByParams } = useSearchOrders();
+  const { getDriversBySearch } = useSearchDrivers();
 
   return (
     <Box sx={formWrapper}>
@@ -18,7 +18,7 @@ const SearchOrders: FC = () => {
           src={searchIcon}
           alt="searchIcon"
           onClick={methods.handleSubmit((data) =>
-            sendRequestByParams(data.search)
+            getDriversBySearch(data.search)
           )}
         />
         <Controller
@@ -38,4 +38,4 @@ const SearchOrders: FC = () => {
   );
 };
 
-export default SearchOrders;
+export default SearchDrivers;
