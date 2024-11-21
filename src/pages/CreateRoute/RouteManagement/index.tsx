@@ -2,6 +2,7 @@ import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import { Box } from '@mui/material';
 import RouteDetails from './components/RouteDetails';
+import Map from './components/Map';
 
 const RouteManagementPage = () => {
   return (
@@ -19,6 +20,7 @@ const RouteManagementPage = () => {
           { time_range: '19:20 - 19:30', city: 'Berlin' },
         ]}
       />
+      <Map />
       <CreateRouteButtons />
     </Box>
   );
