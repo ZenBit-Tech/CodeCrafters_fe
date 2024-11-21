@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { toast } from 'react-toastify';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -20,17 +21,17 @@ const MyCalendar: FC = () => {
     if (activeStartDate) {
       fetchDates(activeStartDate.toISOString(), 1);
     } else {
-      console.warn('activeStartDate is null');
+      toast('activeStartDate is null', { type: 'error' });
     }
   };
 
   return (
     <Calendar
-      onChange={setSelectedDate}
+      onChange={() => setSelectedDate}
       value={selectedDate}
       tileContent={tileContent}
       locale="en-EN"
-      onActiveStartDateChange={handleMonthChange}
+      onActiveStartDateChange={() => handleMonthChange}
     />
   );
 };
