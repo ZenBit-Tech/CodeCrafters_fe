@@ -50,6 +50,10 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
 
   const authToken = useSelector((store: RootState) => store.auth.token);
 
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+  };
+
   const sendData = async (formData: CompanyFormInputs) => {
     try {
       const url = mode === 'update' ? `/company/${companyId}` : '/company';
@@ -75,6 +79,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
       toast(successMessage, { type: 'success' });
 
       fetchCompanies();
+      closeModal();
       reset();
     } catch (error) {
       if (error instanceof AxiosError) {
