@@ -14,6 +14,7 @@ interface MarkDatesInterface {
   tileContent: ReactNode | TileContentFunc;
   selectedDate: Date;
   setSelectedDate: Dispatch<SetStateAction<Date>>;
+  fetchDates: (dateStartString: string, companyId: number) => Promise<void>;
 }
 
 export const useMarkDates = (): MarkDatesInterface => {
@@ -26,6 +27,7 @@ export const useMarkDates = (): MarkDatesInterface => {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/orders/by-dates?date=${dateStartString}&comanyId=${companyId}`
         );
+
         setDates(response.data);
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -54,5 +56,6 @@ export const useMarkDates = (): MarkDatesInterface => {
     tileContent,
     selectedDate,
     setSelectedDate,
+    fetchDates,
   };
 };
