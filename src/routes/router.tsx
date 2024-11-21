@@ -48,6 +48,10 @@ const AppRouter: React.FC = () => {
               element: <CompanyListPage />,
             },
             {
+              path: 'company-list/:id',
+              element: <AdminListPage />,
+            },
+            {
               path: 'orders',
               element: <OrdersPage />,
             },

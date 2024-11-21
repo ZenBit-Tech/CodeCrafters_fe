@@ -1,42 +1,55 @@
-import React, { FC, useState } from 'react';
-import Button from '../Button';
-import { Box, IconButton, Typography } from '@mui/material';
-import { formWrapper, formContainer } from './styles';
+import React, { FC } from 'react';
+import { Box, Typography } from '@mui/material';
 
+import Button from '@/components/Button';
+import {
+  formWrapper,
+  formContainer,
+  EditIcon,
+} from '@/components/ModalForm/styles';
 
 const openButtons = {
-  createButtonElement: function (label: string, handleOpen: () => void) {
+  createButtonElement: function (
+    label: string,
+    handleOpen: () => void
+  ): React.JSX.Element {
     return <Button label={label} variant="colored" onClick={handleOpen} />;
   },
   createImageButton: function (
-    IconComponent: React.ElementType,
+    image: string,
     handleOpen: () => void
-  ) {
+  ): React.JSX.Element {
     return (
-      <IconButton onClick={handleOpen}>
-        <IconComponent />
-      </IconButton>
+      <EditIcon
+        src={image}
+        style={{ cursor: 'pointer' }}
+        alt="edit"
+        onClick={handleOpen}
+      />
     );
   },
 };
 
 const ModalForm: FC<{
   isOpenBtn: boolean;
-  btnContent: string | React.ElementType;
+  btnContent: string;
   children: React.ReactNode;
   formTitle: string;
-}> = ({ isOpenBtn, btnContent, children, formTitle }) => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
-
+  isOpened: boolean;
+  setIsOpened: (open: boolean) => void;
+}> = ({
+  isOpenBtn,
+  btnContent,
+  children,
+  formTitle,
+  isOpened,
+  setIsOpened,
+}) => {
   return (
     <>
       {isOpenBtn
-        ? openButtons.createButtonElement(btnContent as string, () =>
-            setIsOpened(!isOpened)
-          )
-        : openButtons.createImageButton(btnContent as React.ElementType, () =>
-            setIsOpened(!isOpened)
-          )}
+        ? openButtons.createButtonElement(btnContent, () => setIsOpened(true))
+        : openButtons.createImageButton(btnContent, () => setIsOpened(true))}
       {isOpened && (
         <Box sx={formWrapper}>
           <Box sx={formContainer}>

@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 
 import { COLORS } from '@/constants/colors';
 import { SxProps, Theme } from '@mui/material';
@@ -22,3 +23,12 @@ export const formContainer: SxProps<Theme> = {
   right: '0',
   zIndex: 1501,
 };
+
+export const EditIcon = styled('img')({
+  width: '22px',
+  height: '22px',
+  '@media (max-width:600px)': {
+    width: '18px',
+    height: '18px',
+  },
+});

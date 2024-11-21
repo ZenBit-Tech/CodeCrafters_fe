@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { ThemeProvider } from '@mui/material';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,8 +12,6 @@ import App from '@/App';
 import '@/constants/colors.css';
 import { persistor, store } from '@/store/store';
 import i18n from '@/utils/i18n';
-import { ThemeProvider } from '@mui/material';
-import { ToastContainer } from 'react-toastify';
 import Loader from './components/Loader/Loader';
 import theme from './theme';
 
@@ -27,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
           </I18nextProvider>
         </ThemeProvider>
       </PersistGate>
+      <ToastContainer />
     </Provider>
   </StrictMode>
 );

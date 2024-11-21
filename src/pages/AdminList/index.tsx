@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Stack } from '@mui/material';
 
@@ -26,7 +27,10 @@ const AdminListPage: React.FC = () => {
     pageCount,
     startIndex,
     endIndex,
+    refreshAdmins,
   } = useAdminList();
+  const { id } = useParams<{ id: string }>();
+  const companyId = Number(id);
 
   return (
     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} height="100%">
@@ -56,6 +60,8 @@ const AdminListPage: React.FC = () => {
             pageCount={pageCount}
             startIndex={startIndex}
             endIndex={endIndex}
+            companyId={companyId}
+            refreshAdmins={refreshAdmins}
           />
         </StyledMainBox>
       </MainBox>

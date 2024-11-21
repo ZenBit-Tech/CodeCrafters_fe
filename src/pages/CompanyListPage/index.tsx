@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import CompanyItem from '@/components/CompanyItem';
@@ -31,6 +32,7 @@ const CompanyListPage: React.FC = () => {
     handlePageChange,
     toggleSortOrder,
   } = usePaginationAndSorting();
+  const navigate = useNavigate();
   const { companies, total, fetchCompanies } = useCompanies(
     page,
     10,
@@ -134,7 +136,7 @@ const CompanyListPage: React.FC = () => {
               key={company.id}
               company={company}
               fetchCompanies={fetchCompanies}
-              onNavigate={() => console.log(`More: ${company.id}`)}
+              onNavigate={() => navigate(`/company-list/${company.id}`)}
             />
           ))
         ) : (
