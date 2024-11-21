@@ -51,7 +51,7 @@ export const luggageStyles: SxProps<Theme> = {
   flexDirection: 'column',
   alignItems: 'center',
   '& .MuiTypography-root': {
-    fontSize: '14px',
+    fontSize: FONT.fontSize.small,
   },
 };
 

@@ -19,10 +19,9 @@ const OrdersManagementSearch: FC = () => {
             style={{ cursor: 'pointer' }}
             src={searchIcon}
             alt="searchIcon"
-            onClick={methods.handleSubmit((data) => {
-              console.log(data);
-              sendRequestByParams(data.search);
-            })}
+            onClick={methods.handleSubmit((data) =>
+              sendRequestByParams(data.search)
+            )}
           />
           <Controller
             name="search"
