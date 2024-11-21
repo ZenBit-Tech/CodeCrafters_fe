@@ -3,14 +3,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { getAdminList } from '@/api/adminActions';
 import { Admin, UseAdminListReturnType } from '@/interfaces/AdminList';
 
-const useAdminList = (): UseAdminListReturnType => {
+const useAdminList = (companyId: number): UseAdminListReturnType => {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const refreshAdmins = useCallback(async () => {
-    const adminList = await getAdminList();
+    const adminList = await getAdminList(companyId);
     setAdmins(
       adminList.map((admin: Admin) => ({
         id: admin.id,
@@ -18,7 +18,7 @@ const useAdminList = (): UseAdminListReturnType => {
         email: admin.email,
       }))
     );
-  }, []);
+  }, [companyId]);
 
   useEffect(() => {
     refreshAdmins();

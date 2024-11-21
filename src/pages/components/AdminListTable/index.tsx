@@ -18,7 +18,6 @@ import {
 } from '@/pages/components/AdminListTable/styles';
 import DriverAvatar from '@/components/DriverAvatar';
 import { AdminListTableProps } from '@/interfaces/AdminList';
-import useAdminList from '@/pages/AdminList/useAdminList';
 import DeleteAdmin from '@/pages/components/DeleteAdmin';
 import AdminForm from '@/pages/components/AdminForm';
 import { addAdmin, updateAdmin } from '@/api/adminActions';
@@ -38,9 +37,9 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
   endIndex,
   companyId,
   refreshAdmins,
+  filteredAdmins,
 }) => {
   const { t } = useTranslation();
-  const { filteredAdmins } = useAdminList();
 
   return (
     <div>

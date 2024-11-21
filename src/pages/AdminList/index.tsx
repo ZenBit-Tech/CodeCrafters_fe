@@ -15,6 +15,8 @@ import AdminListTable from '@/pages/components/AdminListTable';
 import AdminSidebar from '@/pages/components/AdminSideBar';
 
 const AdminListPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const companyId = Number(id);
   const { t } = useTranslation();
   const {
     searchQuery,
@@ -28,9 +30,8 @@ const AdminListPage: React.FC = () => {
     startIndex,
     endIndex,
     refreshAdmins,
-  } = useAdminList();
-  const { id } = useParams<{ id: string }>();
-  const companyId = Number(id);
+    filteredAdmins,
+  } = useAdminList(companyId);
 
   return (
     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} height="100%">
@@ -62,6 +63,7 @@ const AdminListPage: React.FC = () => {
             endIndex={endIndex}
             companyId={companyId}
             refreshAdmins={refreshAdmins}
+            filteredAdmins={filteredAdmins}
           />
         </StyledMainBox>
       </MainBox>
