@@ -2,21 +2,21 @@ import React from 'react';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import CompanyForm from '@/pages/CompanyListPage/CompanyForm/CompanyForm';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Typography } from '@mui/material';
 
 import DriverAvatar from '../DriverAvatar';
 
 interface CompanyItemProps {
   company: { id: number; name: string; email: string };
-  onEdit: (id: number) => void;
+  fetchCompanies: () => void;
   onNavigate: (id: number) => void;
 }
 
 const CompanyItem: React.FC<CompanyItemProps> = ({
   company,
-  onEdit,
+  fetchCompanies,
   onNavigate,
 }) => {
   const firstName = company.name.split(' ')[0] || '';
@@ -51,10 +51,13 @@ const CompanyItem: React.FC<CompanyItemProps> = ({
         </Typography>
       </Box>
 
-      <Box>
-        <IconButton onClick={() => onEdit(company.id)} sx={{ marginRight: 1 }}>
-          <EditIcon />
-        </IconButton>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <CompanyForm
+          mode="update"
+          fetchCompanies={fetchCompanies}
+          companyId={company.id}
+          companyData={company}
+        />
         <IconButton onClick={() => onNavigate(company.id)}>
           <ArrowForwardIcon />
         </IconButton>

@@ -19,6 +19,30 @@ const resources = {
       },
       button: {
         addNewCompany: '+ Add New Company',
+        add: 'Add',
+        update: 'Update',
+        cancel: 'Cancel',
+        close: 'Close',
+      },
+      modal: {
+        addCompanyTitle: 'Add company',
+        updateCompanyTitle: 'Update company',
+      },
+      form: {
+        organizationName: 'Organization name',
+        email: 'Email',
+        validation: {
+          companyNameRequired: "Company name can't be empty",
+          emailRequired: "Email can't be empty",
+          invalidEmail: 'String should be email',
+          invalidData: 'Invalid data. Please check the fields.',
+        },
+      },
+      company: {
+        successMessage: 'Company created successfully',
+        updateSuccessMessage: 'Company updated successfully',
+        error: 'Failed to create company',
+        updateError: 'Failed to update company',
       },
       altText: {
         logo: 'Logo',

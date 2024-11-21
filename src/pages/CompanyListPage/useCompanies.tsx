@@ -1,4 +1,6 @@
+import { t } from 'i18next';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { getCompanies } from '@/services/companyService';
 
@@ -30,6 +32,7 @@ const useCompanies = (
       setTotal(total);
     } catch (error) {
       console.error('Failed to fetch companies:', error);
+      toast.error(t('company.fetchErorr'), { toastId: 'fetch-error' });
     }
   }, [page, pageSize, searchTerm, sortOrder]);
 
@@ -37,6 +40,6 @@ const useCompanies = (
     fetchCompanies();
   }, [fetchCompanies]);
 
-  return { companies, total };
+  return { companies, total, fetchCompanies };
 };
 export default useCompanies;

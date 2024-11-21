@@ -1,27 +1,28 @@
 import React, { FC, useState } from 'react';
 import Button from '../Button';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { formWrapper, formContainer } from './styles';
+
 
 const openButtons = {
   createButtonElement: function (label: string, handleOpen: () => void) {
     return <Button label={label} variant="colored" onClick={handleOpen} />;
   },
-  createImageButton: function (image: string, handleOpen: () => void) {
+  createImageButton: function (
+    IconComponent: React.ElementType,
+    handleOpen: () => void
+  ) {
     return (
-      <img
-        src={image}
-        style={{ cursor: 'pointer' }}
-        alt="edit"
-        onClick={handleOpen}
-      />
+      <IconButton onClick={handleOpen}>
+        <IconComponent />
+      </IconButton>
     );
   },
 };
 
 const ModalForm: FC<{
   isOpenBtn: boolean;
-  btnContent: string;
+  btnContent: string | React.ElementType;
   children: React.ReactNode;
   formTitle: string;
 }> = ({ isOpenBtn, btnContent, children, formTitle }) => {
@@ -30,10 +31,10 @@ const ModalForm: FC<{
   return (
     <>
       {isOpenBtn
-        ? openButtons.createButtonElement(btnContent, () =>
+        ? openButtons.createButtonElement(btnContent as string, () =>
             setIsOpened(!isOpened)
           )
-        : openButtons.createImageButton(btnContent, () =>
+        : openButtons.createImageButton(btnContent as React.ElementType, () =>
             setIsOpened(!isOpened)
           )}
       {isOpened && (
@@ -53,6 +54,7 @@ const ModalForm: FC<{
                 label="X"
                 variant="grey"
                 onClick={() => setIsOpened(!isOpened)}
+                sx={{ minWidth: '32px' }}
               />
             </Typography>
             {children}
