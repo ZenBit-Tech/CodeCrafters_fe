@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { COLORS } from '@/constants/colors';
 import { SxProps, Theme } from '@mui/material';
 
-
 export const formWrapper: SxProps<Theme> = {
   width: '100vw',
   height: '100vh',

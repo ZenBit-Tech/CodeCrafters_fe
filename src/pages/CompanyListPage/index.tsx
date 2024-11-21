@@ -40,7 +40,6 @@ const CompanyListPage: React.FC = () => {
     sortOrder
   );
 
-
   return (
     <Box
       sx={{

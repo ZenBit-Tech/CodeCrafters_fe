@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Edit as EditIcon } from '@mui/icons-material';
+import editIcon from '@/assets/edit.png';
 
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
@@ -33,6 +33,8 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
   companyId,
   companyData,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { t } = useTranslation();
   const {
     register,
@@ -88,12 +90,14 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
   return (
     <ModalForm
       isOpenBtn={mode === 'create'}
-      btnContent={mode === 'create' ? t('button.addNewCompany') : EditIcon}
+      btnContent={mode === 'create' ? t('button.addNewCompany') : editIcon}
       formTitle={
         mode === 'update'
           ? t('modal.updateCompanyTitle')
           : t('modal.addCompanyTitle')
       }
+      isOpened={isModalOpen}
+      setIsOpened={setIsModalOpen}
     >
       <form onSubmit={handleSubmit(sendData)}>
         <TextInput
