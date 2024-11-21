@@ -3,11 +3,19 @@ import { persistStore } from 'redux-persist';
 
 import exampleReducer from '@/store/slices/exampleSlice';
 import authReducer from '@/store/slices/authSlice';
+import ordersPageSlice from './slices/ordersPageSlice';
+import loaderSlice from './slices/loaderSlice';
+import sortDriversSlice from './slices/sortDriversSlice';
+import driversSlice from './slices/driversSlice';
 
 export const store = configureStore({
   reducer: {
     example: exampleReducer,
     auth: authReducer,
+    ordersPageSlice: ordersPageSlice,
+    loader: loaderSlice,
+    sortDriversBy: sortDriversSlice,
+    drivers: driversSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

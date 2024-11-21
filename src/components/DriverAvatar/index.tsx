@@ -6,11 +6,13 @@ import { Avatar } from '@mui/material';
 
 interface DriverAvatarProps {
   firstName: string;
-  lastName: string;
+  lastName?: string;
 }
 
 const DriverAvatar: React.FC<DriverAvatarProps> = ({ firstName, lastName }) => {
-  const initials = `${firstName[0]}${lastName[0]}`;
+  const initials =
+    firstName.charAt(0).toUpperCase() +
+    (lastName ? lastName.charAt(0).toUpperCase() : '');
 
   return (
     <Avatar
@@ -22,7 +24,7 @@ const DriverAvatar: React.FC<DriverAvatarProps> = ({ firstName, lastName }) => {
         backgroundColor: COLORS.main.light,
       }}
     >
-      {initials}
+      {initials || '?'}
     </Avatar>
   );
 };

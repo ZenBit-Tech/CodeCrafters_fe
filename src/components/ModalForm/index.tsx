@@ -66,7 +66,8 @@ const ModalForm: FC<{
               <Button
                 label="X"
                 variant="grey"
-                onClick={() => setIsOpened(false)}
+                onClick={() => setIsOpened(!isOpened)}
+                sx={{ minWidth: '32px' }}
               />
             </Typography>
             {children}
