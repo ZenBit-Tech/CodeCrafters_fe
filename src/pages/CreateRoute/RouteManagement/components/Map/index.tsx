@@ -17,8 +17,8 @@ const Map: React.FC<MapProps> = ({ locations }) => {
       style={{ height: '810px', width: '728px' }}
     >
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url={import.meta.env.VITE_BASE_TILE_LAYER}
+        attribution={`&copy; <a href="${import.meta.env.VITE_BASE_OPEN_STREET_API}/copyright">OpenStreetMap</a> contributors`}
       />
       <RoutingComponent locations={locations} />
     </MapContainer>

@@ -12,7 +12,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
 
   const geocode = async (address: string) => {
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      `${import.meta.env.VITE_BASE_OPEN_STREET_API}/search?format=json&q=${encodeURIComponent(
         address
       )}`
     );
