@@ -1,13 +1,15 @@
+import { FC } from 'react';
+import { t } from 'i18next';
+import { Box, Typography } from '@mui/material';
+
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
-import { Box, Typography } from '@mui/material';
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 import RouteDetails from './components/RouteDetails';
 import Map from './components/Map';
-import { COLORS } from '@/constants/colors';
-import { t } from 'i18next';
-import { FONT } from '@/constants/font';
 
-const RouteManagementPage = () => {
+const RouteManagementPage: FC = () => {
   const locations = [
     'Kyiv, Khreshchatyk Street',
     'Lviv, Svobody Avenue',
@@ -28,7 +30,11 @@ const RouteManagementPage = () => {
         }}
       >
         <Box sx={{ paddingTop: '20px' }}>
-          <Typography sx={{ ...FONT }}>{t('9 August, Tuesday')}</Typography>
+          <Typography
+            sx={{ fontSize: FONT.fontSize.extraLarge, marginBottom: '16px' }}
+          >
+            {t('9 August, Tuesday')}
+          </Typography>
           <RouteDetails
             driver_full_name={'John Doe'}
             time_range={'19:00 - 20:00'}

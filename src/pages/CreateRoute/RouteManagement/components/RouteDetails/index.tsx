@@ -10,7 +10,12 @@ import eyeIcon from '@/assets/icons/eye.svg';
 import mapPin from '@/assets/icons/map-pin.svg';
 import noteIcon from '@/assets/icons/note.svg';
 import dropDownIcon from '@/assets/icons/drop-down-icon.svg';
-import { routeDetailsHeaderStyles, wrapper, orderRowStyles } from './styles';
+import {
+  routeDetailsHeaderStyles,
+  routeDetailsHeaderClosedStyles,
+  wrapper,
+  orderRowStyles,
+} from './styles';
 
 interface RouteDetailsInterface {
   driver_full_name: string;
@@ -33,7 +38,9 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
   const [open, setIsOpen] = useState<boolean>(false);
   return (
     <Box sx={wrapper}>
-      <Box sx={routeDetailsHeaderStyles}>
+      <Box
+        sx={open ? routeDetailsHeaderStyles : routeDetailsHeaderClosedStyles}
+      >
         <DriverAvatar
           firstName={driver_full_name.split(' ')[0]}
           lastName={driver_full_name.split(' ')[1]}
@@ -45,7 +52,7 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
           </Typography>
           <Typography>#{route_id}</Typography>
         </Box>
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <img src={editIcon} alt="editIcon" />
           <img src={eyeIcon} alt="eyeIcon" />
 

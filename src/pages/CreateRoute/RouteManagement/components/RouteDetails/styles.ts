@@ -1,4 +1,5 @@
 import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 import { SxProps, Theme } from '@mui/material';
 
 export const wrapper: SxProps<Theme> = {
@@ -6,13 +7,26 @@ export const wrapper: SxProps<Theme> = {
 };
 
 export const routeDetailsHeaderStyles: SxProps<Theme> = {
-  width: '344px',
-  padding: '5px',
+  width: '354px',
+  padding: '5px 10px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  background: '#DBDADE',
+  background: COLORS.gray,
   borderRadius: '5px',
+  ...FONT,
+};
+
+export const routeDetailsHeaderClosedStyles: SxProps<Theme> = {
+  width: '354px',
+  padding: '5px 10px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  background: COLORS.white,
+  border: `1px solid ${COLORS.gray}`,
+  borderRadius: '5px',
+  ...FONT,
 };
 
 export const orderRowStyles: SxProps<Theme> = {
