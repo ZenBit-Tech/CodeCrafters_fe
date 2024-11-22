@@ -18,14 +18,6 @@ const MyCalendar: FC = () => {
   const { tileContent, selectedDate, setSelectedDate, fetchDates } =
     useMarkDates();
 
-  const handleDateChange = (value: Value): void => {
-    if (value instanceof Date) {
-      setSelectedDate(value);
-    } else {
-      toast('Invalid date selected', { type: 'error' });
-    }
-  };
-
   const handleMonthChange = ({
     activeStartDate,
   }: OnActiveStartDateChangeParams): void => {
@@ -38,7 +30,7 @@ const MyCalendar: FC = () => {
 
   return (
     <Calendar
-      onChange={handleDateChange}
+      onChange={setSelectedDate}
       value={selectedDate}
       tileContent={tileContent}
       locale="en-EN"
