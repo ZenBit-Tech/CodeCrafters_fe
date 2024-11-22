@@ -15,6 +15,7 @@ import {
   routeDetailsHeaderClosedStyles,
   wrapper,
   orderRowStyles,
+  routeHeaderIconsStyles,
 } from './styles';
 
 interface RouteDetailsInterface {
@@ -36,6 +37,7 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
   orders,
 }) => {
   const [open, setIsOpen] = useState<boolean>(false);
+
   return (
     <Box sx={wrapper}>
       <Box
@@ -52,7 +54,7 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
           </Typography>
           <Typography>#{route_id}</Typography>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={routeHeaderIconsStyles}>
           <img src={editIcon} alt="editIcon" />
           <img src={eyeIcon} alt="eyeIcon" />
 

@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
-import { FONT } from '@/constants/font';
-import RouteDetails from '../RouteDetails';
 import { t } from 'i18next';
+import { Box, Typography } from '@mui/material';
+
+import RouteDetails from '../RouteDetails';
+import { informBlockStyles, titleStyles } from './styles';
 
 interface Order {
   time_range: string;
@@ -23,12 +24,8 @@ interface InformBlockInterface {
 }
 
 const InformBlock: FC<InformBlockInterface> = ({ title, routes }) => (
-  <Box sx={{ paddingTop: '20px' }}>
-    <Typography
-      sx={{ fontSize: FONT.fontSize.extraLarge, marginBottom: '16px' }}
-    >
-      {t(title)}
-    </Typography>
+  <Box sx={informBlockStyles}>
+    <Typography sx={titleStyles}>{t(title)}</Typography>
     {routes.map((route) => (
       <RouteDetails
         key={route.id}

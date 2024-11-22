@@ -29,6 +29,11 @@ export const routeDetailsHeaderClosedStyles: SxProps<Theme> = {
   ...FONT,
 };
 
+export const routeHeaderIconsStyles: SxProps<Theme> = {
+  display: 'flex',
+  alignItems: 'center',
+};
+
 export const orderRowStyles: SxProps<Theme> = {
   width: '344px',
   padding: '5px 0',
