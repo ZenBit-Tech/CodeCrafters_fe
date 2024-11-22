@@ -8,18 +8,9 @@ const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:4000',
 });
 
-const getUserToken = (): string | null => {
-  try {
-    const authData = JSON.parse(localStorage.getItem('persist:auth') || '{}');
-    return authData?.token ? JSON.parse(authData.token) : null;
-  } catch {
-    return null;
-  }
-};
-
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = getUserToken();
+    const accessToken = store.getState().auth.token;
 
     if (accessToken) {
       config.headers.Authorization = `${accessToken}`;
