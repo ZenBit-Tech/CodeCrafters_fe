@@ -5,19 +5,30 @@ import 'react-calendar/dist/Calendar.css';
 
 import { useMarkDates } from './useMarkDates';
 import './styles.css';
+import { Value } from 'react-calendar/dist/esm/shared/types.js';
+
+interface OnActiveStartDateChangeParams {
+  action: string;
+  activeStartDate: Date | null;
+  value: Value;
+  view: string;
+}
 
 const MyCalendar: FC = () => {
   const { tileContent, selectedDate, setSelectedDate, fetchDates } =
     useMarkDates();
 
+  const handleDateChange = (value: Value): void => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+    } else {
+      toast('Invalid date selected', { type: 'error' });
+    }
+  };
+
   const handleMonthChange = ({
     activeStartDate,
-  }: {
-    action: string;
-    activeStartDate: Date | null;
-    value: Date[];
-    view: string;
-  }) => {
+  }: OnActiveStartDateChangeParams): void => {
     if (activeStartDate) {
       fetchDates(activeStartDate.toISOString(), 1);
     } else {
@@ -27,11 +38,11 @@ const MyCalendar: FC = () => {
 
   return (
     <Calendar
-      onChange={() => setSelectedDate}
+      onChange={handleDateChange}
       value={selectedDate}
       tileContent={tileContent}
       locale="en-EN"
-      onActiveStartDateChange={() => handleMonthChange}
+      onActiveStartDateChange={handleMonthChange}
     />
   );
 };
