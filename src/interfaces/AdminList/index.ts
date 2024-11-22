@@ -45,6 +45,7 @@ export interface AdminListTableProps {
   endIndex: number;
   companyId: number;
   refreshAdmins: () => Promise<void>;
+  filteredAdmins: Admin[];
 }
 
 export interface UseAdminListReturnType {
