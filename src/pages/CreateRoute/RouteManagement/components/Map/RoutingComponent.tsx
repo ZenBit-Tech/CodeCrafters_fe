@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
+import { COLORS } from '@/constants/colors';
 
 interface RoutingComponentProps {
   locations: string[];
@@ -40,7 +41,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         routeWhileDragging: true,
         createMarker: () => null,
         lineOptions: {
-          styles: [{ color: '#6FA1EC', weight: 4 }],
+          styles: [{ color: `${COLORS.green}`, weight: 4 }],
         },
         show: false,
       }).addTo(map);
