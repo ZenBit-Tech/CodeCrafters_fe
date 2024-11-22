@@ -30,6 +30,7 @@ const resources = {
       },
       form: {
         organizationName: 'Organization name',
+        clientName: 'Client Name',
         email: 'Email',
         validation: {
           companyNameRequired: "Company name can't be empty",
