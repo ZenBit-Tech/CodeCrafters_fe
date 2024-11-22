@@ -1,6 +1,6 @@
+import { SxProps, Theme } from '@mui/material';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { SxProps, Theme } from '@mui/material';
 
 export const wrapper: SxProps<Theme> = {
   background: COLORS.white,
