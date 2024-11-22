@@ -12,7 +12,6 @@ import SignInPage from '@/pages/SignIn';
 import AdminListPage from '@/pages/AdminList';
 import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
-import ExamplePage from '@/pages/ExamplePage';
 import DateManagementPage from '@/pages/DateManagment';
 import DriversStagePage from '@/pages/CreateRoute/DriversStage';
 
@@ -73,7 +72,6 @@ const AppRouter: React.FC = () => {
         },
       ],
     },
-    { path: '/example-page', element: <ExamplePage /> },
   ]);
 
   return <RouterProvider router={router} />;
