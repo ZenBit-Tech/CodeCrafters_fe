@@ -3,14 +3,16 @@ import { Box, TextField } from '@mui/material';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
-import { useSearchOrders } from './useSearch';
 import { rowStyles, formWrapper, searchInputStyles } from './styles';
 import BasicDatePicker from '@/components/BasicDatePicker';
 
-const OrdersManagementSearch: FC = () => {
+const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
+  onSearch,
+}) => {
   const methods = useForm<{ search: string }>();
-  const { sendRequestByParams } = useSearchOrders();
+  //   const { sendRequestByParams } = useSearchOrders();
 
+  // sendRequestByParams(data.search)
   return (
     <Box sx={rowStyles}>
       <FormProvider {...methods}>
@@ -19,9 +21,7 @@ const OrdersManagementSearch: FC = () => {
             style={{ cursor: 'pointer' }}
             src={searchIcon}
             alt="searchIcon"
-            onClick={methods.handleSubmit((data) =>
-              sendRequestByParams(data.search)
-            )}
+            onClick={methods.handleSubmit((data) => onSearch(data.search))}
           />
           <Controller
             name="search"
@@ -42,4 +42,4 @@ const OrdersManagementSearch: FC = () => {
   );
 };
 
-export default OrdersManagementSearch;
+export default SearchComponent;

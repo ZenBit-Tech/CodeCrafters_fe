@@ -1,13 +1,16 @@
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import { Box, Pagination } from '@mui/material';
+
+import SearchComponent from '@/components/SearchComponent';
 import { paginationWrapper } from './styles';
 import OrderManagementCard from './components/OrderManagementCard';
-import OrdersManagementSearch from './components/OrdersManagementSearch/index';
 import OrdersManagementSort from './components/OrdersManagementSort';
 import { useOrdersPagination } from './useOrdersPagination';
+import { useSearchOrders } from './useSearch';
 
 const SecondStagePage = () => {
+  const { sendRequestByParams } = useSearchOrders();
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
 
@@ -15,7 +18,7 @@ const SecondStagePage = () => {
     <Box>
       <CreateRouteProgressBar />
 
-      <OrdersManagementSearch />
+      <SearchComponent onSearch={sendRequestByParams} />
       <OrdersManagementSort />
       {viewOrdersData.orders.map((order) => (
         <OrderManagementCard

@@ -3,17 +3,19 @@ import { Box, Pagination } from '@mui/material';
 
 import OrderItem from '@/pages/Orders/components/OrderItem/OrderItem';
 import SortingRow from '@/pages/Orders/components/SortingRow/SortingRow';
+import SearchComponent from '@/components/SearchComponent';
 import { useOrdersPagination } from './useOrdersPagination';
-import SearchOrders from './components/SearchOrders';
 import { paginationWrapper } from './styles';
+import { useSearchOrders } from './useSearch';
 
 function OrdersPage(): React.ReactElement {
+  const { sendRequestByParams } = useSearchOrders();
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
 
   return (
     <div>
-      <SearchOrders />
+      <SearchComponent onSearch={sendRequestByParams} />
       <SortingRow />
       {viewOrdersData.orders.map((order) => (
         <OrderItem

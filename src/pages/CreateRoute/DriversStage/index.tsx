@@ -4,17 +4,19 @@ import { Box } from '@mui/material';
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import DriverCard from './components/DriverCard';
-import SearchDrivers from './components/SearchDrivers';
 import SortDriversRow from './components/SordDriversRow';
 import { useExportDrivers } from './useGetDrivers';
+import SearchComponent from '@/components/SearchComponent';
+import { useSearchDrivers } from './useSearchDrivers';
 
 const DriversStagePage: FC = () => {
   const { drivers } = useExportDrivers();
+  const { getDriversBySearch } = useSearchDrivers();
 
   return (
     <Box>
       <CreateRouteProgressBar />
-      <SearchDrivers />
+      <SearchComponent onSearch={getDriversBySearch} />
       <SortDriversRow />
       {drivers.map((driver) => (
         <DriverCard
