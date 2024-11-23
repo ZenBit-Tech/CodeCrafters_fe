@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import editIcon from '@/assets/edit.png';
 
+import editIcon from '@/assets/edit.png';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
@@ -61,16 +61,6 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
         : { name: '', email: '' },
   });
 
-  const btnContent = (() => {
-    if (mode === 'create') {
-      return t('button.addNewCompany');
-    }
-    if (isIconButton) {
-      return editIcon;
-    }
-    return t('adminList.editButton');
-  })();
-
   useEffect(() => {
     if (companyData) {
       reset({
@@ -80,6 +70,16 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
       });
     }
   }, [companyData, reset]);
+
+  const btnContent = (() => {
+    if (mode === 'create') {
+      return t('button.addNewCompany');
+    }
+    if (isIconButton) {
+      return editIcon;
+    }
+    return t('adminList.editButton');
+  })();
 
   const authToken = useSelector((store: RootState) => store.auth.token);
 
