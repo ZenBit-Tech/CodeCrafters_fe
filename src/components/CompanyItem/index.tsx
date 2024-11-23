@@ -57,6 +57,8 @@ const CompanyItem: React.FC<CompanyItemProps> = ({
           fetchCompanies={fetchCompanies}
           companyId={company.id}
           companyData={company}
+          showAsButton={false}
+          isIconButton={true}
         />
         <IconButton onClick={() => onNavigate(company.id)}>
           <ArrowForwardIcon />

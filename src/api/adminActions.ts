@@ -1,13 +1,23 @@
 import { toast } from 'react-toastify';
 import i18n from '@/utils/i18n';
 
-import { Admins, AdminForm } from '@/interfaces/AdminList';
+import { Admins, AdminForm, Company } from '@/interfaces/AdminList';
 import axiosInstance from '@/utils/axiosInstance';
 import { ADMINROLE, LOGO } from '@/constants/constants';
 
 export const getAdminList = async (companyId: number): Promise<Admins[]> => {
   try {
     const response = await axiosInstance.get(`/admins?companyId=${companyId}`);
+    return response.data;
+  } catch {
+    toast.error(i18n.t('adminApi.fetch_failed'));
+    throw new Error(i18n.t('adminApi.unexpected_error'));
+  }
+};
+
+export const getCompanyById = async (company_id: number): Promise<Company> => {
+  try {
+    const response = await axiosInstance.get(`/company/${company_id}`);
     return response.data;
   } catch {
     toast.error(i18n.t('adminApi.fetch_failed'));
