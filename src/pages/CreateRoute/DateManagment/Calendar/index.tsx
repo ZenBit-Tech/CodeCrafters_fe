@@ -22,7 +22,14 @@ const MyCalendar: FC = () => {
     activeStartDate,
   }: OnActiveStartDateChangeParams): void => {
     if (activeStartDate) {
-      fetchDates(activeStartDate.toISOString(), 1);
+      if (
+        !(
+          activeStartDate < new Date() &&
+          new Date().getMonth() - activeStartDate.getMonth() >= 1
+        )
+      ) {
+        fetchDates(activeStartDate.toISOString(), 1);
+      }
     } else {
       toast('activeStartDate is null', { type: 'error' });
     }
