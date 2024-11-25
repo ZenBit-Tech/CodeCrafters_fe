@@ -1,14 +1,16 @@
-import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import { Box, Pagination } from '@mui/material';
 
+import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
+import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import SearchComponent from '@/components/SearchComponent';
-import { paginationWrapper } from './styles';
+import BasicDatePicker from '@/components/BasicDatePicker';
 import OrderManagementCard from './components/OrderManagementCard';
 import OrdersManagementSort from './components/OrdersManagementSort';
 import { useOrdersPagination } from './useOrdersPagination';
 import { useSearchOrders } from './useSearch';
 import { useValidateChoosedOrders } from './useValidateChoosedOrders';
+import { useChangeDate } from './useChangeDate';
+import { paginationWrapper, searchRow } from './styles';
 
 const SecondStagePage = () => {
   const { sendRequestByParams } = useSearchOrders();
@@ -16,11 +18,20 @@ const SecondStagePage = () => {
     useOrdersPagination();
   const { goToDriversStage } = useValidateChoosedOrders();
 
+  const { handleDateChange, selectedDate } = useChangeDate();
+
   return (
     <Box>
       <CreateRouteProgressBar />
 
-      <SearchComponent onSearch={sendRequestByParams} />
+      <Box sx={searchRow}>
+        <SearchComponent onSearch={sendRequestByParams} />
+        <BasicDatePicker
+          dataFormat={''}
+          onChange={handleDateChange}
+          value={selectedDate}
+        />
+      </Box>
       <OrdersManagementSort />
       {viewOrdersData.orders.map((order) => (
         <OrderManagementCard

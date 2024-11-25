@@ -1,5 +1,5 @@
-import { Driver } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Driver } from '@/interfaces/interfaces';
 
 interface CreateRouteInterface {
   routeDate: Date;

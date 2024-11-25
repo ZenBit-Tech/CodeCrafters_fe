@@ -4,7 +4,6 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
 import { rowStyles, formWrapper, searchInputStyles } from './styles';
-import BasicDatePicker from '@/components/BasicDatePicker';
 
 const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
   onSearch,
@@ -35,7 +34,6 @@ const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
           ></Controller>
         </Box>
       </FormProvider>
-      <BasicDatePicker dataFormat={''} />
     </Box>
   );
 };
