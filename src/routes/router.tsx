@@ -14,6 +14,8 @@ import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
 import DateManagementPage from '@/pages/DateManagment';
 import DriversStagePage from '@/pages/CreateRoute/DriversStage';
+import RouteManagementPage from '@/pages/CreateRoute/RouteManagement';
+import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
 
 const AppRouter: React.FC = () => {
@@ -62,6 +64,14 @@ const AppRouter: React.FC = () => {
             {
               path: 'drivers-management',
               element: <DriversStagePage />,
+            },
+            {
+              path: 'route-management',
+              element: <RouteManagementPage />,
+            },
+            {
+              path: 'orders-stage',
+              element: <SecondStagePage />,
             },
             {
               path: 'routes',

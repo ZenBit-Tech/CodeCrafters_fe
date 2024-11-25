@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setParamsPage } from '@/store/slices/ordersPageSlice';
 import { RootState } from '@/store/store';
-import { getOrders } from './api/getOrders';
+import { getOrders } from '@/pages/Orders/api/getOrders';
 
 export const useOrdersPagination = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export const useOrdersPagination = () => {
         search: params.search,
         page,
         companyId: 1,
-        isNew: false,
+        isNew: true,
       });
       dispatch(setParamsPage(page));
     },

@@ -5,48 +5,41 @@ import { useTranslation } from 'react-i18next';
 import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
 import { MONTHS } from '@/constants/moths';
 import DriverAvatar from '@/components/DriverAvatar';
-import Status from '@/components/Status';
 import {
-  orderRow,
   customerBlock,
   collectionDateStyles,
   collectionAddressStyles,
-  routeBlock,
   luggageStyles,
-  statusBlock,
   collectionTimeStyles,
   popup,
 } from '@/pages/Orders/components/OrderItem/styles';
-import { OrderStatuses } from '@/interfaces/interfaces';
+import { orderRow } from './styles';
+import CustomCheckbox from '@/components/Checkbox';
 
-const OrderItem: FC<OrderItemInterface> = ({
+const OrderManagementCard: FC<OrderItemInterface> = ({
   collectionDate,
   collectionTimeStart,
   collectionTimeEnd,
   collectionAddress,
   customer,
-  status,
   luggages,
-  routeId,
 }) => {
   const { t } = useTranslation();
   const customerNames: string[] = customer.full_name.split(' ');
-  const routeIdView: string = !routeId ? t('NEW') : t(`${routeId.id}`);
 
   const date = new Date(collectionDate);
   const timeStart = new Date(collectionTimeStart);
   const timeEnd = new Date(collectionTimeEnd);
 
   return (
-    <Box sx={orderRow(!routeId)}>
+    <Box sx={orderRow}>
+      <CustomCheckbox />
       <Typography sx={collectionDateStyles}>
         {date.getDate()} {MONTHS[date.getMonth()]} {date.getFullYear()}
       </Typography>
       <Typography sx={collectionTimeStyles}>
-        {timeStart.getHours()}:
-        {timeStart.getMinutes() === 0 ? '00' : timeStart.getMinutes()} -{' '}
-        {timeStart.getHours() === 0 ? '00' : timeStart.getHours()}:
-        {timeEnd.getMinutes() == 0 ? '00' : timeEnd.getMinutes()}
+        {timeStart.getHours()}:{timeStart.getMinutes()} - {timeEnd.getHours()}:
+        {timeEnd.getMinutes()}
       </Typography>
       <Typography sx={collectionAddressStyles}>
         {t(collectionAddress)}
@@ -75,12 +68,8 @@ const OrderItem: FC<OrderItemInterface> = ({
           <Typography>{t(customer.phone_number)}</Typography>
         </Box>
       </Box>
-      <Box sx={statusBlock}>
-        <Status status={OrderStatuses[status]} />
-      </Box>
-      <Typography sx={routeBlock}>{t(`${routeIdView}`)}</Typography>
     </Box>
   );
 };
 
-export default OrderItem;
+export default OrderManagementCard;
