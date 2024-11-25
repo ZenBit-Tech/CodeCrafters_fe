@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Box, Typography } from '@mui/material';
 
 import Button from '@/components/Button';
 import {
-  formWrapper,
-  formContainer,
   EditIcon,
+  formContainer,
+  formWrapper,
 } from '@/components/ModalForm/styles';
+import { Box, Typography } from '@mui/material';
 
 const openButtons = {
   createButtonElement: function (

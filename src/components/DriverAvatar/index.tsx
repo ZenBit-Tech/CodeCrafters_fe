@@ -9,7 +9,10 @@ interface DriverAvatarProps {
   lastName?: string;
 }
 
-const DriverAvatar: React.FC<DriverAvatarProps> = ({ firstName, lastName }) => {
+const DriverAvatar: React.FC<DriverAvatarProps> = ({
+  firstName = '',
+  lastName = '',
+}) => {
   const initials =
     firstName.charAt(0).toUpperCase() +
     (lastName ? lastName.charAt(0).toUpperCase() : '');

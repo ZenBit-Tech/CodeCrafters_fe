@@ -1,0 +1,26 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ccccccc2;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.form {
+  width: 400px;
+  height: 100vh;
+  padding: 20px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.input {
+  margin-bottom: 20px !important;
+}
+
+.addBtn {
+  margin-right: 12px !important;
+}

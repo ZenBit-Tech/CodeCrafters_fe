@@ -4,15 +4,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import DashboardLayout from '@/components/Layout/DashboardLayout';
 import RootLayout from '@/components/Layout/RootLayout';
+import AdminListPage from '@/pages/AdminList';
 import CompanyListPage from '@/pages/CompanyListPage';
 import ProtectedRoute from '@/pages/components/ProtectedRoute';
+import DriversStagePage from '@/pages/CreateRoute/DriversStage';
 import DashboardPage from '@/pages/DashboardPage';
+import NotFoundPage from '@/pages/NotFound';
 import OrdersPage from '@/pages/Orders';
 import SignInPage from '@/pages/SignIn';
-import AdminListPage from '@/pages/AdminList';
-import NotFoundPage from '@/pages/NotFound';
+import TeamManagementPage from '@/pages/TeamManagment';
 import { RootState } from '@/store/store';
-import DriversStagePage from '@/pages/CreateRoute/DriversStage';
 import RouteManagementPage from '@/pages/CreateRoute/RouteManagement';
 import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
@@ -95,6 +96,10 @@ const AppRouter: React.FC = () => {
                   },
                 ]
               : []),
+            {
+              path: 'settings',
+              element: <TeamManagementPage />,
+            },
           ],
         },
         {
