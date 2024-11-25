@@ -8,6 +8,7 @@ import loaderSlice from './slices/loaderSlice';
 import sortDriversSlice from './slices/sortDriversSlice';
 import driversSlice from './slices/driversSlice';
 import createRouteSlice from './slices/createRouteSlice';
+import ordersToDriversSlice from './slices/ordersToDriversSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     sortDriversBy: sortDriversSlice,
     drivers: driversSlice,
     createRoutSettings: createRouteSlice,
+    ordersToDriversSlice: ordersToDriversSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
