@@ -43,8 +43,10 @@ const OrderItem: FC<OrderItemInterface> = ({
         {date.getDate()} {MONTHS[date.getMonth()]} {date.getFullYear()}
       </Typography>
       <Typography sx={collectionTimeStyles}>
-        {timeStart.getHours()}:{timeStart.getMinutes()} - {timeEnd.getHours()}:
-        {timeEnd.getMinutes()}
+        {timeStart.getHours()}:
+        {timeStart.getMinutes() === 0 ? '00' : timeStart.getMinutes()} -{' '}
+        {timeStart.getHours() === 0 ? '00' : timeStart.getHours()}:
+        {timeEnd.getMinutes() == 0 ? '00' : timeEnd.getMinutes()}
       </Typography>
       <Typography sx={collectionAddressStyles}>
         {t(collectionAddress)}
