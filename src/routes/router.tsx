@@ -15,6 +15,7 @@ import { RootState } from '@/store/store';
 import ExamplePage from '@/pages/ExamplePage';
 import DateManagementPage from '@/pages/DateManagment';
 import DriversStagePage from '@/pages/CreateRoute/DriversStage';
+import RoutesPage from '@/pages/Routes';
 
 const AppRouter: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -62,6 +63,10 @@ const AppRouter: React.FC = () => {
             {
               path: 'drivers-management',
               element: <DriversStagePage />,
+            },
+            {
+              path: 'routes',
+              element: <RoutesPage />,
             },
           ],
         },
