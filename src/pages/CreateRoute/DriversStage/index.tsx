@@ -28,7 +28,10 @@ const DriversStagePage: FC = () => {
           }}
         />
       ))}
-      <CreateRouteButtons />
+      <CreateRouteButtons
+        previousPath={'/orders-stage'}
+        nextPath={'/route-management'}
+      />
     </Box>
   );
 };

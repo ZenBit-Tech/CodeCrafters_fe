@@ -39,7 +39,10 @@ const RouteManagementPage: FC = () => {
         />
         <Map locations={locations} />
       </Box>
-      <CreateRouteButtons />
+      <CreateRouteButtons
+        previousPath={'/drivers-management'}
+        nextPath={'/route-management'}
+      />
     </Box>
   );
 };

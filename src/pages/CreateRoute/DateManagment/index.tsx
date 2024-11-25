@@ -9,7 +9,7 @@ export const DateManagementPage: FC = () => {
     <>
       <CreateRouteProgressBar />
       <DateManager />
-      <CreateRouteButtons />
+      <CreateRouteButtons previousPath={'/orders'} nextPath={'/orders-stage'} />
     </>
   );
 };

@@ -44,7 +44,10 @@ const SecondStagePage = () => {
         />
       </Box>
 
-      <CreateRouteButtons />
+      <CreateRouteButtons
+        previousPath={'/date-management'}
+        nextPath={'/drivers-management'}
+      />
     </Box>
   );
 };
