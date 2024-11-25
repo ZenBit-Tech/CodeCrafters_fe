@@ -9,6 +9,8 @@ import {
 import { TileContentFunc } from 'react-calendar';
 import axios, { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { store } from '@/store/store';
+import { setRouteDate } from '@/store/slices/createRouteSlice';
 
 interface MarkDatesInterface {
   tileContent: ReactNode | TileContentFunc;
@@ -20,6 +22,18 @@ interface MarkDatesInterface {
 export const useMarkDates = (): MarkDatesInterface => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dates, setDates] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const utcDate = new Date(
+      Date.UTC(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate()
+      )
+    );
+
+    store.dispatch(setRouteDate(utcDate));
+  }, [selectedDate]);
 
   const fetchDates = useCallback(
     async (dateStartString: string, companyId: number): Promise<void> => {

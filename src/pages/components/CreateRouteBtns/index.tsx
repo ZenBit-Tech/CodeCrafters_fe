@@ -11,11 +11,13 @@ import { Link } from 'react-router-dom';
 interface ButtonsPathsInterface {
   previousPath: string;
   nextPath: string;
+  handleValidate: (nextPath: string) => void;
 }
 
 const CreateRouteButtons: FC<ButtonsPathsInterface> = ({
   previousPath,
   nextPath,
+  handleValidate,
 }) => {
   return (
     <Box sx={wrapper}>
@@ -26,13 +28,12 @@ const CreateRouteButtons: FC<ButtonsPathsInterface> = ({
           startIcon={<img src={arrowLeft} alt="backBtn" />}
         />
       </Link>
-      <Link to={nextPath}>
-        <Button
-          label={t('Next step')}
-          variant="colored"
-          endIcon={<img src={arrowRight} alt="backBtn" />}
-        />
-      </Link>
+      <Button
+        label={t('Next step')}
+        variant="colored"
+        endIcon={<img src={arrowRight} alt="backBtn" />}
+        onClick={() => handleValidate(nextPath)}
+      />
     </Box>
   );
 };
