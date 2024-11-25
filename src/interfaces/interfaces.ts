@@ -25,3 +25,32 @@ export interface Customer {
   phone_number: string;
   email: string;
 }
+
+export interface Order {
+  id: number;
+  collection_date: Date;
+  collection_time_start: Date;
+  collection_time_end: Date;
+  collection_address: string;
+  status: StatusEnum;
+  route: null | {
+    id: number;
+  };
+  customer: Customer;
+  luggages: {
+    id: number;
+    luggage_weight: number;
+    luggage_type: LuggageTypes;
+  }[];
+  createdAt: string;
+  updatedAt: string;
+  driverId?: number;
+  addedAutomatically?: boolean;
+}
+
+export interface Driver {
+  id: number;
+  full_name: string;
+  phone_number: string;
+  email: string;
+}
