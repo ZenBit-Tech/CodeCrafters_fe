@@ -10,9 +10,7 @@ const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
   onSearch,
 }) => {
   const methods = useForm<{ search: string }>();
-  //   const { sendRequestByParams } = useSearchOrders();
 
-  // sendRequestByParams(data.search)
   return (
     <Box sx={rowStyles}>
       <FormProvider {...methods}>
