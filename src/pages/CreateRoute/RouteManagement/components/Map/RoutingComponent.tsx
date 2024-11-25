@@ -11,6 +11,10 @@ interface RoutingComponentProps {
 const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
   const map = useMap();
 
+  useEffect(() => {
+    handleCalculateRoute();
+  }, [locations]);
+
   const geocode = async (address: string) => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_OPEN_STREET_API}/search?format=json&q=${encodeURIComponent(
@@ -49,10 +53,6 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
       console.error('Failed to calculate route:', error);
     }
   };
-
-  useEffect(() => {
-    handleCalculateRoute();
-  }, [locations]);
 
   return null;
 };

@@ -7,20 +7,21 @@ import Map from './components/Map';
 import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
 
-const RouteManagementPage: FC = () => {
-  const locations = [
-    'Kyiv, Khreshchatyk Street',
-    'Lviv, Svobody Avenue',
-    'Odessa, Deribasivska Street',
-    'Dnipro, Yavornytskoho Avenue',
-  ];
+const locations = [
+  'Kyiv, Khreshchatyk Street',
+  'Lviv, Svobody Avenue',
+  'Odessa, Deribasivska Street',
+  'Dnipro, Yavornytskoho Avenue',
+];
 
+const RouteManagementPage: FC = () => {
   return (
     <Box>
       <CreateRouteProgressBar />
       <Box sx={mapBlockStyles}>
         <InformBlock
           title={'9 August, Tuesday'}
+          // TODO replace with real data
           routes={[
             {
               driver_full_name: 'John Doe',
