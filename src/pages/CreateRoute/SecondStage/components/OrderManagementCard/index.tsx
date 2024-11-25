@@ -13,10 +13,12 @@ import {
   collectionTimeStyles,
   popup,
 } from '@/pages/Orders/components/OrderItem/styles';
-import { orderRow } from './styles';
 import CustomCheckbox from '@/components/Checkbox';
+import { orderRow } from './styles';
+import { useChooseOrder } from './useChooseOrder';
 
 const OrderManagementCard: FC<OrderItemInterface> = ({
+  id,
   collectionDate,
   collectionTimeStart,
   collectionTimeEnd,
@@ -26,6 +28,7 @@ const OrderManagementCard: FC<OrderItemInterface> = ({
 }) => {
   const { t } = useTranslation();
   const customerNames: string[] = customer.full_name.split(' ');
+  const { chooseOrder, checkedOrders } = useChooseOrder();
 
   const date = new Date(collectionDate);
   const timeStart = new Date(collectionTimeStart);
@@ -33,7 +36,11 @@ const OrderManagementCard: FC<OrderItemInterface> = ({
 
   return (
     <Box sx={orderRow}>
-      <CustomCheckbox />
+      <CustomCheckbox
+        id={id}
+        toggleCheckbox={chooseOrder}
+        isChecked={checkedOrders.some((orderId) => orderId === id)}
+      />
       <Typography sx={collectionDateStyles}>
         {date.getDate()} {MONTHS[date.getMonth()]} {date.getFullYear()}
       </Typography>
