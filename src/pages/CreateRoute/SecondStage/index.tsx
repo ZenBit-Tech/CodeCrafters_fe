@@ -1,24 +1,27 @@
-import React from 'react';
+import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
+import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import { Box, Pagination } from '@mui/material';
 
-import OrderItem from '@/pages/Orders/components/OrderItem/OrderItem';
-import SortingRow from '@/pages/Orders/components/SortingRow/SortingRow';
 import SearchComponent from '@/components/SearchComponent';
-import { useOrdersPagination } from './useOrdersPagination';
 import { paginationWrapper } from './styles';
+import OrderManagementCard from './components/OrderManagementCard';
+import OrdersManagementSort from './components/OrdersManagementSort';
+import { useOrdersPagination } from './useOrdersPagination';
 import { useSearchOrders } from './useSearch';
 
-function OrdersPage(): React.ReactElement {
+const SecondStagePage = () => {
   const { sendRequestByParams } = useSearchOrders();
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
 
   return (
-    <div>
+    <Box>
+      <CreateRouteProgressBar />
+
       <SearchComponent onSearch={sendRequestByParams} />
-      <SortingRow />
+      <OrdersManagementSort />
       {viewOrdersData.orders.map((order) => (
-        <OrderItem
+        <OrderManagementCard
           key={order.id}
           id={order.id}
           collectionDate={order.collection_date}
@@ -40,8 +43,10 @@ function OrdersPage(): React.ReactElement {
           color="primary"
         />
       </Box>
-    </div>
-  );
-}
 
-export default OrdersPage;
+      <CreateRouteButtons />
+    </Box>
+  );
+};
+
+export default SecondStagePage;

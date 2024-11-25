@@ -45,7 +45,8 @@ export const useMarkDates = (): MarkDatesInterface => {
   }, [fetchDates]);
 
   const tileContent = ({ date }: { date: Date }) => {
-    const formattedDate = date.toISOString().split('T')[0];
+    const formattedDate = date.toLocaleDateString('en-CA');
+
     if (dates[formattedDate]) {
       return <span className="has-drivers">{dates[formattedDate]} orders</span>;
     }
