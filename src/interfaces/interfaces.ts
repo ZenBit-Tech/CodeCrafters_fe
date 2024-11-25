@@ -21,6 +21,7 @@ export const OrderStatuses: Record<string, StatusEnum> = {
 };
 
 export interface Customer {
+  id: number;
   full_name: string;
   phone_number: string;
   email: string;

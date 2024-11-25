@@ -1,10 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Driver } from '@/interfaces/interfaces';
 
 interface CreateRouteInterface {
   routeDate: Date;
   checkedOrders: number[];
-  drivers: Driver[];
+  drivers: number[];
 }
 
 const initialState: CreateRouteInterface = {
@@ -28,11 +27,13 @@ const createRouteSlice = createSlice({
         (order) => order !== action.payload
       );
     },
-    addNewDriver(store, action: PayloadAction<Driver>) {
+    addNewDriver(store, action: PayloadAction<number>) {
       store.drivers.push(action.payload);
     },
     removeDriver(store, action: PayloadAction<number>) {
-      store.drivers.filter((driver) => driver.id !== action.payload);
+      store.drivers = store.drivers.filter(
+        (driverId) => driverId !== action.payload
+      );
     },
   },
 });

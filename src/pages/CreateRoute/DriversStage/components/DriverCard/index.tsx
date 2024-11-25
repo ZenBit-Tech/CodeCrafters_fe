@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { t } from 'i18next';
 
@@ -8,12 +8,20 @@ import CustomCheckbox from '@/components/Checkbox/index.tsx';
 
 import { driverRowStyles, customerBlock, popup } from './styles.ts';
 
-const DriverCard: FC<{ customer: Customer }> = ({ customer }) => {
+const DriverCard: FC<{
+  customer: Customer;
+  isDriverChosen: boolean;
+  toggleDriver: (event: ChangeEvent<HTMLInputElement>, id: number) => void;
+}> = ({ customer, isDriverChosen, toggleDriver }) => {
   const customerNames: string[] = customer.full_name.split(' ');
 
   return (
     <Box sx={driverRowStyles}>
-      <CustomCheckbox />
+      <CustomCheckbox
+        id={customer.id}
+        isChecked={isDriverChosen}
+        toggleCheckbox={toggleDriver}
+      />
       <Box sx={customerBlock}>
         <Box className="popup" sx={popup}>
           <Typography>{t(customer.full_name)}</Typography>
