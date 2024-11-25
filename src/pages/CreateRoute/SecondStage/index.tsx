@@ -8,11 +8,13 @@ import OrderManagementCard from './components/OrderManagementCard';
 import OrdersManagementSort from './components/OrdersManagementSort';
 import { useOrdersPagination } from './useOrdersPagination';
 import { useSearchOrders } from './useSearch';
+import { useValidateChoosedOrders } from './useValidateChoosedOrders';
 
 const SecondStagePage = () => {
   const { sendRequestByParams } = useSearchOrders();
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
+  const { goToDriversStage } = useValidateChoosedOrders();
 
   return (
     <Box>
@@ -47,6 +49,7 @@ const SecondStagePage = () => {
       <CreateRouteButtons
         previousPath={'/date-management'}
         nextPath={'/drivers-management'}
+        handleValidate={goToDriversStage}
       />
     </Box>
   );
