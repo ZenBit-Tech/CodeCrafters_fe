@@ -16,6 +16,16 @@ export interface Admins {
   updatedAt: string;
 }
 
+export interface Company {
+  id: number;
+  name: string;
+  client_name: string;
+  logo: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface AdminForm {
   email: string;
   full_name: string;
@@ -45,6 +55,7 @@ export interface AdminListTableProps {
   endIndex: number;
   companyId: number;
   refreshAdmins: () => Promise<void>;
+  filteredAdmins: Admin[];
 }
 
 export interface UseAdminListReturnType {

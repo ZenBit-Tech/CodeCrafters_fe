@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import editIcon from '@/assets/edit.png';
 
+import editIcon from '@/assets/edit.png';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
@@ -19,12 +19,19 @@ interface CompanyFormProps {
   mode: 'create' | 'update';
   fetchCompanies: () => void;
   companyId?: number;
-  companyData?: { name: string; email: string };
+  companyData?: {
+    name: string;
+    email: string;
+    client_name?: string;
+  };
+  isIconButton?: boolean;
+  showAsButton?: boolean;
 }
 
 interface CompanyFormInputs {
   email: string;
   name: string;
+  client_name?: string;
 }
 
 const CompanyForm: React.FC<CompanyFormProps> = ({
@@ -32,6 +39,8 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
   fetchCompanies,
   companyId,
   companyData,
+  isIconButton,
+  showAsButton,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -44,9 +53,33 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
   } = useForm<CompanyFormInputs>({
     defaultValues:
       mode === 'update'
-        ? { name: companyData?.name || '', email: companyData?.email || '' }
+        ? {
+            name: companyData?.name || '',
+            client_name: companyData?.client_name || '',
+            email: companyData?.email || '',
+          }
         : { name: '', email: '' },
   });
+
+  useEffect(() => {
+    if (companyData) {
+      reset({
+        name: companyData.name || '',
+        client_name: companyData.client_name || '',
+        email: companyData.email || '',
+      });
+    }
+  }, [companyData, reset]);
+
+  const btnContent = (() => {
+    if (mode === 'create') {
+      return t('button.addNewCompany');
+    }
+    if (isIconButton) {
+      return editIcon;
+    }
+    return t('adminList.editButton');
+  })();
 
   const authToken = useSelector((store: RootState) => store.auth.token);
 
@@ -94,8 +127,8 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
 
   return (
     <ModalForm
-      isOpenBtn={mode === 'create'}
-      btnContent={mode === 'create' ? t('button.addNewCompany') : editIcon}
+      isOpenBtn={showAsButton ?? mode === 'create'}
+      btnContent={btnContent}
       formTitle={
         mode === 'update'
           ? t('modal.updateCompanyTitle')
@@ -113,6 +146,19 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
           inputProps={{
             ...register('name', {
               required: t('form.validation.companyNameRequired'),
+            }),
+          }}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+        <TextInput
+          className="input"
+          label={t('form.clientName')}
+          sx={input}
+          focused={mode === 'update'}
+          inputProps={{
+            ...register('client_name', {
+              required: t('form.validation.clientNameRequired'),
             }),
           }}
           error={!!errors.name}

@@ -1,22 +1,23 @@
 import { toast } from 'react-toastify';
 import i18n from '@/utils/i18n';
 
-import { Admins, AdminForm } from '@/interfaces/AdminList';
+import { Admins, AdminForm, Company } from '@/interfaces/AdminList';
 import axiosInstance from '@/utils/axiosInstance';
-import { LOGO } from '@/constants/constants';
+import { ADMINROLE, LOGO } from '@/constants/constants';
 
-const getUserRole = (): string | null => {
+export const getAdminList = async (companyId: number): Promise<Admins[]> => {
   try {
-    const authData = JSON.parse(localStorage.getItem('persist:auth') || '{}');
-    return authData?.role ? JSON.parse(authData.role) : null;
+    const response = await axiosInstance.get(`/admins?companyId=${companyId}`);
+    return response.data;
   } catch {
-    return null;
+    toast.error(i18n.t('adminApi.fetch_failed'));
+    throw new Error(i18n.t('adminApi.unexpected_error'));
   }
 };
 
-export const getAdminList = async (): Promise<Admins[]> => {
+export const getCompanyById = async (company_id: number): Promise<Company> => {
   try {
-    const response = await axiosInstance.get(`/admins`);
+    const response = await axiosInstance.get(`/company/${company_id}`);
     return response.data;
   } catch {
     toast.error(i18n.t('adminApi.fetch_failed'));
@@ -29,13 +30,11 @@ export const addAdmin = async (
   companyId: number
 ): Promise<void> => {
   try {
-    const role = getUserRole();
-
     const response = await axiosInstance.post(`/admins`, {
       ...formData,
       logo: LOGO,
       company_id: companyId,
-      role: role,
+      role: ADMINROLE,
     });
     if (response.data.status === 201) {
       toast.success(i18n.t('adminApi.created_successfully'));
