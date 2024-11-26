@@ -63,11 +63,11 @@ export const getRoutesData = async (
 ) => {
   try {
     const { data: ordersData } = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/orders/by-id?ordersIdArray=${ordersListOfId}`,
+      `${import.meta.env.VITE_BASE_URL}/orders/by-id?ordersIdArray=${JSON.stringify(ordersListOfId)}`,
       { headers: { authorization: store.getState().auth.token } }
     );
     const { data: driversData } = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/driver/by-id?listOfId=${driversListOfId}`,
+      `${import.meta.env.VITE_BASE_URL}/driver/by-id?listOfId=${JSON.stringify(driversListOfId)}`,
       { headers: { authorization: store.getState().auth.token } }
     );
 

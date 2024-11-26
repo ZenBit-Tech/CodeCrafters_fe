@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
-import { COLORS } from '@/constants/colors';
 import { store } from '@/store/store';
 import { addDistance } from '@/store/slices/ordersToDriversSlice';
 
@@ -41,7 +40,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
   const handleCalculateRoute = async () => {
     try {
       const coordinates = await Promise.all(
-        locations.map((location) => geocode(location))
+        ['New York', ...locations].map((location) => geocode(location))
       );
 
       const routingControl = L.Routing.control({
@@ -51,19 +50,14 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
         routeWhileDragging: true,
         createMarker: () => null,
         lineOptions: {
-          styles: [{ color: `${COLORS.green}`, weight: 4 }],
-        },
-        show: false,
-      }).addTo(map);
-
-      L.Routing.control({
-        waypoints: coordinates.map((coords) =>
-          L.latLng(coords.lat, coords.lon)
-        ),
-        routeWhileDragging: true,
-        createMarker: () => null,
-        lineOptions: {
-          styles: [{ color: `${COLORS.green}`, weight: 4 }],
+          styles: [
+            {
+              color: `#${Math.floor(Math.random() * 16777215)
+                .toString(16)
+                .padStart(6, '0')}`,
+              weight: 4,
+            },
+          ],
         },
         show: false,
       }).addTo(map);
@@ -75,7 +69,6 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
         store.dispatch(
           addDistance({ driverId, distance: Math.ceil(distance / 1000) })
         );
-        // console.log(`Total distance: ${distance / 1000} km`);
       });
     } catch (error) {
       console.error('Failed to calculate route:', error);

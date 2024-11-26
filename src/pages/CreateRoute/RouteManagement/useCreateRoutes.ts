@@ -8,9 +8,14 @@ export const useCreateRoutes = (): { ordersToDrivers: RouteInfo[] } => {
   const { value } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
+  const { checkedOrders, drivers } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
+
+  console.log(checkedOrders);
 
   useEffect(() => {
-    getRoutesData([1, 2, 3, 4], [2, 3]);
+    getRoutesData([...checkedOrders], [...drivers]);
   }, []);
 
   const mappedRoutes = value.map((orderToDriver) => {
