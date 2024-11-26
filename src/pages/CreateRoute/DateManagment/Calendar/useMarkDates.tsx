@@ -58,7 +58,7 @@ export const useMarkDates = (): MarkDatesInterface => {
     fetchDates(new Date().toISOString(), 1);
   }, [fetchDates]);
 
-  const tileContent = ({ date }: { date: Date }) => {
+  const tileContent = ({ date }: { date: Date }): ReactNode => {
     const formattedDate = date.toLocaleDateString('en-CA');
 
     if (dates[formattedDate]) {

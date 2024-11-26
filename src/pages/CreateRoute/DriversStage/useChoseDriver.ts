@@ -18,7 +18,10 @@ export const useChooseDriver = (): UseChooseDriverInterface => {
     (store: RootState) => store.createRoutSettings
   );
 
-  const chooseDriver = (event: ChangeEvent<HTMLInputElement>, id: number) => {
+  const chooseDriver = (
+    event: ChangeEvent<HTMLInputElement>,
+    id: number
+  ): void => {
     if (event.currentTarget.checked) {
       if (drivers.length < checkedOrders.length) {
         store.dispatch(addNewDriver(id));
@@ -34,7 +37,7 @@ export const useChooseDriver = (): UseChooseDriverInterface => {
     event.currentTarget.checked = !event.currentTarget.checked;
   };
 
-  const goToRouteManagement = (nextPath: string) => {
+  const goToRouteManagement = (nextPath: string): void => {
     if (drivers.length < 1) {
       toast(
         'Please select at least one driver to proceed with filling out the form',

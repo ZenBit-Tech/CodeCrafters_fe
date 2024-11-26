@@ -1,5 +1,5 @@
 import { RootState } from '@/store/store';
-import { noramalizeDate } from '@/utils/normalizeDate';
+import { normalizeDate } from '@/utils/normalizeDate';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,11 +14,11 @@ export const useDateValidation = (): useDateValidationInterface => {
   const { routeDate } = useSelector(
     (store: RootState) => store.createRoutSettings
   );
-  const todayDate: Date = noramalizeDate(new Date());
+  const todayDate: Date = normalizeDate(new Date());
 
   const goToOrdersManagementStage = useCallback(
     (nextPath: string) => {
-      if (noramalizeDate(routeDate) < todayDate) {
+      if (normalizeDate(routeDate) < todayDate) {
         toast(
           'The selected date is in the past. Please choose a date that is today or in the future',
           { type: 'warning' }
@@ -27,7 +27,7 @@ export const useDateValidation = (): useDateValidationInterface => {
         navigate(nextPath);
       }
     },
-    [routeDate]
+    [routeDate, navigate, todayDate]
   );
 
   return { goToOrdersManagementStage };

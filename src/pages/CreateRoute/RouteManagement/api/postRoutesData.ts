@@ -21,7 +21,7 @@ export const postRoutesData = async (
   createRoutesDto: Route[],
   navigate: NavigateFunction,
   nextPath: string
-) => {
+): Promise<void> => {
   try {
     store.dispatch(setisVisible(true));
     await axios.post(

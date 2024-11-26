@@ -40,7 +40,7 @@ export const useCreateRoutes = (): {
     };
   });
 
-  const onCreateRoute = (nextPath: string) => {
+  const onCreateRoute = (nextPath: string): void => {
     const createRoutesData = routeData.map((route) => {
       return {
         submission_date: route.orders[0].collection_time_start,

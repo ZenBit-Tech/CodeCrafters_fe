@@ -25,7 +25,7 @@ export const useValidateChoosedOrders = (): useValidationInterface => {
         navigate(nextPath);
       }
     },
-    [checkedOrders]
+    [checkedOrders, navigate]
   );
 
   return { goToDriversStage };

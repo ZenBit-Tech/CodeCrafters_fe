@@ -13,7 +13,7 @@ export const useExportDrivers = (): { drivers: Customer[] } => {
 
   useEffect(() => {
     getDrivers(value, search);
-  }, []);
+  }, [search, value]);
 
   return { drivers };
 };

@@ -20,7 +20,9 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
     handleCalculateRoute();
   }, []);
 
-  const geocode = async (address: string) => {
+  const geocode = async (
+    address: string
+  ): Promise<{ lat: number; lon: number }> => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_OPEN_STREET_API}/search?format=json&q=${encodeURIComponent(
         address
@@ -37,7 +39,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
     }
   };
 
-  const handleCalculateRoute = async () => {
+  const handleCalculateRoute = async (): Promise<void> => {
     try {
       const coordinates = await Promise.all(
         ['New York', ...locations].map((location) => geocode(location))

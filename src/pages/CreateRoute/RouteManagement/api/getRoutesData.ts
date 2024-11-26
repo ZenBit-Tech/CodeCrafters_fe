@@ -60,7 +60,7 @@ const assignOrdersToDrivers = (
 export const getRoutesData = async (
   ordersListOfId: number[],
   driversListOfId: number[]
-) => {
+): Promise<void> => {
   try {
     const { data: ordersData } = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/orders/by-id?ordersIdArray=${JSON.stringify(ordersListOfId)}`,

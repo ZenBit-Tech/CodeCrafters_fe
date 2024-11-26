@@ -11,7 +11,7 @@ export const useChangeDate = (): {
 } => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
-  const handleDateChange = (newValue: Dayjs | null) => {
+  const handleDateChange = (newValue: Dayjs | null): void => {
     if (newValue) {
       if (!newValue.isBefore(new Date(), 'day')) {
         const ChangedDate = new Date(

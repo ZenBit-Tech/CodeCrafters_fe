@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Box, Pagination } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
@@ -14,7 +15,7 @@ import { useValidateChoosedOrders } from './useValidateChoosedOrders';
 import { useChangeDate } from './useChangeDate';
 import { paginationWrapper, searchRow } from './styles';
 
-const SecondStagePage = () => {
+const SecondStagePage: FC = () => {
   const { sendRequestByParams } = useSearchOrders();
   const { viewOrdersData, currentPage, totalPages, fetchOrders } =
     useOrdersPagination();
