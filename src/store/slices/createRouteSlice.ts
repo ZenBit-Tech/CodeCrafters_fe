@@ -35,6 +35,11 @@ const createRouteSlice = createSlice({
         (driverId) => driverId !== action.payload
       );
     },
+    resetCreateRouteSettings(store) {
+      store.checkedOrders = [];
+      store.drivers = [];
+      store.routeDate = new Date();
+    },
   },
 });
 
@@ -44,5 +49,6 @@ export const {
   addNewOrder,
   removeDriver,
   removeOrder,
+  resetCreateRouteSettings,
 } = createRouteSlice.actions;
 export default createRouteSlice.reducer;

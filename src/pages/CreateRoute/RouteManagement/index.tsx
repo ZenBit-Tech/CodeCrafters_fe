@@ -13,7 +13,7 @@ import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
 import { store } from '@/store/store';
 
 const RouteManagementPage: FC = () => {
-  const { ordersToDrivers } = useCreateRoutes();
+  const { ordersToDrivers, onCreateRoute } = useCreateRoutes();
 
   useEffect(() => {
     store.dispatch(setOrdersToDrivers([]));
@@ -28,8 +28,8 @@ const RouteManagementPage: FC = () => {
       </Box>
       <CreateRouteButtons
         previousPath={'/drivers-management'}
-        nextPath={'/route-management'}
-        handleValidate={() => {}}
+        nextPath={'/orders'}
+        handleValidate={onCreateRoute}
       />
     </Box>
   );
