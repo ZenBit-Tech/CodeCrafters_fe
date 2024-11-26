@@ -45,6 +45,7 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       sx={{
         display: 'inline-flex',
         alignItems: 'center',
+        justifyContent: 'center',
         padding: '4px 8px',
         borderRadius: '4px',
         ...statusStyles[status],

@@ -36,12 +36,12 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
 }) => {
   return (
     <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
+      display="grid"
+      gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr"
       padding={2}
       gap={2}
       borderBottom={`1px solid ${COLORS.text.border}`}
+      alignItems="center"
     >
       <Typography variant="body2" color={COLORS.text.medium}>
         {routeId}
