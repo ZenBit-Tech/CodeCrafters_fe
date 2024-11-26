@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 interface ButtonsPathsInterface {
   previousPath: string;
   nextPath: string;
-  nextBtnText: string;
+  nextBtnText?: string;
   handleValidate: (nextPath: string) => void;
 }
 
