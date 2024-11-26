@@ -25,27 +25,29 @@ const assignOrdersToDrivers = (
   }));
 
   for (const order of orders) {
-    let assigned = false;
+    let bestAssignment: Assignment | null = null;
 
     for (const assignment of assignments) {
       const driverOrders = assignment.orders;
 
-      if (driverOrders.length === 0) {
-        driverOrders.push(order);
-        assigned = true;
-        break;
-      }
-
-      const lastOrder = driverOrders[driverOrders.length - 1];
-
-      if (lastOrder.collection_time_end <= order.collection_time_start) {
-        driverOrders.push(order);
-        assigned = true;
-        break;
+      if (
+        driverOrders.length === 0 ||
+        new Date(
+          driverOrders[driverOrders.length - 1].collection_time_end
+        ).getTime() <= new Date(order.collection_time_start).getTime()
+      ) {
+        if (
+          !bestAssignment ||
+          driverOrders.length < bestAssignment.orders.length
+        ) {
+          bestAssignment = assignment;
+        }
       }
     }
 
-    if (!assigned) {
+    if (bestAssignment) {
+      bestAssignment.orders.push(order);
+    } else {
       toast(`Order ${order.id} could not be assigned to any driver`, {
         type: 'error',
       });

@@ -8,25 +8,14 @@ import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
 import { useCreateRoutes } from './useCreateRoutes';
 
-const locations = [
-  'Kyiv, Khreshchatyk Street',
-  'Lviv, Svobody Avenue',
-  'Odessa, Deribasivska Street',
-  'Dnipro, Yavornytskoho Avenue',
-];
-
 const RouteManagementPage: FC = () => {
   const { ordersToDrivers } = useCreateRoutes();
   return (
     <Box>
       <CreateRouteProgressBar />
       <Box sx={mapBlockStyles}>
-        <InformBlock
-          title={'9 August, Tuesday'}
-          // TODO replace with real data
-          routes={ordersToDrivers}
-        />
-        <Map locations={locations} />
+        <InformBlock title={'9 August, Tuesday'} routes={ordersToDrivers} />
+        <Map />
       </Box>
       <CreateRouteButtons
         previousPath={'/drivers-management'}

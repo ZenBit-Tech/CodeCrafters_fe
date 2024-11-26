@@ -10,7 +10,7 @@ export const useCreateRoutes = (): { ordersToDrivers: RouteInfo[] } => {
   );
 
   useEffect(() => {
-    getRoutesData([1, 2, 3, 4], [2]);
+    getRoutesData([1, 2, 3, 4], [2, 3]);
   }, []);
 
   const mappedRoutes = value.map((orderToDriver) => {
