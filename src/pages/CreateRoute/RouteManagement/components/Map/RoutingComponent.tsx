@@ -38,6 +38,18 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         locations.map((location) => geocode(location))
       );
 
+      const routingControl = L.Routing.control({
+        waypoints: coordinates.map((coords) =>
+          L.latLng(coords.lat, coords.lon)
+        ),
+        routeWhileDragging: true,
+        createMarker: () => null,
+        lineOptions: {
+          styles: [{ color: `${COLORS.green}`, weight: 4 }],
+        },
+        show: false,
+      }).addTo(map);
+
       L.Routing.control({
         waypoints: coordinates.map((coords) =>
           L.latLng(coords.lat, coords.lon)
@@ -49,6 +61,13 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         },
         show: false,
       }).addTo(map);
+
+      routingControl.on('routesfound', (e) => {
+        const routes = e.routes;
+        const distance = routes[0].summary.totalDistance;
+
+        console.log(`Total distance: ${distance / 1000} km`);
+      });
     } catch (error) {
       console.error('Failed to calculate route:', error);
     }

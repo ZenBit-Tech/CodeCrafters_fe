@@ -10,7 +10,7 @@ interface Order {
   city: string;
 }
 
-interface RouteInfo {
+export interface RouteInfo {
   driver_full_name: string;
   time_range: string;
   distance: number;

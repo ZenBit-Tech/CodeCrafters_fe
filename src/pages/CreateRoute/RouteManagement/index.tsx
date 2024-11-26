@@ -6,6 +6,7 @@ import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
 import Map from './components/Map';
 import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
+import { useCreateRoutes } from './useCreateRoutes';
 
 const locations = [
   'Kyiv, Khreshchatyk Street',
@@ -15,6 +16,7 @@ const locations = [
 ];
 
 const RouteManagementPage: FC = () => {
+  const { ordersToDrivers } = useCreateRoutes();
   return (
     <Box>
       <CreateRouteProgressBar />
@@ -22,26 +24,14 @@ const RouteManagementPage: FC = () => {
         <InformBlock
           title={'9 August, Tuesday'}
           // TODO replace with real data
-          routes={[
-            {
-              driver_full_name: 'John Doe',
-              time_range: '19:00 - 20:00',
-              distance: 900,
-              id: 1,
-              orders: [
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-              ],
-            },
-          ]}
+          routes={ordersToDrivers}
         />
         <Map locations={locations} />
       </Box>
       <CreateRouteButtons
         previousPath={'/drivers-management'}
         nextPath={'/route-management'}
+        handleValidate={() => {}}
       />
     </Box>
   );
