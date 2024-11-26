@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { getCompanies } from '@/services/companyService';
 
-interface Company {
+export interface Company {
   id: number;
   name: string;
   email: string;
@@ -36,10 +36,14 @@ const useCompanies = (
     }
   }, [page, pageSize, searchTerm, sortOrder]);
 
+  const addCompanyToList = (newCompany: Company) => {
+    setCompanies((prevCompanies) => [newCompany, ...prevCompanies]);
+  };
+
   useEffect(() => {
     fetchCompanies();
   }, [fetchCompanies]);
 
-  return { companies, total, fetchCompanies };
+  return { companies, total, fetchCompanies, addCompanyToList };
 };
 export default useCompanies;
