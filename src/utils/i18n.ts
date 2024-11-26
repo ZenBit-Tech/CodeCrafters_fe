@@ -142,9 +142,11 @@ const resources = {
       adminApi: {
         fetch_failed: 'Failed to fetch admins data',
         created_successfully: 'Admin created successfully',
-        create_failed: 'Failed to create admin.',
+        create_failed:
+          'Failed to create admin. User with such email already exists',
         updated_successfully: 'Admin data updated successfully',
-        update_failed: 'Failed to change admin data',
+        update_failed:
+          'Failed to change admin data. User with such email already exists',
         deleted_successfully: 'Admin deleted successfully',
         delete_failed: 'Failed to delete admin',
         unexpected_error: 'An unexpected error occurred',
