@@ -2,7 +2,9 @@ import { FC } from 'react';
 import { Box } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
+import CreateRouteProgressBar, {
+  CreateRouteStages,
+} from '@/pages/components/CreateRouteProgressBar';
 import DriverCard from './components/DriverCard';
 import SortDriversRow from './components/SordDriversRow';
 import { useExportDrivers } from './useGetDrivers';
@@ -17,7 +19,7 @@ const DriversStagePage: FC = () => {
 
   return (
     <Box>
-      <CreateRouteProgressBar />
+      <CreateRouteProgressBar choseRoute={CreateRouteStages.THIRD} />
       <SearchComponent onSearch={getDriversBySearch} />
       <SortDriversRow />
       {drivers.map((driver) => (

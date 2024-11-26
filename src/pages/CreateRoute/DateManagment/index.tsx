@@ -2,7 +2,9 @@ import { FC } from 'react';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns/index';
 import DateManager from './Calendar';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
+import CreateRouteProgressBar, {
+  CreateRouteStages,
+} from '@/pages/components/CreateRouteProgressBar';
 import { useDateValidation } from './useDateValidation';
 
 export const DateManagementPage: FC = () => {
@@ -10,7 +12,7 @@ export const DateManagementPage: FC = () => {
 
   return (
     <>
-      <CreateRouteProgressBar />
+      <CreateRouteProgressBar choseRoute={CreateRouteStages.FIRST} />
       <DateManager />
       <CreateRouteButtons
         previousPath={'/orders'}

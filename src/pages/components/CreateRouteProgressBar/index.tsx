@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import { Box } from '@mui/material';
 
 import FirstStep from './FirstStep';
@@ -7,17 +7,22 @@ import ThirdStep from './ThirdStep';
 import FourStep from './FourStep';
 import { progressBarStyles } from './styles';
 
-const stageElements: ReactElement[] = [
-  <FirstStep key="firstStage" />,
-  <SecondStep key="secondStage" isPurple={false} />,
-  <ThirdStep key="thirdStage" isPurple={false} />,
-  <FourStep key="fourStage" isPurple={false} />,
-];
+export enum CreateRouteStages {
+  FIRST = 'FIRST',
+  SECOND = 'SECOND',
+  THIRD = 'THIRD',
+  FOUR = 'FOUR',
+}
 
-const CreateRouteProgressBar: FC = () => {
+const CreateRouteProgressBar: FC<{ choseRoute: CreateRouteStages }> = ({
+  choseRoute,
+}) => {
   return (
     <Box sx={progressBarStyles}>
-      {stageElements.map((stageElement) => stageElement)}
+      <FirstStep isPurple={choseRoute === CreateRouteStages.FIRST} />
+      <SecondStep isPurple={choseRoute === CreateRouteStages.SECOND} />
+      <ThirdStep isPurple={choseRoute === CreateRouteStages.THIRD} />
+      <FourStep isPurple={choseRoute === CreateRouteStages.FOUR} />
     </Box>
   );
 };

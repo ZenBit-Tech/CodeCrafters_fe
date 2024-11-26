@@ -1,7 +1,9 @@
 import { Box, Pagination } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
+import CreateRouteProgressBar, {
+  CreateRouteStages,
+} from '@/pages/components/CreateRouteProgressBar';
 import SearchComponent from '@/components/SearchComponent';
 import BasicDatePicker from '@/components/BasicDatePicker';
 import OrderManagementCard from './components/OrderManagementCard';
@@ -22,7 +24,7 @@ const SecondStagePage = () => {
 
   return (
     <Box>
-      <CreateRouteProgressBar />
+      <CreateRouteProgressBar choseRoute={CreateRouteStages.SECOND} />
 
       <Box sx={searchRow}>
         <SearchComponent onSearch={sendRequestByParams} />

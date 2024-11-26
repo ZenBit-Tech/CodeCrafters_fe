@@ -2,7 +2,9 @@ import { FC, useEffect } from 'react';
 import { Box } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
+import CreateRouteProgressBar, {
+  CreateRouteStages,
+} from '@/pages/components/CreateRouteProgressBar';
 import Map from './components/Map';
 import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
@@ -19,7 +21,7 @@ const RouteManagementPage: FC = () => {
 
   return (
     <Box>
-      <CreateRouteProgressBar />
+      <CreateRouteProgressBar choseRoute={CreateRouteStages.FOUR} />
       <Box sx={mapBlockStyles}>
         <InformBlock title={'9 August, Tuesday'} routes={ordersToDrivers} />
         <Map />
