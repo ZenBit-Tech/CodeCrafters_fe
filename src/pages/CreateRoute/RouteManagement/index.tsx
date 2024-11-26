@@ -30,6 +30,7 @@ const RouteManagementPage: FC = () => {
         previousPath={'/drivers-management'}
         nextPath={'/orders'}
         handleValidate={onCreateRoute}
+        nextBtnText="Send to drivers"
       />
     </Box>
   );
