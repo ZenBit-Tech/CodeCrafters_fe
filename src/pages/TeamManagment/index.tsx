@@ -2,7 +2,7 @@ import { t } from 'i18next';
 import React from 'react';
 
 import Loader from '@/components/Loader/Loader';
-import UserItem from '@/components/UserItem';
+import UserRow from '@/components/UserRow';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -48,128 +48,129 @@ const TeamManagementPage: React.FC = () => {
     handlePageChange,
   } = useUserFilters();
 
-  const { users, totalPages, loading, error, fetchUsers, addUserToList } =
-    useUsers(page, searchTerm, filterByRole, sortOrder);
+  const { users, totalPages, fetchUsers, addUserToList } = useUsers(
+    page,
+    searchTerm,
+    filterByRole,
+    sortOrder
+  );
 
   return (
-    <Box
-      sx={{
-        boxShadow: `0px 4px 18px 0px ${COLORS.text.extraLight}`,
-        borderRadius: 1,
-        backgroundColor: COLORS.text.white,
-        width: '100%',
-        padding: '24px',
-      }}
-    >
-      <Typography
-        sx={{ color: COLORS.text.dark, fontWeight: FONT.fontWeight.large }}
-      >
-        {t('settings.title')}
-      </Typography>
-
+    <>
+      <Loader />
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: '20px',
-          height: '38px',
-          gap: 2,
+          boxShadow: `0px 4px 18px 0px ${COLORS.text.extraLight}`,
+          borderRadius: 1,
+          backgroundColor: COLORS.text.white,
+          width: '100%',
+          padding: '24px',
         }}
       >
-        <TextField
-          label="Search"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Search by name, email..."
-          sx={{
-            padding: 0,
-            '& .MuiOutlinedInput-root': {
-              height: '100%',
-            },
-            '& .MuiFormLabel-root': {
-              transform: searchTerm
-                ? 'translate(14px, -9px) scale(0.75)'
-                : 'translate(14px, 9px) scale(1)',
-            },
-            '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
-              transform: 'translate(14px, -9px) scale(0.75)',
-              maxWidth: 'calc(133% - 32px)',
-            },
-          }}
-        />
-        <Select
-          value={filterByRole}
-          onChange={(e) => handleRoleFilterChange(e.target.value)}
-          displayEmpty
-          variant="outlined"
-          sx={{ color: COLORS.text.dark }}
+        <Typography
+          sx={{ color: COLORS.text.dark, fontWeight: FONT.fontWeight.large }}
         >
-          <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
-          <MenuItem value="DISPATCHER">
-            {t('settings.select.dispatcher')}
-          </MenuItem>
-          <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
-        </Select>
-        <UserForm
-          mode="create"
-          fetchUsers={fetchUsers}
-          addUserToList={addUserToList}
-        />
-      </Box>
+          {t('settings.title')}
+        </Typography>
 
-      <Divider />
-
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '10px 20px',
-          alignItems: 'center',
-        }}
-      >
-        {columns.map(({ key, label }) => (
-          <Box
-            key={key}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginBottom: '20px',
+            height: '38px',
+            gap: 2,
+          }}
+        >
+          <TextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search by name, email..."
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              width: key === 'role' ? '15%' : key === 'name' ? '25%' : '20%',
+              padding: 0,
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+              },
+              '& .MuiFormLabel-root': {
+                transform: searchTerm
+                  ? 'translate(14px, -9px) scale(0.75)'
+                  : 'translate(14px, 9px) scale(1)',
+              },
+              '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+                transform: 'translate(14px, -9px) scale(0.75)',
+                maxWidth: 'calc(133% - 32px)',
+              },
             }}
+          />
+          <Select
+            value={filterByRole}
+            onChange={(e) => handleRoleFilterChange(e.target.value)}
+            displayEmpty
+            variant="outlined"
+            sx={{ color: COLORS.text.dark }}
           >
-            <Typography
+            <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
+            <MenuItem value="DISPATCHER">
+              {t('settings.select.dispatcher')}
+            </MenuItem>
+            <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
+          </Select>
+          <UserForm
+            mode="create"
+            fetchUsers={fetchUsers}
+            addUserToList={addUserToList}
+          />
+        </Box>
+
+        <Divider />
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '10px 20px',
+            alignItems: 'center',
+          }}
+        >
+          {columns.map(({ key, label }) => (
+            <Box
+              key={key}
               sx={{
-                color: COLORS.text.dark,
-                fontSize: FONT.fontSize.small,
+                display: 'flex',
+                alignItems: 'center',
+                width: key === 'role' ? '15%' : key === 'name' ? '25%' : '20%',
               }}
             >
-              {label}
-            </Typography>
-            <IconButton onClick={() => toggleSortOrder(key)}>
-              {sortOrder[validKeys[key] || key] === 'asc' ? (
-                <KeyboardArrowUpIcon />
-              ) : (
-                <KeyboardArrowDownIcon />
-              )}
-            </IconButton>
-          </Box>
-        ))}
-        <Typography
-          sx={{ color: COLORS.text.dark, fontSize: FONT.fontSize.small }}
-        >
-          {t('settings.columns.actions')}
-        </Typography>
-      </Box>
+              <Typography
+                sx={{
+                  color: COLORS.text.dark,
+                  fontSize: FONT.fontSize.small,
+                }}
+              >
+                {label}
+              </Typography>
+              <IconButton onClick={() => toggleSortOrder(key)}>
+                {sortOrder[validKeys[key] || key] === 'asc' ? (
+                  <KeyboardArrowUpIcon />
+                ) : (
+                  <KeyboardArrowDownIcon />
+                )}
+              </IconButton>
+            </Box>
+          ))}
+          <Typography
+            sx={{ color: COLORS.text.dark, fontSize: FONT.fontSize.small }}
+          >
+            {t('settings.columns.actions')}
+          </Typography>
+        </Box>
 
-      <Divider />
+        <Divider />
 
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Typography color="error">{error}</Typography>
-      ) : (
-        users.map((user) => (
-          <UserItem
+        {users.map((user) => (
+          <UserRow
             key={Number(user.id)}
             user={{
               id: Number(user.id),
@@ -181,21 +182,25 @@ const TeamManagementPage: React.FC = () => {
             fetchUsers={fetchUsers}
             addUserToList={addUserToList}
           />
-        ))
-      )}
+        ))}
 
-      <Box
-        sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}
-      >
-        <Pagination
-          count={totalPages}
-          page={page}
-          onChange={handlePageChange}
-          shape="rounded"
-          color="primary"
-        />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: '20px',
+          }}
+        >
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            shape="rounded"
+            color="primary"
+          />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

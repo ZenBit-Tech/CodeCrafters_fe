@@ -6,7 +6,7 @@ import CompanyForm from '@/pages/CompanyListPage/CompanyForm/CompanyForm';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import DriverAvatar from '../DriverAvatar';
+import DriverAvatar from '../UserAvatar';
 
 interface CompanyItemProps {
   company: { id: number; name: string; email: string };
@@ -59,6 +59,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ({
           companyData={company}
           showAsButton={false}
           isIconButton={true}
+          addCompanyToList={() => {}}
         />
         <IconButton onClick={() => onNavigate(company.id)}>
           <ArrowForwardIcon />

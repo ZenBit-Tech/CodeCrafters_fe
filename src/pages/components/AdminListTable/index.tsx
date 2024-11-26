@@ -1,28 +1,28 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, MenuItem, Pagination, Typography } from '@mui/material';
 
-import TextInput from '@/components/TextInput';
-import {
-  StyledSelect,
-  TableTitle,
-  ActionsContainer,
-  ListHeader,
-  AdminListItem,
-  FlexBox,
-  PaginationContainer,
-  PaginationInfo,
-  StyledPaginationButton,
-  StyledPaginationItem,
-  ScrollContainer,
-} from '@/pages/components/AdminListTable/styles';
-import DriverAvatar from '@/components/DriverAvatar';
-import { AdminListTableProps } from '@/interfaces/AdminList';
-import DeleteAdmin from '@/pages/components/DeleteAdmin';
-import AdminForm from '@/pages/components/AdminForm';
 import { addAdmin, updateAdmin } from '@/api/adminActions';
 import editIcon from '@/assets/edit.png';
+import TextInput from '@/components/TextInput';
+import DriverAvatar from '@/components/UserAvatar';
 import { ITEMS_PER_PAGE_OPTIONS } from '@/constants/constants';
+import { AdminListTableProps } from '@/interfaces/AdminList';
+import AdminForm from '@/pages/components/AdminForm';
+import {
+  ActionsContainer,
+  AdminListItem,
+  FlexBox,
+  ListHeader,
+  PaginationContainer,
+  PaginationInfo,
+  ScrollContainer,
+  StyledPaginationButton,
+  StyledPaginationItem,
+  StyledSelect,
+  TableTitle,
+} from '@/pages/components/AdminListTable/styles';
+import DeleteAdmin from '@/pages/components/DeleteAdmin';
+import { Box, MenuItem, Pagination, Typography } from '@mui/material';
 
 const AdminListTable: React.FC<AdminListTableProps> = ({
   paginatedAdmins,

@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import DriverAvatar from '../DriverAvatar';
+import DriverAvatar from '../UserAvatar';
 
 interface DriverInfoProps {
   firstName: string;

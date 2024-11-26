@@ -1,150 +1,39 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { t } from 'i18next';
+import React from 'react';
 
 import { assets } from '@/assets/assets';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
-import { RootState } from '@/store/store';
-import axiosInstance from '@/utils/axiosInstance';
 import { MenuItem, Select, Typography } from '@mui/material';
 
-import { DecodedToken, UserFormInputs, UserFormProps } from '../types';
-import { input } from './styles';
+import { UserFormProps } from '../types';
+import { addBtn, input } from './styles';
+import { useUserForm } from './useUserForm';
 
-const UserForm: React.FC<UserFormProps> = ({
-  mode,
-  fetchUsers,
-  userId,
-  userData,
-  addUserToList,
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [role, setRole] = useState(userData?.role || '');
-  const { t } = useTranslation();
-  const authToken = useSelector((store: RootState) => store.auth.token);
-
+const UserForm: React.FC<UserFormProps> = (props) => {
   const {
+    isModalOpen,
+    setIsModalOpen,
+    role,
+    setValue,
+    setRole,
     register,
     handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm<UserFormInputs>({
-    defaultValues:
-      mode === 'update'
-        ? {
-            fullName: userData?.fullName || '',
-            email: userData?.email || '',
-            phoneNumber: userData?.phoneNumber || '',
-          }
-        : {
-            fullName: '',
-            email: '',
-            phoneNumber: '',
-            role: '',
-          },
-  });
-
-  const closeModal = (): void => {
-    setIsModalOpen(false);
-    reset();
-  };
-
-  const sendData = async (formData: UserFormInputs) => {
-    try {
-      const decodeToken = (token: string): DecodedToken | null => {
-        try {
-          const decodedToken = JSON.parse(atob(token.split('.')[1]));
-          return decodedToken;
-        } catch (error) {
-          console.error('Error decoding token:', error);
-          return null;
-        }
-      };
-
-      const decodedToken = authToken ? decodeToken(authToken) : null;
-
-      if (!decodedToken) {
-        console.error('Invalid token');
-        toast(t('settings.message.invalidToken'), { type: 'error' });
-        return;
-      }
-
-      const companyId = decodedToken.company_id.id;
-
-      if (!companyId) {
-        console.error('Company ID is missing from the token');
-        toast(t('settings.message.noCompanyId'), { type: 'error' });
-        return;
-      }
-
-      const transformedData = {
-        full_name: formData.fullName,
-        email: formData.email,
-        phone_number: formData.phoneNumber,
-        ...(mode === 'create' && { role: role.toLowerCase() }),
-        ...(mode === 'create' && { company_id: companyId }),
-      };
-
-      const url =
-        mode === 'create'
-          ? role === 'dispatcher'
-            ? '/dispatcher'
-            : '/driver'
-          : userData?.role === 'dispatcher'
-            ? `/dispatcher/${userId}`
-            : `/driver/${userId}`;
-
-      const method = mode === 'update' ? 'patch' : 'post';
-      const endpoint = url;
-
-      const response = await axiosInstance[method](endpoint, transformedData, {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: authToken || '',
-        },
-      });
-
-      const successMessage =
-        mode === 'update'
-          ? t('settings.message.updateSuccess')
-          : t('settings.message.addSuccess');
-      toast(successMessage, { type: 'success' });
-
-      if (mode === 'create') {
-        const newUser = response.data;
-
-        const adaptedUser = {
-          id: newUser.id,
-          role: newUser.role,
-          email: newUser.email,
-          phoneNumber: newUser.phone_number,
-          firstName: newUser.full_name?.split(' ')[0] || '',
-          lastName: newUser.full_name?.split(' ').slice(1).join(' ') || '',
-        };
-
-        addUserToList(adaptedUser);
-      } else {
-        fetchUsers();
-      }
-
-      closeModal();
-    } catch (error) {
-      console.log(error);
-      toast(t('settings.message.error'), { type: 'error' });
-    }
-  };
-
+    errors,
+    closeModal,
+    sendData,
+  } = useUserForm(props);
   return (
     <ModalForm
-      isOpenBtn={mode === 'create'}
-      btnContent={mode === 'create' ? t('button.addNewUser') : assets.editIcon}
+      isOpenBtn={props.mode === 'create'}
+      btnContent={
+        props.mode === 'create' ? t('button.addNewUser') : assets.editIcon
+      }
       formTitle={
-        mode === 'update' ? t('modal.updateUserTitle') : t('modal.addUserTitle')
+        props.mode === 'update'
+          ? t('modal.updateUserTitle')
+          : t('modal.addUserTitle')
       }
       isOpened={isModalOpen}
       setIsOpened={setIsModalOpen}
@@ -152,7 +41,6 @@ const UserForm: React.FC<UserFormProps> = ({
       <form onSubmit={handleSubmit(sendData)}>
         <TextInput
           sx={input}
-          className="input"
           label={t('settings.form.fullName')}
           inputProps={{
             ...register('fullName', {
@@ -164,7 +52,6 @@ const UserForm: React.FC<UserFormProps> = ({
         />
         <TextInput
           sx={input}
-          className="input"
           label={t('settings.form.email')}
           inputProps={{
             ...register('email', {
@@ -180,7 +67,6 @@ const UserForm: React.FC<UserFormProps> = ({
         />
         <TextInput
           sx={input}
-          className="input"
           label={t('settings.form.phoneNumber')}
           inputProps={{
             ...register('phoneNumber', {
@@ -204,7 +90,7 @@ const UserForm: React.FC<UserFormProps> = ({
           MenuProps={{
             disablePortal: true,
           }}
-          sx={{ ...input, display: mode === 'create' ? 'block' : 'none' }}
+          sx={{ ...input, display: props.mode === 'create' ? 'block' : 'none' }}
         >
           <MenuItem value="" disabled>
             {t('settings.form.selectRole')}
@@ -221,10 +107,12 @@ const UserForm: React.FC<UserFormProps> = ({
         )}
         <div>
           <Button
-            className="addBtn"
+            sx={addBtn}
             variant="colored"
             type="submit"
-            label={mode === 'update' ? t('button.update') : t('button.add')}
+            label={
+              props.mode === 'update' ? t('button.update') : t('button.add')
+            }
           />
           <Button
             variant="grey"

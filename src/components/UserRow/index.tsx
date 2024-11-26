@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { assets } from '@/assets/assets';
-import DriverAvatar from '@/components/DriverAvatar';
+import DriverAvatar from '@/components/UserAvatar';
 import { COLORS } from '@/constants/colors';
-import { User } from '@/pages/TeamManagment/useFetchUsers';
+import { User } from '@/pages/TeamManagment/types';
 import UserForm from '@/pages/TeamManagment/UserForm/UserForm';
 import { deleteUser } from '@/services/usersService';
+import { getFirstName, getSecondName } from '@/utils/nameUtils';
 import { Box, Divider, IconButton, Typography } from '@mui/material';
 
 import PopupMessage from '../PopupMessage';
@@ -24,14 +25,14 @@ interface UserItemProps {
   addUserToList: (user: User) => void;
 }
 
-const UserItem: React.FC<UserItemProps> = ({
+const UserRow: React.FC<UserItemProps> = ({
   user,
   fetchUsers,
   addUserToList,
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const firstName = user.fullName.split(' ')[0] || '';
-  const lastName = user.fullName.split(' ')[1] || '';
+  const firstName = getFirstName(user.fullName);
+  const lastName = getSecondName(user.fullName);
 
   const handleDelete = async () => {
     try {
@@ -125,4 +126,4 @@ const UserItem: React.FC<UserItemProps> = ({
   );
 };
 
-export default UserItem;
+export default UserRow;

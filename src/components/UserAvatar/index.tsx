@@ -9,7 +9,7 @@ interface DriverAvatarProps {
   lastName?: string;
 }
 
-const DriverAvatar: React.FC<DriverAvatarProps> = ({
+const UserAvatar: React.FC<DriverAvatarProps> = ({
   firstName = '',
   lastName = '',
 }) => {
@@ -32,4 +32,4 @@ const DriverAvatar: React.FC<DriverAvatarProps> = ({
   );
 };
 
-export default DriverAvatar;
+export default UserAvatar;

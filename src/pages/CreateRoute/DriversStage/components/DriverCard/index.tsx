@@ -2,11 +2,11 @@ import { ChangeEvent, FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { t } from 'i18next';
 
-import DriverAvatar from '@/components/DriverAvatar/index.tsx';
-import { Customer } from '@/interfaces/interfaces.ts';
 import CustomCheckbox from '@/components/Checkbox/index.tsx';
+import DriverAvatar from '@/components/UserAvatar/index.tsx';
+import { Customer } from '@/interfaces/interfaces.ts';
 
-import { driverRowStyles, customerBlock, popup } from './styles.ts';
+import { customerBlock, driverRowStyles, popup } from './styles.ts';
 
 const DriverCard: FC<{
   customer: Customer;

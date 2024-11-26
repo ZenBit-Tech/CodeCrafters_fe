@@ -100,6 +100,7 @@ const resources = {
         updateError: 'Failed to update company',
       },
       settings: {
+        noPhone: 'No phone number',
         form: {
           fullName: 'Full Name',
           email: 'Email',
