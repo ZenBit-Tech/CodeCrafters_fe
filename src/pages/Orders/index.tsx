@@ -5,8 +5,11 @@ import OrderItem from '@/pages/Orders/components/OrderItem/OrderItem';
 import SortingRow from '@/pages/Orders/components/SortingRow/SortingRow';
 import SearchComponent from '@/components/SearchComponent';
 import { useOrdersPagination } from './useOrdersPagination';
-import { paginationWrapper } from './styles';
+import { paginationWrapper, searchRowContainer } from './styles';
 import { useSearchOrders } from './useSearch';
+import Button from '@/components/Button';
+import { t } from 'i18next';
+import { Link } from 'react-router-dom';
 
 function OrdersPage(): React.ReactElement {
   const { sendRequestByParams } = useSearchOrders();
@@ -15,7 +18,16 @@ function OrdersPage(): React.ReactElement {
 
   return (
     <div>
-      <SearchComponent onSearch={sendRequestByParams} />
+      <Box sx={searchRowContainer}>
+        <SearchComponent onSearch={sendRequestByParams} />
+        <Link to="/date-management">
+          <Button
+            label={t('Create Route')}
+            variant={'outlined'}
+            sx={{ width: '155px' }}
+          />
+        </Link>
+      </Box>
       <SortingRow />
       {viewOrdersData.orders.map((order) => (
         <OrderItem
