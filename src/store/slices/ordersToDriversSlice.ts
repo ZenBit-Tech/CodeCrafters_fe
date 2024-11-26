@@ -30,8 +30,12 @@ const ordersToDriversSlice = createSlice({
     ) {
       state.distances = [...state.distances, action.payload];
     },
+    clearDistances(state) {
+      state.distances = [];
+    },
   },
 });
 
-export const { setOrdersToDrivers, addDistance } = ordersToDriversSlice.actions;
+export const { setOrdersToDrivers, addDistance, clearDistances } =
+  ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;

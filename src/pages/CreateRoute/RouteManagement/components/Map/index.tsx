@@ -1,19 +1,25 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { RootState, store } from '@/store/store';
+import { clearDistances } from '@/store/slices/ordersToDriversSlice';
 
 const Map: FC = () => {
-  const routes = useSelector(
-    (store: RootState) => store.ordersToDriversSlice.value
+  const { value: routes } = useSelector(
+    (store: RootState) => store.ordersToDriversSlice
   );
 
-  const updatedRouteCoords = routes.map((routeData) => {
-    return {
+  const [mappedRoutes, setMappedRoutes] = useState<
+    { id: number; locations: string[] }[]
+  >([]);
+
+  useEffect(() => {
+    store.dispatch(clearDistances());
+    const updatedRoutes = routes.map((routeData) => ({
       id: routeData.driver.id,
       locations: routeData.orders.map(
         (order) =>
@@ -21,8 +27,9 @@ const Map: FC = () => {
             order.collection_address.split(',').length - 2
           ]
       ),
-    };
-  });
+    }));
+    setMappedRoutes(updatedRoutes);
+  }, [routes]);
 
   return (
     <MapContainer
@@ -34,7 +41,7 @@ const Map: FC = () => {
         url={import.meta.env.VITE_BASE_TILE_LAYER}
         attribution={`&copy; <a href="${import.meta.env.VITE_BASE_OPEN_STREET_API}/copyright">OpenStreetMap</a> contributors`}
       />
-      {updatedRouteCoords.map((routeData) => (
+      {mappedRoutes.map((routeData) => (
         <RoutingComponent
           key={routeData.id}
           locations={routeData.locations}

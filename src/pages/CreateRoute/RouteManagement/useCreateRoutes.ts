@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { RouteInfo } from './components/InformBlock';
 
-export const useCreateRoutes = (): { ordersToDrivers: RouteInfo[] } => {
+export const useCreateRoutes = (): {
+  ordersToDrivers: RouteInfo[];
+} => {
   const { value } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
@@ -12,11 +14,9 @@ export const useCreateRoutes = (): { ordersToDrivers: RouteInfo[] } => {
     (store: RootState) => store.createRoutSettings
   );
 
-  console.log(checkedOrders);
-
   useEffect(() => {
     getRoutesData([...checkedOrders], [...drivers]);
-  }, []);
+  }, [checkedOrders, drivers]);
 
   const mappedRoutes = value.map((orderToDriver) => {
     return {
