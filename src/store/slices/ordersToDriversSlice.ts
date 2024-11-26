@@ -6,10 +6,12 @@ interface OrderToDriversState {
     driver: Driver;
     orders: Order[];
   }[];
+  distances: { driverId: number; distance: number }[];
 }
 
 const initialState: OrderToDriversState = {
   value: [],
+  distances: [],
 };
 
 const ordersToDriversSlice = createSlice({
@@ -22,8 +24,14 @@ const ordersToDriversSlice = createSlice({
     ) {
       state.value = action.payload;
     },
+    addDistance(
+      state,
+      action: PayloadAction<{ driverId: number; distance: number }>
+    ) {
+      state.distances = [...state.distances, action.payload];
+    },
   },
 });
 
-export const { setOrdersToDrivers } = ordersToDriversSlice.actions;
+export const { setOrdersToDrivers, addDistance } = ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;

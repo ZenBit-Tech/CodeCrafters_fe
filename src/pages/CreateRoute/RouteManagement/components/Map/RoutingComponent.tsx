@@ -3,17 +3,23 @@ import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { COLORS } from '@/constants/colors';
+import { store } from '@/store/store';
+import { addDistance } from '@/store/slices/ordersToDriversSlice';
 
 interface RoutingComponentProps {
   locations: string[];
+  driverId: number;
 }
 
-const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
+const RoutingComponent: React.FC<RoutingComponentProps> = ({
+  driverId,
+  locations,
+}) => {
   const map = useMap();
 
   useEffect(() => {
     handleCalculateRoute();
-  }, [locations]);
+  }, []);
 
   const geocode = async (address: string) => {
     const response = await fetch(
@@ -66,7 +72,10 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         const routes = e.routes;
         const distance = routes[0].summary.totalDistance;
 
-        console.log(`Total distance: ${distance / 1000} km`);
+        store.dispatch(
+          addDistance({ driverId, distance: Math.ceil(distance / 1000) })
+        );
+        // console.log(`Total distance: ${distance / 1000} km`);
       });
     } catch (error) {
       console.error('Failed to calculate route:', error);
