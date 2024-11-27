@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
 
-import RouteDetails from '../RouteDetails';
 import { informBlockStyles, titleStyles } from './styles';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { RouteDetails } from '../RouteDetails/RouteDetails';
 
 interface Order {
   time_range: string;
@@ -29,6 +29,7 @@ const InformBlock: FC<InformBlockInterface> = ({ title, routes }) => {
   const { distances } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
+
   return (
     <Box sx={informBlockStyles}>
       <Typography sx={titleStyles}>{t(title)}</Typography>

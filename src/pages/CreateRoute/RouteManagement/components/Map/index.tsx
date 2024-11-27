@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import RoutingComponent from './RoutingComponent';
@@ -7,6 +7,7 @@ import './styles.css';
 import { useSelector } from 'react-redux';
 import { RootState, store } from '@/store/store';
 import { clearDistances } from '@/store/slices/ordersToDriversSlice';
+import { LatLngExpression } from 'leaflet';
 
 const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
   const { value: routes } = useSelector(
@@ -30,6 +31,8 @@ const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
     }));
     setMappedRoutes(updatedRoutes);
   }, [routes]);
+
+  const { coordinates } = useSelector((store: RootState) => store.chosePin);
 
   return (
     <MapContainer
@@ -63,6 +66,15 @@ const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
           return null;
         }
       })}
+      {coordinates !== null && (
+        <Marker
+          position={store.getState().chosePin.coordinates as LatLngExpression}
+        >
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      )}
     </MapContainer>
   );
 };

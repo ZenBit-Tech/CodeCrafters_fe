@@ -3,7 +3,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
 import { FC, useState } from 'react';
-
 import DriverAvatar from '@/components/DriverAvatar';
 import editIcon from '@/assets/icons/edit.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
@@ -16,11 +15,13 @@ import {
   wrapper,
   orderRowStyles,
   routeHeaderIconsStyles,
+  iconActiveStyles,
+  iconStyles,
 } from './styles';
-import { store } from '@/store/store';
-import { toggleChooseRoute } from '@/store/slices/choseRouteSlice';
+import { useChooseMapPin } from './useChooseMapPin';
+import { useChooseRoute } from './useChooseRoute';
 
-interface RouteDetailsInterface {
+export interface RouteDetailsInterface {
   driver_full_name: string;
   time_range: string;
   distance: number;
@@ -31,7 +32,7 @@ interface RouteDetailsInterface {
   }[];
 }
 
-const RouteDetails: FC<RouteDetailsInterface> = ({
+export const RouteDetails: FC<RouteDetailsInterface> = ({
   driver_full_name,
   time_range,
   distance,
@@ -39,6 +40,8 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
   orders,
 }) => {
   const [open, setIsOpen] = useState<boolean>(false);
+  const { choosePin, choseCity } = useChooseMapPin();
+  const { chooseRoute, choseRouteId } = useChooseRoute();
 
   return (
     <Box sx={wrapper}>
@@ -61,23 +64,8 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
           <img
             src={eyeIcon}
             alt="eyeIcon"
-            style={
-              route_id === store.getState().choseRoute.value
-                ? {
-                    background: '#ccc',
-                    borderRadius: '50%',
-                    padding: '7px',
-                    cursor: 'pointer',
-                  }
-                : { cursor: 'pointer' }
-            }
-            onClick={() => {
-              if (route_id === store.getState().choseRoute.value) {
-                store.dispatch(toggleChooseRoute(null));
-              } else {
-                store.dispatch(toggleChooseRoute(route_id));
-              }
-            }}
+            style={route_id === choseRouteId ? iconActiveStyles : iconStyles}
+            onClick={() => chooseRoute(route_id)}
           />
 
           <IconButton
@@ -95,7 +83,14 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
               <Typography>{order.time_range}</Typography>
               <Typography>{t(order.city)}</Typography>
               <Box>
-                <img src={mapPin} alt="mapPin" />
+                <img
+                  src={mapPin}
+                  style={
+                    choseCity === order.city ? iconActiveStyles : iconStyles
+                  }
+                  alt="mapPin"
+                  onClick={() => choosePin(order.city)}
+                />
                 <img src={noteIcon} alt="noteIcon" />
                 <img src={dropDownIcon} alt="dropDownIcon" />
               </Box>
@@ -106,5 +101,3 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
     </Box>
   );
 };
-
-export default RouteDetails;
