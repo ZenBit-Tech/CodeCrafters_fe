@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import './styles.css';
+
 import { AxiosError } from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -9,15 +11,16 @@ import editIcon from '@/assets/edit.png';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
+import { Company } from '@/interfaces/AdminList';
 import { RootState } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
 
 import { input } from './styles';
-import './styles.css';
 
 interface CompanyFormProps {
   mode: 'create' | 'update';
   fetchCompanies: () => void;
+  addCompanyToList: (newCompany: Company) => void;
   companyId?: number;
   companyData?: {
     name: string;
@@ -37,6 +40,7 @@ interface CompanyFormInputs {
 const CompanyForm: React.FC<CompanyFormProps> = ({
   mode,
   fetchCompanies,
+  addCompanyToList,
   companyId,
   companyData,
   isIconButton,
@@ -92,7 +96,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
       const url = mode === 'update' ? `/company/${companyId}` : '/company';
       const method = mode === 'update' ? 'patch' : 'post';
 
-      await axiosInstance[method](
+      const response = await axiosInstance[method](
         url,
         {
           ...formData,
@@ -111,7 +115,12 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
           : t('company.successMessage');
       toast(successMessage, { type: 'success' });
 
-      fetchCompanies();
+      if (mode === 'create') {
+        addCompanyToList(response.data);
+      } else {
+        fetchCompanies();
+      }
+
       closeModal();
       reset();
     } catch (error) {

@@ -33,7 +33,7 @@ const CompanyListPage: React.FC = () => {
     toggleSortOrder,
   } = usePaginationAndSorting();
   const navigate = useNavigate();
-  const { companies, total, fetchCompanies } = useCompanies(
+  const { companies, total, fetchCompanies, addCompanyToList } = useCompanies(
     page,
     10,
     searchTerm,
@@ -80,7 +80,11 @@ const CompanyListPage: React.FC = () => {
             },
           }}
         />
-        <CompanyForm mode="create" fetchCompanies={fetchCompanies} />
+        <CompanyForm
+          mode="create"
+          fetchCompanies={fetchCompanies}
+          addCompanyToList={addCompanyToList}
+        />
       </Box>
 
       <Divider />
