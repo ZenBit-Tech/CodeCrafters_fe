@@ -1,10 +1,18 @@
-import { toast } from 'react-toastify';
-import { Dispatch } from '@reduxjs/toolkit';
 import axios from 'axios';
-import i18n from '@/utils/i18n';
+import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
 
-import axiosInstance from '@/utils/axiosInstance';
 import { setAccessToken } from '@/store/slices/authSlice';
+import axiosInstance from '@/utils/axiosInstance';
+import i18n from '@/utils/i18n';
+import { Dispatch } from '@reduxjs/toolkit';
+
+interface DecodedToken {
+  role: string;
+  company_id: {
+    id: number;
+  };
+}
 
 export const sendLoginLink = (email: string) => async (): Promise<boolean> => {
   try {
@@ -39,7 +47,10 @@ export const verifyToken =
       const { token, role } = response.data;
 
       if (token) {
-        dispatch(setAccessToken({ token, role }));
+        const decodedToken = jwtDecode<DecodedToken>(token);
+        dispatch(
+          setAccessToken({ token, role, companyId: decodedToken.company_id.id })
+        );
       } else {
         toast.error(i18n.t('auth.invalidExpiredLink'));
       }

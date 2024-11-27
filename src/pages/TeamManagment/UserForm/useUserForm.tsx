@@ -8,7 +8,7 @@ import { RootState } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
 import { getFirstName, getSecondName } from '@/utils/nameUtils';
 
-import { DecodedToken, UserFormInputs, UserFormProps } from '../types';
+import { UserFormInputs, UserFormProps } from '../types';
 
 export const useUserForm = ({
   mode,
@@ -21,6 +21,7 @@ export const useUserForm = ({
   const [role, setRole] = useState(userData?.role || '');
   const { t } = useTranslation();
   const authToken = useSelector((store: RootState) => store.auth.token);
+  const companyId = useSelector((store: RootState) => store.auth.companyId);
 
   const {
     register,
@@ -49,28 +50,8 @@ export const useUserForm = ({
     reset();
   };
 
-  const decodeToken = (token: string): DecodedToken | null => {
-    try {
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      return decodedToken;
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  };
-
   const sendData = async (formData: UserFormInputs) => {
     try {
-      const decodedToken = authToken ? decodeToken(authToken) : null;
-
-      if (!decodedToken) {
-        console.error('Invalid token');
-        toast(t('settings.message.invalidToken'), { type: 'error' });
-        return;
-      }
-
-      const companyId = decodedToken.company_id.id;
-
       if (!companyId) {
         console.error('Company ID is missing from the token');
         toast(t('settings.message.noCompanyId'), { type: 'error' });
