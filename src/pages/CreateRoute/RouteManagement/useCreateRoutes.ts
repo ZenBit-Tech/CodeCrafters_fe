@@ -31,6 +31,8 @@ export const useCreateRoutes = (): {
       distance: 1741,
       orders: orderToDriver.orders.map((order) => {
         return {
+          ...order,
+          id: order.id,
           time_range: `${new Date(order.collection_time_start).getHours()}:${new Date(order.collection_time_start).getMinutes() === 0 ? '00' : new Date(order.collection_time_start).getMinutes()} - ${new Date(order.collection_time_start).getHours() === 0 ? '00' : new Date(order.collection_time_start).getHours()}:${new Date(order.collection_time_end).getMinutes() == 0 ? '00' : new Date(order.collection_time_end).getMinutes()}`,
           city: order.collection_address.split(',')[
             order.collection_address.split(',').length - 2

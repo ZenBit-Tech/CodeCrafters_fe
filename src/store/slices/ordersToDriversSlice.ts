@@ -33,9 +33,36 @@ const ordersToDriversSlice = createSlice({
     clearDistances(state) {
       state.distances = [];
     },
+    changeRoutes(
+      state,
+      action: PayloadAction<{
+        currentRouteId: number;
+        draggedOrder: Order;
+        newRouteId: number;
+      }>
+    ) {
+      state.value = state.value.map((route) => {
+        if (route.driver.id === action.payload.currentRouteId) {
+          route.orders = route.orders.filter(
+            (order) => order.id !== action.payload.draggedOrder.id
+          );
+        }
+
+        if (route.driver.id === action.payload.newRouteId) {
+          route.orders.push(action.payload.draggedOrder);
+          route.orders.sort(
+            (a: Order, b: Order) =>
+              new Date(a.collection_time_start).getTime() -
+              new Date(b.collection_time_start).getTime()
+          );
+        }
+
+        return route;
+      });
+    },
   },
 });
 
-export const { setOrdersToDrivers, addDistance, clearDistances } =
+export const { setOrdersToDrivers, addDistance, clearDistances, changeRoutes } =
   ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;

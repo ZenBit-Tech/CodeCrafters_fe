@@ -1,13 +1,16 @@
 import { FC } from 'react';
 import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
+import { DndContext } from '@dnd-kit/core';
 
 import { informBlockStyles, titleStyles } from './styles';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { RouteDetails } from '../RouteDetails/RouteDetails';
+import { useDragEnd } from './useDragEnd';
 
 interface Order {
+  id: number;
   time_range: string;
   city: string;
 }
@@ -29,23 +32,26 @@ const InformBlock: FC<InformBlockInterface> = ({ title, routes }) => {
   const { distances } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
+  const { handleDragEnd } = useDragEnd();
 
   return (
     <Box sx={informBlockStyles}>
       <Typography sx={titleStyles}>{t(title)}</Typography>
-      {routes.map((route) => (
-        <RouteDetails
-          key={route.id}
-          driver_full_name={route.driver_full_name}
-          time_range={route.time_range}
-          distance={
-            distances.find((distanceObj) => distanceObj.driverId === route.id)
-              ?.distance as number
-          }
-          route_id={route.id}
-          orders={route.orders}
-        />
-      ))}
+      <DndContext onDragEnd={handleDragEnd}>
+        {routes.map((route) => (
+          <RouteDetails
+            key={route.id}
+            driver_full_name={route.driver_full_name}
+            time_range={route.time_range}
+            distance={
+              distances.find((distanceObj) => distanceObj.driverId === route.id)
+                ?.distance as number
+            }
+            route_id={route.id}
+            orders={route.orders}
+          />
+        ))}
+      </DndContext>
     </Box>
   );
 };
