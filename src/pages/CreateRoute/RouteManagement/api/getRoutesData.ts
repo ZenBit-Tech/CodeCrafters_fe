@@ -76,7 +76,7 @@ export const getRoutesData = async (
     store.dispatch(setOrdersToDrivers(routesData));
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast(error.response?.data.message);
+      throw new Error(error.response?.data.message);
     }
   }
 };
