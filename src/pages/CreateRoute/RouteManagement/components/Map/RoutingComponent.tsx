@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
+
 import { store } from '@/store/store';
 import { addDistance } from '@/store/slices/ordersToDriversSlice';
+import { START_ROUTE_POINT } from '@/constants/constants';
 
 interface RoutingComponentProps {
   locations: string[];
@@ -19,10 +21,10 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
   useEffect(() => {
     let routingControl: L.Routing.Control;
 
-    const setupRoute = async () => {
+    const setupRoute = async (): Promise<void> => {
       try {
         const coordinates = await Promise.all(
-          ['New York', ...locations].map(geocode)
+          [START_ROUTE_POINT, ...locations].map(geocode)
         );
 
         routingControl = L.Routing.control({
@@ -57,7 +59,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
 
     setupRoute();
 
-    return () => {
+    return (): void => {
       if (routingControl) {
         map.removeControl(routingControl);
       }

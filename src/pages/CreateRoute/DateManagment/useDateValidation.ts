@@ -1,9 +1,11 @@
-import { RootState } from '@/store/store';
-import { normalizeDate } from '@/utils/normalizeDate';
 import { useCallback } from 'react';
+import { t } from 'i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { RootState } from '@/store/store';
+import { normalizeDate } from '@/utils/normalizeDate';
 
 interface useDateValidationInterface {
   goToOrdersManagementStage: (nextPath: string) => void;
@@ -19,10 +21,7 @@ export const useDateValidation = (): useDateValidationInterface => {
   const goToOrdersManagementStage = useCallback(
     (nextPath: string) => {
       if (normalizeDate(routeDate) < todayDate) {
-        toast(
-          'The selected date is in the past. Please choose a date that is today or in the future',
-          { type: 'warning' }
-        );
+        toast(t('dateManagement.invalidDate'), { type: 'warning' });
       } else {
         navigate(nextPath);
       }

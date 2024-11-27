@@ -1,10 +1,12 @@
 import { FC } from 'react';
-import { Box, Pagination } from '@mui/material';
+import { Box, Pagination, Typography } from '@mui/material';
+import { t } from 'i18next';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar, {
   CreateRouteStages,
 } from '@/pages/components/CreateRouteProgressBar';
+import { FONT } from '@/constants/font';
 import SearchComponent from '@/components/SearchComponent';
 import BasicDatePicker from '@/components/BasicDatePicker';
 import OrderManagementCard from './components/OrderManagementCard';
@@ -36,20 +38,29 @@ const SecondStagePage: FC = () => {
         />
       </Box>
       <OrdersManagementSort />
-      {viewOrdersData.orders.map((order) => (
-        <OrderManagementCard
-          key={order.id}
-          id={order.id}
-          collectionDate={order.collection_date}
-          collectionAddress={order.collection_address}
-          luggages={order.luggages}
-          customer={order.customer}
-          status={order.status}
-          routeId={order.route}
-          collectionTimeStart={order.collection_time_start}
-          collectionTimeEnd={order.collection_time_end}
-        />
-      ))}
+      {viewOrdersData.orders.length > 0 ? (
+        viewOrdersData.orders.map((order) => (
+          <OrderManagementCard
+            key={order.id}
+            id={order.id}
+            collectionDate={order.collection_date}
+            collectionAddress={order.collection_address}
+            luggages={order.luggages}
+            customer={order.customer}
+            status={order.status}
+            routeId={order.route}
+            collectionTimeStart={order.collection_time_start}
+            collectionTimeEnd={order.collection_time_end}
+          />
+        ))
+      ) : (
+        <Typography
+          sx={{ textAlign: 'center', fontSize: FONT.fontSize.extraLarge }}
+        >
+          {t('orderManagement.thereIsNoOrders')}
+        </Typography>
+      )}
+
       <Box sx={paginationWrapper}>
         <Pagination
           count={totalPages}

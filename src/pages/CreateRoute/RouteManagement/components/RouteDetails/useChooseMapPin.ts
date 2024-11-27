@@ -1,13 +1,19 @@
-import { toggleChosePin } from '@/store/slices/chosePinSlice';
-import { RootState, store } from '@/store/store';
 import { useSelector } from 'react-redux';
 
-export const useChooseMapPin = () => {
+import { toggleChosePin } from '@/store/slices/chosePinSlice';
+import { RootState, store } from '@/store/store';
+
+interface UseChooseMapPinHook {
+  choosePin: (city: string) => void;
+  choseCity: string | null;
+}
+
+export const useChooseMapPin = (): UseChooseMapPinHook => {
   const { value: choseCity } = useSelector(
     (store: RootState) => store.chosePin
   );
 
-  const geocode = async (address: string) => {
+  const geocode = async (address: string): Promise<void> => {
     const response = await fetch(
       `${import.meta.env.VITE_BASE_OPEN_STREET_API}/search?format=json&q=${encodeURIComponent(
         address
@@ -29,7 +35,7 @@ export const useChooseMapPin = () => {
     }
   };
 
-  const choosePin = (city: string) => {
+  const choosePin = (city: string): void => {
     if (choseCity === city) {
       store.dispatch(toggleChosePin({ value: null, coordinates: null }));
     } else {

@@ -5,10 +5,11 @@ import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar, {
   CreateRouteStages,
 } from '@/pages/components/CreateRouteProgressBar';
+import SearchComponent from '@/components/SearchComponent';
+
 import DriverCard from './components/DriverCard';
 import SortDriversRow from './components/SordDriversRow';
 import { useExportDrivers } from './useGetDrivers';
-import SearchComponent from '@/components/SearchComponent';
 import { useSearchDrivers } from './useSearchDrivers';
 import { useChooseDriver } from './useChoseDriver';
 

@@ -44,7 +44,7 @@ export const orderRowStyles: SxProps<Theme> = {
 };
 
 export const iconActiveStyles: CSSProperties = {
-  background: '#ccc',
+  background: COLORS.gray,
   borderRadius: '50%',
   padding: '7px',
   cursor: 'pointer',

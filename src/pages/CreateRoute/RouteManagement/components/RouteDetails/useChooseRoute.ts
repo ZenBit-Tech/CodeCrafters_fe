@@ -1,6 +1,7 @@
+import { useSelector } from 'react-redux';
+
 import { toggleChooseRoute } from '@/store/slices/choseRouteSlice';
 import { RootState, store } from '@/store/store';
-import { useSelector } from 'react-redux';
 
 interface UseChooseRouteHook {
   chooseRoute: (routeId: number) => void;
@@ -12,7 +13,7 @@ export const useChooseRoute = (): UseChooseRouteHook => {
     (store: RootState) => store.choseRoute
   );
 
-  const chooseRoute = (routeId: number) => {
+  const chooseRoute = (routeId: number): void => {
     if (routeId === choseRouteId) {
       store.dispatch(toggleChooseRoute(null));
     } else {

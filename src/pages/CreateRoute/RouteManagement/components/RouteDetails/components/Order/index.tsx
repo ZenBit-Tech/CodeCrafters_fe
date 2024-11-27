@@ -1,13 +1,18 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { t } from 'i18next';
+import { useDraggable } from '@dnd-kit/core';
 
 import mapPin from '@/assets/icons/map-pin.svg';
 import noteIcon from '@/assets/icons/note.svg';
 import dropDownIcon from '@/assets/icons/drop-down-icon.svg';
-import { iconActiveStyles, iconStyles, orderRowStyles } from '../../styles';
-import { useChooseMapPin } from '../../useChooseMapPin';
-import { useDraggable } from '@dnd-kit/core';
+import {
+  iconActiveStyles,
+  iconStyles,
+  orderRowStyles,
+} from '@/pages/CreateRoute/RouteManagement/components/RouteDetails/styles.ts';
+import { useChooseMapPin } from '@/pages/CreateRoute/RouteManagement/components/RouteDetails/useChooseMapPin';
+import { COLORS } from '@/constants/colors';
 
 const OrderRow: FC<{
   order: {
@@ -26,7 +31,7 @@ const OrderRow: FC<{
 
   const style = transform
     ? {
-        background: '#fff',
+        background: COLORS.white,
         transform: `translate(${transform.x}px, ${transform.y}px)`,
       }
     : undefined;

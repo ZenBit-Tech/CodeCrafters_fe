@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
 
 import { addNewDriver, removeDriver } from '@/store/slices/createRouteSlice';
 import { RootState, store } from '@/store/store';
@@ -26,10 +27,7 @@ export const useChooseDriver = (): UseChooseDriverInterface => {
       if (drivers.length < checkedOrders.length) {
         store.dispatch(addNewDriver(id));
       } else {
-        toast(
-          'The number of drivers selected must not exceed the number of chosen orders. Please adjust your selection accordingly',
-          { type: 'warning' }
-        );
+        toast(t('driverManagement.aLot'), { type: 'warning' });
       }
     } else {
       store.dispatch(removeDriver(id));
@@ -39,10 +37,7 @@ export const useChooseDriver = (): UseChooseDriverInterface => {
 
   const goToRouteManagement = (nextPath: string): void => {
     if (drivers.length < 1) {
-      toast(
-        'Please select at least one driver to proceed with filling out the form',
-        { type: 'warning' }
-      );
+      toast(t('driverManagement.zeroDrivers'), { type: 'warning' });
     } else {
       navigate(nextPath);
     }

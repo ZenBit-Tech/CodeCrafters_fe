@@ -1,11 +1,13 @@
+import axios, { AxiosError } from 'axios';
+import { NavigateFunction } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { t } from 'i18next';
+
 import { StatusEnum } from '@/constants/status';
 import { Order } from '@/interfaces/interfaces';
 import { resetCreateRouteSettings } from '@/store/slices/createRouteSlice';
 import { setisVisible } from '@/store/slices/loaderSlice';
 import { store } from '@/store/store';
-import axios, { AxiosError } from 'axios';
-import { NavigateFunction } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 interface Route {
   submission_date: Date;
@@ -30,10 +32,7 @@ export const postRoutesData = async (
       { headers: { authorization: store.getState().auth.token } }
     );
 
-    toast(
-      'The routes have been successfully assigned to the responsible drivers',
-      { type: 'success' }
-    );
+    toast(t('routeManagement.createSuccessfully'), { type: 'success' });
 
     store.dispatch(resetCreateRouteSettings());
     navigate(nextPath);

@@ -1,14 +1,16 @@
+import { DragEndEvent } from '@dnd-kit/core';
+import { t } from 'i18next';
+import { toast } from 'react-toastify';
+
 import { changeRoutes } from '@/store/slices/ordersToDriversSlice';
 import { store } from '@/store/store';
-import { DragEndEvent } from '@dnd-kit/core';
-import { toast } from 'react-toastify';
 
 interface UseDragEndHook {
   handleDragEnd: (event: DragEndEvent) => void;
 }
 
 export const useDragEnd = (): UseDragEndHook => {
-  function handleDragEnd(event: DragEndEvent) {
+  function handleDragEnd(event: DragEndEvent): void {
     const { active, over } = event;
 
     if (!over) return;
@@ -19,10 +21,7 @@ export const useDragEnd = (): UseDragEndHook => {
         (routeData) => routeData.driver.id === active.data.current?.parentId
       )?.orders.length as number;
     if (ordersCount < 2) {
-      toast(
-        'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
-        { type: 'warning' }
-      );
+      toast(t('routeManagement.dndWarning'), { type: 'warning' });
       return;
     }
 

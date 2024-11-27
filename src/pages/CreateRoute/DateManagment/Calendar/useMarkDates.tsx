@@ -9,6 +9,8 @@ import {
 import { TileContentFunc } from 'react-calendar';
 import axios, { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
+
 import { store } from '@/store/store';
 import { setRouteDate } from '@/store/slices/createRouteSlice';
 
@@ -47,7 +49,7 @@ export const useMarkDates = (): MarkDatesInterface => {
         if (error instanceof AxiosError) {
           toast(error.response?.data.message, { type: 'error' });
         } else {
-          toast('Something went wrong', { type: 'error' });
+          toast(t('getOrdersDates.failed'), { type: 'error' });
         }
       }
     },

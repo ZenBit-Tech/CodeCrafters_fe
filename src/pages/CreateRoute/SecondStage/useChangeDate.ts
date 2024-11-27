@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import { toast } from 'react-toastify';
+import { t } from 'i18next';
+
 import { store } from '@/store/store';
 import { setRouteDate } from '@/store/slices/createRouteSlice';
 import { getOrders } from '@/pages/Orders/api/getOrders';
-import { toast } from 'react-toastify';
+import { ORDERS_SORTS } from '@/constants/ordersSorts';
 
 export const useChangeDate = (): {
   handleDateChange: (newValue: Dayjs) => void;
@@ -24,7 +27,7 @@ export const useChangeDate = (): {
         store.dispatch(setRouteDate(ChangedDate));
 
         getOrders({
-          sortBy: '%7B%22collection_date%22%3A%22DESC%22%7D',
+          sortBy: ORDERS_SORTS.collection_date.asc,
           filter: 'STATUS',
           search: '',
           page: 1,
@@ -33,10 +36,7 @@ export const useChangeDate = (): {
         });
       } else {
         setSelectedDate(dayjs());
-        toast(
-          'The selected date is in the past. Please choose a date that is today or in the future',
-          { type: 'warning' }
-        );
+        toast(t('dateManagement.invalidDate'), { type: 'warning' });
       }
     }
   };

@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
 import { DndContext } from '@dnd-kit/core';
+import { useSelector } from 'react-redux';
 
 import { informBlockStyles, titleStyles } from './styles';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { RouteDetails } from '../RouteDetails/RouteDetails';
 import { useDragEnd } from './useDragEnd';

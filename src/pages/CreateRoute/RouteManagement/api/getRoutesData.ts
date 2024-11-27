@@ -1,8 +1,9 @@
+import axios, { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
+
 import { Driver, Order } from '@/interfaces/interfaces';
 import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
 import { store } from '@/store/store';
-import axios, { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
 
 interface Assignment {
   driver: Driver;

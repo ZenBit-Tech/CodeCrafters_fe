@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import { setDrivers } from '@/store/slices/driversSlice';
 import { store } from '@/store/store';
+import { t } from 'i18next';
 
 export const getDrivers = async (
   sortBy: 'ASC' | 'DESC',
@@ -17,7 +18,7 @@ export const getDrivers = async (
     store.dispatch(setDrivers(response.data));
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast('Something went wrong', { type: 'error' });
+      toast(t('driverManagement.cantGetDrivers'), { type: 'error' });
     }
   }
 };

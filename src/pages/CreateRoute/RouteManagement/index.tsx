@@ -1,20 +1,26 @@
 import { FC, useEffect } from 'react';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { t } from 'i18next';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar, {
   CreateRouteStages,
 } from '@/pages/components/CreateRouteProgressBar';
+import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
+import { RootState, store } from '@/store/store';
+import { MONTHS } from '@/constants/moths';
+
 import Map from './components/Map';
 import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
 import { useCreateRoutes } from './useCreateRoutes';
-import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
-import { RootState, store } from '@/store/store';
-import { useSelector } from 'react-redux';
 
 const RouteManagementPage: FC = () => {
   const { ordersToDrivers, onCreateRoute } = useCreateRoutes();
+  const { routeDate } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
   const { value: choseRoute } = useSelector(
     (store: RootState) => store.choseRoute
   );
@@ -27,7 +33,10 @@ const RouteManagementPage: FC = () => {
     <Box>
       <CreateRouteProgressBar choseRoute={CreateRouteStages.FOUR} />
       <Box sx={mapBlockStyles}>
-        <InformBlock title={'9 August, Tuesday'} routes={ordersToDrivers} />
+        <InformBlock
+          title={t(`${routeDate.getDay()} ${MONTHS[routeDate.getMonth()]} `)}
+          routes={ordersToDrivers}
+        />
         <Map choseRoute={choseRoute} />
       </Box>
       <CreateRouteButtons
