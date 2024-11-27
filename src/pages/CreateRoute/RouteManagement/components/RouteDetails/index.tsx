@@ -17,6 +17,8 @@ import {
   orderRowStyles,
   routeHeaderIconsStyles,
 } from './styles';
+import { store } from '@/store/store';
+import { toggleChooseRoute } from '@/store/slices/choseRouteSlice';
 
 interface RouteDetailsInterface {
   driver_full_name: string;
@@ -56,7 +58,27 @@ const RouteDetails: FC<RouteDetailsInterface> = ({
         </Box>
         <Box sx={routeHeaderIconsStyles}>
           <img src={editIcon} alt="editIcon" />
-          <img src={eyeIcon} alt="eyeIcon" />
+          <img
+            src={eyeIcon}
+            alt="eyeIcon"
+            style={
+              route_id === store.getState().choseRoute.value
+                ? {
+                    background: '#ccc',
+                    borderRadius: '50%',
+                    padding: '7px',
+                    cursor: 'pointer',
+                  }
+                : { cursor: 'pointer' }
+            }
+            onClick={() => {
+              if (route_id === store.getState().choseRoute.value) {
+                store.dispatch(toggleChooseRoute(null));
+              } else {
+                store.dispatch(toggleChooseRoute(route_id));
+              }
+            }}
+          />
 
           <IconButton
             onClick={() => setIsOpen(!open)}

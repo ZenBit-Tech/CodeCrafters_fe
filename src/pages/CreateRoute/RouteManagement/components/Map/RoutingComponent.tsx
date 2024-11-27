@@ -17,8 +17,52 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
   const map = useMap();
 
   useEffect(() => {
-    handleCalculateRoute();
-  }, []);
+    let routingControl: L.Routing.Control;
+
+    const setupRoute = async () => {
+      try {
+        const coordinates = await Promise.all(
+          ['New York', ...locations].map(geocode)
+        );
+
+        routingControl = L.Routing.control({
+          waypoints: coordinates.map((coords) =>
+            L.latLng(coords.lat, coords.lon)
+          ),
+          routeWhileDragging: true,
+          createMarker: () => null,
+          lineOptions: {
+            styles: [
+              {
+                color: generateRandomColor(),
+                weight: 4,
+              },
+            ],
+          },
+          show: false,
+        }).addTo(map);
+
+        routingControl.on('routesfound', (e) => {
+          const routes = e.routes;
+          const distance = routes[0].summary.totalDistance;
+
+          store.dispatch(
+            addDistance({ driverId, distance: Math.ceil(distance / 1000) })
+          );
+        });
+      } catch (error) {
+        console.error('Failed to calculate route:', error);
+      }
+    };
+
+    setupRoute();
+
+    return () => {
+      if (routingControl) {
+        map.removeControl(routingControl);
+      }
+    };
+  }, [locations, driverId, map]);
 
   const geocode = async (
     address: string
@@ -35,46 +79,14 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
         lon: parseFloat(data[0].lon),
       };
     } else {
-      throw new Error('Address not found');
+      throw new Error(`Address not found: ${address}`);
     }
   };
 
-  const handleCalculateRoute = async (): Promise<void> => {
-    try {
-      const coordinates = await Promise.all(
-        ['New York', ...locations].map((location) => geocode(location))
-      );
-
-      const routingControl = L.Routing.control({
-        waypoints: coordinates.map((coords) =>
-          L.latLng(coords.lat, coords.lon)
-        ),
-        routeWhileDragging: true,
-        createMarker: () => null,
-        lineOptions: {
-          styles: [
-            {
-              color: `#${Math.floor(Math.random() * 16777215)
-                .toString(16)
-                .padStart(6, '0')}`,
-              weight: 4,
-            },
-          ],
-        },
-        show: false,
-      }).addTo(map);
-
-      routingControl.on('routesfound', (e) => {
-        const routes = e.routes;
-        const distance = routes[0].summary.totalDistance;
-
-        store.dispatch(
-          addDistance({ driverId, distance: Math.ceil(distance / 1000) })
-        );
-      });
-    } catch (error) {
-      console.error('Failed to calculate route:', error);
-    }
+  const generateRandomColor = (): string => {
+    return `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')}`;
   };
 
   return null;

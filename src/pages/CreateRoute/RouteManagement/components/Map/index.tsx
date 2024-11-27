@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState, store } from '@/store/store';
 import { clearDistances } from '@/store/slices/ordersToDriversSlice';
 
-const Map: FC = () => {
+const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
   const { value: routes } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
@@ -41,13 +41,28 @@ const Map: FC = () => {
         url={import.meta.env.VITE_BASE_TILE_LAYER}
         attribution={`&copy; <a href="${import.meta.env.VITE_BASE_OPEN_STREET_API}/copyright">OpenStreetMap</a> contributors`}
       />
-      {mappedRoutes.map((routeData) => (
-        <RoutingComponent
-          key={routeData.id}
-          locations={routeData.locations}
-          driverId={routeData.id}
-        />
-      ))}
+      {mappedRoutes.map((routeData) => {
+        if (choseRoute === null) {
+          return (
+            <RoutingComponent
+              key={routeData.id}
+              locations={routeData.locations}
+              driverId={routeData.id}
+            />
+          );
+        } else {
+          if (routeData.id === choseRoute) {
+            return (
+              <RoutingComponent
+                key={routeData.id}
+                locations={routeData.locations}
+                driverId={routeData.id}
+              />
+            );
+          }
+          return null;
+        }
+      })}
     </MapContainer>
   );
 };
