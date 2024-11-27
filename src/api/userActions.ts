@@ -48,6 +48,9 @@ export const verifyToken =
 
       if (token) {
         const decodedToken = jwtDecode<DecodedToken>(token);
+
+        console.log('Decoded Token:', decodedToken);
+
         dispatch(
           setAccessToken({ token, role, companyId: decodedToken.company_id.id })
         );

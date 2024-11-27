@@ -1,7 +1,9 @@
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { RootState } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
 
 import { ApiUser, User } from './types';
@@ -17,6 +19,8 @@ const useFetchUsers = (
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const companyId = useSelector((state: RootState) => state.auth.companyId);
+
   const fetchUsers = async () => {
     setLoading(true);
     setError(null);
@@ -31,6 +35,7 @@ const useFetchUsers = (
           search: searchTerm,
           role: filterByRole,
           sortBy: JSON.stringify({ [sortKey]: sortDirection }),
+          company_id: companyId,
         },
       });
 

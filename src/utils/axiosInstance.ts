@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { history } from '@/utils/history';
-import { store } from '@/store/store';
 import { logout } from '@/store/slices/authSlice';
+import { store } from '@/store/store';
+import { history } from '@/utils/history';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:4000',
@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
     const accessToken = store.getState().auth.token;
 
     if (accessToken) {
-      config.headers.Authorization = `${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
