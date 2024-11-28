@@ -33,6 +33,7 @@ export const useChangeDate = (): {
           page: 1,
           companyId: 1,
           isNew: true,
+          routeDate: ChangedDate,
         });
       } else {
         setSelectedDate(dayjs());

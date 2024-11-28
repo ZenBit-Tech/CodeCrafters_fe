@@ -22,6 +22,9 @@ export const useOrdersPagination = (): UseOrdersHook => {
   const { viewOrdersData, params } = useSelector(
     (store: RootState) => store.ordersPageSlice
   );
+  const { routeDate } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
 
   const fetchOrders = useCallback(
     (page: number = 1) => {
@@ -32,6 +35,7 @@ export const useOrdersPagination = (): UseOrdersHook => {
         page,
         companyId: 1,
         isNew: true,
+        routeDate,
       });
       dispatch(setParamsPage(page));
     },

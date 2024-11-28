@@ -27,6 +27,9 @@ interface UseSortOrdersReturn {
 export const useSortOrders = (): UseSortOrdersReturn => {
   const dispatch = useDispatch();
   const { params } = useSelector((store: RootState) => store.ordersPageSlice);
+  const { routeDate } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
 
   const toggleSortOrder = useCallback(
     (sortType: keyof typeof ORDERS_SORTS) => {
@@ -48,6 +51,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
         page: 1,
         companyId: 1,
         isNew: true,
+        routeDate,
       });
     },
     [dispatch, params.sortBy.value, params.filterBy, params.search]
@@ -63,6 +67,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
         page: 1,
         companyId: 1,
         isNew: true,
+        routeDate,
       });
     },
     [dispatch, params.sortBy.encoded]
