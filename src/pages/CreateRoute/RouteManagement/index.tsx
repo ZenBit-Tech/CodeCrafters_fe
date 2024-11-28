@@ -34,7 +34,7 @@ const RouteManagementPage: FC = () => {
       <CreateRouteProgressBar choseRoute={CreateRouteStages.FOUR} />
       <Box sx={mapBlockStyles}>
         <InformBlock
-          title={t(`${routeDate.getDay()} ${MONTHS[routeDate.getMonth()]} `)}
+          title={t(`${routeDate.getDate()} ${MONTHS[routeDate.getMonth()]} `)}
           routes={ordersToDrivers}
         />
         <Map choseRoute={choseRoute} />

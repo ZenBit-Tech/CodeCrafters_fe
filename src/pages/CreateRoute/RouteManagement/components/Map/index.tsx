@@ -39,7 +39,7 @@ const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
     <MapContainer
       center={[50.4501, 30.5234]}
       zoom={6}
-      style={{ height: '810px', width: '728px' }}
+      style={{ height: '810px', width: '728px', zIndex: 5 }}
     >
       <TileLayer
         url={import.meta.env.VITE_BASE_TILE_LAYER}

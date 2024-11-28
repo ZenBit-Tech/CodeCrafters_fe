@@ -6,6 +6,7 @@ import 'leaflet-routing-machine';
 import { store } from '@/store/store';
 import { addDistance } from '@/store/slices/ordersToDriversSlice';
 import { START_ROUTE_POINT } from '@/constants/constants';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 interface RoutingComponentProps {
   locations: string[];
@@ -23,6 +24,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
 
     const setupRoute = async (): Promise<void> => {
       try {
+        store.dispatch(setisVisible(true));
         const coordinates = await Promise.all(
           [START_ROUTE_POINT, ...locations].map(geocode)
         );
@@ -54,6 +56,8 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
         });
       } catch (error) {
         console.error('Failed to calculate route:', error);
+      } finally {
+        store.dispatch(setisVisible(false));
       }
     };
 
