@@ -15,6 +15,7 @@ import { useValidateChoosedOrders } from './useValidateChoosedOrders';
 import { useChangeDate } from './useChangeDate';
 import { paginationWrapper, searchRow } from './styles';
 import EmptyOrdersComponent from '@/pages/components/EmptyOrdersComponent';
+import dayjs from 'dayjs';
 
 const SecondStagePage: FC = () => {
   const { sendRequestByParams } = useSearchOrders();
@@ -31,9 +32,8 @@ const SecondStagePage: FC = () => {
       <Box sx={searchRow}>
         <SearchComponent onSearch={sendRequestByParams} />
         <BasicDatePicker
-          dataFormat={''}
+          value={dayjs(selectedDate?.toISOString())}
           onChange={handleDateChange}
-          value={selectedDate}
         />
       </Box>
       <OrdersManagementSort />
