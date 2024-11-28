@@ -17,6 +17,7 @@ import RouteManagementPage from '@/pages/CreateRoute/RouteManagement';
 import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
 import DateManagementPage from '@/pages/CreateRoute/DateManagment';
+import RouteDetailsPage from '@/pages/RouteDetails';
 
 const AppRouter: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -76,6 +77,10 @@ const AppRouter: React.FC = () => {
             {
               path: 'routes',
               element: <RoutesPage />,
+            },
+            {
+              path: 'route/:id',
+              element: <RouteDetailsPage />,
             },
           ],
         },
