@@ -4,9 +4,9 @@ import { Box, Typography } from '@mui/material';
 import { DndContext } from '@dnd-kit/core';
 import { useSelector } from 'react-redux';
 
-import { informBlockStyles, titleStyles } from './styles';
 import { RootState } from '@/store/store';
 import { RouteDetails } from '../RouteDetails/RouteDetails';
+import { informBlockStyles, titleStyles } from './styles';
 import { useDragEnd } from './useDragEnd';
 
 interface Order {

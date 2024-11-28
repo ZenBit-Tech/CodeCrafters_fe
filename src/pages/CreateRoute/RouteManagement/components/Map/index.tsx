@@ -1,39 +1,16 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
-import { useSelector } from 'react-redux';
 
-import { RootState, store } from '@/store/store';
-import { clearDistances } from '@/store/slices/ordersToDriversSlice';
+import { store } from '@/store/store';
 
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
+import { useViewMap } from './useViewMap';
 
 const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
-  const { value: routes } = useSelector(
-    (store: RootState) => store.ordersToDriversSlice
-  );
-
-  const [mappedRoutes, setMappedRoutes] = useState<
-    { id: number; locations: string[] }[]
-  >([]);
-
-  useEffect(() => {
-    store.dispatch(clearDistances());
-    const updatedRoutes = routes.map((routeData) => ({
-      id: routeData.driver.id,
-      locations: routeData.orders.map(
-        (order) =>
-          order.collection_address.split(',')[
-            order.collection_address.split(',').length - 2
-          ]
-      ),
-    }));
-    setMappedRoutes(updatedRoutes);
-  }, [routes]);
-
-  const { coordinates } = useSelector((store: RootState) => store.chosePin);
+  const { coordinates, mappedRoutes } = useViewMap();
 
   return (
     <MapContainer

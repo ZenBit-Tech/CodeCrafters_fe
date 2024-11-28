@@ -1,8 +1,9 @@
+import { FC, useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
-import { FC, useState } from 'react';
+
 import DriverAvatar from '@/components/DriverAvatar';
 import editIcon from '@/assets/icons/edit.svg';
 import eyeIcon from '@/assets/icons/eye.svg';

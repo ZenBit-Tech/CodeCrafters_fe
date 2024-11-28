@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns/index';
-import DateManager from './Calendar';
 import CreateRouteProgressBar, {
   CreateRouteStages,
 } from '@/pages/components/CreateRouteProgressBar';
+import DateManager from './Calendar';
 import { useDateValidation } from './useDateValidation';
 
 export const DateManagementPage: FC = () => {

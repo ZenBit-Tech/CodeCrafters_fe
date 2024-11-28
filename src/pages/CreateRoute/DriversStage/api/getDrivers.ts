@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
 
 import { setDrivers } from '@/store/slices/driversSlice';
 import { store } from '@/store/store';
-import { t } from 'i18next';
 
 export const getDrivers = async (
   sortBy: 'ASC' | 'DESC',
