@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
+import { toast } from 'react-toastify';
 
 import { store } from '@/store/store';
 import { addDistance } from '@/store/slices/ordersToDriversSlice';
@@ -55,7 +56,12 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
           );
         });
       } catch (error) {
-        console.error('Failed to calculate route:', error);
+        const errorMessage =
+          error instanceof Error ? error.message : 'Unknown error occurred';
+
+        toast(`routeManagement.failedCalculate: ${errorMessage}`, {
+          type: 'error',
+        });
       } finally {
         store.dispatch(setisVisible(false));
       }

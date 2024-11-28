@@ -41,6 +41,7 @@ const resources = {
           'The routes have been successfully assigned to the responsible drivers',
         dndWarning:
           'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
+        failedCalculate: 'Failed to calculate route',
       },
       button: {
         addNewCompany: '+ Add New Company',
