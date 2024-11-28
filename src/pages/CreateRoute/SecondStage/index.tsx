@@ -1,12 +1,10 @@
 import { FC } from 'react';
-import { Box, Pagination, Typography } from '@mui/material';
-import { t } from 'i18next';
+import { Box, Pagination } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
 import CreateRouteProgressBar, {
   CreateRouteStages,
 } from '@/pages/components/CreateRouteProgressBar';
-import { FONT } from '@/constants/font';
 import SearchComponent from '@/components/SearchComponent';
 import BasicDatePicker from '@/components/BasicDatePicker';
 import OrderManagementCard from './components/OrderManagementCard';
@@ -16,6 +14,7 @@ import { useSearchOrders } from './useSearch';
 import { useValidateChoosedOrders } from './useValidateChoosedOrders';
 import { useChangeDate } from './useChangeDate';
 import { paginationWrapper, searchRow } from './styles';
+import EmptyOrdersComponent from '@/pages/components/EmptyOrdersComponent';
 
 const SecondStagePage: FC = () => {
   const { sendRequestByParams } = useSearchOrders();
@@ -54,11 +53,7 @@ const SecondStagePage: FC = () => {
           />
         ))
       ) : (
-        <Typography
-          sx={{ textAlign: 'center', fontSize: FONT.fontSize.extraLarge }}
-        >
-          {t('orderManagement.thereIsNoOrders')}
-        </Typography>
+        <EmptyOrdersComponent />
       )}
 
       <Box sx={paginationWrapper}>
