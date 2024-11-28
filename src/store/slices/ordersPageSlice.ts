@@ -1,3 +1,4 @@
+import { ORDERS_SORTS } from '@/constants/ordersSorts';
 import { Order } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
@@ -22,9 +23,9 @@ interface OrderPageState {
 const initialState: OrderPageState = {
   params: {
     sortBy: {
-      type: 'collection_date',
+      type: 'route',
       value: 'DESC',
-      encoded: '%7B%22collection_date%22%3A%22DESC%22%7D',
+      encoded: ORDERS_SORTS.route.asc,
     },
     search: '',
     filterBy: 'STATUS',
