@@ -1,28 +1,17 @@
+import { FC } from 'react';
+import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
+
 import DriverBlock from './components/DriverBlock';
 import OrderDetails from './components/OrderDetails';
-import { FONT } from '@/constants/font';
+import { driverTitleStyles, routeDateStyles, routeIdStyles } from './styles';
 
-const RouteInformBlock = () => {
+const RouteInformBlock: FC = () => {
   return (
     <Box>
-      <Typography
-        sx={{
-          marginBottom: '30px',
-          paddingTop: '20px',
-          fontSize: FONT.fontSize.extraLarge,
-        }}
-      >
-        9 August, Tuesday
-      </Typography>
-      <Typography
-        sx={{ marginBottom: '30px', fontSize: FONT.fontSize.extraLarge }}
-      >
-        #000000
-      </Typography>
-      <Typography sx={{ marginBottom: '30px', fontSize: FONT.fontSize.medium }}>
-        Driver
-      </Typography>
+      <Typography sx={routeDateStyles}>9 August, Tuesday</Typography>
+      <Typography sx={routeIdStyles}>#000000</Typography>
+      <Typography sx={driverTitleStyles}>{t('Driver')}</Typography>
       <DriverBlock />
       <OrderDetails />
     </Box>

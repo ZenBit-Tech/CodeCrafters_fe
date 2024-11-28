@@ -1,23 +1,15 @@
+import { FC } from 'react';
 import { Box } from '@mui/material';
+
 import Map from './components/Map';
 import RouteInformBlock from './components/RouteInform';
-import { COLORS } from '@/constants/colors';
 import RouteDetailsControlBtns from './components/RouteDetailsControlBtns';
+import { routeDetailsPageStyles } from './styles';
 
-const RouteDetailsPage = () => {
+const RouteDetailsPage: FC = () => {
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'space-between',
-          background: COLORS.white,
-          padding: '0px 0px 0px 15px',
-          borderRadius: '10px',
-          overflow: 'hidden',
-        }}
-      >
+      <Box sx={routeDetailsPageStyles}>
         <RouteInformBlock />
         <Map />
       </Box>

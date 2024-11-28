@@ -1,20 +1,15 @@
-import Button from '@/components/Button';
+import { FC } from 'react';
+import { t } from 'i18next';
+import { Box } from '@mui/material';
 
+import Button from '@/components/Button';
 import arrowLeft from '@/assets/icons/arrow-left.svg';
 import arrowRight from '@/assets/icons/arrow-right.svg';
-import { Box } from '@mui/material';
-import { t } from 'i18next';
+import { routeDetailsStyles } from './styles';
 
-const RouteDetailsControlBtns = () => {
+const RouteDetailsControlBtns: FC = () => {
   return (
-    <Box
-      sx={{
-        width: '1148px',
-        marginTop: '36px',
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
+    <Box sx={routeDetailsStyles}>
       <Button
         label={t('Previous step')}
         variant="outlined"

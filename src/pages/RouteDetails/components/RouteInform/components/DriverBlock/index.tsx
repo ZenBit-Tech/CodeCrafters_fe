@@ -1,31 +1,20 @@
-import DriverAvatar from '@/components/DriverAvatar';
-import { COLORS } from '@/constants/colors';
+import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 
-const DriverBlock = () => {
+import DriverAvatar from '@/components/DriverAvatar';
+import {
+  driverBlockContainerStyles,
+  routePropsBlockStyles,
+  routePropsRowStyles,
+} from './styles';
+
+const DriverBlock: FC = () => {
   return (
-    <Box
-      sx={{
-        width: '344px',
-        marginBottom: '15px',
-        padding: '8px',
-        border: `1px solid ${COLORS.gray}`,
-        borderRadius: '4px',
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Box sx={driverBlockContainerStyles}>
       <DriverAvatar firstName={'John'} lastName={'Doe'} />
-      <Box sx={{ marginLeft: '15px' }}>
+      <Box sx={routePropsBlockStyles}>
         <Typography>John Doe</Typography>
-        <Box
-          sx={{
-            width: '200px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
+        <Box sx={routePropsRowStyles}>
           <Typography>09:00 - 18:00</Typography>
           <Typography>5 stops</Typography>
           <Typography>900 km</Typography>

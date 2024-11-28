@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
+
 const Map: FC = () => {
   const locations = ['New York', 'Washington'];
 
