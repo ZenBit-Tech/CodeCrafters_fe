@@ -7,6 +7,7 @@ const DriverBlock = () => {
     <Box
       sx={{
         width: '344px',
+        marginBottom: '15px',
         padding: '8px',
         border: `1px solid ${COLORS.gray}`,
         borderRadius: '4px',
