@@ -17,7 +17,7 @@ const useFetchUsers = (
   const [users, setUsers] = useState<User[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const companyId = useSelector((state: RootState) => state.auth.companyId);
 
@@ -35,7 +35,7 @@ const useFetchUsers = (
           search: searchTerm,
           role: filterByRole,
           sortBy: JSON.stringify({ [sortKey]: sortDirection }),
-          company_id: companyId,
+          companyId,
         },
       });
 
@@ -52,7 +52,7 @@ const useFetchUsers = (
       setUsers(adaptedUsers);
       setTotalPages(response.data.pagesCount);
     } catch (err) {
-      toast.error(t('settings.message.fetchErorr'));
+      toast.error(t('settings.message.fetchError'));
       console.error(err);
     } finally {
       setLoading(false);
