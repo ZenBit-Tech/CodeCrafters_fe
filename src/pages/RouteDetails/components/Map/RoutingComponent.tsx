@@ -51,7 +51,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         map.removeControl(routingControl);
       }
     };
-  }, [locations, map]);
+  }, [map]);
 
   const geocode = async (
     address: string

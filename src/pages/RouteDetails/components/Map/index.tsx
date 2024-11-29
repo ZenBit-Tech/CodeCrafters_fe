@@ -1,11 +1,14 @@
 import { FC } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import { useRouteDetails } from '@/pages/RouteDetails';
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
 
 const Map: FC<{ locations: string[] }> = ({ locations }) => {
+  const { pinCoordinates } = useRouteDetails();
+
   return (
     <MapContainer
       center={[50.4501, 30.5234]}
@@ -17,6 +20,7 @@ const Map: FC<{ locations: string[] }> = ({ locations }) => {
         attribution={`&copy; <a href="${import.meta.env.VITE_BASE_OPEN_STREET_API}/copyright">OpenStreetMap</a> contributors`}
       />
       <RoutingComponent locations={locations} />
+      {pinCoordinates && <Marker position={pinCoordinates}></Marker>}
     </MapContainer>
   );
 };

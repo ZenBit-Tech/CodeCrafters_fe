@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+import { COLORS } from '@/constants/colors';
 import { SxProps, Theme } from '@mui/material';
 
 export const orderDetailsBlockStyles: SxProps<Theme> = {
@@ -12,4 +14,15 @@ export const orderRowActionsBlockStyles: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+};
+
+export const mapPinActive: CSSProperties = {
+  backgroundColor: COLORS.gray,
+  padding: '5px',
+  borderRadius: '50%',
+  cursor: 'pointer',
+};
+
+export const mapPinStyles: CSSProperties = {
+  cursor: 'pointer',
 };

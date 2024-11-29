@@ -7,7 +7,14 @@ import { StatusEnum } from '@/constants/status';
 import mapPin from '@/assets/icons/map-pin.svg';
 import noteIcon from '@/assets/icons/note.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
-import { orderDetailsBlockStyles, orderRowActionsBlockStyles } from './styles';
+import {
+  mapPinActive,
+  mapPinStyles,
+  orderDetailsBlockStyles,
+  orderRowActionsBlockStyles,
+} from './styles';
+import { useRouteDetails } from '@/pages/RouteDetails';
+import { useToggleVisible } from '@/hooks/useToggleVisible';
 
 interface OrderDetailsProps {
   city: string;
@@ -15,6 +22,9 @@ interface OrderDetailsProps {
 }
 
 const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime }) => {
+  const { getPinCoordinates: handleChoosePin } = useRouteDetails();
+  const [isVisible, toggleIsVisible] = useToggleVisible(false);
+
   return (
     <Box sx={orderDetailsBlockStyles}>
       <Box>
@@ -24,7 +34,15 @@ const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime }) => {
       <Status status={StatusEnum.COMPLETED} />
       <Box sx={orderRowActionsBlockStyles}>
         <img src={noteIcon} alt="noteIcon" />
-        <img src={mapPin} alt="mapPin" />
+        <img
+          src={mapPin}
+          style={isVisible ? mapPinActive : mapPinStyles}
+          alt="mapPin"
+          onClick={() => {
+            toggleIsVisible();
+            handleChoosePin(city);
+          }}
+        />
         <img src={deleteIcon} alt="deleteIcon" />
       </Box>
     </Box>

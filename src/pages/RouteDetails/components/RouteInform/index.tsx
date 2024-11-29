@@ -3,17 +3,17 @@ import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
+import { DAY_MONTH_WEEKDAY, FULL_TIME } from '@/constants/dateFormats';
 import { RouteInform } from '@/interfaces/interfaces';
 import { createTimeRange } from '@/utils/createTimeRange';
 import { createIdString } from '@/utils/createIdString';
 import DriverBlock from './components/DriverBlock';
 import OrderDetails from './components/OrderDetails';
 import { driverTitleStyles, routeDateStyles, routeIdStyles } from './styles';
-import { DAY_MONTH_WEEKDAY, FULL_TIME } from '@/constants/dateFormats';
 
-const RouteInformBlock: FC<{ routeDetails: RouteInform }> = ({
-  routeDetails,
-}) => {
+const RouteInformBlock: FC<{
+  routeDetails: RouteInform;
+}> = ({ routeDetails }) => {
   return (
     <Box>
       <Typography sx={routeDateStyles}>
