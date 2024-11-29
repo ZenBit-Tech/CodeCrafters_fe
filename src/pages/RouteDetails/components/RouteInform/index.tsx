@@ -23,10 +23,23 @@ const RouteInformBlock: FC<{ routeDetails: RouteInform }> = ({
       {/* // TODO id formatter */}
       <Typography sx={routeIdStyles}>#{routeDetails?.id}</Typography>
       <Typography sx={driverTitleStyles}>{t('Driver')}</Typography>
-      {/* // TODO Diver props */}
-      <DriverBlock />
-      {/* // TODO Orders props */}
-      <OrderDetails />
+      <DriverBlock
+        fullName={routeDetails.driver.full_name}
+        collectionTime={'19:00 - 20:00'}
+        stops={routeDetails.orders.length}
+        distance={routeDetails.distance}
+      />
+      {routeDetails.orders.map((order) => (
+        <OrderDetails
+          key={order.id}
+          city={
+            order.collection_address.split(',')[
+              order.collection_address.split(',').length - 2
+            ]
+          }
+          startTime={`${new Date(order.collection_time_start).getHours()}:${new Date(order.collection_time_start).getMinutes()}`}
+        />
+      ))}
     </Box>
   );
 };

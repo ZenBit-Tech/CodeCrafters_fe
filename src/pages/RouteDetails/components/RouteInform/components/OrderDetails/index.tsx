@@ -9,12 +9,17 @@ import noteIcon from '@/assets/icons/note.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
 import { orderDetailsBlockStyles, orderRowActionsBlockStyles } from './styles';
 
-const OrderDetails: FC = () => {
+interface OrderDetailsProps {
+  city: string;
+  startTime: string;
+}
+
+const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime }) => {
   return (
     <Box sx={orderDetailsBlockStyles}>
       <Box>
-        <Typography>{t('New York')}</Typography>
-        <Typography>11:25</Typography>
+        <Typography>{t(city)}</Typography>
+        <Typography>{startTime}</Typography>
       </Box>
       <Status status={StatusEnum.COMPLETED} />
       <Box sx={orderRowActionsBlockStyles}>

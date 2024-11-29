@@ -9,16 +9,30 @@ import {
   routePropsRowStyles,
 } from './styles';
 
-const DriverBlock: FC = () => {
+interface DriverBlockProps {
+  fullName: string;
+  collectionTime: string;
+  stops: number;
+  distance: number;
+}
+
+const DriverBlock: FC<DriverBlockProps> = ({
+  fullName,
+  collectionTime,
+  stops,
+  distance,
+}) => {
+  const splitName = fullName.split(' ');
+
   return (
     <Box sx={driverBlockContainerStyles}>
-      <DriverAvatar firstName={'John'} lastName={'Doe'} />
+      <DriverAvatar firstName={splitName[0]} lastName={splitName[1]} />
       <Box sx={routePropsBlockStyles}>
-        <Typography>{t('John Doe')}</Typography>
+        <Typography>{fullName}</Typography>
         <Box sx={routePropsRowStyles}>
-          <Typography>09:00 - 18:00</Typography>
-          <Typography>{t('5 stops')}</Typography>
-          <Typography>900 km</Typography>
+          <Typography>{collectionTime}</Typography>
+          <Typography>{t(`${stops} stops`)}</Typography>
+          <Typography>{distance} km</Typography>
         </Box>
       </Box>
     </Box>
