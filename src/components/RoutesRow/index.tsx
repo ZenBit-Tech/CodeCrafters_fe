@@ -12,13 +12,13 @@ import DriverAvatar from '../DriverAvatar';
 import Status from '../Status';
 
 interface RoutesRowProps {
-  routeId: string;
+  routeId: number;
   date: string;
   driverFirstName: string;
   driverLastName: string;
-  driverPhone: string;
+  driverPhone: string | null;
   stopsCount: number;
-  workingHours: string;
+  route_time: string;
   distance: number;
   status: StatusEnum;
 }
@@ -30,7 +30,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
   driverLastName,
   driverPhone,
   stopsCount,
-  workingHours,
+  route_time,
   distance,
   status,
 }) => {
@@ -69,7 +69,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       </Typography>
 
       <Typography variant="body2" color={COLORS.text.medium}>
-        {workingHours}
+        {route_time}
       </Typography>
       <Typography variant="body2" color={COLORS.text.medium}>
         {distance} km

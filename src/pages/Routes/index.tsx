@@ -7,55 +7,67 @@ import FilterHeader from './components/FilterHeader';
 import ActionsPanel from './components/ActionsPanel';
 import RouteTable from './components/RouteTable';
 import RoutePagination from './components/Pagination';
-import { useRoutes } from '@/pages/Routes/useRoutes';
+import useRoutes from './useRoutes';
 
 const RoutesPage: React.FC = () => {
   const {
+    routes,
     page,
-    totalPages,
-    sortedData,
-    startIndex,
-    endIndex,
-    totalRows,
+    rowsPerPage,
     sortField,
     sortDirection,
-    statusFilter,
     handleSort,
-    setStatusFilter,
-    handleChangePage,
+    handlePageChange,
+    handleDateChange,
+    handleSearchChange,
+    handleFilterChange,
   } = useRoutes();
 
   return (
     <Container>
-      <FilterHeader />
+      <FilterHeader onFilterChange={handleFilterChange} />
 
       <Divider />
 
-      <ActionsPanel />
+      <ActionsPanel
+        onDateChange={handleDateChange}
+        onSearchChange={handleSearchChange}
+      />
 
       <Divider />
 
       <RouteTable
         sortField={sortField}
         sortDirection={sortDirection}
-        statusFilter={statusFilter}
         onSort={handleSort}
-        onFilterChange={setStatusFilter}
       />
 
       <Divider />
 
-      {sortedData.slice(startIndex, endIndex).map((route) => (
-        <RoutesRow key={route.routeId} {...route} />
-      ))}
+      {routes
+        .slice((page - 1) * rowsPerPage, page * rowsPerPage)
+        .map((route) => (
+          <RoutesRow
+            key={route.routeId}
+            routeId={route.routeId}
+            date={route.date}
+            driverFirstName={route.driverFirstName}
+            driverLastName={route.driverLastName}
+            driverPhone={route.driverPhone}
+            stopsCount={route.stopsCount}
+            route_time={route.route_time}
+            distance={route.distance}
+            status={route.status}
+          />
+        ))}
 
       <RoutePagination
         page={page}
-        totalPages={totalPages}
-        start={startIndex + 1}
-        end={endIndex}
-        total={totalRows}
-        onPageChange={handleChangePage}
+        totalPages={Math.ceil(routes.length / rowsPerPage)}
+        start={(page - 1) * rowsPerPage + 1}
+        end={page * rowsPerPage}
+        total={routes.length}
+        onPageChange={handlePageChange}
       />
     </Container>
   );
