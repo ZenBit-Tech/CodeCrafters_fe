@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
-import { COLORS } from '@/constants/colors';
 import { SxProps, Theme } from '@mui/material';
+import { COLORS } from '@/constants/colors';
 
 export const orderDetailsBlockStyles: SxProps<Theme> = {
   width: '352px',

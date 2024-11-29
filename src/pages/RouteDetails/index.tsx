@@ -1,4 +1,5 @@
 import { FC, createContext, useContext } from 'react';
+import { t } from 'i18next';
 import { Box } from '@mui/material';
 
 import Map from './components/Map';
@@ -20,7 +21,7 @@ const RouteDetailsContext = createContext<
 export const useRouteDetails = (): RouteDetailsContextInterface => {
   const context = useContext(RouteDetailsContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error(t('routeDetails.contextIsUndefined'));
   }
   return context;
 };
@@ -32,11 +33,7 @@ const RouteDetailsPage: FC = () => {
   return (
     <RouteDetailsContext.Provider value={{ getPinCoordinates, pinCoordinates }}>
       <Box sx={routeDetailsPageStyles}>
-        {routeDetails ? (
-          <RouteInformBlock routeDetails={routeDetails} />
-        ) : (
-          'Error'
-        )}
+        {routeDetails ? <RouteInformBlock routeDetails={routeDetails} /> : ''}
         <Map locations={locations} />
       </Box>
       <RouteDetailsControlBtns />

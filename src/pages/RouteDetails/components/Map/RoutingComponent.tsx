@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 import { store } from '@/store/store';
 import { setisVisible } from '@/store/slices/loaderSlice';
+import { generateRandomColor } from '@/utils/generateRandomColor';
 
 interface RoutingComponentProps {
   locations: string[];
@@ -37,8 +40,14 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
           },
           show: false,
         }).addTo(map);
-      } catch (error) {
-        console.error('Failed to calculate route:', error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast(error.message, { type: 'error' });
+        } else if (error instanceof AxiosError) {
+          toast(error.message, { type: 'error' });
+        } else {
+          toast('routeDetails.failedToCalculate', { type: 'error' });
+        }
       } finally {
         store.dispatch(setisVisible(false));
       }
@@ -68,14 +77,9 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         lon: parseFloat(data[0].lon),
       };
     } else {
-      throw new Error(`Address not found: ${address}`);
+      toast('routeDetails.addressNotFound', { type: 'error' });
+      throw new Error();
     }
-  };
-
-  const generateRandomColor = (): string => {
-    return `#${Math.floor(Math.random() * 16777215)
-      .toString(16)
-      .padStart(6, '0')}`;
   };
 
   return null;

@@ -3,14 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { t } from 'i18next';
 
-import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
 import { RouteInform } from '@/interfaces/interfaces';
 import { START_ROUTE_POINT } from '@/constants/constants';
+import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
 
-export const useGetRoute = (): {
+interface useGetRouteHook {
   routeDetails: RouteInform | null;
   locations: string[];
-} => {
+}
+
+export const useGetRoute = (): useGetRouteHook => {
   const [routeDetails, setRouteDetails] = useState<RouteInform | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();

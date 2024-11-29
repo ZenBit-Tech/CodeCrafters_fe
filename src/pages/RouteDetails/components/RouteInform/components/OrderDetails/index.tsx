@@ -7,14 +7,14 @@ import { StatusEnum } from '@/constants/status';
 import mapPin from '@/assets/icons/map-pin.svg';
 import noteIcon from '@/assets/icons/note.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
+import { useRouteDetails } from '@/pages/RouteDetails';
+import { useToggleVisible } from '@/hooks/useToggleVisible';
 import {
   mapPinActive,
   mapPinStyles,
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
 } from './styles';
-import { useRouteDetails } from '@/pages/RouteDetails';
-import { useToggleVisible } from '@/hooks/useToggleVisible';
 
 interface OrderDetailsProps {
   city: string;

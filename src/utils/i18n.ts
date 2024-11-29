@@ -70,6 +70,10 @@ const resources = {
       },
       routeDetails: {
         invalidParams: "Invalid URL parameters: 'id' must be a valid number",
+        failedToCalculate: 'Failed to calculate route',
+        addressNotFound: 'Address not found',
+        contextIsUndefined:
+          'Data not found. Please check your input or try again later',
       },
       modal: {
         addCompanyTitle: 'Add company',
