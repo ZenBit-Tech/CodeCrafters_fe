@@ -79,7 +79,7 @@ const AppRouter: React.FC = () => {
               element: <RoutesPage />,
             },
             {
-              path: 'route/:id',
+              path: 'routes/:id',
               element: <RouteDetailsPage />,
             },
           ],

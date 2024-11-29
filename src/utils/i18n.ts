@@ -68,6 +68,9 @@ const resources = {
         cancel: 'Cancel',
         close: 'Close',
       },
+      routeDetails: {
+        invalidParams: "Invalid URL parameters: 'id' must be a valid number",
+      },
       modal: {
         addCompanyTitle: 'Add company',
         updateCompanyTitle: 'Update company',
