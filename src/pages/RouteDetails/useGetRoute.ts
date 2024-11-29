@@ -5,8 +5,12 @@ import { t } from 'i18next';
 
 import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
 import { RouteInform } from '@/interfaces/interfaces';
+import { START_ROUTE_POINT } from '@/constants/constants';
 
-export const useGetRoute = (): { routeDetails: RouteInform | null } => {
+export const useGetRoute = (): {
+  routeDetails: RouteInform | null;
+  locations: string[];
+} => {
   const [routeDetails, setRouteDetails] = useState<RouteInform | null>(null);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,5 +27,13 @@ export const useGetRoute = (): { routeDetails: RouteInform | null } => {
     }
   }, []);
 
-  return { routeDetails };
+  return {
+    routeDetails,
+    locations: routeDetails
+      ? [
+          START_ROUTE_POINT,
+          ...routeDetails.orders.map((order) => order.collection_address),
+        ]
+      : [],
+  };
 };

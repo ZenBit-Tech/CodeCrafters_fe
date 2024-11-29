@@ -5,9 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
 
-const Map: FC = () => {
-  const locations = ['New York', 'Washington'];
-
+const Map: FC<{ locations: string[] }> = ({ locations }) => {
   return (
     <MapContainer
       center={[50.4501, 30.5234]}

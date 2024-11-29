@@ -8,7 +8,7 @@ import { routeDetailsPageStyles } from './styles';
 import { useGetRoute } from './useGetRoute';
 
 const RouteDetailsPage: FC = () => {
-  const { routeDetails } = useGetRoute();
+  const { routeDetails, locations } = useGetRoute();
 
   return (
     <>
@@ -18,7 +18,7 @@ const RouteDetailsPage: FC = () => {
         ) : (
           'Error'
         )}
-        <Map />
+        <Map locations={locations} />
       </Box>
       <RouteDetailsControlBtns />
     </>
