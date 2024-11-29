@@ -16,7 +16,7 @@ export const getRoutesByDateRange = async (
   statuses?: string[]
 ): Promise<BackendRoute[]> => {
   try {
-    const response = await axiosInstance.get('/routes/by-dates', {
+    const response = await axiosInstance.get('/route/by-dates', {
       params: {
         startDate,
         endDate,
