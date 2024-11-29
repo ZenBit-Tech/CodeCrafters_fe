@@ -1,13 +1,15 @@
 import { FC } from 'react';
 import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
+import dayjs from 'dayjs';
 
+import { RouteInform } from '@/interfaces/interfaces';
+import { createTimeRange } from '@/utils/createTimeRange';
+import { createIdString } from '@/utils/createIdString';
 import DriverBlock from './components/DriverBlock';
 import OrderDetails from './components/OrderDetails';
 import { driverTitleStyles, routeDateStyles, routeIdStyles } from './styles';
-import { RouteInform } from '@/interfaces/interfaces';
-import { MONTHS } from '@/constants/moths';
-import { DAYS } from '@/constants/days';
+import { DAY_MONTH_WEEKDAY, FULL_TIME } from '@/constants/dateFormats';
 
 const RouteInformBlock: FC<{ routeDetails: RouteInform }> = ({
   routeDetails,
@@ -15,17 +17,18 @@ const RouteInformBlock: FC<{ routeDetails: RouteInform }> = ({
   return (
     <Box>
       <Typography sx={routeDateStyles}>
-        {/*// TODO date formatter utils */}
-        {new Date(routeDetails?.submission_date).getDate()}{' '}
-        {MONTHS[new Date(routeDetails?.submission_date).getMonth()]},{' '}
-        {DAYS[new Date(routeDetails?.submission_date).getDay()]}
+        {dayjs(routeDetails?.submission_date).format(DAY_MONTH_WEEKDAY)}
       </Typography>
-      {/* // TODO id formatter */}
-      <Typography sx={routeIdStyles}>#{routeDetails?.id}</Typography>
+      <Typography sx={routeIdStyles}>
+        {createIdString(`${routeDetails.id}`)}
+      </Typography>
       <Typography sx={driverTitleStyles}>{t('Driver')}</Typography>
       <DriverBlock
         fullName={routeDetails.driver.full_name}
-        collectionTime={'19:00 - 20:00'}
+        collectionTime={createTimeRange(
+          routeDetails.arrival_date,
+          routeDetails.submission_date
+        )}
         stops={routeDetails.orders.length}
         distance={routeDetails.distance}
       />
@@ -37,7 +40,7 @@ const RouteInformBlock: FC<{ routeDetails: RouteInform }> = ({
               order.collection_address.split(',').length - 2
             ]
           }
-          startTime={`${new Date(order.collection_time_start).getHours()}:${new Date(order.collection_time_start).getMinutes()}`}
+          startTime={dayjs(order.collection_time_start).format(FULL_TIME)}
         />
       ))}
     </Box>
