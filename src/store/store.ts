@@ -7,6 +7,7 @@ import ordersPageSlice from './slices/ordersPageSlice';
 import loaderSlice from './slices/loaderSlice';
 import sortDriversSlice from './slices/sortDriversSlice';
 import driversSlice from './slices/driversSlice';
+import routesReducer from './slices/routesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     loader: loaderSlice,
     sortDriversBy: sortDriversSlice,
     drivers: driversSlice,
+    routes: routesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
