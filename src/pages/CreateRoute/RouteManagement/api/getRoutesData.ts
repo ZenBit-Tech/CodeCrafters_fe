@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
 import { store } from '@/store/store';
@@ -16,7 +17,7 @@ export const getRoutesData = async (
     store.dispatch(setOrdersToDrivers(assignedOrders));
   } catch (error) {
     if (error instanceof AxiosError) {
-      throw new Error(error.response?.data.message);
+      toast(error.response?.data.message, { type: 'error' });
     }
   }
 };
