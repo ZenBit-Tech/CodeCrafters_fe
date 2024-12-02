@@ -1,13 +1,13 @@
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { DragEndEvent } from '@dnd-kit/core';
 import { t } from 'i18next';
-import { toast } from 'react-toastify';
 
 import {
   changeRoutes,
   removeNotAssignedOrder,
 } from '@/store/slices/ordersToDriversSlice';
 import { RootState, store } from '@/store/store';
-import { useSelector } from 'react-redux';
 
 interface UseDragEndHook {
   handleDragEnd: (event: DragEndEvent) => void;
@@ -17,9 +17,9 @@ export const useDragEnd = (): UseDragEndHook => {
   const { notAssignedOrders } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
+
   function handleDragEnd(event: DragEndEvent): void {
     const { active, over } = event;
-
     if (!over) return;
 
     const ordersCount: number = store
@@ -31,8 +31,6 @@ export const useDragEnd = (): UseDragEndHook => {
       toast(t('routeManagement.dndWarning'), { type: 'warning' });
       return;
     }
-
-    console.log(active.data.current?.order);
 
     if (
       notAssignedOrders.some(

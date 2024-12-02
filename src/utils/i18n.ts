@@ -44,6 +44,8 @@ const resources = {
         dndWarning:
           'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
         failedCalculate: 'Failed to calculate route',
+        assignError: "Couldn't be added automatically",
+        assignErrorSubtitle: 'No driver can reach this stop on time',
       },
       button: {
         addNewCompany: '+ Add New Company',

@@ -1,34 +1,26 @@
-import { RootState } from '@/store/store';
-import { createTimeRange } from '@/utils/createTimeRange';
-import { Box, Typography } from '@mui/material';
-import { t } from 'i18next';
 import { FC } from 'react';
+import { t } from 'i18next';
 import { useSelector } from 'react-redux';
-import OrderRow from '../../../RouteDetails/components/Order';
-import { COLORS } from '@/constants/colors';
 import { useDroppable } from '@dnd-kit/core';
+import { Box, Typography } from '@mui/material';
+
+import OrderRow from '@/pages/CreateRoute/RouteManagement/components/RouteDetails/components/Order';
+import { createTimeRange } from '@/utils/createTimeRange';
+import { RootState } from '@/store/store';
+import { errorSubtitleStyles, errorTitleStyle } from './styles';
 
 const UnassignedOrder: FC = () => {
   const { notAssignedOrders } = useSelector(
     (store: RootState) => store.ordersToDriversSlice
   );
 
-  const { setNodeRef } = useDroppable({ id: 'asd' });
+  const { setNodeRef } = useDroppable({ id: -1 });
 
   return (
     <Box ref={setNodeRef}>
       {notAssignedOrders.length > 0 && (
-        <Typography
-          sx={{
-            background: '#C7282829',
-            color: 'red',
-            padding: '1px 5px',
-            borderradius: '4px',
-            display: 'block',
-            marginTop: '15px',
-          }}
-        >
-          {t("Couldn'n be added automatically")}
+        <Typography sx={errorTitleStyle}>
+          {t('routeManagement.assignError')}
         </Typography>
       )}
       {notAssignedOrders.length > 0 &&
@@ -37,6 +29,7 @@ const UnassignedOrder: FC = () => {
             <OrderRow
               key={order.id}
               order={{
+                ...order,
                 time_range: createTimeRange(
                   order.collection_time_start,
                   order.collection_time_end
@@ -44,15 +37,14 @@ const UnassignedOrder: FC = () => {
                 city: order.collection_address?.split(',')[
                   order.collection_address.split(',').length - 2
                 ],
-                ...order,
               }}
-              parentId={0}
+              parentId={-1}
             />
           );
         })}
       {notAssignedOrders.length > 0 && (
-        <Typography sx={{ color: COLORS.text.dark }}>
-          {t('No driver can reach this stop on time')}
+        <Typography sx={errorSubtitleStyles}>
+          {t('routeManagement.assignErrorSubtitle')}
         </Typography>
       )}
     </Box>
