@@ -13,6 +13,9 @@ interface RoutesState {
   endDate: string;
 }
 
+const today = new Date();
+const formattedDate = today.toISOString().split('T')[0];
+
 const initialState: RoutesState = {
   routes: [],
   page: 1,
@@ -20,8 +23,8 @@ const initialState: RoutesState = {
   sortDirection: 'asc',
   statusFilter: null,
   rowsPerPage: 10,
-  startDate: '2024-11-01',
-  endDate: '2024-11-05',
+  startDate: formattedDate,
+  endDate: formattedDate,
 };
 
 const routesSlice = createSlice({
