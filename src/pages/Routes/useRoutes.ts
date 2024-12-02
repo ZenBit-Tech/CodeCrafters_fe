@@ -11,32 +11,12 @@ import {
 } from '@/store/slices/routesSlice';
 import { RootState } from '@/store/store';
 import { StatusEnum } from '@/constants/status';
-import { BackendRoute } from '@/interfaces/Routes';
-
-const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  }).format(date); // Example: 01 Nov 2024
-};
-
-const calculateRouteTime = (startDate: string, endDate: string): string => {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-
-  const diffMs = end.getTime() - start.getTime();
-  const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-
-  return `${diffHrs} : ${diffMins}0`;
-};
-
-const processFullName = (fullName: string) => {
-  const [firstName, lastName] = fullName.split(' ');
-  return { firstName, lastName };
-};
+import { RouteData } from '@/interfaces/Routes';
+import {
+  calculateRouteTime,
+  formatDate,
+  processFullName,
+} from '@/pages/Routes/utils';
 
 const useRoutes = () => {
   const [filters, setFilters] = useState<{
@@ -74,24 +54,24 @@ const useRoutes = () => {
         filters.statuses
       );
 
-      const transformedData = data.map((backendRoute: BackendRoute) => {
+      const transformedData = data.map((routeData: RouteData) => {
         const { firstName, lastName } = processFullName(
-          backendRoute.user_id.full_name
+          routeData.user_full_name
         );
 
         return {
-          routeId: backendRoute.id,
-          date: formatDate(backendRoute.submission_date),
+          routeId: routeData.route_id,
+          date: formatDate(routeData.route_submission_date),
           driverFirstName: firstName,
           driverLastName: lastName,
-          driverPhone: backendRoute.user_id.phone_number || 'N/A',
-          stopsCount: backendRoute.distance,
-          route_time: calculateRouteTime(
-            backendRoute.submission_date,
-            backendRoute.arrival_date
+          driverPhone: routeData.user_phone_number || 'N/A',
+          stopsCount: parseInt(routeData.ordersCount, 10),
+          routeTime: calculateRouteTime(
+            routeData.route_submission_date,
+            routeData.route_arrival_date
           ),
-          distance: backendRoute.distance,
-          status: backendRoute.status as StatusEnum,
+          distance: routeData.route_distance,
+          status: routeData.route_status as StatusEnum,
         };
       });
 

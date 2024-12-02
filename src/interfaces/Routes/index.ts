@@ -1,36 +1,32 @@
 import { StatusEnum } from '@/constants/status';
 import React from 'react';
 
-export interface Company {
-  id: number;
-  name: string;
-  client_name: string;
-  logo: string;
-  email: string;
-}
+export interface RouteData {
+  route_id: number;
+  route_submission_date: string;
+  route_arrival_date: string;
+  route_status: string;
+  route_distance: number;
+  route_companyIdId: number;
+  route_userIdId: number;
+  ordersCount: string;
 
-export interface User {
-  id: number;
-  full_name: string;
-  email: string;
-  phone_number: string | null;
-  role: string;
-  company_id: Company;
-  createdAt: string;
-  updatedAt: string;
-  logo: string;
-}
+  company_id: number;
+  company_name: string;
+  company_email: string;
+  company_logo: string;
+  company_createdAt: string;
+  company_updatedAt: string;
+  company_client_name: string;
 
-export interface BackendRoute {
-  id: number;
-  submission_date: string;
-  arrival_date: string;
-  distance: number;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  user_id: User;
-  company_id: Company;
+  user_id: number;
+  user_full_name: string;
+  user_email: string;
+  user_logo: string;
+  user_phone_number: string | null;
+  user_role: string;
+  user_createdAt: string;
+  user_updatedAt: string;
 }
 
 export interface Route {
@@ -40,7 +36,7 @@ export interface Route {
   driverLastName: string;
   driverPhone: string;
   stopsCount: number;
-  route_time: string;
+  routeTime: string;
   distance: number;
   status: StatusEnum;
 }

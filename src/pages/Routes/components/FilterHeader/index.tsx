@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 import {
   Checkbox,
   ListItemText,
   MenuItem,
   Select,
-  SelectChangeEvent,
   Typography,
 } from '@mui/material';
 
 import { FilterOptions, Header } from '@/pages/Routes/styles';
-import { RootState } from '@/store/store';
+import useFilterHeader from './useFilterHeader';
+
+interface FilterHeaderProps {
+  onFilterChange: (filters: {
+    drivers: string[];
+    stops: number[];
+    statuses: string[];
+  }) => void;
+}
 
 interface FilterHeaderProps {
   onFilterChange: (filters: {
@@ -22,66 +27,27 @@ interface FilterHeaderProps {
 }
 
 const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
-  const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
-  const [selectedStops, setSelectedStops] = useState<number[]>([]);
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-
-  const { t } = useTranslation();
-  const { routes } = useSelector((state: RootState) => state.routes);
-
-  const uniqueDrivers = Array.from(
-    new Set(
-      routes.map((route) => `${route.driverFirstName} ${route.driverLastName}`)
-    )
-  );
-
-  const uniqueStops = Array.from(
-    new Set(routes.map((route) => route.stopsCount))
-  );
-  const uniqueStatuses = Array.from(
-    new Set(routes.map((route) => route.status))
-  );
-
-  const handleDriverChange = (event: SelectChangeEvent<string[]>) => {
-    const drivers = event.target.value as string[];
-    setSelectedDrivers(drivers);
-    onFilterChange({
-      drivers,
-      stops: selectedStops,
-      statuses: selectedStatuses,
-    });
-  };
-
-  const handleStopsChange = (event: SelectChangeEvent<number[]>) => {
-    const stops = event.target.value as number[];
-    setSelectedStops(stops);
-    onFilterChange({
-      drivers: selectedDrivers,
-      stops,
-      statuses: selectedStatuses,
-    });
-  };
-
-  const handleStatusChange = (event: SelectChangeEvent<string[]>) => {
-    const statuses = event.target.value as string[];
-    setSelectedStatuses(statuses);
-    onFilterChange({
-      drivers: selectedDrivers,
-      stops: selectedStops,
-      statuses,
-    });
-  };
+  const {
+    t,
+    selectedDrivers,
+    selectedStops,
+    selectedStatuses,
+    uniqueDrivers,
+    uniqueStops,
+    uniqueStatuses,
+    handleDriverChange,
+    handleStopsChange,
+    handleStatusChange,
+  } = useFilterHeader(onFilterChange);
 
   return (
     <Header>
-      <Typography variant="body2" color="textSecondary">
-        {t('routesPage.filter')}
-      </Typography>
+      <Typography variant="body2">{t('routesPage.filter')}</Typography>
       <FilterOptions>
         <Select
           multiple
           value={selectedDrivers}
-          onChange={handleDriverChange}
+          onChange={(e) => handleDriverChange(e.target.value as string[])}
           displayEmpty
           renderValue={(selected) =>
             selected.length
@@ -90,7 +56,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
           }
         >
           <MenuItem disabled>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="subtitle2">
               {t('routesPage.selectDriver')}
             </Typography>
           </MenuItem>
@@ -105,7 +71,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
         <Select
           multiple
           value={selectedStops}
-          onChange={handleStopsChange}
+          onChange={(e) => handleStopsChange(e.target.value as number[])}
           displayEmpty
           renderValue={(selected) =>
             selected.length
@@ -114,7 +80,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
           }
         >
           <MenuItem disabled>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="subtitle2">
               {t('routesPage.selectStops')}
             </Typography>
           </MenuItem>
@@ -129,7 +95,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
         <Select
           multiple
           value={selectedStatuses}
-          onChange={handleStatusChange}
+          onChange={(e) => handleStatusChange(e.target.value as string[])}
           displayEmpty
           renderValue={(selected) =>
             selected.length
@@ -138,7 +104,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
           }
         >
           <MenuItem disabled>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="subtitle2">
               {t('routesPage.selectStatus')}
             </Typography>
           </MenuItem>

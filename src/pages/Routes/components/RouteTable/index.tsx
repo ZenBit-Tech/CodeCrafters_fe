@@ -32,18 +32,14 @@ const RouteTable: React.FC<Props> = ({ sortField, sortDirection, onSort }) => {
     <TableHeader>
       {columns.map(({ label, key }) => (
         <ColumnHeader key={key} onClick={() => onSort(label)}>
-          <Typography variant="body2" color={COLORS.text.medium}>
+          <Typography variant="body2">
             {t(`routesPage.columns.${key}`)}
           </Typography>
-          {renderSortIcon(key)}
+          {renderSortIcon(label)}
         </ColumnHeader>
       ))}
-      <Typography variant="body2" color={COLORS.text.medium}>
-        {t('routesPage.columns.status')}
-      </Typography>
-      <Typography variant="body2" color={COLORS.text.medium}>
-        {t('routesPage.actions')}
-      </Typography>
+      <Typography variant="body2">{t('routesPage.columns.status')}</Typography>
+      <Typography variant="body2">{t('routesPage.actions')}</Typography>
     </TableHeader>
   );
 };
