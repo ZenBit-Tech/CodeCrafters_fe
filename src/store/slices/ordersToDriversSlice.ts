@@ -37,6 +37,11 @@ const ordersToDriversSlice = createSlice({
     addNotAssignedOrder(state, action: PayloadAction<Order>) {
       state.notAssignedOrders = [...state.notAssignedOrders, action.payload];
     },
+    removeNotAssignedOrder(state, action: PayloadAction<number>) {
+      state.notAssignedOrders = state.notAssignedOrders.filter(
+        (order) => order.id !== action.payload
+      );
+    },
     addDistance(
       state,
       action: PayloadAction<{ driverId: number; distance: number }>
@@ -82,5 +87,6 @@ export const {
   clearDistances,
   changeRoutes,
   addNotAssignedOrder,
+  removeNotAssignedOrder,
 } = ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;

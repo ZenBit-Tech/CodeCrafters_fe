@@ -38,6 +38,8 @@ export const useChooseDriver = (): UseChooseDriverInterface => {
   const goToRouteManagement = (nextPath: string): void => {
     if (drivers.length < 1) {
       toast(t('driverManagement.zeroDrivers'), { type: 'warning' });
+    } else if (drivers.length >= checkedOrders.length) {
+      toast(t(`driverManagement.moreThanOrders`, { type: 'warning' }));
     } else {
       navigate(nextPath);
     }
