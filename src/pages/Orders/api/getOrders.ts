@@ -13,6 +13,7 @@ interface GetOrdersParams {
   page: number;
   companyId: number;
   isNew: boolean;
+  routeDate?: Date;
 }
 
 export const getOrders = async ({
@@ -22,12 +23,14 @@ export const getOrders = async ({
   page,
   companyId,
   isNew,
+  routeDate,
 }: GetOrdersParams): Promise<void> => {
   try {
     store.dispatch(setisVisible(true));
+    // const { routeDate } = store.getState().createRoutSettings;
 
     const orders: AxiosResponse = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/orders/?sortBy=${sortBy}${filter !== 'STATUS' ? `&filterBy=${filter}` : ''}&isNew=${isNew}${!search ? '' : `&search=${search}`}&page=${page}&companyId=${companyId}`,
+      `${import.meta.env.VITE_BASE_URL}/orders/?sortBy=${sortBy}${filter !== 'STATUS' ? `&filterBy=${filter}` : ''}&isNew=${isNew}${!search ? '' : `&search=${search}`}&page=${page}&companyId=${companyId}${routeDate ? `&startDate=${routeDate}` : ''}`,
       {
         headers: {
           authorization: store.getState().auth.token,

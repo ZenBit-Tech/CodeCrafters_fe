@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { toast } from 'react-toastify';
 import Calendar from 'react-calendar';
+import { Value } from 'react-calendar/dist/esm/shared/types.js';
+import { t } from 'i18next';
 import 'react-calendar/dist/Calendar.css';
 
 import { useMarkDates } from './useMarkDates';
 import './styles.css';
-import { Value } from 'react-calendar/dist/esm/shared/types.js';
 
 interface OnActiveStartDateChangeParams {
   action: string;
@@ -22,9 +23,16 @@ const MyCalendar: FC = () => {
     activeStartDate,
   }: OnActiveStartDateChangeParams): void => {
     if (activeStartDate) {
-      fetchDates(activeStartDate.toISOString(), 1);
+      if (
+        !(
+          activeStartDate < new Date() &&
+          new Date().getMonth() - activeStartDate.getMonth() >= 1
+        )
+      ) {
+        fetchDates(activeStartDate.toISOString(), 1);
+      }
     } else {
-      toast('activeStartDate is null', { type: 'error' });
+      toast(t('dateManagement.dateIsNull'), { type: 'error' });
     }
   };
 

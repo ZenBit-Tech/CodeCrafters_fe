@@ -1,6 +1,7 @@
 import { SxProps, Theme } from '@mui/material';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import { CSSProperties } from 'react';
 
 export const wrapper: SxProps<Theme> = {
   background: COLORS.white,
@@ -40,4 +41,15 @@ export const orderRowStyles: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+};
+
+export const iconActiveStyles: CSSProperties = {
+  background: COLORS.gray,
+  borderRadius: '50%',
+  padding: '7px',
+  cursor: 'pointer',
+};
+
+export const iconStyles: CSSProperties = {
+  cursor: 'pointer',
 };

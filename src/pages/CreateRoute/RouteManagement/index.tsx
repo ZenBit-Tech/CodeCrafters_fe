@@ -1,45 +1,50 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { t } from 'i18next';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
-import CreateRouteProgressBar from '@/pages/components/CreateRouteProgressBar';
+import CreateRouteProgressBar, {
+  CreateRouteStages,
+} from '@/pages/components/CreateRouteProgressBar';
+import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
+import { RootState, store } from '@/store/store';
+import { MONTHS } from '@/constants/moths';
+
 import Map from './components/Map';
 import InformBlock from './components/InformBlock';
 import { mapBlockStyles } from './styles';
-
-const locations = [
-  'Kyiv, Khreshchatyk Street',
-  'Lviv, Svobody Avenue',
-  'Odessa, Deribasivska Street',
-  'Dnipro, Yavornytskoho Avenue',
-];
+import { useCreateRoutes } from './useCreateRoutes';
 
 const RouteManagementPage: FC = () => {
+  const { ordersToDrivers, onCreateRoute } = useCreateRoutes();
+  const { routeDate } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
+  const { value: choseRoute } = useSelector(
+    (store: RootState) => store.choseRoute
+  );
+
+  useEffect(() => {
+    store.dispatch(setOrdersToDrivers([]));
+  }, []);
+
   return (
     <Box>
-      <CreateRouteProgressBar />
+      <CreateRouteProgressBar choseRoute={CreateRouteStages.FOUR} />
       <Box sx={mapBlockStyles}>
         <InformBlock
-          title={'9 August, Tuesday'}
-          // TODO replace with real data
-          routes={[
-            {
-              driver_full_name: 'John Doe',
-              time_range: '19:00 - 20:00',
-              distance: 900,
-              id: 1,
-              orders: [
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-                { time_range: '19:20 - 19:30', city: 'Berlin' },
-              ],
-            },
-          ]}
+          title={t(`${routeDate.getDate()} ${MONTHS[routeDate.getMonth()]} `)}
+          routes={ordersToDrivers}
         />
-        <Map locations={locations} />
+        <Map choseRoute={choseRoute} />
       </Box>
-      <CreateRouteButtons />
+      <CreateRouteButtons
+        previousPath={'/drivers-management'}
+        nextPath={'/orders'}
+        handleValidate={onCreateRoute}
+        nextBtnText="Send to drivers"
+      />
     </Box>
   );
 };

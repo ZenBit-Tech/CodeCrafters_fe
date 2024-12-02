@@ -50,7 +50,7 @@ export const useSortOrders = (): UseSortOrdersReturn => {
         isNew: false,
       });
     },
-    [dispatch, params.sortBy.value, params.filterBy]
+    [dispatch, params.sortBy.value, params.filterBy, params.search]
   );
 
   const updateFilter = useCallback(

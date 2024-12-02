@@ -7,6 +7,10 @@ import ordersPageSlice from './slices/ordersPageSlice';
 import loaderSlice from './slices/loaderSlice';
 import sortDriversSlice from './slices/sortDriversSlice';
 import driversSlice from './slices/driversSlice';
+import createRouteSlice from './slices/createRouteSlice';
+import ordersToDriversSlice from './slices/ordersToDriversSlice';
+import choseRouteSlice from './slices/choseRouteSlice';
+import chosePinSlice from './slices/chosePinSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +20,10 @@ export const store = configureStore({
     loader: loaderSlice,
     sortDriversBy: sortDriversSlice,
     drivers: driversSlice,
+    createRoutSettings: createRouteSlice,
+    ordersToDriversSlice: ordersToDriversSlice,
+    choseRoute: choseRouteSlice,
+    chosePin: chosePinSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
