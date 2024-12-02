@@ -22,11 +22,17 @@ const ordersToDriversSlice = createSlice({
   reducers: {
     setOrdersToDrivers(
       state,
-      action: PayloadAction<
-        { driver: Driver; orders: Order[]; notAssignedOrders: Order[] }[]
-      >
+      action: PayloadAction<{
+        value: {
+          driver: Driver;
+          orders: Order[];
+          notAssignedOrders: Order[];
+        }[];
+        notAssignedOrders: Order[];
+      }>
     ) {
-      state.value = action.payload;
+      state.value = action.payload.value;
+      state.notAssignedOrders = action.payload.notAssignedOrders;
     },
     addNotAssignedOrder(state, action: PayloadAction<Order>) {
       state.notAssignedOrders = [...state.notAssignedOrders, action.payload];

@@ -26,7 +26,7 @@ const RouteManagementPage: FC = () => {
   );
 
   useEffect(() => {
-    store.dispatch(setOrdersToDrivers([]));
+    store.dispatch(setOrdersToDrivers({ value: [], notAssignedOrders: [] }));
   }, []);
 
   return (

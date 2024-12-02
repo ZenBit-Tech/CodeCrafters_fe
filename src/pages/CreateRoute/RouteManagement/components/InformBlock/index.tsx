@@ -8,6 +8,7 @@ import { RootState } from '@/store/store';
 import { RouteDetails } from '../RouteDetails/RouteDetails';
 import { informBlockStyles, titleStyles } from './styles';
 import { useDragEnd } from './useDragEnd';
+import UnassignedOrder from './components/UnassignedOrder';
 
 interface Order {
   id: number;
@@ -51,6 +52,7 @@ const InformBlock: FC<InformBlockInterface> = ({ title, routes }) => {
             orders={route.orders}
           />
         ))}
+        <UnassignedOrder />
       </DndContext>
     </Box>
   );
