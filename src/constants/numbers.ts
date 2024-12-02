@@ -1,0 +1,1 @@
+export const NOT_ASSIGNED_ORDERS_BLOCK = -1;

@@ -5,6 +5,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { Box, Typography } from '@mui/material';
 
 import OrderRow from '@/pages/CreateRoute/RouteManagement/components/RouteDetails/components/Order';
+import { NOT_ASSIGNED_ORDERS_BLOCK } from '@/constants/numbers';
 import { createTimeRange } from '@/utils/createTimeRange';
 import { RootState } from '@/store/store';
 import { errorSubtitleStyles, errorTitleStyle } from './styles';
@@ -14,7 +15,7 @@ const UnassignedOrder: FC = () => {
     (store: RootState) => store.ordersToDriversSlice
   );
 
-  const { setNodeRef } = useDroppable({ id: -1 });
+  const { setNodeRef } = useDroppable({ id: NOT_ASSIGNED_ORDERS_BLOCK });
 
   return (
     <Box ref={setNodeRef}>
@@ -38,7 +39,7 @@ const UnassignedOrder: FC = () => {
                   order.collection_address.split(',').length - 2
                 ],
               }}
-              parentId={-1}
+              parentId={NOT_ASSIGNED_ORDERS_BLOCK}
             />
           );
         })}
