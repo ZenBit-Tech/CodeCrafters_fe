@@ -2,12 +2,16 @@ import axios, { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 import { Driver, Order } from '@/interfaces/interfaces';
-import { setOrdersToDrivers } from '@/store/slices/ordersToDriversSlice';
+import {
+  addNotAssignedOrder,
+  setOrdersToDrivers,
+} from '@/store/slices/ordersToDriversSlice';
 import { store } from '@/store/store';
 
 interface Assignment {
   driver: Driver;
   orders: Order[];
+  notAssignedOrders: Order[];
 }
 
 const assignOrdersToDrivers = (
@@ -23,35 +27,39 @@ const assignOrdersToDrivers = (
   const assignments: Assignment[] = drivers.map((driver) => ({
     driver,
     orders: [],
+    notAssignedOrders: [],
   }));
 
-  for (const order of orders) {
-    let bestAssignment: Assignment | null = null;
+  const driverCount = drivers.length;
 
-    for (const assignment of assignments) {
+  for (const order of orders) {
+    let assigned = false;
+
+    for (let i = 0; i < driverCount; i++) {
+      const assignment = assignments[i];
       const driverOrders = assignment.orders;
 
-      if (
-        driverOrders.length === 0 ||
-        new Date(
-          driverOrders[driverOrders.length - 1].collection_time_end
-        ).getTime() <= new Date(order.collection_time_start).getTime()
-      ) {
-        if (
-          !bestAssignment ||
-          driverOrders.length < bestAssignment.orders.length
-        ) {
-          bestAssignment = assignment;
-        }
+      const hasSameStartTime = driverOrders.some(
+        (o) =>
+          new Date(o.collection_time_start).getTime() ===
+          new Date(order.collection_time_start).getTime()
+      );
+
+      if (!hasSameStartTime) {
+        assignment.orders.push(order);
+        assigned = true;
+        break;
       }
     }
 
-    if (bestAssignment) {
-      bestAssignment.orders.push(order);
-    } else {
-      toast(`Order ${order.id} could not be assigned to any driver`, {
-        type: 'error',
-      });
+    if (!assigned) {
+      store.dispatch(addNotAssignedOrder(order));
+      toast(
+        `Order ${order.id} could not be assigned because all drivers already have an order with collection_time_start: ${order.collection_time_start}`,
+        {
+          type: 'error',
+        }
+      );
     }
   }
 

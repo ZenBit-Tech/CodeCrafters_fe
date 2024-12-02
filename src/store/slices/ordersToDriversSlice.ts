@@ -6,11 +6,13 @@ interface OrderToDriversState {
     driver: Driver;
     orders: Order[];
   }[];
+  notAssignedOrders: Order[];
   distances: { driverId: number; distance: number }[];
 }
 
 const initialState: OrderToDriversState = {
   value: [],
+  notAssignedOrders: [],
   distances: [],
 };
 
@@ -20,9 +22,14 @@ const ordersToDriversSlice = createSlice({
   reducers: {
     setOrdersToDrivers(
       state,
-      action: PayloadAction<{ driver: Driver; orders: Order[] }[]>
+      action: PayloadAction<
+        { driver: Driver; orders: Order[]; notAssignedOrders: Order[] }[]
+      >
     ) {
       state.value = action.payload;
+    },
+    addNotAssignedOrder(state, action: PayloadAction<Order>) {
+      state.notAssignedOrders = [...state.notAssignedOrders, action.payload];
     },
     addDistance(
       state,
@@ -63,6 +70,11 @@ const ordersToDriversSlice = createSlice({
   },
 });
 
-export const { setOrdersToDrivers, addDistance, clearDistances, changeRoutes } =
-  ordersToDriversSlice.actions;
+export const {
+  setOrdersToDrivers,
+  addDistance,
+  clearDistances,
+  changeRoutes,
+  addNotAssignedOrder,
+} = ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;
