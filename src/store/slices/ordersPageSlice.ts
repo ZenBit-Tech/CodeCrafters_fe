@@ -1,5 +1,5 @@
-import { StatusEnum } from '@/constants/status';
-import { Customer, LuggageTypes } from '@/interfaces/interfaces';
+import { ORDERS_SORTS } from '@/constants/ordersSorts';
+import { Order } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface OrderPageState {
@@ -14,25 +14,7 @@ interface OrderPageState {
     page: number;
   };
   viewOrdersData: {
-    orders: {
-      id: number;
-      collection_date: Date;
-      collection_time_start: Date;
-      collection_time_end: Date;
-      collection_address: string;
-      status: StatusEnum;
-      route: null | {
-        id: number;
-      };
-      customer: Customer;
-      luggages: {
-        id: number;
-        luggage_weight: number;
-        luggage_type: LuggageTypes;
-      }[];
-      createdAt: string;
-      updatedAt: string;
-    }[];
+    orders: Order[];
     pagesCount: number;
     page: number;
   };
@@ -41,9 +23,9 @@ interface OrderPageState {
 const initialState: OrderPageState = {
   params: {
     sortBy: {
-      type: 'collection_date',
+      type: 'route',
       value: 'DESC',
-      encoded: '%7B%22collection_date%22%3A%22DESC%22%7D',
+      encoded: ORDERS_SORTS.route.asc,
     },
     search: '',
     filterBy: 'STATUS',

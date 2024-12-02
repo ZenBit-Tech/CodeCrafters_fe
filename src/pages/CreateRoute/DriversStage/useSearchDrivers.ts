@@ -1,7 +1,8 @@
-import { setDriverSearchString } from '@/store/slices/sortDriversSlice';
-import { RootState, store } from '@/store/store';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+
+import { setDriverSearchString } from '@/store/slices/sortDriversSlice';
+import { RootState, store } from '@/store/store';
 import { getDrivers } from '@/pages/CreateRoute/DriversStage/api/getDrivers';
 
 export const useSearchDrivers = (): {

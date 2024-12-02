@@ -7,3 +7,10 @@ export const paginationWrapper: SxProps<Theme> = {
   display: 'flex',
   justifyContent: 'flex-end',
 };
+
+export const searchRow: SxProps<Theme> = {
+  width: '1126px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'baseline',
+};

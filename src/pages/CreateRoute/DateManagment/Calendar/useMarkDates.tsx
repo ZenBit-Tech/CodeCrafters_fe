@@ -9,6 +9,10 @@ import {
 import { TileContentFunc } from 'react-calendar';
 import axios, { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
+
+import { store } from '@/store/store';
+import { setRouteDate } from '@/store/slices/createRouteSlice';
 
 interface MarkDatesInterface {
   tileContent: ReactNode | TileContentFunc;
@@ -20,6 +24,18 @@ interface MarkDatesInterface {
 export const useMarkDates = (): MarkDatesInterface => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dates, setDates] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const utcDate = new Date(
+      Date.UTC(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate()
+      )
+    );
+
+    store.dispatch(setRouteDate(utcDate));
+  }, [selectedDate]);
 
   const fetchDates = useCallback(
     async (dateStartString: string, companyId: number): Promise<void> => {
@@ -33,7 +49,7 @@ export const useMarkDates = (): MarkDatesInterface => {
         if (error instanceof AxiosError) {
           toast(error.response?.data.message, { type: 'error' });
         } else {
-          toast('Something went wrong', { type: 'error' });
+          toast(t('getOrdersDates.failed'), { type: 'error' });
         }
       }
     },
@@ -44,7 +60,7 @@ export const useMarkDates = (): MarkDatesInterface => {
     fetchDates(new Date().toISOString(), 1);
   }, [fetchDates]);
 
-  const tileContent = ({ date }: { date: Date }) => {
+  const tileContent = ({ date }: { date: Date }): ReactNode => {
     const formattedDate = date.toLocaleDateString('en-CA');
 
     if (dates[formattedDate]) {

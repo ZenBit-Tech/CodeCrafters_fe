@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -16,18 +15,15 @@ import Loader from './components/Loader/Loader';
 import theme from './theme';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <ToastContainer />
-      <Loader />
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <I18nextProvider i18n={i18n}>
-            <App />
-          </I18nextProvider>
-        </ThemeProvider>
-      </PersistGate>
-      <ToastContainer />
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <ToastContainer />
+    <Loader />
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <I18nextProvider i18n={i18n}>
+          <App />
+        </I18nextProvider>
+      </ThemeProvider>
+    </PersistGate>
+  </Provider>
 );

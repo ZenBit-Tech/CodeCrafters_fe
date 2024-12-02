@@ -5,3 +5,10 @@ export const paginationWrapper: SxProps<Theme> = {
   display: 'flex',
   justifyContent: 'flex-end',
 };
+
+export const searchRowContainer: SxProps<Theme> = {
+  width: '1236px',
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+};

@@ -9,6 +9,9 @@ type UseSearchType = () => { sendRequestByParams: (search: string) => void };
 
 export const useSearchOrders: UseSearchType = () => {
   const { params } = useSelector((store: RootState) => store.ordersPageSlice);
+  const { routeDate } = useSelector(
+    (store: RootState) => store.createRoutSettings
+  );
 
   const sendRequestByParams = debounce((search: string) => {
     store.dispatch(setSearchBy(search));
@@ -21,6 +24,7 @@ export const useSearchOrders: UseSearchType = () => {
       page: 1,
       companyId: 1,
       isNew: true,
+      routeDate,
     });
   }, 300);
 

@@ -3,9 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setParamsPage } from '@/store/slices/ordersPageSlice';
 import { RootState } from '@/store/store';
+import { Order } from '@/interfaces/interfaces';
 import { getOrders } from './api/getOrders';
 
-export const useOrdersPagination = () => {
+interface UseOrderPaginationHook {
+  viewOrdersData: {
+    orders: Order[];
+    pagesCount: number;
+    page: number;
+  };
+  currentPage: number;
+  totalPages: number;
+  fetchOrders: (page?: number) => void;
+}
+
+export const useOrdersPagination = (): UseOrderPaginationHook => {
   const dispatch = useDispatch();
   const { viewOrdersData, params } = useSelector(
     (store: RootState) => store.ordersPageSlice

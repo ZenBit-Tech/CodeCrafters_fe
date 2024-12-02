@@ -1,0 +1,68 @@
+import { Driver, Order } from '@/interfaces/interfaces';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+interface OrderToDriversState {
+  value: {
+    driver: Driver;
+    orders: Order[];
+  }[];
+  distances: { driverId: number; distance: number }[];
+}
+
+const initialState: OrderToDriversState = {
+  value: [],
+  distances: [],
+};
+
+const ordersToDriversSlice = createSlice({
+  name: 'ordersToDrivers',
+  initialState,
+  reducers: {
+    setOrdersToDrivers(
+      state,
+      action: PayloadAction<{ driver: Driver; orders: Order[] }[]>
+    ) {
+      state.value = action.payload;
+    },
+    addDistance(
+      state,
+      action: PayloadAction<{ driverId: number; distance: number }>
+    ) {
+      state.distances = [...state.distances, action.payload];
+    },
+    clearDistances(state) {
+      state.distances = [];
+    },
+    changeRoutes(
+      state,
+      action: PayloadAction<{
+        currentRouteId: number;
+        draggedOrder: Order;
+        newRouteId: number;
+      }>
+    ) {
+      state.value = state.value.map((route) => {
+        if (route.driver.id === action.payload.currentRouteId) {
+          route.orders = route.orders.filter(
+            (order) => order.id !== action.payload.draggedOrder.id
+          );
+        }
+
+        if (route.driver.id === action.payload.newRouteId) {
+          route.orders.push(action.payload.draggedOrder);
+          route.orders.sort(
+            (a: Order, b: Order) =>
+              new Date(a.collection_time_start).getTime() -
+              new Date(b.collection_time_start).getTime()
+          );
+        }
+
+        return route;
+      });
+    },
+  },
+});
+
+export const { setOrdersToDrivers, addDistance, clearDistances, changeRoutes } =
+  ordersToDriversSlice.actions;
+export default ordersToDriversSlice.reducer;

@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
 
 import { setDrivers } from '@/store/slices/driversSlice';
 import { store } from '@/store/store';
@@ -10,13 +11,14 @@ export const getDrivers = async (
 ): Promise<void> => {
   try {
     const response: AxiosResponse = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/driver?sortBy=${sortBy}&search=${search}&companyId=1`
+      `${import.meta.env.VITE_BASE_URL}/driver?sortBy=${sortBy}&search=${search}&companyId=1`,
+      { headers: { authorization: store.getState().auth.token } }
     );
 
     store.dispatch(setDrivers(response.data));
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast('Something went wrong', { type: 'error' });
+      toast(t('driverManagement.cantGetDrivers'), { type: 'error' });
     }
   }
 };

@@ -17,6 +17,32 @@ const resources = {
         placeholder: 'Search…',
         noResults: 'No companies found.',
       },
+      dateManagement: {
+        invalidDate:
+          'The selected date is in the past. Please choose a date that is today or in the future',
+        dateIsNull: 'activeStartDate is null',
+      },
+      driverManagement: {
+        zeroDrivers:
+          'Please select at least one driver to proceed with filling out the form',
+        aLot: 'The number of drivers selected must not exceed the number of chosen orders. Please adjust your selection accordingly',
+        cantGetDrivers: "Can't get drivers",
+      },
+      orderManagement: {
+        zeroOrders:
+          'Please select at least one order to proceed with filling out the form',
+        thereIsNoOrders: 'There is no available orders',
+      },
+      getOrdersDates: {
+        failed: "Can't get assigned orders",
+      },
+      routeManagement: {
+        createSuccessfully:
+          'The routes have been successfully assigned to the responsible drivers',
+        dndWarning:
+          'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
+        failedCalculate: 'Failed to calculate route',
+      },
       button: {
         addNewCompany: '+ Add New Company',
         add: 'Add',

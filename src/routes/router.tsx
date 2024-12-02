@@ -12,11 +12,11 @@ import SignInPage from '@/pages/SignIn';
 import AdminListPage from '@/pages/AdminList';
 import NotFoundPage from '@/pages/NotFound';
 import { RootState } from '@/store/store';
-import DateManagementPage from '@/pages/DateManagment';
 import DriversStagePage from '@/pages/CreateRoute/DriversStage';
 import RouteManagementPage from '@/pages/CreateRoute/RouteManagement';
 import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
+import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 
 const AppRouter: React.FC = () => {
   const isAuthenticated = useSelector(
