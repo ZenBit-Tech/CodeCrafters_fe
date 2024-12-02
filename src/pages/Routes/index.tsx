@@ -55,7 +55,7 @@ const RoutesPage: React.FC = () => {
             driverLastName={route.driverLastName}
             driverPhone={route.driverPhone}
             stopsCount={route.stopsCount}
-            route_time={route.route_time}
+            route_time={route.routeTime}
             distance={route.distance}
             status={route.status}
           />
