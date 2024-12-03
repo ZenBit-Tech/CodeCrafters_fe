@@ -29,6 +29,20 @@ const resources = {
         cantGetDrivers: "Can't get drivers",
         moreThanOrders:
           'The number of selected drivers exceeds the number of selected orders. Please adjust your selection to ensure all drivers have orders to assign',
+        title: 'Add New Driver',
+        button: '+ Add New Driver',
+        driverAdd: 'Driver successfully added',
+        cantAddDriver: 'Failed to add driver. {{message}}',
+        fullName: 'Full Name',
+        email: 'Email',
+        phoneNumber: 'Phone number',
+        add: 'Add',
+        cancel: 'Cancel',
+        emptyFullName: 'Full name is required.',
+        emptyEmail: 'Email is required.',
+        invalidEmail: 'Please enter a valid email address.',
+        emptyPhoneNumber: 'Phone number is required.',
+        invalidPhoneNumber: 'Phone number must be in format +380XXXXXXXXX',
       },
       orderManagement: {
         zeroOrders:
