@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import { useRouteDetails } from '@/pages/RouteDetails';
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
+import { MapContainerStyles } from './styles';
 
 const Map: FC<{ locations: string[] }> = ({ locations }) => {
   const { pinCoordinates } = useRouteDetails();
@@ -13,7 +14,7 @@ const Map: FC<{ locations: string[] }> = ({ locations }) => {
     <MapContainer
       center={[50.4501, 30.5234]}
       zoom={6}
-      style={{ height: '810px', width: '728px', zIndex: 5 }}
+      style={MapContainerStyles}
     >
       <TileLayer
         url={import.meta.env.VITE_BASE_TILE_LAYER}
