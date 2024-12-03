@@ -1,9 +1,3 @@
 .leaflet-top {
   display: none !important;
 }
-
-.mapContainer {
-  height: '810px'; 
-  width: '728px'; 
-  z-index: 5;
-}
