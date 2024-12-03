@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 import { t } from 'i18next';
 
 import { RootState, store } from '@/store/store';
-import { setRouteDate } from '@/store/slices/createRouteSlice';
+import {
+  resetCreateRouteSettings,
+  setRouteDate,
+} from '@/store/slices/createRouteSlice';
 import { getOrders } from '@/pages/Orders/api/getOrders';
 import { ORDERS_SORTS } from '@/constants/ordersSorts';
 
@@ -25,6 +28,7 @@ export const useChangeDate = (): {
           newValue.date()
         );
 
+        store.dispatch(resetCreateRouteSettings());
         store.dispatch(setRouteDate(ChangedDate));
 
         getOrders({

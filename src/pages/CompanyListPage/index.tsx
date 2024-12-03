@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
 import CompanyItem from '@/components/CompanyItem';
 import TextInput from '@/components/TextInput';
@@ -157,8 +156,6 @@ const CompanyListPage: React.FC = () => {
           color="primary"
         />
       </Box>
-
-      <ToastContainer />
     </Box>
   );
 };

@@ -17,16 +17,16 @@ import { mapBlockStyles } from './styles';
 import { useCreateRoutes } from './useCreateRoutes';
 
 const RouteManagementPage: FC = () => {
-  const { ordersToDrivers, onCreateRoute } = useCreateRoutes();
   const { routeDate } = useSelector(
     (store: RootState) => store.createRoutSettings
   );
   const { value: choseRoute } = useSelector(
     (store: RootState) => store.choseRoute
   );
+  const { ordersToDrivers, onCreateRoute } = useCreateRoutes();
 
   useEffect(() => {
-    store.dispatch(setOrdersToDrivers([]));
+    store.dispatch(setOrdersToDrivers({ value: [], notAssignedOrders: [] }));
   }, []);
 
   return (

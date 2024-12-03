@@ -27,6 +27,8 @@ const resources = {
           'Please select at least one driver to proceed with filling out the form',
         aLot: 'The number of drivers selected must not exceed the number of chosen orders. Please adjust your selection accordingly',
         cantGetDrivers: "Can't get drivers",
+        moreThanOrders:
+          'The number of selected drivers exceeds the number of selected orders. Please adjust your selection to ensure all drivers have orders to assign',
       },
       orderManagement: {
         zeroOrders:
@@ -42,6 +44,8 @@ const resources = {
         dndWarning:
           'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
         failedCalculate: 'Failed to calculate route',
+        assignError: "Couldn't be added automatically",
+        assignErrorSubtitle: 'No driver can reach this stop on time',
       },
       button: {
         addNewCompany: '+ Add New Company',
