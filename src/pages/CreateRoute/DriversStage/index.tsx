@@ -12,16 +12,36 @@ import SortDriversRow from './components/SordDriversRow';
 import { useExportDrivers } from './useGetDrivers';
 import { useSearchDrivers } from './useSearchDrivers';
 import { useChooseDriver } from './useChoseDriver';
+import DriverForm from './components/DriverForm';
+import { useTranslation } from 'react-i18next';
+import { addDrivers } from './api/getDrivers';
 
 const DriversStagePage: FC = () => {
-  const { drivers } = useExportDrivers();
+  const { t } = useTranslation();
+
+  const { drivers, refreshDrivers } = useExportDrivers();
   const { getDriversBySearch } = useSearchDrivers();
   const { chooseDriver, goToRouteManagement, choseDrivers } = useChooseDriver();
 
   return (
     <Box>
       <CreateRouteProgressBar choseRoute={CreateRouteStages.THIRD} />
-      <SearchComponent onSearch={getDriversBySearch} />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          p: 3,
+        }}
+      >
+        <SearchComponent onSearch={getDriversBySearch} />
+        <DriverForm
+          formTitle={t('driverManagement.title')}
+          buttonContent={`${t('driverManagement.button')}`}
+          onSubmit={async (data) => await addDrivers(data, 7)}
+          refreshDrivers={refreshDrivers}
+        />
+      </Box>
       <SortDriversRow />
       {drivers.map((driver) => (
         <DriverCard

@@ -13,7 +13,14 @@ const openButtons = {
     label: string,
     handleOpen: () => void
   ): React.JSX.Element {
-    return <Button label={label} variant="colored" onClick={handleOpen} />;
+    return (
+      <Button
+        label={label}
+        variant="colored"
+        onClick={handleOpen}
+        sx={{ width: '187px' }}
+      />
+    );
   },
   createImageButton: function (
     image: string,
