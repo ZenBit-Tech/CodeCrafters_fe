@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { assets } from '@/assets/assets';
-import DriverAvatar from '@/components/UserAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import { COLORS } from '@/constants/colors';
 import { User } from '@/pages/TeamManagment/types';
 import UserForm from '@/pages/TeamManagment/UserForm/UserForm';
@@ -65,7 +65,7 @@ const UserRow: React.FC<UserItemProps> = ({
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', width: '25%' }}>
-          <DriverAvatar firstName={firstName} lastName={lastName} />
+          <UserAvatar firstName={firstName} lastName={lastName} />
           <Typography sx={{ marginLeft: '10px', color: COLORS.text.medium }}>
             {firstName} {lastName}
           </Typography>

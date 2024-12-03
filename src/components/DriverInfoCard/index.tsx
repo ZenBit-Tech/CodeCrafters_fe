@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import DriverAvatar from '../UserAvatar';
+import UserAvatar from '../UserAvatar';
 
 interface DriverInfoProps {
   firstName: string;
@@ -36,7 +36,7 @@ const DriverInfoCard: React.FC<DriverInfoProps> = ({
       padding={'7px 14px'}
       gap={1}
     >
-      <DriverAvatar firstName={firstName} lastName={lastName} />
+      <UserAvatar firstName={firstName} lastName={lastName} />
       <Box ml={2} display={'flex'} flexDirection={'column'}>
         <Typography
           color={COLORS.text.dark}

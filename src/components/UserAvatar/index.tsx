@@ -4,12 +4,12 @@ import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { Avatar } from '@mui/material';
 
-interface DriverAvatarProps {
+interface UserAvatarProps {
   firstName: string;
   lastName?: string;
 }
 
-const UserAvatar: React.FC<DriverAvatarProps> = ({
+const UserAvatar: React.FC<UserAvatarProps> = ({
   firstName = '',
   lastName = '',
 }) => {

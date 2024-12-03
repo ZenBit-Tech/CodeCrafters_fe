@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { addAdmin, updateAdmin } from '@/api/adminActions';
 import editIcon from '@/assets/edit.png';
 import TextInput from '@/components/TextInput';
-import DriverAvatar from '@/components/UserAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import { ITEMS_PER_PAGE_OPTIONS } from '@/constants/constants';
 import { AdminListTableProps } from '@/interfaces/AdminList';
 import AdminForm from '@/pages/components/AdminForm';
@@ -80,10 +80,10 @@ const AdminListTable: React.FC<AdminListTableProps> = ({
         {paginatedAdmins.map((admin) => (
           <AdminListItem key={admin.id}>
             <FlexBox>
-              <DriverAvatar
+              <UserAvatar
                 firstName={admin.firstName}
                 lastName={admin.lastName}
-              ></DriverAvatar>
+              ></UserAvatar>
               <Box>
                 <TableTitle>{admin.full_name}</TableTitle>
                 <Typography variant="subtitle2" color="textSecondary">

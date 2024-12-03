@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { t } from 'i18next';
 
 import CustomCheckbox from '@/components/Checkbox/index.tsx';
-import DriverAvatar from '@/components/UserAvatar/index.tsx';
+import UserAvatar from '@/components/UserAvatar/index.tsx';
 import { Customer } from '@/interfaces/interfaces.ts';
 
 import { customerBlock, driverRowStyles, popup } from './styles.ts';
@@ -28,10 +28,7 @@ const DriverCard: FC<{
           <Typography>{t(customer.phone_number)}</Typography>
           <Typography>{t(customer.email)}</Typography>
         </Box>
-        <DriverAvatar
-          firstName={customerNames[0]}
-          lastName={customerNames[1]}
-        />
+        <UserAvatar firstName={customerNames[0]} lastName={customerNames[1]} />
         <Box>
           <Typography>{t(customer.full_name)}</Typography>
           <Typography>{t(customer.phone_number)}</Typography>

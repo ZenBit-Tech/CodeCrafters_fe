@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Box, Typography } from '@mui/material';
 
 import Status from '@/components/Status';
-import DriverAvatar from '@/components/UserAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import { MONTHS } from '@/constants/moths';
 import { OrderStatuses } from '@/interfaces/interfaces';
 import {
@@ -66,10 +66,7 @@ const OrderItem: FC<OrderItemInterface> = ({
           <Typography>{t(customer.phone_number)}</Typography>
           <Typography>{t(customer.email)}</Typography>
         </Box>
-        <DriverAvatar
-          firstName={customerNames[0]}
-          lastName={customerNames[1]}
-        />
+        <UserAvatar firstName={customerNames[0]} lastName={customerNames[1]} />
         <Box>
           <Typography>{t(customer.full_name)}</Typography>
           <Typography>{t(customer.phone_number)}</Typography>

@@ -4,7 +4,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
 
-import DriverAvatar from '@/components/DriverAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import editIcon from '@/assets/icons/edit.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
 import {
@@ -45,7 +45,7 @@ export const RouteDetails: FC<RouteDetailsInterface> = ({
       <Box
         sx={open ? routeDetailsHeaderStyles : routeDetailsHeaderClosedStyles}
       >
-        <DriverAvatar
+        <UserAvatar
           firstName={driver_full_name.split(' ')[0]}
           lastName={driver_full_name.split(' ')[1]}
         />
