@@ -11,7 +11,7 @@ import { useDriverForm } from './useDriverForm';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
-import { emailRegex, phoneRegex } from '@/constants/validation';
+import { PHONE_REGEX, EMAIL_REGEX } from '@/constants/validation';
 
 const DriverForm = ({
   isEditing = false,
@@ -79,7 +79,7 @@ const DriverForm = ({
             ...register('email', {
               required: t('driverManagement.emptyEmail'),
               pattern: {
-                value: emailRegex,
+                value: EMAIL_REGEX,
                 message: t('driverManagement.invalidEmail'),
               },
             }),
@@ -94,7 +94,7 @@ const DriverForm = ({
             ...register('phone_number', {
               required: t('driverManagement.emptyPhoneNumber'),
               pattern: {
-                value: phoneRegex,
+                value: PHONE_REGEX,
                 message: t('driverManagement.invalidPhoneNumber'),
               },
             }),

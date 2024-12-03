@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { t } from 'i18next';
 import { Box } from '@mui/material';
 
 import CreateRouteButtons from '@/pages/components/CreateRouteBtns';
@@ -13,13 +14,10 @@ import { useExportDrivers } from './useGetDrivers';
 import { useSearchDrivers } from './useSearchDrivers';
 import { useChooseDriver } from './useChoseDriver';
 import DriverForm from './components/DriverForm';
-import { useTranslation } from 'react-i18next';
 import { addDrivers } from './api/getDrivers';
 import { driversFormContainer } from './styles';
 
 const DriversStagePage: FC = () => {
-  const { t } = useTranslation();
-
   const { drivers, refreshDrivers } = useExportDrivers();
   const { getDriversBySearch } = useSearchDrivers();
   const { chooseDriver, goToRouteManagement, choseDrivers } = useChooseDriver();
