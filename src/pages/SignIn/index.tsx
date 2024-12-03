@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { Container, Typography, Box } from '@mui/material';
 
 import loginLogo from '@/assets/login/logo.svg';
@@ -99,7 +98,6 @@ const SignInPage: React.FC = () => {
           </Box>
         </Box>
       </Box>
-      <ToastContainer />
     </Container>
   );
 };
