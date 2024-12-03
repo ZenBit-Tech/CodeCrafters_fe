@@ -10,7 +10,7 @@ export const getRoutesData = async (
 ): Promise<void> => {
   try {
     const { data: assignedOrders } = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/assign-orders?driversIds=${JSON.stringify(driversListOfId)}&ordersIds=${JSON.stringify(ordersListOfId)}`,
+      `${import.meta.env.VITE_BASE_URL}/orders/assign-orders?driversIds=${JSON.stringify(driversListOfId)}&ordersIds=${JSON.stringify(ordersListOfId)}`,
       { headers: { authorization: store.getState().auth.token } }
     );
 
