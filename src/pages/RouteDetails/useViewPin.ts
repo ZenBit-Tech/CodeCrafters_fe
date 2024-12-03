@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
 
 export interface Coordinates {
   lat: number;
@@ -44,7 +45,7 @@ export const useViewPin = (): useViewPinHook => {
       } else if (error instanceof AxiosError) {
         toast(error.message, { type: 'error' });
       } else {
-        toast('routeDetails.failedToCalculate', { type: 'error' });
+        toast(t('routeDetails.failedToCalculate'), { type: 'error' });
       }
     }
   };

@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet-routing-machine';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
+import { t } from 'i18next';
 
 import { store } from '@/store/store';
 import { setisVisible } from '@/store/slices/loaderSlice';
@@ -46,7 +47,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
         } else if (error instanceof AxiosError) {
           toast(error.message, { type: 'error' });
         } else {
-          toast('routeDetails.failedToCalculate', { type: 'error' });
+          toast(t('routeDetails.failedToCalculate'), { type: 'error' });
         }
       } finally {
         store.dispatch(setisVisible(false));
