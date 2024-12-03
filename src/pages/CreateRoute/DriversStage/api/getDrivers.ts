@@ -13,7 +13,7 @@ export const getDrivers = async (
 ): Promise<void> => {
   try {
     const response: AxiosResponse = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/driver?sortBy=${sortBy}&search=${search}&companyId=7`,
+      `${import.meta.env.VITE_BASE_URL}/driver?sortBy=${sortBy}&search=${search}&companyId=1`,
       { headers: { authorization: store.getState().auth.token } }
     );
 

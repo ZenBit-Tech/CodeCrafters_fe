@@ -15,6 +15,7 @@ import { useChooseDriver } from './useChoseDriver';
 import DriverForm from './components/DriverForm';
 import { useTranslation } from 'react-i18next';
 import { addDrivers } from './api/getDrivers';
+import { driversFormContainer } from './styles';
 
 const DriversStagePage: FC = () => {
   const { t } = useTranslation();
@@ -26,19 +27,12 @@ const DriversStagePage: FC = () => {
   return (
     <Box>
       <CreateRouteProgressBar choseRoute={CreateRouteStages.THIRD} />
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          p: 3,
-        }}
-      >
+      <Box sx={driversFormContainer}>
         <SearchComponent onSearch={getDriversBySearch} />
         <DriverForm
           formTitle={t('driverManagement.title')}
           buttonContent={`${t('driverManagement.button')}`}
-          onSubmit={async (data) => await addDrivers(data, 7)}
+          onSubmit={async (data) => await addDrivers(data, 1)}
           refreshDrivers={refreshDrivers}
         />
       </Box>
