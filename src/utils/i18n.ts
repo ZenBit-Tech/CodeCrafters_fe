@@ -27,6 +27,22 @@ const resources = {
           'Please select at least one driver to proceed with filling out the form',
         aLot: 'The number of drivers selected must not exceed the number of chosen orders. Please adjust your selection accordingly',
         cantGetDrivers: "Can't get drivers",
+        moreThanOrders:
+          'The number of selected drivers exceeds the number of selected orders. Please adjust your selection to ensure all drivers have orders to assign',
+        title: 'Add New Driver',
+        button: '+ Add New Driver',
+        driverAdd: 'Driver successfully added',
+        cantAddDriver: 'Failed to add driver. {{message}}',
+        fullName: 'Full Name',
+        email: 'Email',
+        phoneNumber: 'Phone number',
+        add: 'Add',
+        cancel: 'Cancel',
+        emptyFullName: 'Full name is required.',
+        emptyEmail: 'Email is required.',
+        invalidEmail: 'Please enter a valid email address.',
+        emptyPhoneNumber: 'Phone number is required.',
+        invalidPhoneNumber: 'Phone number must be in format +380XXXXXXXXX',
       },
       orderManagement: {
         zeroOrders:
@@ -42,6 +58,8 @@ const resources = {
         dndWarning:
           'Each route must contain at least one order. Please ensure all routes meet this requirement before proceeding',
         failedCalculate: 'Failed to calculate route',
+        assignError: "Couldn't be added automatically",
+        assignErrorSubtitle: 'No driver can reach this stop on time',
       },
       button: {
         addNewCompany: '+ Add New Company',
@@ -49,6 +67,13 @@ const resources = {
         update: 'Update',
         cancel: 'Cancel',
         close: 'Close',
+      },
+      routeDetails: {
+        invalidParams: "Invalid URL parameters: 'id' must be a valid number",
+        failedToCalculate: 'Failed to calculate route',
+        addressNotFound: 'Address not found',
+        contextIsUndefined:
+          'Data not found. Please check your input or try again later',
       },
       modal: {
         addCompanyTitle: 'Add company',
@@ -191,9 +216,12 @@ const resources = {
         next: 'Next',
         pagination: 'Showing {{start}} to {{end}} of {{total}} routes',
         routesApi: {
-          "unexpected_error": "An unexpected error occurred. Please try again later.",
-          "fetch_failed": "Failed to fetch routes. Please check your network connection.",
-          "fetch_filters_failed": "Failed to fetch filters. Please try again later.",
+          unexpected_error:
+            'An unexpected error occurred. Please try again later.',
+          fetch_failed:
+            'Failed to fetch routes. Please check your network connection.',
+          fetch_filters_failed:
+            'Failed to fetch filters. Please try again later.',
         },
         columns: {
           id: 'ID ROUTE',

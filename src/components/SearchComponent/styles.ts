@@ -2,7 +2,6 @@ import { SxProps, Theme } from '@mui/material';
 
 export const rowStyles: SxProps<Theme> = {
   width: '1126px',
-  marginBottom: '36px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',

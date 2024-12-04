@@ -4,6 +4,8 @@ export const COLORS = {
   purple: '#7367F0',
   lightPurple: '#E8DEF829',
   gray: '#4B465C1A',
+  lightRed: '#C7282829',
+  red: 'red',
   text: {
     border: 'rgb(75, 70, 92, 0.2)',
     extraLight: 'rgb(75, 70, 92, 0.08)',

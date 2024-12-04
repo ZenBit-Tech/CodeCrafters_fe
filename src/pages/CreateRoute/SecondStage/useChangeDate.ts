@@ -4,12 +4,22 @@ import { useSelector } from 'react-redux';
 import { t } from 'i18next';
 
 import { RootState, store } from '@/store/store';
-import { setRouteDate } from '@/store/slices/createRouteSlice';
+import {
+  resetCreateRouteSettings,
+  setRouteDate,
+} from '@/store/slices/createRouteSlice';
 import { getOrders } from '@/pages/Orders/api/getOrders';
 import { ORDERS_SORTS } from '@/constants/ordersSorts';
+import {
+  DateValidationError,
+  PickerChangeHandlerContext,
+} from '@mui/x-date-pickers';
 
 export const useChangeDate = (): {
-  handleDateChange: (newValue: Dayjs) => void;
+  handleDateChange: (
+    newValue: Dayjs | null,
+    context: PickerChangeHandlerContext<DateValidationError>
+  ) => void;
   selectedDate: Dayjs | null;
 } => {
   const { routeDate } = useSelector(
@@ -25,6 +35,7 @@ export const useChangeDate = (): {
           newValue.date()
         );
 
+        store.dispatch(resetCreateRouteSettings());
         store.dispatch(setRouteDate(ChangedDate));
 
         getOrders({

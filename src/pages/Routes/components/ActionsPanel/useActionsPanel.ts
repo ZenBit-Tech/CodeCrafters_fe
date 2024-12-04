@@ -33,7 +33,7 @@ const useActionsPanel = (
     handleKeyDown,
     handleSearchClick,
     onDateChange,
-    handleCreateRouteClick
+    handleCreateRouteClick,
   };
 };
 

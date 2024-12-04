@@ -20,7 +20,7 @@ import { input } from './styles';
 interface CompanyFormProps {
   mode: 'create' | 'update';
   fetchCompanies: () => void;
-  addCompanyToList: (newCompany: Company) => void;
+  addCompanyToList?: (newCompany: Company) => void;
   companyId?: number;
   companyData?: {
     name: string;
@@ -116,7 +116,9 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
       toast(successMessage, { type: 'success' });
 
       if (mode === 'create') {
-        addCompanyToList(response.data);
+        if (addCompanyToList) {
+          addCompanyToList(response.data);
+        }
       } else {
         fetchCompanies();
       }

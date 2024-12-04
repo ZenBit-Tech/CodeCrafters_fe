@@ -1,16 +1,18 @@
-import { Driver, Order } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Driver, Order } from '@/interfaces/interfaces';
 
 interface OrderToDriversState {
   value: {
     driver: Driver;
     orders: Order[];
   }[];
+  notAssignedOrders: Order[];
   distances: { driverId: number; distance: number }[];
 }
 
 const initialState: OrderToDriversState = {
   value: [],
+  notAssignedOrders: [],
   distances: [],
 };
 
@@ -20,9 +22,22 @@ const ordersToDriversSlice = createSlice({
   reducers: {
     setOrdersToDrivers(
       state,
-      action: PayloadAction<{ driver: Driver; orders: Order[] }[]>
+      action: PayloadAction<{
+        value: {
+          driver: Driver;
+          orders: Order[];
+          notAssignedOrders: Order[];
+        }[];
+        notAssignedOrders: Order[];
+      }>
     ) {
-      state.value = action.payload;
+      state.value = action.payload.value;
+      state.notAssignedOrders = action.payload.notAssignedOrders;
+    },
+    removeNotAssignedOrder(state, action: PayloadAction<number>) {
+      state.notAssignedOrders = state.notAssignedOrders.filter(
+        (order) => order.id !== action.payload
+      );
     },
     addDistance(
       state,
@@ -63,6 +78,11 @@ const ordersToDriversSlice = createSlice({
   },
 });
 
-export const { setOrdersToDrivers, addDistance, clearDistances, changeRoutes } =
-  ordersToDriversSlice.actions;
+export const {
+  setOrdersToDrivers,
+  addDistance,
+  clearDistances,
+  changeRoutes,
+  removeNotAssignedOrder,
+} = ordersToDriversSlice.actions;
 export default ordersToDriversSlice.reducer;

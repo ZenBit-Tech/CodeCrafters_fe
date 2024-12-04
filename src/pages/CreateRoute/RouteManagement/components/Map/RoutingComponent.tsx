@@ -35,7 +35,6 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
             L.latLng(coords.lat, coords.lon)
           ),
           routeWhileDragging: true,
-          createMarker: () => null,
           lineOptions: {
             styles: [
               {
@@ -43,6 +42,8 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
                 weight: 4,
               },
             ],
+            extendToWaypoints: true,
+            missingRouteTolerance: 10,
           },
           show: false,
         }).addTo(map);
