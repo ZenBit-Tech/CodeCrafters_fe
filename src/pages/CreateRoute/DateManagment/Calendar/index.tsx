@@ -36,9 +36,17 @@ const MyCalendar: FC = () => {
     }
   };
 
+  const handleDateChange = (value: Value): void => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+    } else {
+      toast.error('Invalid date selected');
+    }
+  };
+
   return (
     <Calendar
-      onChange={setSelectedDate}
+      onChange={handleDateChange}
       value={selectedDate}
       tileContent={tileContent}
       locale="en-EN"
