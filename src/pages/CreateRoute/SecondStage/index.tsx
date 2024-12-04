@@ -34,6 +34,7 @@ const SecondStagePage: FC = () => {
         <BasicDatePicker
           value={dayjs(selectedDate?.toISOString())}
           onChange={handleDateChange}
+          dataFormat={''}
         />
       </Box>
       <OrdersManagementSort />
