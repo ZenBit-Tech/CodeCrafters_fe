@@ -20,8 +20,13 @@ const ActionsPanel: React.FC<{
   onSearchChange: (searchQuery: string) => void;
 }> = ({ onDateChange, onSearchChange }) => {
   const { t } = useTranslation();
-  const { searchQuery, handleInputChange, handleKeyDown, handleSearchClick } =
-    useActionsPanel(onDateChange, onSearchChange);
+  const {
+    searchQuery,
+    handleInputChange,
+    handleKeyDown,
+    handleSearchClick,
+    handleCreateRouteClick,
+  } = useActionsPanel(onDateChange, onSearchChange);
 
   return (
     <ActionsContainer>
@@ -47,7 +52,11 @@ const ActionsPanel: React.FC<{
           label={t('routesPage.mapView')}
           startIcon={<RopeIcon src={ropeIcon} alt={t('routesPage.rope')} />}
         />
-        <Button variant="lined" label={t('routesPage.createRoute')} />
+        <Button
+          variant="lined"
+          label={t('routesPage.createRoute')}
+          onClick={handleCreateRouteClick}
+        />
       </ActionButtonsContainer>
     </ActionsContainer>
   );

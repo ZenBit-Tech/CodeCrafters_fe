@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useActionsPanel = (
   onDateChange: (start: string, end: string) => void,
   onSearchChange: (searchQuery: string) => void
 ) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -20,6 +22,10 @@ const useActionsPanel = (
     onSearchChange(searchQuery);
   };
 
+  const handleCreateRouteClick = () => {
+    navigate('/date-management');
+  };
+
   return {
     searchQuery,
     setSearchQuery,
@@ -27,6 +33,7 @@ const useActionsPanel = (
     handleKeyDown,
     handleSearchClick,
     onDateChange,
+    handleCreateRouteClick
   };
 };
 
