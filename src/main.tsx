@@ -16,7 +16,6 @@ import theme from './theme';
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <ToastContainer />
     <Loader />
     <PersistGate loading={null} persistor={persistor}>
       <ThemeProvider theme={theme}>
@@ -25,5 +24,6 @@ createRoot(document.getElementById('root')!).render(
         </I18nextProvider>
       </ThemeProvider>
     </PersistGate>
+    <ToastContainer />
   </Provider>
 );

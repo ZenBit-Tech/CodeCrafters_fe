@@ -55,3 +55,25 @@ export interface Driver {
   phone_number: string;
   email: string;
 }
+
+export interface RouteInform {
+  id: number;
+  submission_date: Date;
+  arrival_date: Date;
+  distance: number;
+  status: StatusEnum;
+  driver: {
+    id: number;
+    full_name: string;
+    email: string;
+    phone_number: string;
+  };
+  orders: {
+    id: number;
+    collection_date: Date;
+    collection_time_start: Date;
+    collection_time_end: Date;
+    collection_address: string;
+    status: StatusEnum;
+  }[];
+}
