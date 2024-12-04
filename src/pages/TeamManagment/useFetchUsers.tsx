@@ -1,11 +1,9 @@
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
-// import { RootState } from '@/store/store';
-import axiosInstance from '@/utils/axiosInstance';
-
+import { store } from '@/store/store';
 import { ApiUser, User } from './types';
 
 const useFetchUsers = (
@@ -19,8 +17,6 @@ const useFetchUsers = (
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  // const companyId = useSelector((state: RootState) => state.auth.companyId);
-
   const fetchUsers = async () => {
     setLoading(true);
     setError(null);
@@ -29,15 +25,21 @@ const useFetchUsers = (
     const sortDirection = sortOrder[sortKey];
 
     try {
-      const response = await axiosInstance.get('/users', {
-        params: {
-          page,
-          search: searchTerm,
-          role: filterByRole,
-          sortBy: JSON.stringify({ [sortKey]: sortDirection }),
-          companyId: 1,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/users`,
+        {
+          params: {
+            page,
+            search: searchTerm,
+            role: filterByRole,
+            sortBy: JSON.stringify({ [sortKey]: sortDirection }),
+            companyId: 1,
+          },
+          headers: {
+            authorization: store.getState().auth.token,
+          },
+        }
+      );
 
       const adaptedUsers = response.data.users.map((user: ApiUser) => {
         const [firstName, ...lastNameParts] = user.full_name.split(' ');

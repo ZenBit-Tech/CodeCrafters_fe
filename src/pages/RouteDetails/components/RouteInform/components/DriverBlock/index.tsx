@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
 import { t } from 'i18next';
 
-import DriverAvatar from '@/components/DriverAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import {
   driverBlockContainerStyles,
   routePropsBlockStyles,
@@ -26,7 +26,7 @@ const DriverBlock: FC<DriverBlockProps> = ({
 
   return (
     <Box sx={driverBlockContainerStyles}>
-      <DriverAvatar firstName={splitName[0]} lastName={splitName[1]} />
+      <UserAvatar firstName={splitName[0]} lastName={splitName[1]} />
       <Box sx={routePropsBlockStyles}>
         <Typography>{fullName}</Typography>
         <Box sx={routePropsRowStyles}>

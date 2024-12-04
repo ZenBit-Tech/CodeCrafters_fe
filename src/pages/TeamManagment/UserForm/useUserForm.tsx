@@ -21,7 +21,6 @@ export const useUserForm = ({
   const [role, setRole] = useState(userData?.role || '');
   const { t } = useTranslation();
   const authToken = useSelector((store: RootState) => store.auth.token);
-  const companyId = useSelector((store: RootState) => store.auth.companyId);
 
   const {
     register,
@@ -52,18 +51,13 @@ export const useUserForm = ({
 
   const sendData = async (formData: UserFormInputs) => {
     try {
-      if (!companyId) {
-        console.error('Company ID is missing from the token');
-        toast(t('settings.message.noCompanyId'), { type: 'error' });
-        return;
-      }
-
       const transformedData = {
         full_name: formData.fullName,
         email: formData.email,
         phone_number: formData.phoneNumber,
+        company_id: { id: 1 },
         ...(mode === 'create' && { role: role.toLowerCase() }),
-        ...(mode === 'create' && { company_id: companyId }),
+        ...(mode === 'create' && { company_id: 1 }),
       };
 
       const url =

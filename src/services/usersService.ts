@@ -1,4 +1,6 @@
+import { store } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
+import axios from 'axios';
 
 export const getUsers = async (
   page = 1,
@@ -8,7 +10,7 @@ export const getUsers = async (
   sortBy = 'name',
   sortOrder = 'ASC'
 ) => {
-  const response = await axiosInstance.get('/users', {
+  const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users`, {
     params: {
       page,
       pageSize,
@@ -16,6 +18,10 @@ export const getUsers = async (
       filterBy,
       sortBy,
       sortOrder,
+      companyId: 1,
+    },
+    headers: {
+      authorization: store.getState().auth.token,
     },
   });
 
