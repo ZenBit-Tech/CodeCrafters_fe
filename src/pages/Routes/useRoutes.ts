@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getRoutesByDateRange } from '@/api/routesActions';
 import {
   setPage,
@@ -10,7 +11,7 @@ import {
   setEndDate,
 } from '@/store/slices/routesSlice';
 import { RootState } from '@/store/store';
-import { StatusEnum } from '@/constants/status';
+import { RouteStatusEnum } from '@/constants/routeStatus';
 import { RouteData } from '@/interfaces/Routes';
 import {
   calculateRouteTime,
@@ -71,7 +72,7 @@ const useRoutes = () => {
             routeData.route_arrival_date
           ),
           distance: routeData.route_distance,
-          status: routeData.route_status as StatusEnum,
+          status: routeData.route_status as RouteStatusEnum,
         };
       });
 

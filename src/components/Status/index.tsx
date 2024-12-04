@@ -3,18 +3,18 @@ import { useTranslation } from 'react-i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { StatusEnum } from '@/constants/status';
+import { RouteStatusEnum } from '@/constants/routeStatus';
 import { Box, Typography } from '@mui/material';
 
 interface StatusProps {
-  status: StatusEnum;
+  status: RouteStatusEnum;
 }
 
 const Status: React.FC<StatusProps> = ({ status }) => {
   const { t } = useTranslation();
 
   const statusStyles = {
-    completed: {
+    on_time: {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
     },
@@ -39,7 +39,6 @@ const Status: React.FC<StatusProps> = ({ status }) => {
   const formattedStatus = t(`${status}`)
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (l) => l.toUpperCase());
-
   return (
     <Box
       sx={{

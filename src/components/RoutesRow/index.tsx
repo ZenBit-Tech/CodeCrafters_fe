@@ -2,14 +2,22 @@ import React from 'react';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { StatusEnum } from '@/constants/status';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { RouteStatusEnum } from '@/constants/routeStatus';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import DriverAvatar from '../DriverAvatar';
-import Status from '../Status';
+import { IconWrapper } from '@/components/RoutesRow/styles';
+import noteIcon from '@/assets/icons/note.svg';
+import visibilityIcon from '@/assets/icons/eye.svg';
+import moreIcon from '@/assets/icons/dots-vertical.svg';
+import DriverAvatar from '@/components/DriverAvatar';
+import Status from '@/components/Status';
+
+const normalizeStatus = (status: string): RouteStatusEnum => {
+  const normalizedStatus = status.toLowerCase().replace(/ /g, '_');
+  return RouteStatusEnum[
+    normalizedStatus.toUpperCase() as keyof typeof RouteStatusEnum
+  ];
+};
 
 interface RoutesRowProps {
   routeId: number;
@@ -20,7 +28,7 @@ interface RoutesRowProps {
   stopsCount: number;
   route_time: string;
   distance: number;
-  status: StatusEnum;
+  status: RouteStatusEnum;
 }
 
 const RoutesRow: React.FC<RoutesRowProps> = ({
@@ -74,16 +82,16 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       <Typography variant="body2" color={COLORS.text.medium}>
         {distance} km
       </Typography>
-      <Status status={status} />
+      <Status status={normalizeStatus(status)} />
       <Box display="flex" gap={1}>
         <IconButton>
-          <EditIcon />
+          <IconWrapper src={noteIcon} alt="More options" />
         </IconButton>
         <IconButton>
-          <VisibilityIcon />
+          <IconWrapper src={visibilityIcon} alt="More options" />
         </IconButton>
         <IconButton>
-          <MoreVertIcon />
+          <IconWrapper src={moreIcon} alt="More options" />
         </IconButton>
       </Box>
     </Box>

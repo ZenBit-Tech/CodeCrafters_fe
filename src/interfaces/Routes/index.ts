@@ -1,4 +1,4 @@
-import { StatusEnum } from '@/constants/status';
+import { RouteStatusEnum } from '@/constants/routeStatus';
 import React from 'react';
 
 export interface RouteData {
@@ -38,7 +38,7 @@ export interface Route {
   stopsCount: number;
   routeTime: string;
   distance: number;
-  status: StatusEnum;
+  status: RouteStatusEnum;
 }
 
 export interface UseRoutesPage {
