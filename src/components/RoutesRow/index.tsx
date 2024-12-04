@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from 'i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
@@ -85,13 +86,13 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       <Status status={normalizeStatus(status)} />
       <Box display="flex" gap={1}>
         <IconButton>
-          <IconWrapper src={noteIcon} alt="More options" />
+          <IconWrapper src={noteIcon} alt={t('Notifications')} />
         </IconButton>
         <IconButton>
-          <IconWrapper src={visibilityIcon} alt="More options" />
+          <IconWrapper src={visibilityIcon} alt={t('Show icon')} />
         </IconButton>
         <IconButton>
-          <IconWrapper src={moreIcon} alt="More options" />
+          <IconWrapper src={moreIcon} alt={t('More options')} />
         </IconButton>
       </Box>
     </Box>
