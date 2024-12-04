@@ -40,7 +40,7 @@ const UserRow: React.FC<UserItemProps> = ({
       fetchUsers();
     } catch (error) {
       toast(t('settings.message.errorDelete'), { type: 'error' });
-      console.error('Failed to delete user:', error);
+      throw new Error(`${error}`)
     }
     setIsPopupOpen(false);
   };
