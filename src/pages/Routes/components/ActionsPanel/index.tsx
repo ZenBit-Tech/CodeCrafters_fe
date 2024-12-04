@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment } from '@mui/material';
@@ -13,27 +13,16 @@ import {
 import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
 import Button from '@/components/Button';
+import useActionsPanel from './useActionsPanel';
 
 const ActionsPanel: React.FC<{
   onDateChange: (start: string, end: string) => void;
   onSearchChange: (searchQuery: string) => void;
 }> = ({ onDateChange, onSearchChange }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const { t } = useTranslation();
+  const { searchQuery, handleInputChange, handleKeyDown, handleSearchClick } =
+    useActionsPanel(onDateChange, onSearchChange);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSearchChange(searchQuery);
-    }
-  };
-
-  const handleSearchClick = () => {
-    onSearchChange(searchQuery);
-  };
   return (
     <ActionsContainer>
       <SearchContainer>
