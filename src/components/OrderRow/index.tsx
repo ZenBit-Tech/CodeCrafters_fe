@@ -35,7 +35,7 @@ const OrderRow: React.FC<OrderRowProps> = ({
       gap={2}
       borderBottom={`1px solid ${COLORS.text.border}`}
     >
-      <CustomCheckbox />
+      <CustomCheckbox id={0} isChecked={false} toggleCheckbox={() => {}} />
 
       <Typography
         variant="body2"
