@@ -2,7 +2,7 @@ import React from 'react';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { RouteStatusEnum } from '@/constants/routeStatus';
+import { StatusEnum } from '@/constants/status';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NoteIcon from '@mui/icons-material/Note';
@@ -13,7 +13,7 @@ import Status from '../Status';
 interface DetailedRouteRowProps {
   city: string;
   time: string;
-  status: RouteStatusEnum;
+  status: StatusEnum;
 }
 
 const DetailedRouteRow: React.FC<DetailedRouteRowProps> = ({

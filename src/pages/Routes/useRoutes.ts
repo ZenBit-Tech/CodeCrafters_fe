@@ -11,7 +11,7 @@ import {
   setEndDate,
 } from '@/store/slices/routesSlice';
 import { RootState } from '@/store/store';
-import { RouteStatusEnum } from '@/constants/routeStatus';
+import { StatusEnum } from '@/constants/status';
 import { RouteData } from '@/interfaces/Routes';
 import {
   calculateRouteTime,
@@ -72,7 +72,7 @@ const useRoutes = () => {
             routeData.route_arrival_date
           ),
           distance: routeData.route_distance,
-          status: routeData.route_status as RouteStatusEnum,
+          status: routeData.route_status as StatusEnum,
         };
       });
 

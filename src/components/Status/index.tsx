@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { RouteStatusEnum } from '@/constants/routeStatus';
+import { StatusEnum } from '@/constants/status';
 import { Box, Typography } from '@mui/material';
 
 interface StatusProps {
-  status: RouteStatusEnum;
+  status: StatusEnum;
 }
 
 const Status: React.FC<StatusProps> = ({ status }) => {
@@ -15,6 +15,10 @@ const Status: React.FC<StatusProps> = ({ status }) => {
 
   const statusStyles = {
     on_time: {
+      backgroundColor: COLORS.status.completed.bg,
+      color: COLORS.status.completed.text,
+    },
+    completed: {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
     },
