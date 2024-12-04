@@ -70,7 +70,7 @@ const RoutesPage: React.FC = () => {
             page={page}
             totalPages={Math.ceil(routes.length / rowsPerPage)}
             start={(page - 1) * rowsPerPage + 1}
-            end={page * rowsPerPage}
+            end={Math.min(page * rowsPerPage, routes.length)}
             total={routes.length}
             onPageChange={handlePageChange}
           />
