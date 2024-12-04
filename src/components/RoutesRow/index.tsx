@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { t } from 'i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { RouteStatusEnum } from '@/constants/routeStatus';
+import { StatusEnum } from '@/constants/status';
 import { Box, IconButton, Typography } from '@mui/material';
 
 import { IconWrapper } from '@/components/RoutesRow/styles';
@@ -13,11 +14,9 @@ import moreIcon from '@/assets/icons/dots-vertical.svg';
 import DriverAvatar from '@/components/DriverAvatar';
 import Status from '@/components/Status';
 
-const normalizeStatus = (status: string): RouteStatusEnum => {
+const normalizeStatus = (status: string): StatusEnum => {
   const normalizedStatus = status.toLowerCase().replace(/ /g, '_');
-  return RouteStatusEnum[
-    normalizedStatus.toUpperCase() as keyof typeof RouteStatusEnum
-  ];
+  return StatusEnum[normalizedStatus.toUpperCase() as keyof typeof StatusEnum];
 };
 
 interface RoutesRowProps {
@@ -29,7 +28,7 @@ interface RoutesRowProps {
   stopsCount: number;
   route_time: string;
   distance: number;
-  status: RouteStatusEnum;
+  status: StatusEnum;
 }
 
 const RoutesRow: React.FC<RoutesRowProps> = ({
@@ -43,6 +42,12 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
   distance,
   status,
 }) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    navigate(`/routes/${routeId}`);
+  };
+
   return (
     <Box
       display="grid"
@@ -88,7 +93,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
         <IconButton>
           <IconWrapper src={noteIcon} alt={t('Notifications')} />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleViewDetails}>
           <IconWrapper src={visibilityIcon} alt={t('Show icon')} />
         </IconButton>
         <IconButton>
