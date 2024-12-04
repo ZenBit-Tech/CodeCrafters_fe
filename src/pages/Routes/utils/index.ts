@@ -1,3 +1,5 @@
+import { MINUTES_THRESHOLD } from '@/constants/constants';
+
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
   return new Intl.DateTimeFormat('en-GB', {
@@ -17,7 +19,8 @@ export const calculateRouteTime = (
   const formatTime = (date: Date): string => {
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const formattedMinutes =
+      minutes < MINUTES_THRESHOLD ? `0${minutes}` : `${minutes}`;
     return `${hours}.${formattedMinutes}`;
   };
 
