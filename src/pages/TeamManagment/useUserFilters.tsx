@@ -1,6 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
-const useUserFilters = () => {
+type SortOrder = Record<string, 'asc' | 'desc'>;
+
+interface UseUserFiltersReturn {
+  page: number;
+  searchTerm: string;
+  filterByRole: string;
+  sortOrder: SortOrder;
+  handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleRoleFilterChange: (role: string) => void;
+  toggleSortOrder: (key: string) => void;
+  handlePageChange: (_: ChangeEvent<unknown>, value: number) => void;
+}
+
+const useUserFilters = (): UseUserFiltersReturn => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterByRole, setFilterByRole] = useState('');
@@ -11,17 +24,19 @@ const useUserFilters = () => {
     role: 'asc',
   });
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setSearchTerm(event.target.value);
     setPage(1);
   };
 
-  const handleRoleFilterChange = (role: string) => {
+  const handleRoleFilterChange = (role: string): void => {
     setFilterByRole(role);
     setPage(1);
   };
 
-  const toggleSortOrder = (key: string) => {
+  const toggleSortOrder = (key: string): void => {
     const validKeys: Record<string, string> = {
       name: 'full_name',
       email: 'email',
@@ -36,7 +51,10 @@ const useUserFilters = () => {
     }));
   };
 
-  const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    _: React.ChangeEvent<unknown>,
+    value: number
+  ): void => {
     setPage(value);
   };
 

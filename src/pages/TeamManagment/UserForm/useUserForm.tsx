@@ -1,5 +1,10 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { BaseSyntheticEvent, Dispatch, SetStateAction, useState } from 'react';
+import {
+  FieldErrors,
+  useForm,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,13 +15,28 @@ import { getFirstName, getSecondName } from '@/utils/nameUtils';
 
 import { UserFormInputs, UserFormProps } from '../types';
 
+interface UseUserFormReturn {
+  isModalOpen: boolean;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  role: string;
+  setValue: UseFormSetValue<UserFormInputs>;
+  setRole: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<UserFormInputs>;
+  handleSubmit: (
+    onSubmit: (data: UserFormInputs) => void
+  ) => (e?: BaseSyntheticEvent) => Promise<void>;
+  errors: FieldErrors<UserFormInputs>;
+  closeModal: () => void;
+  sendData: (formData: UserFormInputs) => Promise<void>;
+}
+
 export const useUserForm = ({
   mode,
   fetchUsers,
   userId,
   userData,
   addUserToList,
-}: UserFormProps) => {
+}: UserFormProps): UseUserFormReturn => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [role, setRole] = useState(userData?.role || '');
   const { t } = useTranslation();
@@ -49,7 +69,7 @@ export const useUserForm = ({
     reset();
   };
 
-  const sendData = async (formData: UserFormInputs) => {
+  const sendData = async (formData: UserFormInputs): Promise<void> => {
     try {
       const transformedData = {
         full_name: formData.fullName,
@@ -60,14 +80,13 @@ export const useUserForm = ({
         ...(mode === 'create' && { company_id: 1 }),
       };
 
-      const url =
-        mode === 'create'
-          ? role === 'dispatcher'
-            ? '/dispatcher'
-            : '/driver'
-          : userData?.role === 'dispatcher'
-            ? `/dispatcher/${userId}`
-            : `/driver/${userId}`;
+      const createMode = role === 'dispatcher' ? '/dispatcher' : '/driver';
+      const diapatcherMode =
+        userData?.role === 'dispatcher'
+          ? `/dispatcher/${userId}`
+          : `/driver/${userId}`;
+
+      const url = mode === 'create' ? createMode : diapatcherMode;
 
       const method = mode === 'update' ? 'patch' : 'post';
       const response = await axiosInstance[method](url, transformedData, {

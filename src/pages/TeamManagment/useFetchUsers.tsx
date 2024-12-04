@@ -1,23 +1,36 @@
-import { t } from 'i18next';
 import { useEffect, useState } from 'react';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { store } from '@/store/store';
 import { ApiUser, User } from './types';
 
+type FetchUsers = () => Promise<void>;
+
+type AddUserToList = (newUser: User) => void;
+
+interface UseFetchUsersReturn {
+  users: User[];
+  totalPages: number;
+  loading: boolean;
+  error: Error | null;
+  fetchUsers: FetchUsers;
+  addUserToList: AddUserToList;
+}
+
 const useFetchUsers = (
   page: number,
   searchTerm: string,
   filterByRole: string,
   sortOrder: Record<string, 'asc' | 'desc'>
-) => {
+): UseFetchUsersReturn => {
   const [users, setUsers] = useState<User[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (): Promise<void> => {
     setLoading(true);
     setError(null);
 
@@ -53,9 +66,9 @@ const useFetchUsers = (
 
       setUsers(adaptedUsers);
       setTotalPages(response.data.pagesCount);
-    } catch (err) {
+    } catch (err: unknown) {
       toast.error(t('settings.message.fetchError'));
-      console.error(err);
+      throw new Error(`${err}`);
     } finally {
       setLoading(false);
     }
@@ -65,7 +78,7 @@ const useFetchUsers = (
     fetchUsers();
   }, [page, searchTerm, filterByRole, sortOrder]);
 
-  const addUserToList = (newUser: User) => {
+  const addUserToList = (newUser: User): void => {
     const adaptedUser = {
       ...newUser,
       fullName: `${newUser.firstName} ${newUser.lastName}`.trim(),

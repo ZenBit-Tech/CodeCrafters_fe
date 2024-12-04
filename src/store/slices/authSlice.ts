@@ -1,7 +1,7 @@
 import { persistReducer } from 'redux-persist';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import persistConfig from '@/store/persistConfig';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AuthState {
   token: string | null;

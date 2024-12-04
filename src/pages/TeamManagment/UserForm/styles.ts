@@ -1,4 +1,5 @@
 import { SxProps, Theme } from '@mui/material';
+import { COLORS } from '@/constants/colors';
 
 export const input: SxProps<Theme> = {
   width: '100%',
@@ -17,7 +18,7 @@ export const input: SxProps<Theme> = {
 export const wrapper: SxProps<Theme> = {
   width: '100vw',
   height: '100vh',
-  backgroundColor: '#ccccccc2',
+  backgroundColor: COLORS.gray,
   position: 'fixed',
   top: 0,
   left: 0,
@@ -27,7 +28,7 @@ export const form: SxProps<Theme> = {
   width: '400px',
   height: '100vh',
   padding: '20px',
-  backgroundColor: '#fff',
+  backgroundColor: COLORS.white,
   position: 'absolute',
   top: 0,
   right: 0,

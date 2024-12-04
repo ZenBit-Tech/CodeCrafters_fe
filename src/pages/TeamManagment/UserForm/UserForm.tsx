@@ -1,11 +1,11 @@
-import { t } from 'i18next';
 import React from 'react';
+import { MenuItem, Select, Typography } from '@mui/material';
+import { t } from 'i18next';
 
 import { assets } from '@/assets/assets';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
-import { MenuItem, Select, Typography } from '@mui/material';
 
 import { UserFormProps } from '../types';
 import { addBtn, input } from './styles';

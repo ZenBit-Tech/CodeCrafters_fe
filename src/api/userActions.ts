@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Dispatch } from '@reduxjs/toolkit';
 
 import { setAccessToken } from '@/store/slices/authSlice';
 import axiosInstance from '@/utils/axiosInstance';
 import i18n from '@/utils/i18n';
-import { Dispatch } from '@reduxjs/toolkit';
 
 interface VerifyTokenResponse {
   token: string;

@@ -1,6 +1,7 @@
-import { t } from 'i18next';
 import React, { useState } from 'react';
+import { Box, Divider, IconButton, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
 
 import { assets } from '@/assets/assets';
 import UserAvatar from '@/components/UserAvatar';
@@ -9,7 +10,6 @@ import { User } from '@/pages/TeamManagment/types';
 import UserForm from '@/pages/TeamManagment/UserForm/UserForm';
 import { deleteUser } from '@/services/usersService';
 import { getFirstName, getSecondName } from '@/utils/nameUtils';
-import { Box, Divider, IconButton, Typography } from '@mui/material';
 
 import PopupMessage from '../PopupMessage';
 
@@ -34,7 +34,7 @@ const UserRow: React.FC<UserItemProps> = ({
   const firstName = getFirstName(user.fullName);
   const lastName = getSecondName(user.fullName);
 
-  const handleDelete = async () => {
+  const handleDelete = async (): void => {
     try {
       await deleteUser(user.id);
       fetchUsers();

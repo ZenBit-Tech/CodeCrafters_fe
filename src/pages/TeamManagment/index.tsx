@@ -1,10 +1,4 @@
-import { t } from 'i18next';
 import React from 'react';
-
-import Loader from '@/components/Loader/Loader';
-import UserRow from '@/components/UserRow';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
@@ -17,6 +11,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { t } from 'i18next';
+
+import Loader from '@/components/Loader/Loader';
+import UserRow from '@/components/UserRow';
+import { COLORS } from '@/constants/colors';
+import { FONT } from '@/constants/font';
 
 import useUsers from './useFetchUsers';
 import UserForm from './UserForm/UserForm';

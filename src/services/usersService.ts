@@ -1,6 +1,23 @@
+import axios from 'axios';
+
 import { store } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
-import axios from 'axios';
+
+interface ApiUser {
+  id: number;
+  full_name: string;
+  email: string;
+  phone_number: string | null;
+  role: string;
+}
+
+interface GetUsersResponse {
+  users: ApiUser[];
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  totalUsers: number;
+}
 
 export const getUsers = async (
   page = 1,
@@ -9,7 +26,7 @@ export const getUsers = async (
   filterBy = '',
   sortBy = 'name',
   sortOrder = 'ASC'
-) => {
+): Promise<GetUsersResponse> => {
   const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users`, {
     params: {
       page,

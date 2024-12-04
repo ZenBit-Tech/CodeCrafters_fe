@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box, MenuItem, Pagination, Typography } from '@mui/material';
 
 import { addAdmin, updateAdmin } from '@/api/adminActions';
 import editIcon from '@/assets/edit.png';
@@ -22,7 +23,6 @@ import {
   TableTitle,
 } from '@/pages/components/AdminListTable/styles';
 import DeleteAdmin from '@/pages/components/DeleteAdmin';
-import { Box, MenuItem, Pagination, Typography } from '@mui/material';
 
 const AdminListTable: React.FC<AdminListTableProps> = ({
   paginatedAdmins,
