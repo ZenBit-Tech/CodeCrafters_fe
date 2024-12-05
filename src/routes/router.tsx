@@ -20,8 +20,8 @@ import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 import RouteDetailsPage from '@/pages/RouteDetails';
 
 const AppRouter: React.FC = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+  const { isAuthenticated, role } = useSelector(
+    (state: RootState) => state.auth
   );
 
   const router = createBrowserRouter([
@@ -48,44 +48,54 @@ const AppRouter: React.FC = () => {
             },
             {
               path: 'company-list',
-              element: <CompanyListPage />,
+              element: (
+                <ProtectedRoute isAllowed={role === 'superadmin'}>
+                  <CompanyListPage />
+                </ProtectedRoute>
+              ),
             },
             {
               path: 'company-list/:id',
-              element: <AdminListPage />,
+              element: (
+                <ProtectedRoute isAllowed={role === 'superadmin'}>
+                  <AdminListPage />
+                </ProtectedRoute>
+              ),
             },
-            {
-              path: 'orders',
-              element: <OrdersPage />,
-            },
-            {
-              path: 'date-management',
-              element: <DateManagementPage />,
-            },
-            {
-              path: 'drivers-management',
-              element: <DriversStagePage />,
-            },
-            {
-              path: 'route-management',
-              element: <RouteManagementPage />,
-            },
-            {
-              path: 'orders-stage',
-              element: <SecondStagePage />,
-            },
-            {
-              path: 'routes',
-              element: <RoutesPage />,
-            },
-            {
-              path: 'routes/:id',
-              element: <RouteDetailsPage />,
-            },
+            ...(role === 'admin' || role === 'dispatcher'
+              ? [
+                  {
+                    path: 'orders',
+                    element: <OrdersPage />,
+                  },
+                  {
+                    path: 'date-management',
+                    element: <DateManagementPage />,
+                  },
+                  {
+                    path: 'drivers-management',
+                    element: <DriversStagePage />,
+                  },
+                  {
+                    path: 'route-management',
+                    element: <RouteManagementPage />,
+                  },
+                  {
+                    path: 'orders-stage',
+                    element: <SecondStagePage />,
+                  },
+                  {
+                    path: 'routes',
+                    element: <RoutesPage />,
+                  },
+                  {
+                    path: 'routes/:id',
+                    element: <RouteDetailsPage />,
+                  },
+                ]
+              : []),
           ],
         },
-        { path: '/admin-list', element: <AdminListPage /> },
-
         {
           path: '*',
           element: <NotFoundPage />,
