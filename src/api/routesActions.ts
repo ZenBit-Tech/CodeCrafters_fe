@@ -4,6 +4,8 @@ import { AxiosError } from 'axios';
 
 import axiosInstance from '@/utils/axiosInstance';
 import { RouteData } from '@/interfaces/Routes';
+import { setisVisible } from '@/store/slices/loaderSlice';
+import { store } from '@/store/store';
 
 export const getRoutesByDateRange = async (
   startDate: string,
@@ -16,6 +18,8 @@ export const getRoutesByDateRange = async (
   statuses?: string[]
 ): Promise<RouteData[]> => {
   try {
+    store.dispatch(setisVisible(true));
+
     const response = await axiosInstance.get('/route/by-dates', {
       params: {
         startDate,
@@ -39,6 +43,8 @@ export const getRoutesByDateRange = async (
       toast.error(i18n.t('routesPage.routesApi.fetch_failed'));
     }
     throw new Error(i18n.t('routesPage.routesApi.unexpected_error'));
+  } finally {
+    store.dispatch(setisVisible(false));
   }
 };
 
@@ -47,6 +53,8 @@ export const getRouteFilters = async (
   endDate: string
 ): Promise<{ drivers: string[]; stops: number[]; statuses: string[] }> => {
   try {
+    store.dispatch(setisVisible(true));
+
     const response = await axiosInstance.get('/route/list-filters', {
       params: {
         startDate,
@@ -58,5 +66,7 @@ export const getRouteFilters = async (
   } catch (error) {
     toast.error(i18n.t('routesPage.routesApi.fetch_filters_failed'));
     throw new Error(i18n.t('routesPage.routesApi.fetch_filters_failed'));
+  } finally {
+    store.dispatch(setisVisible(false));
   }
 };
