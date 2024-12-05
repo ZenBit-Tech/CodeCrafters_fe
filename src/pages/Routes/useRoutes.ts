@@ -13,11 +13,9 @@ import {
 import { RootState } from '@/store/store';
 import { StatusEnum } from '@/constants/status';
 import { RouteData } from '@/interfaces/Routes';
-import {
-  calculateRouteTime,
-  formatDate,
-  processFullName,
-} from '@/pages/Routes/utils';
+import { processFullName } from '@/utils/processFullName';
+import { formatDate } from '@/utils/formatDate';
+import { calculateRouteTime } from '@/utils/calculateRouteTime';
 
 const useRoutes = () => {
   const [filters, setFilters] = useState<{

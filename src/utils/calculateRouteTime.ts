@@ -1,14 +1,5 @@
 import { MINUTES_THRESHOLD } from '@/constants/constants';
 
-export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  }).format(date);
-};
-
 export const calculateRouteTime = (
   startDate: string,
   endDate: string
@@ -28,9 +19,4 @@ export const calculateRouteTime = (
   const endTime = formatTime(end);
 
   return `${startTime} - ${endTime}`;
-};
-
-export const processFullName = (fullName: string) => {
-  const [firstName, lastName] = fullName.split(' ');
-  return { firstName, lastName };
 };
