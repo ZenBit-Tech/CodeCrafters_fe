@@ -5,6 +5,7 @@ import { t } from 'i18next';
 import { setViewOrdersData } from '@/store/slices/ordersPageSlice';
 import { setisVisible } from '@/store/slices/loaderSlice';
 import { store } from '@/store/store';
+import axiosInstance from '@/utils/axiosInstance';
 
 interface GetOrdersParams {
   sortBy: string;
@@ -50,4 +51,14 @@ export const getOrders = async ({
   } finally {
     store.dispatch(setisVisible(false));
   }
+};
+
+export const getNewOrdersCount = async (companyId: number): Promise<number> => {
+  const response = await axiosInstance.get(
+    `${import.meta.env.VITE_BASE_URL}/orders/new-orders-count`,
+    {
+      params: { companyId },
+    }
+  );
+  return response.data;
 };
