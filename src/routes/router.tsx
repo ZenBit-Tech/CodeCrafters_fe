@@ -18,6 +18,7 @@ import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
 import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 import RouteDetailsPage from '@/pages/RouteDetails';
+import { Roles } from '@/constants/roles';
 
 const AppRouter: React.FC = () => {
   const { isAuthenticated, role } = useSelector(
@@ -49,7 +50,7 @@ const AppRouter: React.FC = () => {
             {
               path: 'company-list',
               element: (
-                <ProtectedRoute isAllowed={role === 'superadmin'}>
+                <ProtectedRoute isAllowed={role === Roles.SUPERADMIN}>
                   <CompanyListPage />
                 </ProtectedRoute>
               ),
@@ -57,12 +58,12 @@ const AppRouter: React.FC = () => {
             {
               path: 'company-list/:id',
               element: (
-                <ProtectedRoute isAllowed={role === 'superadmin'}>
+                <ProtectedRoute isAllowed={role === Roles.SUPERADMIN}>
                   <AdminListPage />
                 </ProtectedRoute>
               ),
             },
-            ...(role === 'admin' || role === 'dispatcher'
+            ...(role === Roles.ADMIN || role === Roles.DISPATCHER
               ? [
                   {
                     path: 'orders',

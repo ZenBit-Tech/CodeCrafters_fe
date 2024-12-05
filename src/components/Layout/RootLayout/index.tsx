@@ -13,6 +13,7 @@ import theme from '@/theme';
 import { RootState } from '@/store/store';
 import CustomNavigationItem from '@/components/NavigationCount';
 import { useRootLayout } from './useRootLayout';
+import { Roles } from '@/constants/roles';
 
 import type { Navigation } from '@toolpad/core';
 
@@ -22,7 +23,7 @@ const RootLayout: React.FC = () => {
   const { newOrdersCount } = useRootLayout();
 
   const NAVIGATION: Navigation = React.useMemo(() => {
-    if (role === 'superadmin') {
+    if (role === Roles.SUPERADMIN) {
       return [
         {
           segment: 'company-list',
@@ -30,7 +31,7 @@ const RootLayout: React.FC = () => {
           icon: <ListIcon />,
         },
       ];
-    } else if (role === 'admin' || role === 'dispatcher') {
+    } else if (role === Roles.ADMIN || role === Roles.DISPATCHER) {
       return [
         {
           segment: 'orders',
