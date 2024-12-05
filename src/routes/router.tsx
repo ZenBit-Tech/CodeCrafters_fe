@@ -18,10 +18,11 @@ import SecondStagePage from '@/pages/CreateRoute/SecondStage';
 import RoutesPage from '@/pages/Routes';
 import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 import RouteDetailsPage from '@/pages/RouteDetails';
+import { Roles } from '@/constants/roles';
 
 const AppRouter: React.FC = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+  const { isAuthenticated, role } = useSelector(
+    (state: RootState) => state.auth
   );
 
   const router = createBrowserRouter([
@@ -48,44 +49,54 @@ const AppRouter: React.FC = () => {
             },
             {
               path: 'company-list',
-              element: <CompanyListPage />,
+              element: (
+                <ProtectedRoute isAllowed={role === Roles.SUPERADMIN}>
+                  <CompanyListPage />
+                </ProtectedRoute>
+              ),
             },
             {
               path: 'company-list/:id',
-              element: <AdminListPage />,
+              element: (
+                <ProtectedRoute isAllowed={role === Roles.SUPERADMIN}>
+                  <AdminListPage />
+                </ProtectedRoute>
+              ),
             },
-            {
-              path: 'orders',
-              element: <OrdersPage />,
-            },
-            {
-              path: 'date-management',
-              element: <DateManagementPage />,
-            },
-            {
-              path: 'drivers-management',
-              element: <DriversStagePage />,
-            },
-            {
-              path: 'route-management',
-              element: <RouteManagementPage />,
-            },
-            {
-              path: 'orders-stage',
-              element: <SecondStagePage />,
-            },
-            {
-              path: 'routes',
-              element: <RoutesPage />,
-            },
-            {
-              path: 'routes/:id',
-              element: <RouteDetailsPage />,
-            },
+            ...(role === Roles.ADMIN || role === Roles.DISPATCHER
+              ? [
+                  {
+                    path: 'orders',
+                    element: <OrdersPage />,
+                  },
+                  {
+                    path: 'date-management',
+                    element: <DateManagementPage />,
+                  },
+                  {
+                    path: 'drivers-management',
+                    element: <DriversStagePage />,
+                  },
+                  {
+                    path: 'route-management',
+                    element: <RouteManagementPage />,
+                  },
+                  {
+                    path: 'orders-stage',
+                    element: <SecondStagePage />,
+                  },
+                  {
+                    path: 'routes',
+                    element: <RoutesPage />,
+                  },
+                  {
+                    path: 'routes/:id',
+                    element: <RouteDetailsPage />,
+                  },
+                ]
+              : []),
           ],
         },
-        { path: '/admin-list', element: <AdminListPage /> },
-
         {
           path: '*',
           element: <NotFoundPage />,
