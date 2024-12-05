@@ -51,3 +51,13 @@ export const getOrders = async ({
     store.dispatch(setisVisible(false));
   }
 };
+
+export const getNewOrdersCount = async (companyId: number): Promise<number> => {
+  const response = await axios.get(
+    `${import.meta.env.VITE_BASE_URL}/orders/new-orders-count`,
+    {
+      params: { companyId },
+    }
+  );
+  return response.data;
+};
