@@ -6,6 +6,7 @@ import axiosInstance from '@/utils/axiosInstance';
 import { RouteData } from '@/interfaces/Routes';
 import { setisVisible } from '@/store/slices/loaderSlice';
 import { store } from '@/store/store';
+import { MIN_LOADER_TIME } from '@/constants/constants';
 
 export const getRoutesByDateRange = async (
   startDate: string,
@@ -17,6 +18,8 @@ export const getRoutesByDateRange = async (
   stopsCount?: number[],
   statuses?: string[]
 ): Promise<RouteData[]> => {
+  const loaderStartTime = Date.now();
+
   try {
     store.dispatch(setisVisible(true));
 
@@ -32,6 +35,14 @@ export const getRoutesByDateRange = async (
         statuses,
       },
     });
+
+    const elapsedTime = Date.now() - loaderStartTime;
+    if (elapsedTime < MIN_LOADER_TIME) {
+      await new Promise((resolve) =>
+        setTimeout(resolve, MIN_LOADER_TIME - elapsedTime)
+      );
+    }
+
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
