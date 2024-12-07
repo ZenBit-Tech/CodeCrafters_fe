@@ -1,8 +1,8 @@
 export const columns = [
-  { key: 'routeId' },
-  { key: 'date' },
-  { key: 'driverFirstName' },
-  { key: 'stopsCount' },
-  { key: 'workingHours' },
-  { key: 'distance' },
+  { label: 'id', key: 'id' },
+  { label: 'submission_date', key: 'submission_date' },
+  { label: 'user_id.full_name', key: 'full_name' },
+  { label: 'ordersCount', key: 'stops' },
+  { label: 'route_time', key: 'route_time' },
+  { label: 'distance', key: 'distance' },
 ];

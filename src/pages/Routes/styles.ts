@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Select } from '@mui/material';
+import { Box, Select, TextField } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
 
@@ -86,3 +86,21 @@ export const RopeIcon = styled('img')({
     height: '1.125rem',
   },
 });
+
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: COLORS.main,
+    },
+    '&:hover fieldset': {
+      borderColor: COLORS.main,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: COLORS.main,
+    },
+    paddingRight: theme.spacing(1),
+  },
+  '& .MuiInputAdornment-root': {
+    cursor: 'pointer',
+  },
+}));

@@ -215,14 +215,22 @@ const resources = {
         previous: 'Previous',
         next: 'Next',
         pagination: 'Showing {{start}} to {{end}} of {{total}} routes',
+        routesApi: {
+          unexpected_error:
+            'An unexpected error occurred. Please try again later.',
+          fetch_failed:
+            'Failed to fetch routes. Please check your network connection.',
+          fetch_filters_failed:
+            'Failed to fetch filters. Please try again later.',
+        },
         columns: {
-          routeId: 'ID ROUTE',
-          date: 'COLLECTION DATE',
-          driverFirstName: 'DRIVER',
-          stopsCount: 'STOPS',
-          workingHours: 'ROUTE TIME',
+          id: 'ID ROUTE',
+          submission_date: 'COLLECTION DATE',
+          full_name: 'DRIVER',
+          stops: 'STOPS',
+          route_time: 'ROUTE TIME',
           distance: 'DISTANCE',
-          status: 'Status',
+          status: 'STATUS',
         },
         status: {
           completed: 'Completed',

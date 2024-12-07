@@ -1,24 +1,32 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { t } from 'i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { StatusEnum } from '@/constants/status';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Typography } from '@mui/material';
 
-import DriverAvatar from '../DriverAvatar';
-import Status from '../Status';
+import { IconWrapper } from '@/components/RoutesRow/styles';
+import noteIcon from '@/assets/icons/note.svg';
+import visibilityIcon from '@/assets/icons/eye.svg';
+import moreIcon from '@/assets/icons/dots-vertical.svg';
+import DriverAvatar from '@/components/DriverAvatar';
+import Status from '@/components/Status';
+
+const normalizeStatus = (status: string): StatusEnum => {
+  const normalizedStatus = status.toLowerCase().replace(/ /g, '_');
+  return StatusEnum[normalizedStatus.toUpperCase() as keyof typeof StatusEnum];
+};
 
 interface RoutesRowProps {
-  routeId: string;
+  routeId: number;
   date: string;
   driverFirstName: string;
   driverLastName: string;
-  driverPhone: string;
+  driverPhone: string | null;
   stopsCount: number;
-  workingHours: string;
+  route_time: string;
   distance: number;
   status: StatusEnum;
 }
@@ -30,10 +38,16 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
   driverLastName,
   driverPhone,
   stopsCount,
-  workingHours,
+  route_time,
   distance,
   status,
 }) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    navigate(`/routes/${routeId}`);
+  };
+
   return (
     <Box
       display="grid"
@@ -69,21 +83,21 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       </Typography>
 
       <Typography variant="body2" color={COLORS.text.medium}>
-        {workingHours}
+        {route_time}
       </Typography>
       <Typography variant="body2" color={COLORS.text.medium}>
         {distance} km
       </Typography>
-      <Status status={status} />
+      <Status status={normalizeStatus(status)} />
       <Box display="flex" gap={1}>
         <IconButton>
-          <EditIcon />
+          <IconWrapper src={noteIcon} alt={t('Notifications')} />
+        </IconButton>
+        <IconButton onClick={handleViewDetails}>
+          <IconWrapper src={visibilityIcon} alt={t('Show icon')} />
         </IconButton>
         <IconButton>
-          <VisibilityIcon />
-        </IconButton>
-        <IconButton>
-          <MoreVertIcon />
+          <IconWrapper src={moreIcon} alt={t('More options')} />
         </IconButton>
       </Box>
     </Box>

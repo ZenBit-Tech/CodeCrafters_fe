@@ -5,10 +5,11 @@ import { useDroppable } from '@dnd-kit/core';
 import { Box, Typography } from '@mui/material';
 
 import OrderRow from '@/pages/CreateRoute/RouteManagement/components/RouteDetails/components/Order';
-import { NOT_ASSIGNED_ORDERS_BLOCK } from '@/constants/numbers';
 import { createTimeRange } from '@/utils/createTimeRange';
 import { RootState } from '@/store/store';
 import { errorSubtitleStyles, errorTitleStyle } from './styles';
+
+const NOT_ASSIGNED_ORDERS_BLOCK = -1;
 
 const UnassignedOrder: FC = () => {
   const { notAssignedOrders } = useSelector(

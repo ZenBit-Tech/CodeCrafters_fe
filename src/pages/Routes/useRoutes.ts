@@ -1,79 +1,138 @@
-import React, { useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getRoutesByDateRange } from '@/api/routesActions';
+import {
+  setPage,
+  setRoutes,
+  setSortDirection,
+  setSortField,
+  setStartDate,
+  setEndDate,
+} from '@/store/slices/routesSlice';
+import { RootState } from '@/store/store';
 import { StatusEnum } from '@/constants/status';
-import { Route, UseRoutesPage } from '@/interfaces/Routes';
+import { RouteData } from '@/interfaces/Routes';
+import { processFullName } from '@/utils/processFullName';
+import { formatDate } from '@/utils/formatDate';
+import { calculateRouteTime } from '@/utils/calculateRouteTime';
 
-// Dummy data. Change with the real one from BE
-const mockData: Route[] = Array.from({ length: 20 }, (_, index) => ({
-  routeId: `ID${index + 1}`,
-  date: '25 Aug 2024',
-  driverFirstName: 'John',
-  driverLastName: `Doe ${index + 1}`,
-  driverPhone: '123-456-7890',
-  stopsCount: 5 + index,
-  workingHours: `${8 + (index % 3)}:00-${9 + (index % 3)}:00`,
-  distance: 50 + index * 5,
-  status: index % 2 === 0 ? StatusEnum.COMPLETED : StatusEnum.UPCOMING,
-}));
+const useRoutes = () => {
+  const [filters, setFilters] = useState<{
+    drivers: string[];
+    stops: number[];
+    statuses: string[];
+  }>({
+    drivers: [],
+    stops: [],
+    statuses: [],
+  });
+  const [searchQuery, setSearchQuery] = useState('');
 
-export const useRoutes = (): UseRoutesPage => {
-  const [page, setPage] = useState(1);
-  const [sortField, setSortField] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  const {
+    routes,
+    page,
+    sortField,
+    sortDirection,
+    rowsPerPage,
+    startDate,
+    endDate,
+  } = useSelector((state: RootState) => state.routes);
 
-  const rowsPerPage = 10;
-  const totalRows = mockData.length;
-  const totalPages = Math.ceil(totalRows / rowsPerPage);
+  useEffect(() => {
+    const fetchRoutes = async () => {
+      const data = await getRoutesByDateRange(
+        startDate,
+        endDate,
+        sortField,
+        sortDirection,
+        searchQuery,
+        filters.drivers,
+        filters.stops,
+        filters.statuses
+      );
 
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
+      const transformedData = data.map((routeData: RouteData) => {
+        const { firstName, lastName } = processFullName(
+          routeData.user_full_name
+        );
+
+        return {
+          routeId: routeData.route_id,
+          date: formatDate(routeData.route_submission_date),
+          driverFirstName: firstName,
+          driverLastName: lastName,
+          driverPhone: routeData.user_phone_number || 'N/A',
+          stopsCount: parseInt(routeData.ordersCount, 10),
+          routeTime: calculateRouteTime(
+            routeData.route_submission_date,
+            routeData.route_arrival_date
+          ),
+          distance: routeData.route_distance,
+          status: routeData.route_status as StatusEnum,
+        };
+      });
+
+      dispatch(setRoutes(transformedData));
+    };
+
+    fetchRoutes();
+  }, [
+    startDate,
+    endDate,
+    sortField,
+    sortDirection,
+    searchQuery,
+    filters,
+    dispatch,
+  ]);
 
   const handleSort = (field: string): void => {
     if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      dispatch(setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc'));
     } else {
-      setSortField(field);
-      setSortDirection('asc');
+      dispatch(setSortField(field));
+      dispatch(setSortDirection('asc'));
     }
   };
 
-  const handleChangePage = (
-    _e: React.ChangeEvent<unknown>,
-    value: number
-  ): void => {
-    setPage(value);
+  const handlePageChange = (_e: React.ChangeEvent<unknown>, value: number) => {
+    dispatch(setPage(value));
   };
 
-  const sortedData = useMemo(() => {
-    return [...mockData]
-      .filter((item) => (statusFilter ? item.status === statusFilter : true))
-      .sort((a, b) => {
-        if (!sortField) return 0;
-        const aValue = a[sortField as keyof typeof a];
-        const bValue = b[sortField as keyof typeof b];
-        if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-        if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-        return 0;
-      });
-  }, [statusFilter, sortField, sortDirection]);
+  const handleDateChange = (start: string, end: string) => {
+    dispatch(setStartDate(start));
+    dispatch(setEndDate(end));
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const handleFilterChange = (newFilters: {
+    drivers: string[];
+    stops: number[];
+    statuses: string[];
+  }) => {
+    setFilters(newFilters);
+  };
 
   return {
+    routes,
     page,
-    totalPages,
     rowsPerPage,
-    sortedData,
-    startIndex,
-    endIndex,
-    totalRows,
     sortField,
     sortDirection,
-    statusFilter,
-    setPage,
-    setSortField,
-    setSortDirection,
-    setStatusFilter,
     handleSort,
-    handleChangePage,
+    handlePageChange,
+    handleDateChange,
+    handleSearchChange,
+    handleFilterChange,
+    filters,
+    startDate,
+    endDate,
   };
 };
+
+export default useRoutes;
