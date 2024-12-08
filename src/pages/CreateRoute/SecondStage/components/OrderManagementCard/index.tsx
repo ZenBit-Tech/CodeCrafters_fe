@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
 import { MONTHS } from '@/constants/moths';
-import DriverAvatar from '@/components/DriverAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import {
   customerBlock,
   collectionDateStyles,
@@ -66,10 +66,7 @@ const OrderManagementCard: FC<OrderItemInterface> = ({
           <Typography>{t(customer.phone_number)}</Typography>
           <Typography>{t(customer.email)}</Typography>
         </Box>
-        <DriverAvatar
-          firstName={customerNames[0]}
-          lastName={customerNames[1]}
-        />
+        <UserAvatar firstName={customerNames[0]} lastName={customerNames[1]} />
         <Box>
           <Typography>{t(customer.full_name)}</Typography>
           <Typography>{t(customer.phone_number)}</Typography>

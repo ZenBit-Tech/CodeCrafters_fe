@@ -18,14 +18,6 @@ interface FilterHeaderProps {
   }) => void;
 }
 
-interface FilterHeaderProps {
-  onFilterChange: (filters: {
-    drivers: string[];
-    stops: number[];
-    statuses: string[];
-  }) => void;
-}
-
 const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
   const {
     t,

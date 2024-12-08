@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getRoutesByDateRange } from '@/api/routesActions';
@@ -97,7 +97,7 @@ const useRoutes = () => {
     }
   };
 
-  const handlePageChange = (_e: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_e: ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value));
   };
 

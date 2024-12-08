@@ -1,17 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { StatusEnum } from '@/constants/status';
-import { Box, IconButton, Typography } from '@mui/material';
 
 import { IconWrapper } from '@/components/RoutesRow/styles';
 import noteIcon from '@/assets/icons/note.svg';
 import visibilityIcon from '@/assets/icons/eye.svg';
 import moreIcon from '@/assets/icons/dots-vertical.svg';
-import DriverAvatar from '@/components/DriverAvatar';
+import UserAvatar from '@/components/UserAvatar';
 import Status from '@/components/Status';
 
 const normalizeStatus = (status: string): StatusEnum => {
@@ -44,7 +44,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleViewDetails = () => {
+  const handleViewDetails = (): void => {
     navigate(`/routes/${routeId}`);
   };
 
@@ -65,7 +65,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       </Typography>
 
       <Box display="flex" alignItems="center" sx={{ minWidth: '150px' }}>
-        <DriverAvatar firstName={driverFirstName} lastName={driverLastName} />
+        <UserAvatar firstName={driverFirstName} lastName={driverLastName} />
         <Box ml={1}>
           <Typography
             variant="body2"
