@@ -1,10 +1,16 @@
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Dispatch } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import { setAccessToken } from '@/store/slices/authSlice';
+import axiosInstance from '@/utils/axiosInstance';
 import i18n from '@/utils/i18n';
 
-import axiosInstance from '@/utils/axiosInstance';
-import { setAccessToken } from '@/store/slices/authSlice';
+interface VerifyTokenResponse {
+  token: string;
+  role: string;
+  companyId: number;
+}
 
 export const sendLoginLink = (email: string) => async (): Promise<boolean> => {
   try {
@@ -36,10 +42,10 @@ export const verifyToken =
         },
       });
 
-      const { token, role } = response.data;
+      const { token, role, companyId }: VerifyTokenResponse = response.data;
 
       if (token) {
-        dispatch(setAccessToken({ token, role }));
+        dispatch(setAccessToken({ token, role, companyId }));
       } else {
         toast.error(i18n.t('auth.invalidExpiredLink'));
       }

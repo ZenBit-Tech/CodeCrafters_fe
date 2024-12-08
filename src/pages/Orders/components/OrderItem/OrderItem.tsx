@@ -1,23 +1,23 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Box, Typography } from '@mui/material';
 
-import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
-import { MONTHS } from '@/constants/moths';
-import DriverAvatar from '@/components/DriverAvatar';
 import Status from '@/components/Status';
-import {
-  orderRow,
-  customerBlock,
-  collectionDateStyles,
-  collectionAddressStyles,
-  routeBlock,
-  luggageStyles,
-  statusBlock,
-  collectionTimeStyles,
-  popup,
-} from '@/pages/Orders/components/OrderItem/styles';
+import UserAvatar from '@/components/UserAvatar';
+import { MONTHS } from '@/constants/moths';
 import { OrderStatuses } from '@/interfaces/interfaces';
+import {
+  collectionAddressStyles,
+  collectionDateStyles,
+  collectionTimeStyles,
+  customerBlock,
+  luggageStyles,
+  orderRow,
+  popup,
+  routeBlock,
+  statusBlock,
+} from '@/pages/Orders/components/OrderItem/styles';
+import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
 
 const OrderItem: FC<OrderItemInterface> = ({
   collectionDate,
@@ -66,10 +66,7 @@ const OrderItem: FC<OrderItemInterface> = ({
           <Typography>{t(customer.phone_number)}</Typography>
           <Typography>{t(customer.email)}</Typography>
         </Box>
-        <DriverAvatar
-          firstName={customerNames[0]}
-          lastName={customerNames[1]}
-        />
+        <UserAvatar firstName={customerNames[0]} lastName={customerNames[1]} />
         <Box>
           <Typography>{t(customer.full_name)}</Typography>
           <Typography>{t(customer.phone_number)}</Typography>

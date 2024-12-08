@@ -63,6 +63,7 @@ const resources = {
       },
       button: {
         addNewCompany: '+ Add New Company',
+        addNewUser: '+ Add New User',
         add: 'Add',
         update: 'Update',
         cancel: 'Cancel',
@@ -78,6 +79,8 @@ const resources = {
       modal: {
         addCompanyTitle: 'Add company',
         updateCompanyTitle: 'Update company',
+        updateUserTitle: 'Update User',
+        addUserTitle: 'Add New User',
       },
       form: {
         organizationName: 'Organization name',
@@ -95,6 +98,57 @@ const resources = {
         updateSuccessMessage: 'Company updated successfully',
         error: 'Failed to create company',
         updateError: 'Failed to update company',
+      },
+      settings: {
+        noPhone: 'No phone number',
+        form: {
+          fullName: 'Full Name',
+          email: 'Email',
+          phoneNumber: 'Phone Number',
+          selectRole: 'Select a role',
+          roles: {
+            dispatcher: 'Dispatcher',
+            driver: 'Driver',
+          },
+          validation: {
+            fullNameRequired: 'Full name is required',
+            emailRequired: 'Email is required',
+            invalidEmail: 'Invalid email format',
+            phoneNumberRequired: 'Phone number is required',
+            invalidPhoneNumber: 'Invalid phone number format',
+            roleRequired: 'Role is required',
+          },
+        },
+        selectRole: 'Select a role',
+        title: 'Team Management',
+        select: {
+          allRoles: 'All Roles',
+          dispatcher: 'Dispatcher',
+          driver: 'Driver',
+        },
+        columns: {
+          role: 'ROLE',
+          name: 'NAME',
+          email: 'EMAIL',
+          phoneNumber: 'PHONE NUMBER',
+          actions: 'ACTIONS',
+        },
+        message: {
+          fetchError: 'Failed to fetch users. Please try again later.',
+          invalidToken: 'Error: Invalid token',
+          noCompanyId: 'Error: Missing company ID',
+          updateSuccess: 'User successfully update',
+          addSuccess: 'User successfully added',
+          error: 'Something went wrong. Try again later',
+          errorDelete: 'Failed to delete user',
+        },
+        popup: {
+          heading: 'Confirm Deletion',
+          mainMessage: 'Are you sure you want to delete {{user}}?',
+          subMessage: 'This action cannot be undone.',
+          cancelText: 'Cancel',
+          confirmText: 'Delete',
+        },
       },
       altText: {
         logo: 'Logo',

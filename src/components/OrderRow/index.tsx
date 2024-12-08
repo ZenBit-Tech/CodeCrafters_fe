@@ -1,11 +1,11 @@
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
-import { Box, Typography } from '@mui/material';
 
 import CustomCheckbox from '../Checkbox';
-import DriverAvatar from '../DriverAvatar';
+import UserAvatar from '../UserAvatar';
 
 interface OrderRowProps {
   date: string;
@@ -70,7 +70,7 @@ const OrderRow: React.FC<OrderRowProps> = ({
       </Box>
 
       <Box display="flex" alignItems="center" sx={{ minWidth: '150px' }}>
-        <DriverAvatar firstName={driverFirstName} lastName={driverLastName} />
+        <UserAvatar firstName={driverFirstName} lastName={driverLastName} />
         <Box ml={1}>
           <Typography
             variant="body2"

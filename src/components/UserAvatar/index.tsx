@@ -4,12 +4,15 @@ import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { Avatar } from '@mui/material';
 
-interface DriverAvatarProps {
+interface UserAvatarProps {
   firstName: string;
   lastName?: string;
 }
 
-const DriverAvatar: React.FC<DriverAvatarProps> = ({ firstName, lastName }) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({
+  firstName = '',
+  lastName = '',
+}) => {
   const initials =
     firstName.charAt(0).toUpperCase() +
     (lastName ? lastName.charAt(0).toUpperCase() : '');
@@ -29,4 +32,4 @@ const DriverAvatar: React.FC<DriverAvatarProps> = ({ firstName, lastName }) => {
   );
 };
 
-export default DriverAvatar;
+export default UserAvatar;
