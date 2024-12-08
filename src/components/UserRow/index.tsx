@@ -34,13 +34,13 @@ const UserRow: React.FC<UserItemProps> = ({
   const firstName = getFirstName(user.fullName);
   const lastName = getSecondName(user.fullName);
 
-  const handleDelete = async (): void => {
+  const handleDelete = async (): Promise<void> => {
     try {
       await deleteUser(user.id);
       fetchUsers();
     } catch (error) {
       toast(t('settings.message.errorDelete'), { type: 'error' });
-      throw new Error(`${error}`)
+      throw new Error(`${error}`);
     }
     setIsPopupOpen(false);
   };

@@ -23,39 +23,47 @@ const RootLayout: React.FC = () => {
   const { newOrdersCount } = useRootLayout();
 
   const NAVIGATION: Navigation = React.useMemo(() => {
-    if (role === Roles.SUPERADMIN) {
-      return [
-        {
-          segment: 'company-list',
-          title: t('navigation.companyList'),
-          icon: <ListIcon />,
-        },
-      ];
-    } else if (role === Roles.ADMIN || role === Roles.DISPATCHER) {
-      return [
-        {
-          segment: 'orders',
-          title: (
-            <CustomNavigationItem
-              title={t('navigation.orders')}
-              count={newOrdersCount}
-            />
-          ),
-          icon: <LuggageIcon />,
-        },
-        {
-          segment: 'routes',
-          title: t('navigation.routes'),
-          icon: <LocationOnIcon />,
-        },
-        {
-          segment: 'settings',
-          title: t('navigation.settings'),
-          icon: <SettingsIcon />,
-        },
-      ];
+    const superAdminNavigation = [
+      {
+        segment: 'company-list',
+        title: t('navigation.companyList'),
+        icon: <ListIcon />,
+      },
+    ];
+
+    const adminOrDispatcherNavigation = [
+      {
+        segment: 'orders',
+        title: t('navigation.orders'),
+        icon: <LuggageIcon />,
+        customTitle: (
+          <CustomNavigationItem
+            title={t('navigation.orders')}
+            count={newOrdersCount}
+          />
+        ),
+      },
+      {
+        segment: 'routes',
+        title: t('navigation.routes'),
+        icon: <LocationOnIcon />,
+      },
+      {
+        segment: 'settings',
+        title: t('navigation.settings'),
+        icon: <SettingsIcon />,
+      },
+    ];
+
+    switch (role) {
+      case Roles.SUPERADMIN:
+        return superAdminNavigation;
+      case Roles.ADMIN:
+      case Roles.DISPATCHER:
+        return adminOrDispatcherNavigation;
+      default:
+        return [];
     }
-    return [];
   }, [newOrdersCount, role, t]);
 
   const BRANDING = {

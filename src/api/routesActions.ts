@@ -76,7 +76,7 @@ export const getRouteFilters = async (
     return response.data;
   } catch (error) {
     toast.error(i18n.t('routesPage.routesApi.fetch_filters_failed'));
-    throw new Error(i18n.t('routesPage.routesApi.fetch_filters_failed'));
+    throw new Error(`${error}`);
   } finally {
     store.dispatch(setisVisible(false));
   }
