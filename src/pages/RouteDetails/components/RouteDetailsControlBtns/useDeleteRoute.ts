@@ -1,9 +1,11 @@
-import { setisVisible } from '@/store/slices/loaderSlice';
-import { RootState, store } from '@/store/store';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import { t } from 'i18next';
+
+import { setisVisible } from '@/store/slices/loaderSlice';
+import { RootState, store } from '@/store/store';
 
 interface UseDeleteRoute {
   handleDelete: () => Promise<void>;
@@ -21,7 +23,7 @@ export const useDeleteRoute = (): UseDeleteRoute => {
         headers: { authorization: accessToken },
       });
 
-      toast.success('Route deleted successfully');
+      toast.success(t('routeDetails.deletedSuccessfully'));
       navigate('/routes');
     } catch (error) {
       toast.error(`${error}`);

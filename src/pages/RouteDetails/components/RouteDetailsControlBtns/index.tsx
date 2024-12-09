@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import { t } from 'i18next';
 import { Box } from '@mui/material';
+import { t } from 'i18next';
 
 import Button from '@/components/Button';
 import arrowLeft from '@/assets/icons/arrow-left.svg';
 import arrowRight from '@/assets/icons/arrow-right.svg';
-import { routeDetailsStyles } from './styles';
 import { useToggleVisible } from '@/hooks/useToggleVisible';
 import PopupMessage from '@/components/PopupMessage';
 import { useDeleteRoute } from './useDeleteRoute';
+import { routeDetailsStyles } from './styles';
 
 const RouteDetailsControlBtns: FC = () => {
   const [isRouteDeleteVisible, toggleIsRouteDeleteVisible] =
@@ -33,11 +33,11 @@ const RouteDetailsControlBtns: FC = () => {
         open={isRouteDeleteVisible}
         onClose={toggleIsRouteDeleteVisible}
         onConfirm={handleDelete}
-        heading={'Route deleting'}
-        mainMessage={'Are you really wanna delete this route?'}
-        subMessage={'You will not be able to restore it'}
-        cancelText={'Cancel'}
-        confirmText={'Delete route'}
+        heading={t('Route deleting')}
+        mainMessage={t('Are you really wanna delete this route?')}
+        subMessage={t('You will not be able to restore it')}
+        cancelText={t('Cancel')}
+        confirmText={t('Delete route')}
       />
     </Box>
   );

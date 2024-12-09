@@ -9,13 +9,14 @@ import noteIcon from '@/assets/icons/note.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
 import { useRouteDetails } from '@/pages/RouteDetails';
 import { useToggleVisible } from '@/hooks/useToggleVisible';
+import PopupMessage from '@/components/PopupMessage';
+
 import {
   mapPinActive,
   mapPinStyles,
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
 } from './styles';
-import PopupMessage from '@/components/PopupMessage';
 
 interface OrderDetailsProps {
   id: number;
@@ -62,11 +63,11 @@ const OrderDetails: FC<OrderDetailsProps> = ({
           handleDelete(id);
           toggleIsRemoveOrder();
         }}
-        heading={`This operation delete order #${id}`}
-        mainMessage={'Do you really want to remove this order from route?'}
-        subMessage={'You will not be able to restore it'}
-        cancelText={'Close'}
-        confirmText={'Remove'}
+        heading={t(`This operation delete order #${id}`)}
+        mainMessage={t('deleteRouteModal.mainMessage')}
+        subMessage={t('deleteRouteModal.subMessage')}
+        cancelText={t('deleteRouteModal.cancelText')}
+        confirmText={t('deleteRouteModal.confirmText')}
       />
     </Box>
   );

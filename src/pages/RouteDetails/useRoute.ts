@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 import { t } from 'i18next';
 
-import { RouteInform } from '@/interfaces/interfaces';
 import { START_ROUTE_POINT } from '@/constants/constants';
-import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
-import { useSelector } from 'react-redux';
+import { RouteInform } from '@/interfaces/interfaces';
 import { RootState, store } from '@/store/store';
-import axios from 'axios';
 import { setisVisible } from '@/store/slices/loaderSlice';
+import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
 
-interface useGetRouteHook {
+interface useRouteHook {
   routeDetails: RouteInform | null;
   locations: string[];
   handleDelete: (orderId: number) => Promise<void>;
 }
 
-export const useGetRoute = (): useGetRouteHook => {
+export const useRoute = (): useRouteHook => {
   const [routeDetails, setRouteDetails] = useState<RouteInform | null>(null);
   const { token: accessToken } = useSelector((store: RootState) => store.auth);
   const { id } = useParams();
@@ -46,7 +46,7 @@ export const useGetRoute = (): useGetRouteHook => {
 
       setRouteDetails(response.data);
     } catch (error: unknown) {
-      toast.error('error');
+      toast.error('routeDetails.deletedFailed');
       throw new Error(`${error}`);
     } finally {
       store.dispatch(setisVisible(false));
