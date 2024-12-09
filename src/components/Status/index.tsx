@@ -18,11 +18,27 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
     },
+    'Not arrived': {
+      backgroundColor: COLORS.status.notArrived.bg,
+      color: COLORS.status.notArrived.text,
+    },
+    'At Risk': {
+      backgroundColor: COLORS.status.atRisk.bg,
+      color: COLORS.status.atRisk.text,
+    },
     completed: {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
     },
+    Completed: {
+      backgroundColor: COLORS.status.completed.bg,
+      color: COLORS.status.completed.text,
+    },
     failed: {
+      backgroundColor: COLORS.status.failed.bg,
+      color: COLORS.status.failed.text,
+    },
+    Failed: {
       backgroundColor: COLORS.status.failed.bg,
       color: COLORS.status.failed.text,
     },
@@ -35,6 +51,10 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       color: COLORS.status.atRisk.text,
     },
     upcoming: {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    Upcoming: {
       backgroundColor: COLORS.status.upcoming.bg,
       color: COLORS.status.upcoming.text,
     },

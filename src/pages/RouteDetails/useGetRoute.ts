@@ -34,7 +34,12 @@ export const useGetRoute = (): useGetRouteHook => {
     locations: routeDetails
       ? [
           START_ROUTE_POINT,
-          ...routeDetails.orders.map((order) => order.collection_address),
+          ...routeDetails.orders.map(
+            (order) =>
+              order.collection_address.split(',')[
+                order.collection_address.split(',').length - 2
+              ]
+          ),
         ]
       : [],
   };

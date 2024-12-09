@@ -19,9 +19,10 @@ import {
 interface OrderDetailsProps {
   city: string;
   startTime: string;
+  status: StatusEnum;
 }
 
-const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime }) => {
+const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime, status }) => {
   const { getPinCoordinates: handleChoosePin } = useRouteDetails();
   const [isVisible, toggleIsVisible] = useToggleVisible(false);
 
@@ -31,7 +32,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime }) => {
         <Typography>{t(city)}</Typography>
         <Typography>{startTime}</Typography>
       </Box>
-      <Status status={StatusEnum.COMPLETED} />
+      <Status status={status} />
       <Box sx={orderRowActionsBlockStyles}>
         <img src={noteIcon} alt="noteIcon" />
         <img
