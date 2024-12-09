@@ -15,7 +15,6 @@ import {
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
 } from './styles';
-import { useRemoveOrderFromRoute } from './useRemoveOrderFromRoute';
 import PopupMessage from '@/components/PopupMessage';
 
 interface OrderDetailsProps {
@@ -31,10 +30,10 @@ const OrderDetails: FC<OrderDetailsProps> = ({
   startTime,
   status,
 }) => {
-  const { getPinCoordinates: handleChoosePin } = useRouteDetails();
+  const { getPinCoordinates: handleChoosePin, handleDelete } =
+    useRouteDetails();
   const [isVisible, toggleIsVisible] = useToggleVisible(false);
   const [isRemoveOrder, toggleIsRemoveOrder] = useToggleVisible(false);
-  const { handleDelete } = useRemoveOrderFromRoute();
 
   return (
     <Box sx={orderDetailsBlockStyles}>

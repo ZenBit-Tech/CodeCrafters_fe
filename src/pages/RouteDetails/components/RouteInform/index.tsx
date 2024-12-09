@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { t } from 'i18next';
 import { Box, Typography } from '@mui/material';
 import dayjs from 'dayjs';
@@ -14,6 +14,12 @@ import { driverTitleStyles, routeDateStyles, routeIdStyles } from './styles';
 const RouteInformBlock: FC<{
   routeDetails: RouteInform;
 }> = ({ routeDetails }) => {
+  console.log('render');
+
+  useEffect(() => {
+    console.log('re-render');
+  }, [routeDetails]);
+
   return (
     <Box>
       <Typography sx={routeDateStyles}>

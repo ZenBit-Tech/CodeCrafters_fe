@@ -6,14 +6,19 @@ import { t } from 'i18next';
 import { RouteInform } from '@/interfaces/interfaces';
 import { START_ROUTE_POINT } from '@/constants/constants';
 import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import axios from 'axios';
 
 interface useGetRouteHook {
   routeDetails: RouteInform | null;
   locations: string[];
+  handleDelete: (orderId: number) => Promise<void>;
 }
 
 export const useGetRoute = (): useGetRouteHook => {
   const [routeDetails, setRouteDetails] = useState<RouteInform | null>(null);
+  const { token: accessToken } = useSelector((store: RootState) => store.auth);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -27,9 +32,21 @@ export const useGetRoute = (): useGetRouteHook => {
         setRouteDetails(response.data);
       });
     }
-  }, []);
+  }, [id, navigate]);
+
+  const handleDelete = async (orderId: number): Promise<void> => {
+    const response = await axios.patch(
+      `${import.meta.env.VITE_BASE_URL}/route/${id}?orderId=${orderId}`,
+      { headers: { authorization: accessToken } }
+    );
+
+    console.log(response.data);
+
+    setRouteDetails(response.data);
+  };
 
   return {
+    handleDelete,
     routeDetails,
     locations: routeDetails
       ? [
