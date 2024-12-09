@@ -7,8 +7,9 @@ import { RouteInform } from '@/interfaces/interfaces';
 import { START_ROUTE_POINT } from '@/constants/constants';
 import { getRouteDetails } from './components/RouteInform/api/getRouteDetails';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { RootState, store } from '@/store/store';
 import axios from 'axios';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 interface useGetRouteHook {
   routeDetails: RouteInform | null;
@@ -35,14 +36,21 @@ export const useGetRoute = (): useGetRouteHook => {
   }, [id, navigate]);
 
   const handleDelete = async (orderId: number): Promise<void> => {
-    const response = await axios.patch(
-      `${import.meta.env.VITE_BASE_URL}/route/${id}?orderId=${orderId}`,
-      { headers: { authorization: accessToken } }
-    );
+    try {
+      store.dispatch(setisVisible(true));
+      const response = await axios.patch(
+        `${import.meta.env.VITE_BASE_URL}/route/${id}?orderId=${orderId}`,
+        {},
+        { headers: { authorization: accessToken } }
+      );
 
-    console.log(response.data);
-
-    setRouteDetails(response.data);
+      setRouteDetails(response.data);
+    } catch (error: unknown) {
+      toast.error('error');
+      throw new Error(`${error}`);
+    } finally {
+      store.dispatch(setisVisible(false));
+    }
   };
 
   return {
