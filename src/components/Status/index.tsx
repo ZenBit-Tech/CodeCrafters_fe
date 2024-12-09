@@ -31,8 +31,8 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       color: COLORS.status.completed.text,
     },
     Completed: {
-      backgroundColor: COLORS.status.completed.bg,
-      color: COLORS.status.completed.text,
+      color: COLORS.main.dark,
+      backgroundColor: COLORS.main.light,
     },
     failed: {
       backgroundColor: COLORS.status.failed.bg,
