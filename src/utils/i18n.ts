@@ -82,7 +82,7 @@ const resources = {
           mainMessage: 'Do you really want to remove this order from route?',
           subMessage: 'You will not be able to restore it',
           cancelText: 'Close',
-          confirmTex: 'Remove',
+          confirmText: 'Remove',
         },
       },
       modal: {

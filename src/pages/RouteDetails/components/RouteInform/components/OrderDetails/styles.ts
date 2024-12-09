@@ -26,3 +26,7 @@ export const mapPinActive: CSSProperties = {
 export const mapPinStyles: CSSProperties = {
   cursor: 'pointer',
 };
+
+export const removeOrderIconStyles: CSSProperties = {
+  cursor: 'pointer',
+};

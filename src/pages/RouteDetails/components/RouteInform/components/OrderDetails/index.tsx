@@ -16,6 +16,7 @@ import {
   mapPinStyles,
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
+  removeOrderIconStyles,
 } from './styles';
 
 interface OrderDetailsProps {
@@ -54,7 +55,12 @@ const OrderDetails: FC<OrderDetailsProps> = ({
             handleChoosePin(city);
           }}
         />
-        <img src={deleteIcon} alt="deleteIcon" onClick={toggleIsRemoveOrder} />
+        <img
+          src={deleteIcon}
+          alt="deleteIcon"
+          style={removeOrderIconStyles}
+          onClick={toggleIsRemoveOrder}
+        />
       </Box>
       <PopupMessage
         open={isRemoveOrder}
@@ -64,10 +70,10 @@ const OrderDetails: FC<OrderDetailsProps> = ({
           toggleIsRemoveOrder();
         }}
         heading={t(`This operation delete order #${id}`)}
-        mainMessage={t('deleteRouteModal.mainMessage')}
-        subMessage={t('deleteRouteModal.subMessage')}
-        cancelText={t('deleteRouteModal.cancelText')}
-        confirmText={t('deleteRouteModal.confirmText')}
+        mainMessage={t('routeDetails.deleteRouteModal.mainMessage')}
+        subMessage={t('routeDetails.deleteRouteModal.subMessage')}
+        cancelText={t('routeDetails.deleteRouteModal.cancelText')}
+        confirmText={t('routeDetails.deleteRouteModal.confirmText')}
       />
     </Box>
   );
