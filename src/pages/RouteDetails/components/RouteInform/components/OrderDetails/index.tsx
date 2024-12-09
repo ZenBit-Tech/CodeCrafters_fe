@@ -15,16 +15,26 @@ import {
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
 } from './styles';
+import { useRemoveOrderFromRoute } from './useRemoveOrderFromRoute';
+import PopupMessage from '@/components/PopupMessage';
 
 interface OrderDetailsProps {
+  id: number;
   city: string;
   startTime: string;
   status: StatusEnum;
 }
 
-const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime, status }) => {
+const OrderDetails: FC<OrderDetailsProps> = ({
+  id,
+  city,
+  startTime,
+  status,
+}) => {
   const { getPinCoordinates: handleChoosePin } = useRouteDetails();
   const [isVisible, toggleIsVisible] = useToggleVisible(false);
+  const [isRemoveOrder, toggleIsRemoveOrder] = useToggleVisible(false);
+  const { handleDelete } = useRemoveOrderFromRoute();
 
   return (
     <Box sx={orderDetailsBlockStyles}>
@@ -44,8 +54,21 @@ const OrderDetails: FC<OrderDetailsProps> = ({ city, startTime, status }) => {
             handleChoosePin(city);
           }}
         />
-        <img src={deleteIcon} alt="deleteIcon" />
+        <img src={deleteIcon} alt="deleteIcon" onClick={toggleIsRemoveOrder} />
       </Box>
+      <PopupMessage
+        open={isRemoveOrder}
+        onClose={toggleIsRemoveOrder}
+        onConfirm={() => {
+          handleDelete(id);
+          toggleIsRemoveOrder();
+        }}
+        heading={`This operation delete order #${id}`}
+        mainMessage={'Do you really want to remove this order from route?'}
+        subMessage={'You will not be able to restore it'}
+        cancelText={'Close'}
+        confirmText={'Remove'}
+      />
     </Box>
   );
 };

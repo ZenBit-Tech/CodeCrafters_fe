@@ -35,6 +35,7 @@ const RouteInformBlock: FC<{
       {routeDetails.orders.map((order) => (
         <OrderDetails
           key={order.id}
+          id={order.id}
           city={
             order.collection_address.split(',')[
               order.collection_address.split(',').length - 2
