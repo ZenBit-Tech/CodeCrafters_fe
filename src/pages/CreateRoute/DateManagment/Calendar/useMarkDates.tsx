@@ -13,6 +13,7 @@ import { t } from 'i18next';
 
 import { store } from '@/store/store';
 import { setRouteDate } from '@/store/slices/createRouteSlice';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 interface MarkDatesInterface {
   tileContent: ReactNode | TileContentFunc;
@@ -40,6 +41,7 @@ export const useMarkDates = (): MarkDatesInterface => {
   const fetchDates = useCallback(
     async (dateStartString: string, companyId: number): Promise<void> => {
       try {
+        store.dispatch(setisVisible(true));
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/orders/by-dates?date=${dateStartString}&comanyId=${companyId}`
         );
@@ -51,6 +53,8 @@ export const useMarkDates = (): MarkDatesInterface => {
         } else {
           toast(t('getOrdersDates.failed'), { type: 'error' });
         }
+      } finally {
+        store.dispatch(setisVisible(false));
       }
     },
     []

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { t } from 'i18next';
+import { setisVisible } from '@/store/slices/loaderSlice';
+import { store } from '@/store/store';
 
 export interface Coordinates {
   lat: number;
@@ -26,6 +28,7 @@ export const useViewPin = (): useViewPinHook => {
       return;
     }
     try {
+      store.dispatch(setisVisible(true));
       const response = await fetch(
         `${import.meta.env.VITE_BASE_OPEN_STREET_API}/search?format=json&q=${encodeURIComponent(
           address
@@ -47,6 +50,8 @@ export const useViewPin = (): useViewPinHook => {
       } else {
         toast(t('routeDetails.failedToCalculate'), { type: 'error' });
       }
+    } finally {
+      store.dispatch(setisVisible(false));
     }
   };
 
