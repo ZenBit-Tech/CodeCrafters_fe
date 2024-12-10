@@ -51,6 +51,9 @@ const MyCalendar: FC = () => {
       tileContent={tileContent}
       locale="en-EN"
       onActiveStartDateChange={handleMonthChange}
+      tileDisabled={({ date }) =>
+        new Date(date) < new Date(new Date().setHours(0, 0, 0, 0))
+      }
     />
   );
 };
