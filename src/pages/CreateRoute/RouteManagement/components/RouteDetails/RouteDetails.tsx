@@ -52,7 +52,8 @@ export const RouteDetails: FC<RouteDetailsInterface> = ({
         <Box>
           {t(driver_full_name)}
           <Typography>
-            {time_range} {t(`${orders.length} stops`)} {`${distance} km`}
+            {time_range} {t(`${orders.length} stops`)}{' '}
+            {`${distance ? distance : 0} km`}
           </Typography>
           <Typography>#{route_id}</Typography>
         </Box>
