@@ -8,6 +8,7 @@ export const mapDatePickerContainer: SxProps<Theme> = {
 export const mapDatePicker: SxProps<Theme> = {
   position: 'absolute',
   backgroundColor: COLORS.white,
+  zIndex: 9,
   top: '60px',
   transform: 'translate(-50%, 0)',
 };

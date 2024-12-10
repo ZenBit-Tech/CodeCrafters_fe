@@ -25,6 +25,7 @@ import {
   mapDatePickerActions,
   mapDatePickerContainer,
 } from './styles';
+import { DATE_FORMAT } from '@/constants/dateFormats';
 
 const ActionsPanel: React.FC<{
   onDateChange: (start: string, end: string) => void;
@@ -38,14 +39,12 @@ const ActionsPanel: React.FC<{
     handleKeyDown,
     handleSearchClick,
     handleCreateRouteClick,
+    handleViewRoutes,
   } = useActionsPanel(onDateChange, onSearchChange);
 
   const today = dayjs();
   const plusMoth = dayjs().add(30, 'days');
-  const [value, setValue] = useState<[Dayjs | null, Dayjs | null]>([
-    today,
-    plusMoth,
-  ]);
+  const [value, setValue] = useState<[Dayjs, Dayjs]>([today, plusMoth]);
 
   return (
     <ActionsContainer>
@@ -89,7 +88,16 @@ const ActionsPanel: React.FC<{
                   variant={'outlined'}
                   onClick={toggleIsMapViewVisible}
                 ></Button>
-                <Button label={'Apply'} variant={'contained'}></Button>
+                <Button
+                  label={'Apply'}
+                  variant={'contained'}
+                  onClick={() =>
+                    handleViewRoutes(
+                      value[0]?.format(DATE_FORMAT),
+                      value[1].format(DATE_FORMAT)
+                    )
+                  }
+                ></Button>
               </Box>
             </Box>
           )}
