@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchIcon from '@mui/icons-material/Search';
-import { InputAdornment } from '@mui/material';
+import { Box, InputAdornment } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
+import dayjs, { Dayjs } from 'dayjs';
 
 import {
   ActionsContainer,
@@ -14,11 +18,19 @@ import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
 import Button from '@/components/Button';
 import useActionsPanel from './useActionsPanel';
+import { useToggleVisible } from '@/hooks/useToggleVisible';
+import {
+  closeDatePickerStyles,
+  mapDatePicker,
+  mapDatePickerActions,
+  mapDatePickerContainer,
+} from './styles';
 
 const ActionsPanel: React.FC<{
   onDateChange: (start: string, end: string) => void;
   onSearchChange: (searchQuery: string) => void;
 }> = ({ onDateChange, onSearchChange }) => {
+  const [isMapViewVisible, toggleIsMapViewVisible] = useToggleVisible(false);
   const { t } = useTranslation();
   const {
     searchQuery,
@@ -27,6 +39,13 @@ const ActionsPanel: React.FC<{
     handleSearchClick,
     handleCreateRouteClick,
   } = useActionsPanel(onDateChange, onSearchChange);
+
+  const today = dayjs();
+  const plusMoth = dayjs().add(30, 'days');
+  const [value, setValue] = useState<[Dayjs | null, Dayjs | null]>([
+    today,
+    plusMoth,
+  ]);
 
   return (
     <ActionsContainer>
@@ -47,11 +66,35 @@ const ActionsPanel: React.FC<{
       </SearchContainer>
       <ActionButtonsContainer>
         <CalendarRange onDateChange={onDateChange} />
-        <Button
-          variant="lined"
-          label={t('routesPage.mapView')}
-          startIcon={<RopeIcon src={ropeIcon} alt={t('routesPage.rope')} />}
-        />
+        <Box sx={mapDatePickerContainer}>
+          <Button
+            variant="lined"
+            label={t('routesPage.mapView')}
+            startIcon={<RopeIcon src={ropeIcon} alt={t('routesPage.rope')} />}
+            onClick={toggleIsMapViewVisible}
+            sx={{ height: '55px' }}
+          />
+          {isMapViewVisible && (
+            <Box sx={mapDatePicker}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateRangeCalendar
+                  value={value}
+                  onChange={(newValue) => setValue(newValue)}
+                />
+              </LocalizationProvider>
+              <Box sx={mapDatePickerActions}>
+                <Button
+                  sx={closeDatePickerStyles}
+                  label={'Cancel'}
+                  variant={'outlined'}
+                  onClick={toggleIsMapViewVisible}
+                ></Button>
+                <Button label={'Apply'} variant={'contained'}></Button>
+              </Box>
+            </Box>
+          )}
+        </Box>
+
         <Button
           variant="lined"
           label={t('routesPage.createRoute')}
