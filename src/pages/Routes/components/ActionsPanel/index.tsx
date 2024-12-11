@@ -26,6 +26,7 @@ import {
   mapDatePickerContainer,
 } from './styles';
 import { DATE_FORMAT } from '@/constants/dateFormats';
+import { RoutesOnTheMap } from '../RoutesOnTheMap';
 
 const ActionsPanel: React.FC<{
   onDateChange: (start: string, end: string) => void;
@@ -40,6 +41,7 @@ const ActionsPanel: React.FC<{
     handleSearchClick,
     handleCreateRouteClick,
     handleViewRoutes,
+    isMapVisible,
   } = useActionsPanel(onDateChange, onSearchChange);
 
   const today = dayjs();
@@ -109,6 +111,7 @@ const ActionsPanel: React.FC<{
           onClick={handleCreateRouteClick}
         />
       </ActionButtonsContainer>
+      {isMapVisible && <RoutesOnTheMap />}
     </ActionsContainer>
   );
 };

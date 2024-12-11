@@ -11,7 +11,8 @@ const useActionsPanel = (
   onDateChange: (start: string, end: string) => void,
   onSearchChange: (searchQuery: string) => void
 ) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [isMapVisible, setIsMapVisible] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const navigate = useNavigate();
   const { token: accessToken } = useSelector((store: RootState) => store.auth);
 
@@ -42,6 +43,7 @@ const useActionsPanel = (
       );
 
       store.dispatch(setChoseRoutes(response.data));
+      setIsMapVisible(true);
     } catch (error) {
       toast.error(`${error}`);
     } finally {
@@ -58,6 +60,7 @@ const useActionsPanel = (
     onDateChange,
     handleCreateRouteClick,
     handleViewRoutes,
+    isMapVisible,
   };
 };
 
