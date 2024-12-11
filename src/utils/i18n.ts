@@ -75,6 +75,15 @@ const resources = {
         addressNotFound: 'Address not found',
         contextIsUndefined:
           'Data not found. Please check your input or try again later',
+        deletedSuccessfully: 'Route deleted successfully',
+        deletedFailed:
+          "Cannot delete this route. Route isn't exist or something went wrong, try again later",
+        deleteRouteModal: {
+          mainMessage: 'Do you really want to remove this order from route?',
+          subMessage: 'You will not be able to restore it',
+          cancelText: 'Close',
+          confirmText: 'Remove',
+        },
       },
       modal: {
         addCompanyTitle: 'Add company',

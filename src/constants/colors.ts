@@ -29,8 +29,8 @@ export const COLORS = {
       text: 'rgb(199, 40, 40)',
     },
     notArrived: {
-      bg: 'rgba(255, 159, 67, 0.16)',
-      text: 'rgb(255, 159, 67)',
+      bg: 'rgba(139, 69, 19, 0.16)',
+      text: 'rgb(139, 69, 19)',
     },
     atRisk: {
       bg: 'rgba(255, 159, 67, 0.16)',

@@ -35,12 +35,14 @@ const RouteInformBlock: FC<{
       {routeDetails.orders.map((order) => (
         <OrderDetails
           key={order.id}
+          id={order.id}
           city={
             order.collection_address.split(',')[
               order.collection_address.split(',').length - 2
             ]
           }
           startTime={dayjs(order.collection_time_start).format(FULL_TIME)}
+          status={order.status}
         />
       ))}
     </Box>

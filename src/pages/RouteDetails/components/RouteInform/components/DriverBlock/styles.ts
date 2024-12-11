@@ -16,7 +16,7 @@ export const routePropsBlockStyles: SxProps<Theme> = {
 };
 
 export const routePropsRowStyles: SxProps<Theme> = {
-  width: '200px',
+  width: '250px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',

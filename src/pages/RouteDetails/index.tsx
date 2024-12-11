@@ -5,13 +5,14 @@ import { Box } from '@mui/material';
 import Map from './components/Map';
 import RouteInformBlock from './components/RouteInform';
 import RouteDetailsControlBtns from './components/RouteDetailsControlBtns';
-import { routeDetailsPageStyles } from './styles';
-import { useGetRoute } from './useGetRoute';
+import { useRoute } from './useRoute';
 import { Coordinates, useViewPin } from './useViewPin';
+import { routeDetailsPageStyles } from './styles';
 
 interface RouteDetailsContextInterface {
   pinCoordinates: Coordinates | null;
   getPinCoordinates: (address: string) => Promise<void>;
+  handleDelete: (orderId: number) => Promise<void>;
 }
 
 const RouteDetailsContext = createContext<
@@ -27,13 +28,17 @@ export const useRouteDetails = (): RouteDetailsContextInterface => {
 };
 
 const RouteDetailsPage: FC = () => {
-  const { routeDetails, locations } = useGetRoute();
+  const { routeDetails, locations, handleDelete } = useRoute();
   const { getPinCoordinates, pinCoordinates } = useViewPin();
 
   return (
-    <RouteDetailsContext.Provider value={{ getPinCoordinates, pinCoordinates }}>
+    <RouteDetailsContext.Provider
+      value={{ getPinCoordinates, pinCoordinates, handleDelete }}
+    >
       <Box sx={routeDetailsPageStyles}>
-        {routeDetails ? <RouteInformBlock routeDetails={routeDetails} /> : ''}
+        {routeDetails && (
+          <RouteInformBlock routeDetails={{ ...routeDetails }} />
+        )}
         <Map locations={locations} />
       </Box>
       <RouteDetailsControlBtns />
