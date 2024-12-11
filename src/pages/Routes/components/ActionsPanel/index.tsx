@@ -18,9 +18,9 @@ import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
 import Button from '@/components/Button';
 import useActionsPanel from './useActionsPanel';
-import { useToggleVisible } from '@/hooks/useToggleVisible';
 import {
   closeDatePickerStyles,
+  mapContainer,
   mapDatePicker,
   mapDatePickerActions,
   mapDatePickerContainer,
@@ -32,7 +32,6 @@ const ActionsPanel: React.FC<{
   onDateChange: (start: string, end: string) => void;
   onSearchChange: (searchQuery: string) => void;
 }> = ({ onDateChange, onSearchChange }) => {
-  const [isMapViewVisible, toggleIsMapViewVisible] = useToggleVisible(false);
   const { t } = useTranslation();
   const {
     searchQuery,
@@ -42,11 +41,14 @@ const ActionsPanel: React.FC<{
     handleCreateRouteClick,
     handleViewRoutes,
     isMapVisible,
+    setIsMapVisible,
   } = useActionsPanel(onDateChange, onSearchChange);
 
   const today = dayjs();
   const plusMoth = dayjs().add(30, 'days');
   const [value, setValue] = useState<[Dayjs, Dayjs]>([today, plusMoth]);
+
+  const [isMapViewVisible, toggleIsMapViewVisible] = useState<boolean>(false);
 
   return (
     <ActionsContainer>
@@ -72,7 +74,7 @@ const ActionsPanel: React.FC<{
             variant="lined"
             label={t('routesPage.mapView')}
             startIcon={<RopeIcon src={ropeIcon} alt={t('routesPage.rope')} />}
-            onClick={toggleIsMapViewVisible}
+            onClick={() => toggleIsMapViewVisible(true)}
             sx={{ height: '55px' }}
           />
           {isMapViewVisible && (
@@ -88,7 +90,7 @@ const ActionsPanel: React.FC<{
                   sx={closeDatePickerStyles}
                   label={'Cancel'}
                   variant={'outlined'}
-                  onClick={toggleIsMapViewVisible}
+                  onClick={() => toggleIsMapViewVisible(false)}
                 ></Button>
                 <Button
                   label={'Apply'}
@@ -111,7 +113,26 @@ const ActionsPanel: React.FC<{
           onClick={handleCreateRouteClick}
         />
       </ActionButtonsContainer>
-      {isMapVisible && <RoutesOnTheMap />}
+      {isMapVisible && (
+        <>
+          <Button
+            sx={{
+              zIndex: 9,
+              position: 'relative',
+              top: '-120px',
+              left: '100px',
+            }}
+            label={'X'}
+            variant={'outlined'}
+            onClick={() => setIsMapVisible(false)}
+          ></Button>
+          <Box sx={mapContainer}>
+            <RoutesOnTheMap>
+              <Box></Box>
+            </RoutesOnTheMap>
+          </Box>
+        </>
+      )}
     </ActionsContainer>
   );
 };

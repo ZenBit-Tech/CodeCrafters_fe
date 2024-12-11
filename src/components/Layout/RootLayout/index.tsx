@@ -68,7 +68,7 @@ const RootLayout: React.FC = () => {
 
   const BRANDING = {
     logo: (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', zIndex: 5 }}>
         <img
           src={assets.logoIcon}
           alt="First Logo"

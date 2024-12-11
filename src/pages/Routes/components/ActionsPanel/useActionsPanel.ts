@@ -61,6 +61,7 @@ const useActionsPanel = (
     handleCreateRouteClick,
     handleViewRoutes,
     isMapVisible,
+    setIsMapVisible,
   };
 };
 
