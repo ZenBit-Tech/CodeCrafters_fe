@@ -35,6 +35,7 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({
             L.latLng(coords.lat, coords.lon)
           ),
           routeWhileDragging: true,
+          createMarker: () => null,
           lineOptions: {
             styles: [
               {
