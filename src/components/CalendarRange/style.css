@@ -1,27 +1,34 @@
+:root {
+  --primary-color: rgba(115, 103, 240, 1);
+  --primary-color-light: rgba(115, 103, 240, 0.16);
+  --white-color: rgba(255, 255, 255, 1);
+  --calendar-width: 500px;
+}
+
 .rdrDayHovered .rdrDayStartPreview,
 .rdrDayHovered .rdrDayEndPreview {
-  background-color: rgba(115, 103, 240, 0.16);
+  background-color: var(--primary-color-light);
 }
 
 .rdrStartEdge,
 .rdrEndEdge {
-  background-color: rgba(115, 103, 240, 1);
-  color: rgba(255, 255, 255, 1) !important;
+  background-color: var(--primary-color);
+  color: var(--white-color) !important;
 }
 
 .rdrDayStartPreview,
 .rdrDayEndPreview {
-  background-color: rgba(115, 103, 240, 1);
+  background-color: var(--primary-color);
   z-index: 0;
 }
 
 .rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
 .rdrDayInPreview ~ .rdrDayNumber span {
-  color: rgba(115, 103, 240, 1);
+  color: var(--primary-color);
 }
 
 .rdrDayInPreview {
-  background-color: rgba(115, 103, 240, 0.16);
+  background-color: var(--primary-color-light);
   border: none;
 }
 
@@ -30,11 +37,11 @@
 }
 
 .rdrCalendarWrapper {
-  width: 500px;
+  width: var(--calendar-width);
 }
 
 .rdrMonthsHorizontal {
-  width: 500px;
+  width: var(--calendar-width);
 }
 
 .rdrMonthAndYearWrapper {
