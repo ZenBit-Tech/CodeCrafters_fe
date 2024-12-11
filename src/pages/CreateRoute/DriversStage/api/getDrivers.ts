@@ -6,12 +6,14 @@ import { setDrivers } from '@/store/slices/driversSlice';
 import { store } from '@/store/store';
 import { DriverFormValues } from '@/pages/CreateRoute/DriversStage/components/DriverForm/useDriverForm';
 import { DRIVERROLE, LOGO } from '@/constants/constants';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 export const getDrivers = async (
   sortBy: 'ASC' | 'DESC',
   search: string
 ): Promise<void> => {
   try {
+    store.dispatch(setisVisible(true));
     const response: AxiosResponse = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/driver?sortBy=${sortBy}&search=${search}&companyId=1`,
       { headers: { authorization: store.getState().auth.token } }
@@ -22,6 +24,8 @@ export const getDrivers = async (
     if (error instanceof AxiosError) {
       toast(t('driverManagement.cantGetDrivers'), { type: 'error' });
     }
+  } finally {
+    store.dispatch(setisVisible(false));
   }
 };
 
@@ -30,6 +34,7 @@ export const addDrivers = async (
   companyId: number
 ): Promise<void> => {
   try {
+    store.dispatch(setisVisible(true));
     const response: AxiosResponse = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/driver`,
       {
@@ -52,5 +57,7 @@ export const addDrivers = async (
         })
       );
     }
+  } finally {
+    store.dispatch(setisVisible(false));
   }
 };

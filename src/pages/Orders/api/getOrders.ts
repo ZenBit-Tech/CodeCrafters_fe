@@ -28,7 +28,6 @@ export const getOrders = async ({
 }: GetOrdersParams): Promise<void> => {
   try {
     store.dispatch(setisVisible(true));
-    // const { routeDate } = store.getState().createRoutSettings;
 
     const orders: AxiosResponse = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/orders/?sortBy=${sortBy}${filter !== 'STATUS' ? `&filterBy=${filter}` : ''}&isNew=${isNew}${!search ? '' : `&search=${search}`}&page=${page}&companyId=${companyId}${routeDate ? `&startDate=${routeDate}` : ''}`,

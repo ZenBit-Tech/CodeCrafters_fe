@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { store } from '@/store/store';
 import { ApiUser, User } from './types';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 type FetchUsers = () => Promise<void>;
 
@@ -38,6 +39,7 @@ const useFetchUsers = (
     const sortDirection = sortOrder[sortKey];
 
     try {
+      store.dispatch(setisVisible(true));
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/users`,
         {
@@ -70,6 +72,7 @@ const useFetchUsers = (
       toast.error(t('settings.message.fetchError'));
       throw new Error(`${err}`);
     } finally {
+      store.dispatch(setisVisible(false));
       setLoading(false);
     }
   };

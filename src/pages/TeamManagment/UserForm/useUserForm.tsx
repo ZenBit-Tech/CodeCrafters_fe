@@ -9,11 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { RootState } from '@/store/store';
+import { RootState, store } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
 import { getFirstName, getSecondName } from '@/utils/nameUtils';
 
 import { UserFormInputs, UserFormProps } from '../types';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 interface UseUserFormReturn {
   isModalOpen: boolean;
@@ -71,6 +72,7 @@ export const useUserForm = ({
 
   const sendData = async (formData: UserFormInputs): Promise<void> => {
     try {
+      store.dispatch(setisVisible(true));
       const transformedData = {
         full_name: formData.fullName,
         email: formData.email,
@@ -121,8 +123,10 @@ export const useUserForm = ({
 
       closeModal();
     } catch (error) {
-      console.error(error);
       toast(t('settings.message.error'), { type: 'error' });
+      throw new Error(`${error}`);
+    } finally {
+      store.dispatch(setisVisible(false));
     }
   };
 

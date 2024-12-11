@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from '@/store/store';
 import { sendLoginLink, verifyToken } from '@/api/userActions';
 import { SignInFormData, UseSignInReturnType } from '@/interfaces/SignIn';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
@@ -42,18 +43,23 @@ const useSignIn = (
   }, [dispatch, navigate]);
 
   const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
-    if (isLocked) return;
+    try {
+      dispatch(setisVisible(true));
+      if (isLocked) return;
 
-    const { email } = data;
+      const { email } = data;
 
-    const isSent = await sendLoginLink(email)();
+      const isSent = await sendLoginLink(email)();
 
-    if (!isSent) {
-      setAttemptCount((prev) => prev + 1);
-    }
+      if (!isSent) {
+        setAttemptCount((prev) => prev + 1);
+      }
 
-    if (attemptCount + 1 >= 5) {
-      setIsLocked(true);
+      if (attemptCount + 1 >= 5) {
+        setIsLocked(true);
+      }
+    } finally {
+      dispatch(setisVisible(false));
     }
   };
 

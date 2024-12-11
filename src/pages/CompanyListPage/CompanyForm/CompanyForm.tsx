@@ -12,10 +12,11 @@ import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
 import { Company } from '@/interfaces/AdminList';
-import { RootState } from '@/store/store';
+import { RootState, store } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
 
 import { input } from './styles';
+import { setisVisible } from '@/store/slices/loaderSlice';
 
 interface CompanyFormProps {
   mode: 'create' | 'update';
@@ -93,6 +94,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
 
   const sendData = async (formData: CompanyFormInputs) => {
     try {
+      store.dispatch(setisVisible(true));
       const url = mode === 'update' ? `/company/${companyId}` : '/company';
       const method = mode === 'update' ? 'patch' : 'post';
 
@@ -133,6 +135,8 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
             : t(`company.error ${error.response?.data.message}`);
         toast(errorMessage, { type: 'error' });
       }
+    } finally {
+      store.dispatch(setisVisible(false));
     }
   };
 
