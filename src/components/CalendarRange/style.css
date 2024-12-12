@@ -1,0 +1,43 @@
+.rdrDayHovered .rdrDayStartPreview,
+.rdrDayHovered .rdrDayEndPreview {
+  background-color: var(--primary-color-light);
+}
+
+.rdrStartEdge,
+.rdrEndEdge {
+  background-color: var(--primary-color);
+  color: var(--white) !important;
+}
+
+.rdrDayStartPreview,
+.rdrDayEndPreview {
+  background-color: var(--primary-color);
+  z-index: 0;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+.rdrDayInPreview ~ .rdrDayNumber span {
+  color: var(--primary-color);
+}
+
+.rdrDayInPreview {
+  background-color: var(--primary-color-light);
+  border: none;
+}
+
+.rdrMonthName {
+  display: none;
+}
+
+.rdrCalendarWrapper {
+  width: 500px;
+}
+
+.rdrMonthsHorizontal {
+  width: 500px;
+}
+
+.rdrMonthAndYearWrapper {
+  justify-content: space-between;
+  display: none;
+}

@@ -1,4 +1,6 @@
 :root {
   --white: #fff;
   --gray: #575757b0;
+  --primary-color: rgba(115, 103, 240, 1);
+  --primary-color-light: rgba(115, 103, 240, 0.16);
 }
