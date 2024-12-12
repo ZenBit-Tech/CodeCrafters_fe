@@ -21,6 +21,8 @@ export const mapDatePickerActions: SxProps<Theme> = {
   borderRadius: '4px',
 };
 
+export const openMapDatePicker: SxProps<Theme> = { height: '55px' };
+
 export const closeDatePickerStyles: SxProps<Theme> = {
   marginRight: '15px',
 };
@@ -33,4 +35,11 @@ export const mapContainer: SxProps<Theme> = {
   top: '0',
   left: '0',
   zIndex: 8,
+};
+
+export const closeMapBtn: SxProps<Theme> = {
+  zIndex: 9,
+  position: 'relative',
+  top: '-120px',
+  left: '100px',
 };

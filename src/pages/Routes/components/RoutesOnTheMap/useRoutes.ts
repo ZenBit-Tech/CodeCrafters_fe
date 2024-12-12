@@ -1,6 +1,7 @@
+import { useSelector } from 'react-redux';
+
 import { START_ROUTE_POINT } from '@/constants/constants';
 import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
 
 interface UseRoute {
   routesDetails: string[][];

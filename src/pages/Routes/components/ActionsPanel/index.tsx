@@ -17,15 +17,18 @@ import {
 import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
 import Button from '@/components/Button';
+import { DATE_FORMAT } from '@/constants/dateFormats';
+import { useToggleVisible } from '@/hooks/useToggleVisible';
 import useActionsPanel from './useActionsPanel';
 import {
   closeDatePickerStyles,
+  closeMapBtn,
   mapContainer,
   mapDatePicker,
   mapDatePickerActions,
   mapDatePickerContainer,
+  openMapDatePicker,
 } from './styles';
-import { DATE_FORMAT } from '@/constants/dateFormats';
 import { RoutesOnTheMap } from '../RoutesOnTheMap';
 
 const ActionsPanel: React.FC<{
@@ -43,12 +46,10 @@ const ActionsPanel: React.FC<{
     isMapVisible,
     setIsMapVisible,
   } = useActionsPanel(onDateChange, onSearchChange);
-
+  const [isMapViewVisible, toggleIsMapViewVisible] = useToggleVisible(false);
   const today = dayjs();
   const plusMoth = dayjs().add(30, 'days');
   const [value, setValue] = useState<[Dayjs, Dayjs]>([today, plusMoth]);
-
-  const [isMapViewVisible, toggleIsMapViewVisible] = useState<boolean>(false);
 
   return (
     <ActionsContainer>
@@ -74,8 +75,8 @@ const ActionsPanel: React.FC<{
             variant="lined"
             label={t('routesPage.mapView')}
             startIcon={<RopeIcon src={ropeIcon} alt={t('routesPage.rope')} />}
-            onClick={() => toggleIsMapViewVisible(true)}
-            sx={{ height: '55px' }}
+            onClick={toggleIsMapViewVisible}
+            sx={openMapDatePicker}
           />
           {isMapViewVisible && (
             <Box sx={mapDatePicker}>
@@ -90,7 +91,7 @@ const ActionsPanel: React.FC<{
                   sx={closeDatePickerStyles}
                   label={'Cancel'}
                   variant={'outlined'}
-                  onClick={() => toggleIsMapViewVisible(false)}
+                  onClick={toggleIsMapViewVisible}
                 ></Button>
                 <Button
                   label={'Apply'}
@@ -116,12 +117,7 @@ const ActionsPanel: React.FC<{
       {isMapVisible && (
         <>
           <Button
-            sx={{
-              zIndex: 9,
-              position: 'relative',
-              top: '-120px',
-              left: '100px',
-            }}
+            sx={closeMapBtn}
             label={'X'}
             variant={'outlined'}
             onClick={() => setIsMapVisible(false)}
