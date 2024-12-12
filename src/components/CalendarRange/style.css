@@ -6,7 +6,7 @@
 .rdrStartEdge,
 .rdrEndEdge {
   background-color: var(--primary-color);
-  color: var(--white-color) !important;
+  color: var(--white) !important;
 }
 
 .rdrDayStartPreview,
@@ -30,11 +30,11 @@
 }
 
 .rdrCalendarWrapper {
-  width: var(--calendar-width);
+  width: 500px;
 }
 
 .rdrMonthsHorizontal {
-  width: var(--calendar-width);
+  width: 500px;
 }
 
 .rdrMonthAndYearWrapper {
