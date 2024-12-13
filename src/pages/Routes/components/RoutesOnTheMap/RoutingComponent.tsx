@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { store } from '@/store/store';
 import { START_ROUTE_POINT } from '@/constants/constants';
 import { setisVisible } from '@/store/slices/loaderSlice';
+import { generateRandomColor } from '@/utils/generateRandomColor';
 
 interface RoutingComponentProps {
   locations: string[];
@@ -80,12 +81,6 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
     } else {
       throw new Error(`Address not found: ${address}`);
     }
-  };
-
-  const generateRandomColor = (): string => {
-    return `#${Math.floor(Math.random() * 16777215)
-      .toString(16)
-      .padStart(6, '0')}`;
   };
 
   return null;
