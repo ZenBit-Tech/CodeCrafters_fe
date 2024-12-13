@@ -12,6 +12,7 @@ import ordersToDriversSlice from './slices/ordersToDriversSlice';
 import choseRouteSlice from './slices/choseRouteSlice';
 import chosePinSlice from './slices/chosePinSlice';
 import routesReducer from './slices/routesSlice';
+import choseRoutes from './slices/choseRoutes';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     choseRoute: choseRouteSlice,
     chosePin: chosePinSlice,
     routes: routesReducer,
+    choseRoutes: choseRoutes,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
