@@ -1,7 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { t } from 'i18next';
 
 import { RootState, store } from '@/store/store';
 import {
@@ -28,6 +26,10 @@ export const useChangeDate = (): {
 
   const handleDateChange = (newValue: Dayjs | null): void => {
     if (newValue) {
+      if (!newValue?.isValid()) {
+        return;
+      }
+
       if (!newValue.isBefore(new Date(), 'day')) {
         const ChangedDate = new Date(
           newValue.year(),
@@ -47,19 +49,9 @@ export const useChangeDate = (): {
           isNew: true,
           routeDate: ChangedDate,
         });
-      } else {
-        store.dispatch(setRouteDate(new Date()));
-        getOrders({
-          sortBy: ORDERS_SORTS.collection_date.asc,
-          filter: 'STATUS',
-          search: '',
-          page: 1,
-          companyId: 1,
-          isNew: true,
-          routeDate: new Date(),
-        });
-        toast(t('dateManagement.invalidDate'), { type: 'warning' });
       }
+
+      return;
     }
   };
 
