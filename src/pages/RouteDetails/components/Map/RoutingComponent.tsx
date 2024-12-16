@@ -42,6 +42,19 @@ const RoutingComponent: React.FC<RoutingComponentProps> = ({ locations }) => {
             missingRouteTolerance: 10,
           },
           show: false,
+        } as {
+          waypoints: L.LatLng[];
+          createMarker: () => null;
+          routeWhileDragging: boolean;
+          lineOptions: {
+            styles: {
+              color: string;
+              weight: number;
+            }[];
+            extendToWaypoints: boolean;
+            missingRouteTolerance: number;
+          };
+          show: boolean;
         }).addTo(map);
       } catch (error: unknown) {
         if (error instanceof Error) {
