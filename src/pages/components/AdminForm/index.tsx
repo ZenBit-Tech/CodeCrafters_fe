@@ -35,7 +35,7 @@ const AdminForm = ({
     register,
     handleSubmit,
     errors,
-    reset,
+    closeModal,
     handleFormSubmit,
     emailRegex,
   } = useAdminForm({
@@ -92,7 +92,7 @@ const AdminForm = ({
           <Button
             label={t('adminForm.cancel')}
             variant="grey"
-            onClick={() => reset()}
+            onClick={closeModal}
           />
         </Box>
       </Box>
