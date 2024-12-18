@@ -1,6 +1,5 @@
 export interface Admins {
   id: number;
-  logo: string;
   full_name: string;
   email: string;
   role: string;
