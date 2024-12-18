@@ -76,7 +76,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
     }
   }, [companyData, reset]);
 
-  const btnContent = (() => {
+  const btnContent = ((): string => {
     if (mode === 'create') {
       return t('button.addNewCompany');
     }
@@ -92,7 +92,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
     setIsModalOpen(false);
   };
 
-  const sendData = async (formData: CompanyFormInputs) => {
+  const sendData = async (formData: CompanyFormInputs): Promise<void> => {
     try {
       store.dispatch(setisVisible(true));
       const url = mode === 'update' ? `/company/${companyId}` : '/company';
@@ -206,7 +206,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
           <Button
             label={t('button.cancel')}
             variant="grey"
-            onClick={() => reset()}
+            onClick={closeModal}
           />
         </div>
       </form>

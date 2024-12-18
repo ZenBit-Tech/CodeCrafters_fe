@@ -12,7 +12,7 @@ export interface UseAdminFormReturn {
   register: UseFormReturn<AdminFormValues>['register'];
   handleSubmit: UseFormReturn<AdminFormValues>['handleSubmit'];
   errors: UseFormReturn<AdminFormValues>['formState']['errors'];
-  reset: UseFormReturn<AdminFormValues>['reset'];
+  closeModal: () => void;
   handleFormSubmit: (data: AdminFormValues) => Promise<void>;
   emailRegex: RegExp;
 }
@@ -55,7 +55,7 @@ export const useAdminForm = ({
     register,
     handleSubmit,
     errors,
-    reset,
+    closeModal,
     handleFormSubmit,
     emailRegex,
   };
