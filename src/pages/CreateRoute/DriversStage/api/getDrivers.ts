@@ -5,7 +5,7 @@ import { t } from 'i18next';
 import { setDrivers } from '@/store/slices/driversSlice';
 import { store } from '@/store/store';
 import { DriverFormValues } from '@/pages/CreateRoute/DriversStage/components/DriverForm/useDriverForm';
-import { DRIVERROLE, LOGO } from '@/constants/constants';
+import { DRIVERROLE } from '@/constants/constants';
 import { setisVisible } from '@/store/slices/loaderSlice';
 
 export const getDrivers = async (
@@ -40,7 +40,6 @@ export const addDrivers = async (
       {
         ...formData,
         company_id: companyId,
-        logo: LOGO,
         role: DRIVERROLE,
       },
       { headers: { authorization: store.getState().auth.token } }

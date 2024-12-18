@@ -3,7 +3,7 @@ import i18n from '@/utils/i18n';
 
 import { Admins, AdminForm, Company } from '@/interfaces/AdminList';
 import axiosInstance from '@/utils/axiosInstance';
-import { ADMINROLE, LOGO } from '@/constants/constants';
+import { ADMINROLE } from '@/constants/constants';
 import { store } from '@/store/store';
 import { setisVisible } from '@/store/slices/loaderSlice';
 
@@ -40,7 +40,6 @@ export const addAdmin = async (
   try {
     const response = await axiosInstance.post(`/admins`, {
       ...formData,
-      logo: LOGO,
       company_id: companyId,
       role: ADMINROLE,
     });
@@ -61,7 +60,6 @@ export const updateAdmin = async (
     store.dispatch(setisVisible(true));
     const response = await axiosInstance.patch(`/admins/${userId}`, {
       ...formData,
-      logo: LOGO,
     });
     if (response.data.status === 200) {
       toast.success(i18n.t('adminApi.updated_successfully'));
