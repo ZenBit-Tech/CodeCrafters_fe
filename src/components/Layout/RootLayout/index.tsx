@@ -36,12 +36,7 @@ const RootLayout: React.FC = () => {
         segment: 'orders',
         title: t('navigation.orders'),
         icon: <LuggageIcon />,
-        customTitle: (
-          <CustomNavigationItem
-            title={t('navigation.orders')}
-            count={newOrdersCount}
-          />
-        ),
+        action: <CustomNavigationItem count={newOrdersCount} />,
       },
       {
         segment: 'routes',
