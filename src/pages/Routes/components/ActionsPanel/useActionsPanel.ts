@@ -57,10 +57,16 @@ const useActionsPanel = (
   const handleViewRoutes = async (from: string, to: string): Promise<void> => {
     try {
       store.dispatch(setisVisible(true));
+      console.log(from, to);
+      // console.log(
+      //   `${import.meta.env.VITE_BASE_URL}/route/by-date-range?from=${new Date(from)}&to=${new Date(to)}`
+      // );
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/route/by-date-range?from=${from}&to=${to}`,
         { headers: { authorization: accessToken } }
       );
+
+      console.log(response);
 
       store.dispatch(setChoseRoutes(response.data));
       setIsMapVisible(true);
