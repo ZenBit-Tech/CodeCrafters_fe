@@ -17,7 +17,7 @@ import {
 import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
 import Button from '@/components/Button';
-import { DATE_FORMAT } from '@/constants/dateFormats';
+import { DATE } from '@/constants/dateFormats';
 import { useToggleVisible } from '@/hooks/useToggleVisible';
 import useActionsPanel from './useActionsPanel';
 import {
@@ -98,8 +98,8 @@ const ActionsPanel: React.FC<{
                   variant={'contained'}
                   onClick={() =>
                     handleViewRoutes(
-                      value[0]?.format(DATE_FORMAT),
-                      value[1].format(DATE_FORMAT)
+                      value[0]?.format(DATE),
+                      value[1].format(DATE)
                     )
                   }
                 ></Button>
