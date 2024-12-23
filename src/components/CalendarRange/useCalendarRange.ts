@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Range, RangeKeyDict } from 'react-date-range';
 import { addMonths, format } from 'date-fns';
 
@@ -38,6 +38,26 @@ export const useCalendarRange = (
     endDate: INITIAL_DATE,
     key: 'selection',
   });
+
+  useEffect(() => {
+    setConfirmedRange({
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    });
+    setTempRange({
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    });
+
+    setCurrentMonth(new Date());
+
+    onDateChange(
+      format(new Date(), DATE_FORMAT),
+      format(new Date(), DATE_FORMAT)
+    );
+  }, [onDateChange]);
 
   const handleSelect = (ranges: RangeKeyDict): void => {
     const { selection } = ranges;
