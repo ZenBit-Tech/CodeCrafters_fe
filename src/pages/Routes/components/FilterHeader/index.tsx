@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from 'i18next';
 import {
   Checkbox,
   ListItemText,
@@ -20,7 +21,6 @@ interface FilterHeaderProps {
 
 const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
   const {
-    t,
     selectedDrivers,
     selectedStops,
     selectedStatuses,

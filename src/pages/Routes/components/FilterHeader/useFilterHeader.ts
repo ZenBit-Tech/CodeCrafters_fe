@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 
 import { RootState } from '@/store/store';
 import { getRouteFilters } from '@/api/routesActions';
+import { Filters } from '@/interfaces/Routes';
 
-interface Filters {
-  drivers: string[];
-  stops: number[];
-  statuses: string[];
+interface UseFilterHeaderReturn {
+  selectedDrivers: string[];
+  selectedStops: number[];
+  selectedStatuses: string[];
+  uniqueDrivers: string[];
+  uniqueStops: number[];
+  uniqueStatuses: string[];
+  handleDriverChange: (drivers: string[]) => void;
+  handleStopsChange: (stops: number[]) => void;
+  handleStatusChange: (statuses: string[]) => void;
 }
 
-const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
+const useFilterHeader = (
+  onFilterChange: (filters: Filters) => void
+): UseFilterHeaderReturn => {
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
   const [selectedStops, setSelectedStops] = useState<number[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
@@ -20,13 +28,12 @@ const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
   const [uniqueStops, setStops] = useState<number[]>([]);
   const [uniqueStatuses, setStatuses] = useState<string[]>([]);
 
-  const { t } = useTranslation();
   const { startDate, endDate } = useSelector(
     (state: RootState) => state.routes
   );
 
   useEffect(() => {
-    const loadFilters = async () => {
+    const loadFilters = async (): Promise<void> => {
       const { drivers, stops, statuses } = await getRouteFilters(
         startDate,
         endDate
@@ -40,7 +47,7 @@ const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
     loadFilters();
   }, [startDate, endDate]);
 
-  const handleDriverChange = (drivers: string[]) => {
+  const handleDriverChange = (drivers: string[]): void => {
     setSelectedDrivers(drivers);
     onFilterChange({
       drivers,
@@ -49,7 +56,7 @@ const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
     });
   };
 
-  const handleStopsChange = (stops: number[]) => {
+  const handleStopsChange = (stops: number[]): void => {
     setSelectedStops(stops);
     onFilterChange({
       drivers: selectedDrivers,
@@ -58,7 +65,7 @@ const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
     });
   };
 
-  const handleStatusChange = (statuses: string[]) => {
+  const handleStatusChange = (statuses: string[]): void => {
     setSelectedStatuses(statuses);
     onFilterChange({
       drivers: selectedDrivers,
@@ -68,7 +75,6 @@ const useFilterHeader = (onFilterChange: (filters: Filters) => void) => {
   };
 
   return {
-    t,
     selectedDrivers,
     selectedStops,
     selectedStatuses,

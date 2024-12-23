@@ -13,12 +13,12 @@ import {
 } from '@/store/slices/routesSlice';
 import { RootState } from '@/store/store';
 import { StatusEnum } from '@/constants/status';
-import { RouteData } from '@/interfaces/Routes';
+import { RouteData, UseRoutesReturn } from '@/interfaces/Routes';
 import { processFullName } from '@/utils/processFullName';
 import { formatDate } from '@/utils/formatDate';
 import { calculateRouteTime } from '@/utils/calculateRouteTime';
 
-const useRoutes = () => {
+const useRoutes = (): UseRoutesReturn => {
   const [filters, setFilters] = useState<{
     drivers: string[];
     stops: number[];
@@ -43,7 +43,7 @@ const useRoutes = () => {
   } = useSelector((state: RootState) => state.routes);
 
   useEffect(() => {
-    const fetchRoutes = async () => {
+    const fetchRoutes = async (): Promise<void> => {
       const data = await getRoutesByDateRange(
         startDate,
         endDate,
@@ -99,16 +99,16 @@ const useRoutes = () => {
     }
   };
 
-  const handlePageChange = (_e: ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_e: ChangeEvent<unknown>, value: number): void => {
     dispatch(setPage(value));
   };
 
-  const handleDateChange = (start: string, end: string) => {
+  const handleDateChange = (start: string, end: string): void => {
     dispatch(setStartDate(start));
     dispatch(setEndDate(end));
   };
 
-  const handleSearchChange = (query: string) => {
+  const handleSearchChange = (query: string): void => {
     setSearchQuery(query);
   };
 
@@ -116,7 +116,7 @@ const useRoutes = () => {
     drivers: string[];
     stops: number[];
     statuses: string[];
-  }) => {
+  }): void => {
     setFilters(newFilters);
   };
 
