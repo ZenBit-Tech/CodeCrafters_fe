@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { getRoutesByDateRange } from '@/api/routesActions';
 import {
@@ -28,6 +29,7 @@ const useRoutes = () => {
     statuses: [],
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const {
@@ -118,6 +120,10 @@ const useRoutes = () => {
     setFilters(newFilters);
   };
 
+  const handleCreateRouteClick = (): void => {
+    navigate('/date-management');
+  };
+
   return {
     routes,
     page,
@@ -132,6 +138,7 @@ const useRoutes = () => {
     filters,
     startDate,
     endDate,
+    handleCreateRouteClick,
   };
 };
 
