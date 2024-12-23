@@ -8,7 +8,8 @@ export const Container = styled(Box)({
 export const CalendarTrigger = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: '8px 12px',
+  padding: '0 16px',
+  height: '55px',
   border: `1px solid ${theme.palette.grey[400]}`,
   borderRadius: '4px',
   cursor: 'pointer',
