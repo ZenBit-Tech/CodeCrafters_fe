@@ -46,12 +46,7 @@ export const getRoutesByDateRange = async (
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
-      const errorMessage =
-        error.response.data.message ||
-        i18n.t('routesPage.routesApi.unexpected_error');
-      toast.error(i18n.t(errorMessage));
-    } else {
-      toast.error(i18n.t('routesPage.routesApi.fetch_failed'));
+      throw new Error(i18n.t(`${error.response.data.message}`));
     }
     throw new Error(i18n.t('routesPage.routesApi.unexpected_error'));
   } finally {
