@@ -278,6 +278,7 @@ const resources = {
         previous: 'Previous',
         next: 'Next',
         pagination: 'Showing {{start}} to {{end}} of {{total}} routes',
+        noRoutes: 'No routes have been sent to drivers yet',
         routesApi: {
           unexpected_error:
             'An unexpected error occurred. Please try again later.',

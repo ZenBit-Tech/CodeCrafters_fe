@@ -22,6 +22,7 @@ const RoutesPage: React.FC = () => {
     handleDateChange,
     handleSearchChange,
     handleFilterChange,
+    handleCreateRouteClick,
   } = useRoutes();
 
   return (
@@ -38,7 +39,7 @@ const RoutesPage: React.FC = () => {
       <Divider />
 
       {routes.length === 0 ? (
-        <NoRoutesMessage />
+        <NoRoutesMessage onCreateRouteClick={handleCreateRouteClick} />
       ) : (
         <>
           <RouteTable

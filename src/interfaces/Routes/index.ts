@@ -1,5 +1,6 @@
+import React, { ChangeEvent } from 'react';
+
 import { StatusEnum } from '@/constants/status';
-import React from 'react';
 
 export interface RouteData {
   route_id: number;
@@ -58,4 +59,39 @@ export interface UseRoutesPage {
   setStatusFilter: (status: string | null) => void;
   handleSort: (field: string) => void;
   handleChangePage: (event: React.ChangeEvent<unknown>, value: number) => void;
+}
+
+export interface Filters {
+  drivers: string[];
+  stops: number[];
+  statuses: string[];
+}
+
+export interface TransformedRoute {
+  routeId: number;
+  date: string;
+  driverFirstName: string;
+  driverLastName: string;
+  driverPhone: string;
+  stopsCount: number;
+  routeTime: string;
+  distance: number;
+  status: StatusEnum;
+}
+
+export interface UseRoutesReturn {
+  routes: TransformedRoute[];
+  page: number;
+  rowsPerPage: number;
+  sortField: string;
+  sortDirection: 'asc' | 'desc';
+  handleSort: (field: string) => void;
+  handlePageChange: (_e: ChangeEvent<unknown>, value: number) => void;
+  handleDateChange: (start: string, end: string) => void;
+  handleSearchChange: (query: string) => void;
+  handleFilterChange: (newFilters: Filters) => void;
+  filters: Filters;
+  startDate: string;
+  endDate: string;
+  handleCreateRouteClick: () => void;
 }
