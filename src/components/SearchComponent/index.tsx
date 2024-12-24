@@ -1,14 +1,16 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Box, TextField } from '@mui/material';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import searchIcon from '@/assets/icons/search.svg';
 import { rowStyles, formWrapper, searchInputStyles } from './styles';
+import { useHandleKeyDown } from './useHandleKeyDown';
 
 const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
   onSearch,
 }) => {
   const methods = useForm<{ search: string }>();
+  const { handleKeyDown } = useHandleKeyDown(onSearch);
 
   return (
     <Box sx={rowStyles}>
@@ -28,6 +30,7 @@ const SearchComponent: FC<{ onSearch: (search: string) => void }> = ({
                 sx={searchInputStyles}
                 value={value}
                 onChange={onChange}
+                onKeyDown={handleKeyDown}
                 label={'search'}
               />
             )}
