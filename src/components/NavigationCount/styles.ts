@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
@@ -6,12 +6,8 @@ import { FONT } from '@/constants/font';
 export const Container = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'end',
   width: '100%',
-});
-
-export const Title = styled(Typography)({
-  display: 'inline-block',
 });
 
 export const Count = styled(Box)({
