@@ -20,7 +20,11 @@ export const useCreateRoutes = (): {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getRoutesData([...checkedOrders], [...drivers]);
+    if (checkedOrders.length === 0) {
+      navigate('/orders');
+    } else {
+      getRoutesData([...checkedOrders], [...drivers]);
+    }
   }, [checkedOrders, drivers]);
 
   const mappedRoutes = routeData.map((orderToDriver) => {
