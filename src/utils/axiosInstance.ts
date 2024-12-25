@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-import { logout } from '@/store/slices/authSlice';
 import { store } from '@/store/store';
-import { history } from '@/utils/history';
+import { openModal } from '@/store/slices/tokenModalSlice';
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:4000',
@@ -24,8 +23,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      store.dispatch(logout());
-      history.push('/');
+      store.dispatch(openModal());
     }
     return Promise.reject(error);
   }
