@@ -21,6 +21,7 @@ import { FONT } from '@/constants/font';
 import useUsers from './useFetchUsers';
 import UserForm from './UserForm/UserForm';
 import useUserFilters from './useUserFilters';
+import { noUsers } from './UserForm/styles';
 
 const columns = [
   { key: 'role', label: t('settings.columns.role') },
@@ -169,21 +170,27 @@ const TeamManagementPage: React.FC = () => {
 
         <Divider />
 
-        {users.map((user) => (
-          <UserRow
-            key={Number(user.id)}
-            user={{
-              id: Number(user.id),
-              fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
-              email: user.email,
-              phoneNumber: user.phoneNumber,
-              role: user.role,
-            }}
-            fetchUsers={fetchUsers}
-            addUserToList={addUserToList}
-          />
-        ))}
-
+        {users.length === 0 ? (
+          <Typography sx={noUsers}>
+            {t('settings.message.noUsersFound')}
+          </Typography>
+        ) : (
+          users.map((user) => (
+            <UserRow
+              key={Number(user.id)}
+              user={{
+                id: Number(user.id),
+                fullName:
+                  `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                role: user.role,
+              }}
+              fetchUsers={fetchUsers}
+              addUserToList={addUserToList}
+            />
+          ))
+        )}
         <Box
           sx={{
             display: 'flex',

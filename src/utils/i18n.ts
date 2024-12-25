@@ -150,6 +150,7 @@ const resources = {
           addSuccess: 'User successfully added',
           error: 'Something went wrong. Try again later',
           errorDelete: 'Failed to delete user',
+          noUsersFound: 'No users matching these conditions were found.',
         },
         popup: {
           heading: 'Confirm Deletion',
