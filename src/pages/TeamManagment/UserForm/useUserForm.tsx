@@ -8,6 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 import { RootState, store } from '@/store/store';
 import axiosInstance from '@/utils/axiosInstance';
@@ -123,7 +124,11 @@ export const useUserForm = ({
 
       closeModal();
     } catch (error) {
-      toast(t('settings.message.error'), { type: 'error' });
+      if (axios.isAxiosError(error)) {
+        const errorMessage =
+          t(`${error.response?.data?.message}`) || t('settings.message.error');
+        toast(errorMessage, { type: 'error' });
+      }
       throw new Error(`${error}`);
     } finally {
       store.dispatch(setisVisible(false));
