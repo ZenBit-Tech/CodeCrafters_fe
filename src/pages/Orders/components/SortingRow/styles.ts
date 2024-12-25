@@ -5,6 +5,7 @@ import { FONT } from '@/constants/font';
 
 export const sortingRow: SxProps<Theme> = {
   width: '1238px',
+  marginTop: '15px',
   background: COLORS.white,
   padding: '10px 25px',
   display: 'flex',

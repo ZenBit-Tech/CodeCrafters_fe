@@ -5,7 +5,6 @@ import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
 
 import UserAvatar from '@/components/UserAvatar';
-import editIcon from '@/assets/icons/edit.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
 import {
   routeDetailsHeaderStyles,
@@ -58,7 +57,6 @@ export const RouteDetails: FC<RouteDetailsInterface> = ({
           <Typography>#{route_id}</Typography>
         </Box>
         <Box sx={routeHeaderIconsStyles}>
-          <img src={editIcon} alt="editIcon" />
           <img
             src={eyeIcon}
             alt="eyeIcon"
