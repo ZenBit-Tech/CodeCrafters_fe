@@ -3,7 +3,7 @@ import { Box, Divider, IconButton, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { t } from 'i18next';
 
-import { assets } from '@/assets/assets';
+import trashIcon from '@/assets/icons/delete.svg';
 import UserAvatar from '@/components/UserAvatar';
 import { COLORS } from '@/constants/colors';
 import { User } from '@/pages/TeamManagment/types';
@@ -107,7 +107,7 @@ const UserRow: React.FC<UserItemProps> = ({
             }}
           />
           <IconButton onClick={() => setIsPopupOpen(true)} aria-label="Delete">
-            <img src={assets.trashIcon} alt="delete-icon" />
+            <img src={trashIcon} alt="delete-icon" />
           </IconButton>
         </Box>
       </Box>
