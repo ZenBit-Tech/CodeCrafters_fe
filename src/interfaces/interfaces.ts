@@ -18,6 +18,12 @@ export const OrderStatuses: Record<string, StatusEnum> = {
   'Not arrived': StatusEnum.NOT_ARRIVED,
   'At Risk': StatusEnum.AT_RISK,
   Upcoming: StatusEnum.UPCOMING,
+  'Customer Informed': StatusEnum.CUSTOMER_INFORMED,
+  'Transporter Locked': StatusEnum.TRANSPORTER_LOCKED,
+  'Identity Verified': StatusEnum.IDENTITY_VERIFIED,
+  'Boarding pass verified': StatusEnum.BOARDING_PASS_VERIFIED,
+  'Baggage confirmed': StatusEnum.BAGGAGE_CONFIRMED,
+  'Customer confirmed': StatusEnum.CUSTOMER_CONFIRMED,
 };
 
 export interface Customer {

@@ -59,6 +59,30 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       backgroundColor: COLORS.status.upcoming.bg,
       color: COLORS.status.upcoming.text,
     },
+    'Customer Informed': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    'Transporter Locked': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    'Identity Verified': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    'Boarding pass verified': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    'Baggage confirmed': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
+    'Customer confirmed': {
+      backgroundColor: COLORS.status.upcoming.bg,
+      color: COLORS.status.upcoming.text,
+    },
   };
 
   const formattedStatus = t(`${status}`)
