@@ -5,4 +5,5 @@ export enum StatusEnum {
   NOT_ARRIVED = 'not_arrived',
   AT_RISK = 'at_risk',
   UPCOMING = 'upcoming',
+  EMPTY_STATUS = '',
 }

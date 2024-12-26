@@ -14,6 +14,7 @@ const Status: React.FC<StatusProps> = ({ status }) => {
   const { t } = useTranslation();
 
   const statusStyles = {
+    '': {},
     on_time: {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
