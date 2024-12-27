@@ -180,6 +180,10 @@ const resources = {
         invalidExpiredLink: 'Invalid or expired link.',
         verificationError:
           'An error occurred during verification. Please try again.',
+        missingEmail: 'User email is missing',
+        tokenTitle: 'Token Expired',
+        tokenDescription: 'Your Confirmation link was expired. ',
+        buttonText: 'Send confirmation link again',
       },
       signin: {
         welcomeMessage: 'Welcome to Smartporters! 👋',

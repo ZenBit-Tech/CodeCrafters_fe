@@ -12,6 +12,7 @@ interface VerifyTokenResponse {
   token: string;
   role: string;
   companyId: number;
+  email: string;
 }
 
 export const sendLoginLink = (email: string) => async (): Promise<boolean> => {
@@ -48,10 +49,11 @@ export const verifyToken =
         },
       });
 
-      const { token, role, companyId }: VerifyTokenResponse = response.data;
+      const { token, role, companyId, email }: VerifyTokenResponse =
+        response.data;
 
       if (token) {
-        dispatch(setAccessToken({ token, role, companyId }));
+        dispatch(setAccessToken({ token, role, companyId, email }));
       } else {
         toast.error(i18n.t('auth.invalidExpiredLink'));
       }
