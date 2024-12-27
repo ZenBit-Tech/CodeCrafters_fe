@@ -62,7 +62,7 @@ const useFetchUsers = (
           ...user,
           firstName,
           lastName: lastNameParts.join(' ') || '',
-          phoneNumber: user.phone_number || t('setting.noPhone'),
+          phoneNumber: user.phone_number || t('settings.noPhone'),
         };
       });
 
