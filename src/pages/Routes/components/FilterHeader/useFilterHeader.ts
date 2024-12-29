@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { getRouteFilters } from '@/api/routesActions';
 import { Filters } from '@/interfaces/Routes';
+import { formatStatus } from '@/utils/formatStatus';
 
 interface UseFilterHeaderReturn {
   selectedDrivers: string[];
@@ -41,7 +42,7 @@ const useFilterHeader = (
 
       setDrivers(drivers);
       setStops(stops);
-      setStatuses(statuses);
+      setStatuses(statuses.map(formatStatus));
     };
 
     loadFilters();
