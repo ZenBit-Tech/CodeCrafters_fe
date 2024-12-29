@@ -17,11 +17,11 @@ import Loader from '@/components/Loader/Loader';
 import UserRow from '@/components/UserRow';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import ConditionalWrapper from '@/components/ConditionalWrapper';
 
 import useUsers from './useFetchUsers';
 import UserForm from './UserForm/UserForm';
 import useUserFilters from './useUserFilters';
-import { noUsers } from './UserForm/styles';
 
 const columns = [
   { key: 'role', label: t('settings.columns.role') },
@@ -170,12 +170,11 @@ const TeamManagementPage: React.FC = () => {
 
         <Divider />
 
-        {users.length === 0 ? (
-          <Typography sx={noUsers}>
-            {t('settings.message.noUsersFound')}
-          </Typography>
-        ) : (
-          users.map((user) => (
+        <ConditionalWrapper
+          items={users}
+          emptyContent={t('settings.message.noUsersFound')}
+        >
+          {users.map((user) => (
             <UserRow
               key={Number(user.id)}
               user={{
@@ -189,8 +188,8 @@ const TeamManagementPage: React.FC = () => {
               fetchUsers={fetchUsers}
               addUserToList={addUserToList}
             />
-          ))
-        )}
+          ))}
+        </ConditionalWrapper>
         <Box
           sx={{
             display: 'flex',

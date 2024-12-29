@@ -1,7 +1,6 @@
 import { SxProps, Theme } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 
 export const input: SxProps<Theme> = {
   width: '100%',
@@ -38,15 +37,4 @@ export const form: SxProps<Theme> = {
 
 export const addBtn: SxProps<Theme> = {
   marginRight: '12px !important',
-};
-
-export const noUsers: SxProps<Theme> = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  textAlign: 'center',
-  color: COLORS.text.light,
-  marginTop: '20px',
-  fontSize: FONT.fontSize.extraLarge,
-  minHeight: '50vh',
 };
