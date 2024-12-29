@@ -5,6 +5,10 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "declaration": true, 
+    "composite": true, 
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
 
     "baseUrl": "./src",
     "paths": {
@@ -15,7 +19,6 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
     "jsx": "react-jsx",
 
     "strict": true,
@@ -24,5 +27,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "vite.config.ts", "jest.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
