@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Route } from '@/interfaces/Routes';
 
-interface RoutesState {
+export interface RoutesState {
   routes: Route[];
   page: number;
   sortField: string;

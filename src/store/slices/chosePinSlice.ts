@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LatLngExpression } from 'leaflet';
 
-interface ChosePinState {
+export interface ChosePinState {
   value: string | null;
   coordinates: LatLngExpression | null;
 }

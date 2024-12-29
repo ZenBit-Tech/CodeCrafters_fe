@@ -1,7 +1,7 @@
 import { Customer } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface DriversSliceInterface {
+export interface DriversSliceInterface {
   drivers: Customer[];
 }
 
