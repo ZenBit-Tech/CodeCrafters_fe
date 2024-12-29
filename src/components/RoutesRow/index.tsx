@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
 
@@ -7,17 +6,14 @@ import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
 import { StatusEnum } from '@/constants/status';
 
-import { IconWrapper } from '@/components/RoutesRow/styles';
+import { IconWrapper, NotesCount } from '@/components/RoutesRow/styles';
 import noteIcon from '@/assets/icons/note.svg';
 import visibilityIcon from '@/assets/icons/eye.svg';
 import moreIcon from '@/assets/icons/dots-vertical.svg';
 import UserAvatar from '@/components/UserAvatar';
 import Status from '@/components/Status';
-
-const normalizeStatus = (status: string): StatusEnum => {
-  const normalizedStatus = status.toLowerCase().replace(/ /g, '_');
-  return StatusEnum[normalizedStatus.toUpperCase() as keyof typeof StatusEnum];
-};
+import RouteDetailsModal from '@/pages/Routes/components/RouteDetailsModal';
+import useRoutesRow from './useRoutesRow';
 
 interface RoutesRowProps {
   routeId: number;
@@ -29,6 +25,7 @@ interface RoutesRowProps {
   route_time: string;
   distance: number;
   status: StatusEnum;
+  failedOrdersCount: number;
 }
 
 const RoutesRow: React.FC<RoutesRowProps> = ({
@@ -41,17 +38,20 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
   route_time,
   distance,
   status,
+  failedOrdersCount,
 }) => {
-  const navigate = useNavigate();
-
-  const handleViewDetails = (): void => {
-    navigate(`/routes/${routeId}`);
-  };
+  const {
+    handleViewDetails,
+    handleNoteIconClick,
+    setModalOpen,
+    modalOpen,
+    modalData,
+  } = useRoutesRow(routeId);
 
   return (
     <Box
       display="grid"
-      gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr"
+      gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1fr 1.5fr"
       padding={2}
       gap={2}
       borderBottom={`1px solid ${COLORS.text.border}`}
@@ -88,10 +88,19 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
       <Typography variant="body2" color={COLORS.text.medium}>
         {distance} km
       </Typography>
-      <Status status={normalizeStatus(status)} />
+      <Status status={status} />
       <Box display="flex" gap={1}>
-        <IconButton>
+        <IconButton
+          onClick={failedOrdersCount > 0 ? handleNoteIconClick : undefined}
+          disabled={failedOrdersCount === 0}
+          sx={{
+            cursor: failedOrdersCount > 0 ? 'pointer' : 'disabled',
+          }}
+        >
           <IconWrapper src={noteIcon} alt={t('Notifications')} />
+          {failedOrdersCount > 0 && (
+            <NotesCount>{failedOrdersCount}</NotesCount>
+          )}
         </IconButton>
         <IconButton onClick={handleViewDetails}>
           <IconWrapper src={visibilityIcon} alt={t('Show icon')} />
@@ -100,6 +109,12 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
           <IconWrapper src={moreIcon} alt={t('More options')} />
         </IconButton>
       </Box>
+
+      <RouteDetailsModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        data={modalData}
+      />
     </Box>
   );
 };
