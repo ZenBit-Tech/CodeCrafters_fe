@@ -2,7 +2,7 @@ import { ORDERS_SORTS } from '@/constants/ordersSorts';
 import { Order } from '@/interfaces/interfaces';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface OrderPageState {
+export interface OrderPageState {
   params: {
     sortBy: {
       type: string;

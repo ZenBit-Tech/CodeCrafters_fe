@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Driver, Order } from '@/interfaces/interfaces';
 
-interface OrderToDriversState {
+export interface OrderToDriversState {
   value: {
     driver: Driver;
     orders: Order[];

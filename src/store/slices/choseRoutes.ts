@@ -36,7 +36,7 @@ export interface RouteInform {
   }[];
 }
 
-interface ChoseRouteState {
+export interface ChoseRouteState {
   routes: RouteInform[];
 }
 

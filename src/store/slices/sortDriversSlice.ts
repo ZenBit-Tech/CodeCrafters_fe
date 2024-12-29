@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface SearchDriversInterface {
+export interface SearchDriversInterface {
   value: 'ASC' | 'DESC';
   search: string;
 }
