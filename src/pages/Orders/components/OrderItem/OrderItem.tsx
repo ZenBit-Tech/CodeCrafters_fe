@@ -18,6 +18,7 @@ import {
   statusBlock,
 } from '@/pages/Orders/components/OrderItem/styles';
 import { OrderItemInterface } from '@/pages/Orders/components/OrderItem/types';
+import { StatusEnum } from '@/constants/status';
 
 const OrderItem: FC<OrderItemInterface> = ({
   collectionDate,
@@ -73,7 +74,7 @@ const OrderItem: FC<OrderItemInterface> = ({
         </Box>
       </Box>
       <Box sx={statusBlock}>
-        <Status status={OrderStatuses[status]} />
+        <Status status={OrderStatuses[status] || StatusEnum.EMPTY_STATUS} />
       </Box>
       <Typography sx={routeBlock}>{t(`${routeIdView}`)}</Typography>
     </Box>
