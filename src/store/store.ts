@@ -13,6 +13,7 @@ import choseRouteSlice from './slices/choseRouteSlice';
 import chosePinSlice from './slices/chosePinSlice';
 import routesReducer from './slices/routesSlice';
 import choseRoutes from './slices/choseRoutes';
+import tokenModalSlice from './slices/tokenModalSlice';
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     chosePin: chosePinSlice,
     routes: routesReducer,
     choseRoutes: choseRoutes,
+    tokenModal: tokenModalSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

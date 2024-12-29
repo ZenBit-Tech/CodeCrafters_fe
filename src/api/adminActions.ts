@@ -1,11 +1,12 @@
 import { toast } from 'react-toastify';
-import i18n from '@/utils/i18n';
+import axios from 'axios';
 
 import { Admins, AdminForm, Company } from '@/interfaces/AdminList';
 import axiosInstance from '@/utils/axiosInstance';
-import { ADMINROLE } from '@/constants/constants';
+import { ADMINROLE, STATUS_NOT_FOUND } from '@/constants/constants';
 import { store } from '@/store/store';
 import { setisVisible } from '@/store/slices/loaderSlice';
+import i18n from '@/utils/i18n';
 
 export const getAdminList = async (companyId: number): Promise<Admins[]> => {
   try {
@@ -25,9 +26,16 @@ export const getCompanyById = async (company_id: number): Promise<Company> => {
     store.dispatch(setisVisible(true));
     const response = await axiosInstance.get(`/company/${company_id}`);
     return response.data;
-  } catch {
-    toast.error(i18n.t('adminApi.fetch_failed'));
-    throw new Error(i18n.t('adminApi.unexpected_error'));
+  } catch (error) {
+    if (
+      axios.isAxiosError(error) &&
+      error.response?.status === STATUS_NOT_FOUND
+    ) {
+      toast.error(i18n.t('adminApi.companyNotFound'));
+    } else {
+      toast.error(i18n.t('adminApi.unexpectedError'));
+    }
+    throw error;
   } finally {
     store.dispatch(setisVisible(false));
   }

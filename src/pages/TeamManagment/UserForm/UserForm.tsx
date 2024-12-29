@@ -2,7 +2,7 @@ import React from 'react';
 import { MenuItem, Select, Typography } from '@mui/material';
 import { t } from 'i18next';
 
-import { assets } from '@/assets/assets';
+import editIcon from '@/assets/icons/edit.svg';
 import Button from '@/components/Button';
 import ModalForm from '@/components/ModalForm';
 import TextInput from '@/components/TextInput';
@@ -27,9 +27,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
   return (
     <ModalForm
       isOpenBtn={props.mode === 'create'}
-      btnContent={
-        props.mode === 'create' ? t('button.addNewUser') : assets.editIcon
-      }
+      btnContent={props.mode === 'create' ? t('button.addNewUser') : editIcon}
       formTitle={
         props.mode === 'update'
           ? t('modal.updateUserTitle')

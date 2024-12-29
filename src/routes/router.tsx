@@ -20,6 +20,7 @@ import RoutesPage from '@/pages/Routes';
 import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 import RouteDetailsPage from '@/pages/RouteDetails';
 import { Roles } from '@/constants/roles';
+import TokenExpiredModal from '@/components/TokenExpiredModal';
 
 const AppRouter: React.FC = () => {
   const { isAuthenticated, role } = useSelector(
@@ -110,7 +111,12 @@ const AppRouter: React.FC = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <TokenExpiredModal />
+    </>
+  );
 };
 
 export default AppRouter;
