@@ -17,6 +17,7 @@ import Loader from '@/components/Loader/Loader';
 import UserRow from '@/components/UserRow';
 import { COLORS } from '@/constants/colors';
 import { FONT } from '@/constants/font';
+import ConditionalWrapper from '@/components/ConditionalWrapper';
 
 import useUsers from './useFetchUsers';
 import UserForm from './UserForm/UserForm';
@@ -169,21 +170,26 @@ const TeamManagementPage: React.FC = () => {
 
         <Divider />
 
-        {users.map((user) => (
-          <UserRow
-            key={Number(user.id)}
-            user={{
-              id: Number(user.id),
-              fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
-              email: user.email,
-              phoneNumber: user.phoneNumber,
-              role: user.role,
-            }}
-            fetchUsers={fetchUsers}
-            addUserToList={addUserToList}
-          />
-        ))}
-
+        <ConditionalWrapper
+          items={users}
+          emptyContent={t('settings.message.noUsersFound')}
+        >
+          {users.map((user) => (
+            <UserRow
+              key={Number(user.id)}
+              user={{
+                id: Number(user.id),
+                fullName:
+                  `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                role: user.role,
+              }}
+              fetchUsers={fetchUsers}
+              addUserToList={addUserToList}
+            />
+          ))}
+        </ConditionalWrapper>
         <Box
           sx={{
             display: 'flex',
