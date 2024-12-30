@@ -13,7 +13,7 @@ import { routeDetailsStyles } from './styles';
 const RouteDetailsControlBtns: FC = () => {
   const [isRouteDeleteVisible, toggleIsRouteDeleteVisible] =
     useToggleVisible(false);
-  const { handleDelete } = useDeleteRoute();
+  const { handleDelete, handlePreviousPage } = useDeleteRoute();
 
   return (
     <Box sx={routeDetailsStyles}>
@@ -21,6 +21,7 @@ const RouteDetailsControlBtns: FC = () => {
         label={t('Previous step')}
         variant="outlined"
         startIcon={<img src={arrowLeft} alt="backBtn" />}
+        onClick={handlePreviousPage}
       />
       <Button
         label={t('Delete the route')}
