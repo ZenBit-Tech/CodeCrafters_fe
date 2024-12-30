@@ -1,7 +1,8 @@
 import { styled } from '@mui/material/styles';
-import { Box, Select, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 import { COLORS } from '@/constants/colors';
+import Button from '@/components/Button';
 
 export const Container = styled(Box)({
   backgroundColor: COLORS.text.white,
@@ -60,24 +61,6 @@ export const ColumnHeader = styled(Box)({
   gap: '8px',
 });
 
-export const StyledSelect = styled(Select)({
-  '&.MuiSelect-root': {
-    padding: 0,
-    minWidth: 'auto',
-  },
-  '&.MuiOutlinedInput-root': {
-    '& fieldset': {
-      border: 'none',
-    },
-  },
-  '&.MuiSelect-select': {
-    display: 'inline',
-  },
-  '.MuiSelect-icon': {
-    display: 'none',
-  },
-});
-
 export const RopeIcon = styled('img')({
   width: '1.375rem',
   height: '1.375rem',
@@ -88,7 +71,19 @@ export const RopeIcon = styled('img')({
 });
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiInputLabel-root': {
+    fontSize: '0.875rem',
+    lineHeight: '1.5',
+    transform: 'translate(14px, 12px)',
+    '&.Mui-focused, &.MuiInputLabel-shrink': {
+      transform: 'translate(14px, -6px) scale(0.75)',
+    },
+  },
   '& .MuiOutlinedInput-root': {
+    height: '38px',
+    display: 'flex',
+    alignItems: 'center',
+    paddingRight: theme.spacing(1),
     '& fieldset': {
       borderColor: COLORS.main,
     },
@@ -98,9 +93,21 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     '&.Mui-focused fieldset': {
       borderColor: COLORS.main,
     },
-    paddingRight: theme.spacing(1),
   },
   '& .MuiInputAdornment-root': {
+    margin: 0,
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
     cursor: 'pointer',
   },
+  '& .MuiInputBase-input': {
+    padding: '0 8px',
+    height: '100%',
+    boxSizing: 'border-box',
+  },
 }));
+
+export const StyledButton = styled(Button)({
+  height: '38px',
+});
