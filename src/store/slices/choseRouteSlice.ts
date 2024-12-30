@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface ChoseRouteState {
+export interface ChoseRouteState {
   value: number | null;
 }
 

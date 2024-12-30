@@ -1,4 +1,5 @@
 import { SxProps, Theme } from '@mui/material';
+
 import { COLORS } from '@/constants/colors';
 
 export const input: SxProps<Theme> = {

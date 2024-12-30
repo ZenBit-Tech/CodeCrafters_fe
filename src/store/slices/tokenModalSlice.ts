@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface tokenModalInterface {
+export interface tokenModalInterface {
   isModalOpen: boolean;
 }
 
