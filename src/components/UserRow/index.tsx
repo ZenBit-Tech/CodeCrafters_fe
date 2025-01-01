@@ -7,11 +7,12 @@ import trashIcon from '@/assets/icons/delete.svg';
 import UserAvatar from '@/components/UserAvatar';
 import { COLORS } from '@/constants/colors';
 import { User } from '@/pages/TeamManagment/types';
-import UserForm from '@/pages/TeamManagment/UserForm/UserForm';
+import UserForm from '@/pages/TeamManagment/UserForm';
 import { deleteUser } from '@/services/usersService';
 import { getFirstName, getSecondName } from '@/utils/nameUtils';
 
 import PopupMessage from '../PopupMessage';
+import { Roles } from '@/constants/roles';
 
 interface UserItemProps {
   user: {
@@ -35,6 +36,12 @@ const UserRow: React.FC<UserItemProps> = ({
   const lastName = getSecondName(user.fullName);
 
   const handleDelete = async (): Promise<void> => {
+    if (user.role === Roles.ADMIN) {
+      toast.warning(t('settings.message.unableToDelete'));
+      setIsPopupOpen(false);
+      return;
+    }
+
     try {
       await deleteUser(user.id);
       fetchUsers();
