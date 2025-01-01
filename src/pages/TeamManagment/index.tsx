@@ -5,6 +5,7 @@ import {
   Box,
   Divider,
   IconButton,
+  InputAdornment,
   MenuItem,
   Pagination,
   Select,
@@ -12,6 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { t } from 'i18next';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Loader from '@/components/Loader/Loader';
 import UserRow from '@/components/UserRow';
@@ -20,7 +22,7 @@ import { FONT } from '@/constants/font';
 import ConditionalWrapper from '@/components/ConditionalWrapper';
 
 import useUsers from './useFetchUsers';
-import UserForm from './UserForm/UserForm';
+import UserForm from './UserForm';
 import useUserFilters from './useUserFilters';
 
 const columns = [
@@ -47,6 +49,9 @@ const TeamManagementPage: React.FC = () => {
     handleRoleFilterChange,
     toggleSortOrder,
     handlePageChange,
+    triggerSearch,
+    pendingSearchTerm,
+    handleKeyDown,
   } = useUserFilters();
 
   const { users, totalPages, fetchUsers, addUserToList } = useUsers(
@@ -69,7 +74,11 @@ const TeamManagementPage: React.FC = () => {
         }}
       >
         <Typography
-          sx={{ color: COLORS.text.dark, fontWeight: FONT.fontWeight.large }}
+          sx={{
+            color: COLORS.text.dark,
+            fontWeight: FONT.fontWeight.large,
+            marginBottom: '20px',
+          }}
         >
           {t('settings.title')}
         </Typography>
@@ -77,25 +86,34 @@ const TeamManagementPage: React.FC = () => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
             marginBottom: '20px',
             height: '38px',
-            gap: 2,
           }}
         >
           <TextField
             label="Search"
             variant="outlined"
-            value={searchTerm}
+            value={pendingSearchTerm}
             onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
             placeholder="Search by name, email..."
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={triggerSearch}>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             sx={{
-              padding: 0,
+              width: '25%',
               '& .MuiOutlinedInput-root': {
                 height: '100%',
               },
               '& .MuiFormLabel-root': {
-                transform: searchTerm
+                transform: pendingSearchTerm
                   ? 'translate(14px, -9px) scale(0.75)'
                   : 'translate(14px, 9px) scale(1)',
               },
@@ -105,24 +123,28 @@ const TeamManagementPage: React.FC = () => {
               },
             }}
           />
-          <Select
-            value={filterByRole}
-            onChange={(e) => handleRoleFilterChange(e.target.value)}
-            displayEmpty
-            variant="outlined"
-            sx={{ color: COLORS.text.dark }}
-          >
-            <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
-            <MenuItem value="DISPATCHER">
-              {t('settings.select.dispatcher')}
-            </MenuItem>
-            <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
-          </Select>
-          <UserForm
-            mode="create"
-            fetchUsers={fetchUsers}
-            addUserToList={addUserToList}
-          />
+
+          <Box sx={{ display: 'flex', gap: '16px' }}>
+            <Select
+              value={filterByRole}
+              onChange={(e) => handleRoleFilterChange(e.target.value)}
+              displayEmpty
+              variant="outlined"
+              sx={{ color: COLORS.text.dark }}
+            >
+              <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
+              <MenuItem value="DISPATCHER">
+                {t('settings.select.dispatcher')}
+              </MenuItem>
+              <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
+              <MenuItem value="ADMIN">{t('settings.select.admin')}</MenuItem>
+            </Select>
+            <UserForm
+              mode="create"
+              fetchUsers={fetchUsers}
+              addUserToList={addUserToList}
+            />
+          </Box>
         </Box>
 
         <Divider />
