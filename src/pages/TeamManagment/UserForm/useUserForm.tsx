@@ -16,6 +16,7 @@ import { getFirstName, getSecondName } from '@/utils/nameUtils';
 
 import { UserFormInputs, UserFormProps } from '../types';
 import { setisVisible } from '@/store/slices/loaderSlice';
+import { Roles } from '@/constants/roles';
 
 interface UseUserFormReturn {
   isModalOpen: boolean;
@@ -73,6 +74,11 @@ export const useUserForm = ({
 
   const sendData = async (formData: UserFormInputs): Promise<void> => {
     try {
+      if (role === Roles.ADMIN) {
+        toast.warning(t('settings.message.unableToUpdate'));
+        closeModal();
+        return;
+      }
       store.dispatch(setisVisible(true));
       const transformedData = {
         full_name: formData.fullName,
