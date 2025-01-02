@@ -9,6 +9,7 @@ import { RootState, store } from '@/store/store';
 
 interface UseDeleteRoute {
   handleDelete: () => Promise<void>;
+  handlePreviousPage: () => void;
 }
 
 export const useDeleteRoute = (): UseDeleteRoute => {
@@ -32,5 +33,8 @@ export const useDeleteRoute = (): UseDeleteRoute => {
     }
   };
 
-  return { handleDelete };
+  const handlePreviousPage = (): void => {
+    navigate('/routes');
+  };
+  return { handleDelete, handlePreviousPage };
 };

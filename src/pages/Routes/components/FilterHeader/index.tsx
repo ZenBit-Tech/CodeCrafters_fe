@@ -10,6 +10,7 @@ import {
 
 import { FilterOptions, Header } from '@/pages/Routes/styles';
 import useFilterHeader from './useFilterHeader';
+import { selectStyle } from './styles';
 
 interface FilterHeaderProps {
   onFilterChange: (filters: {
@@ -46,6 +47,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
               ? (selected as string[]).join(', ')
               : t('routesPage.selectDriver')
           }
+          sx={selectStyle}
         >
           <MenuItem disabled>
             <Typography variant="subtitle2">
@@ -70,6 +72,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
               ? (selected as number[]).join(', ')
               : t('routesPage.selectStops')
           }
+          sx={selectStyle}
         >
           <MenuItem disabled>
             <Typography variant="subtitle2">
@@ -94,6 +97,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ onFilterChange }) => {
               ? (selected as string[]).join(', ')
               : t('routesPage.selectStatus')
           }
+          sx={selectStyle}
         >
           <MenuItem disabled>
             <Typography variant="subtitle2">

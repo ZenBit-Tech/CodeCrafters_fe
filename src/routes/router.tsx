@@ -8,7 +8,6 @@ import AdminListPage from '@/pages/AdminList';
 import CompanyListPage from '@/pages/CompanyListPage';
 import ProtectedRoute from '@/pages/components/ProtectedRoute';
 import DriversStagePage from '@/pages/CreateRoute/DriversStage';
-import DashboardPage from '@/pages/DashboardPage';
 import NotFoundPage from '@/pages/NotFound';
 import OrdersPage from '@/pages/Orders';
 import SignInPage from '@/pages/SignIn';
@@ -21,6 +20,7 @@ import DateManagementPage from '@/pages/CreateRoute/DateManagment';
 import RouteDetailsPage from '@/pages/RouteDetails';
 import { Roles } from '@/constants/roles';
 import TokenExpiredModal from '@/components/TokenExpiredModal';
+import RedirectBasedOnRole from '@/components/RedirectBasedOnRole';
 
 const AppRouter: React.FC = () => {
   const { isAuthenticated, role } = useSelector(
@@ -45,7 +45,7 @@ const AppRouter: React.FC = () => {
               index: true,
               element: (
                 <ProtectedRoute isAllowed={isAuthenticated}>
-                  <DashboardPage />
+                  <RedirectBasedOnRole />
                 </ProtectedRoute>
               ),
             },
@@ -99,7 +99,11 @@ const AppRouter: React.FC = () => {
               : []),
             {
               path: 'settings',
-              element: <TeamManagementPage />,
+              element: (
+                <ProtectedRoute isAllowed={role === Roles.ADMIN}>
+                  <TeamManagementPage />
+                </ProtectedRoute>
+              ),
             },
           ],
         },
