@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import { t } from 'i18next';
 
 import Status from '@/components/Status';
@@ -17,6 +17,8 @@ import {
   orderDetailsBlockStyles,
   orderRowActionsBlockStyles,
   removeOrderIconStyles,
+  noteBadgeStyles,
+  noteBadgeBlockStyles,
 } from './styles';
 
 interface OrderDetailsProps {
@@ -24,6 +26,7 @@ interface OrderDetailsProps {
   city: string;
   startTime: string;
   status: StatusEnum;
+  failedReason: string | null;
 }
 
 const OrderDetails: FC<OrderDetailsProps> = ({
@@ -31,6 +34,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({
   city,
   startTime,
   status,
+  failedReason,
 }) => {
   const { getPinCoordinates: handleChoosePin, handleDelete } =
     useRouteDetails();
@@ -45,7 +49,13 @@ const OrderDetails: FC<OrderDetailsProps> = ({
       </Box>
       <Status status={status} />
       <Box sx={orderRowActionsBlockStyles}>
-        <img src={noteIcon} alt="noteIcon" />
+        <Box sx={noteBadgeBlockStyles}>
+          <Tooltip title={failedReason || ''} arrow placement="top">
+            <img src={noteIcon} alt="noteIcon" />
+          </Tooltip>
+          {failedReason && <Box sx={noteBadgeStyles}>1</Box>}
+        </Box>
+
         <img
           src={mapPin}
           style={isVisible ? mapPinActive : mapPinStyles}

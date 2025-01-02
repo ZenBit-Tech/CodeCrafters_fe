@@ -308,6 +308,10 @@ const resources = {
           at_risk: 'At Risk',
           upcoming: 'Upcoming',
         },
+        modal: {
+          notificationsFrom: 'Notifications from {{name}}',
+          noteFromDriver: 'Note from driver',
+        },
       },
     },
   },

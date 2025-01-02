@@ -65,6 +65,23 @@ const theme = createTheme({
     borderRadius: 6,
   },
   components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: COLORS.white,
+          color: COLORS.text.dark,
+          padding: '12px',
+          borderRadius: '8px',
+          fontSize: FONT.fontSize.medium,
+          maxWidth: '40vw',
+          whiteSpace: 'pre-wrap',
+          boxShadow: COLORS.main.shadowBox,
+        },
+        arrow: {
+          color: COLORS.white,
+        },
+      },
+    },
     MuiButton: {
       variants: [
         {

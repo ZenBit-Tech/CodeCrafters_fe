@@ -1,13 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Range, RangeKeyDict } from 'react-date-range';
-import { addMonths, format } from 'date-fns';
+import { addMonths, endOfDay, format, startOfDay } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { DATE_FORMAT } from '@/constants/dateFormats';
+import { RootState } from '@/store/store';
+import { setEndDate, setStartDate } from '@/store/slices/routesSlice';
+import {
+  END_OF_DAY_FORMAT,
+  START_OF_DAY_FORMAT,
+} from '@/constants/dateFormats';
 
 interface UseCalendarRangeReturn {
   isCalendarOpen: boolean;
   currentMonth: Date;
-  confirmedRange: Range;
   tempRange: Range;
   handleSelect: (ranges: RangeKeyDict) => void;
   handleConfirm: () => void;
@@ -15,49 +20,21 @@ interface UseCalendarRangeReturn {
   handlePrevMonth: () => void;
   handleNextMonth: () => void;
   openCalendar: () => void;
-  closeCalendar: () => void;
 }
-
-const MONTH_SHIFT = 1;
 const INITIAL_DATE = new Date();
 
-export const useCalendarRange = (
-  onDateChange: (start: string, end: string) => void
-): UseCalendarRangeReturn => {
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+export const useCalendarRange = (): UseCalendarRangeReturn => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
+  const [currentMonth, setCurrentMonth] = useState<Date>(INITIAL_DATE);
 
-  const [confirmedRange, setConfirmedRange] = useState<Range>({
-    startDate: INITIAL_DATE,
-    endDate: INITIAL_DATE,
-    key: 'selection',
-  });
-
+  const dispatch = useDispatch();
+  const startDate = useSelector((state: RootState) => state.routes.startDate);
+  const endDate = useSelector((state: RootState) => state.routes.endDate);
   const [tempRange, setTempRange] = useState<Range>({
-    startDate: INITIAL_DATE,
-    endDate: INITIAL_DATE,
+    startDate: new Date(startDate),
+    endDate: new Date(endDate),
     key: 'selection',
   });
-
-  useEffect(() => {
-    setConfirmedRange({
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
-    });
-    setTempRange({
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
-    });
-
-    setCurrentMonth(new Date());
-
-    onDateChange(
-      format(new Date(), DATE_FORMAT),
-      format(new Date(), DATE_FORMAT)
-    );
-  }, [onDateChange]);
 
   const handleSelect = (ranges: RangeKeyDict): void => {
     const { selection } = ranges;
@@ -65,39 +42,44 @@ export const useCalendarRange = (
   };
 
   const handleConfirm = (): void => {
-    setConfirmedRange(tempRange);
-    onDateChange(
-      format(tempRange.startDate as Date, DATE_FORMAT),
-      format(tempRange.endDate as Date, DATE_FORMAT)
+    const formattedStartDate = format(
+      startOfDay(tempRange.startDate as Date),
+      START_OF_DAY_FORMAT
     );
+    const formattedEndDate = format(
+      endOfDay(tempRange.endDate as Date),
+      END_OF_DAY_FORMAT
+    );
+
+    dispatch(setStartDate(formattedStartDate));
+    dispatch(setEndDate(formattedEndDate));
     setIsCalendarOpen(false);
   };
 
   const handleCancel = (): void => {
-    setTempRange(confirmedRange);
+    setTempRange({
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
+      key: 'selection',
+    });
     setIsCalendarOpen(false);
   };
 
   const handlePrevMonth = (): void => {
-    setCurrentMonth(addMonths(currentMonth, -MONTH_SHIFT));
+    setCurrentMonth(addMonths(currentMonth, -1));
   };
 
   const handleNextMonth = (): void => {
-    setCurrentMonth(addMonths(currentMonth, MONTH_SHIFT));
+    setCurrentMonth(addMonths(currentMonth, 1));
   };
 
   const openCalendar = (): void => {
     setIsCalendarOpen(true);
   };
 
-  const closeCalendar = (): void => {
-    setIsCalendarOpen(false);
-  };
-
   return {
     isCalendarOpen,
     currentMonth,
-    confirmedRange,
     tempRange,
     handleSelect,
     handleConfirm,
@@ -105,6 +87,5 @@ export const useCalendarRange = (
     handlePrevMonth,
     handleNextMonth,
     openCalendar,
-    closeCalendar,
   };
 };

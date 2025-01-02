@@ -43,6 +43,7 @@ const RouteInformBlock: FC<{
           }
           startTime={dayjs(order.collection_time_start).format(FULL_TIME)}
           status={order.status}
+          failedReason={order.failed_reason}
         />
       ))}
     </Box>

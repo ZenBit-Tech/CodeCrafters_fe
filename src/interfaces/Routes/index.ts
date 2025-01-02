@@ -11,6 +11,7 @@ export interface RouteData {
   route_companyIdId: number;
   route_userIdId: number;
   ordersCount: string;
+  failedOrdersCount: number;
 
   company_id: number;
   company_name: string;
@@ -40,6 +41,7 @@ export interface Route {
   routeTime: string;
   distance: number;
   status: StatusEnum;
+  failedOrdersCount: number;
 }
 
 export interface UseRoutesPage {
@@ -67,31 +69,27 @@ export interface Filters {
   statuses: string[];
 }
 
-export interface TransformedRoute {
-  routeId: number;
-  date: string;
-  driverFirstName: string;
-  driverLastName: string;
-  driverPhone: string;
-  stopsCount: number;
-  routeTime: string;
-  distance: number;
-  status: StatusEnum;
-}
-
 export interface UseRoutesReturn {
-  routes: TransformedRoute[];
+  routes: Route[];
   page: number;
   rowsPerPage: number;
   sortField: string;
   sortDirection: 'asc' | 'desc';
   handleSort: (field: string) => void;
   handlePageChange: (_e: ChangeEvent<unknown>, value: number) => void;
-  handleDateChange: (start: string, end: string) => void;
   handleSearchChange: (query: string) => void;
   handleFilterChange: (newFilters: Filters) => void;
   filters: Filters;
-  startDate: string;
-  endDate: string;
   handleCreateRouteClick: () => void;
+}
+
+export interface NotificationsData {
+  collection_address: string;
+  collection_date: Date;
+  collection_time_end: string;
+  collection_time_start: string;
+  failed_reason: string;
+  id: number;
+  status: StatusEnum;
+  user: { id: number; full_name: string; email: string };
 }
