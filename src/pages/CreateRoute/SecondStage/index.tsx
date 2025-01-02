@@ -54,7 +54,7 @@ const SecondStagePage: FC = () => {
           />
         ))
       ) : (
-        <EmptyOrdersComponent />
+        <EmptyOrdersComponent width={1126} />
       )}
 
       <Box sx={paginationWrapper}>
