@@ -36,7 +36,7 @@ export const RouteDetails: FC<RouteDetailsInterface> = ({
   route_id,
   orders,
 }) => {
-  const [open, setIsOpen] = useState<boolean>(false);
+  const [open, setIsOpen] = useState<boolean>(true);
   const { choseRouteId, chooseRoute } = useChooseRoute();
 
   return (
