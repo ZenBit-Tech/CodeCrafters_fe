@@ -2,6 +2,8 @@ import { FC, ReactNode } from 'react';
 import { t } from 'i18next';
 import { Typography } from '@mui/material';
 
+import { STRING_TYPE } from '@/constants/constants';
+
 import { noData } from './styles';
 
 interface ConditionalWrapperProps {
@@ -9,8 +11,6 @@ interface ConditionalWrapperProps {
   emptyContent: ReactNode;
   children: ReactNode;
 }
-
-const STRING_TYPE = 'string';
 
 const ConditionalWrapper: FC<ConditionalWrapperProps> = ({
   items,

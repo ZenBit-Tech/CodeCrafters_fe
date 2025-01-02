@@ -9,3 +9,5 @@ export const DRIVERROLE = 'driver';
 export const START_ROUTE_POINT = 'New York';
 
 export const STATUS_NOT_FOUND = 404;
+
+export const STRING_TYPE = 'string';
