@@ -17,10 +17,20 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import Loader from '@/components/Loader/Loader';
 import UserRow from '@/components/UserRow';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 import ConditionalWrapper from '@/components/ConditionalWrapper';
 
+import {
+  container,
+  title,
+  filtersContainer,
+  searchField,
+  roleSelect,
+  columnsHeader,
+  columnLabel,
+  columnTypography,
+  paginationContainer,
+  buttonContainer,
+} from './styles';
 import useUsers from './useFetchUsers';
 import UserForm from './UserForm';
 import useUserFilters from './useUserFilters';
@@ -64,33 +74,10 @@ const TeamManagementPage: React.FC = () => {
   return (
     <>
       <Loader />
-      <Box
-        sx={{
-          boxShadow: `0px 4px 18px 0px ${COLORS.text.extraLight}`,
-          borderRadius: 1,
-          backgroundColor: COLORS.text.white,
-          width: '100%',
-          padding: '24px',
-        }}
-      >
-        <Typography
-          sx={{
-            color: COLORS.text.dark,
-            fontWeight: FONT.fontWeight.large,
-            marginBottom: '20px',
-          }}
-        >
-          {t('settings.title')}
-        </Typography>
+      <Box sx={container}>
+        <Typography sx={title}>{t('settings.title')}</Typography>
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '20px',
-            height: '38px',
-          }}
-        >
+        <Box sx={filtersContainer}>
           <TextField
             label="Search"
             variant="outlined"
@@ -107,30 +94,16 @@ const TeamManagementPage: React.FC = () => {
                 </InputAdornment>
               ),
             }}
-            sx={{
-              width: '25%',
-              '& .MuiOutlinedInput-root': {
-                height: '100%',
-              },
-              '& .MuiFormLabel-root': {
-                transform: pendingSearchTerm
-                  ? 'translate(14px, -9px) scale(0.75)'
-                  : 'translate(14px, 9px) scale(1)',
-              },
-              '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
-                transform: 'translate(14px, -9px) scale(0.75)',
-                maxWidth: 'calc(133% - 32px)',
-              },
-            }}
+            sx={searchField}
           />
 
-          <Box sx={{ display: 'flex', gap: '16px' }}>
+          <Box sx={buttonContainer}>
             <Select
               value={filterByRole}
               onChange={(e) => handleRoleFilterChange(e.target.value)}
               displayEmpty
               variant="outlined"
-              sx={{ color: COLORS.text.dark }}
+              sx={roleSelect}
             >
               <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
               <MenuItem value="DISPATCHER">
@@ -149,31 +122,10 @@ const TeamManagementPage: React.FC = () => {
 
         <Divider />
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '10px 20px',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={columnsHeader}>
           {columns.map(({ key, label }) => (
-            <Box
-              key={key}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                width: key === 'role' ? '15%' : key === 'name' ? '25%' : '20%',
-              }}
-            >
-              <Typography
-                sx={{
-                  color: COLORS.text.dark,
-                  fontSize: FONT.fontSize.small,
-                }}
-              >
-                {label}
-              </Typography>
+            <Box key={key} sx={columnLabel(key)}>
+              <Typography sx={columnTypography}>{label}</Typography>
               <IconButton onClick={() => toggleSortOrder(key)}>
                 {sortOrder[validKeys[key] || key] === 'asc' ? (
                   <KeyboardArrowUpIcon />
@@ -183,9 +135,7 @@ const TeamManagementPage: React.FC = () => {
               </IconButton>
             </Box>
           ))}
-          <Typography
-            sx={{ color: COLORS.text.dark, fontSize: FONT.fontSize.small }}
-          >
+          <Typography sx={columnTypography}>
             {t('settings.columns.actions')}
           </Typography>
         </Box>
@@ -212,13 +162,7 @@ const TeamManagementPage: React.FC = () => {
             />
           ))}
         </ConditionalWrapper>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: '20px',
-          }}
-        >
+        <Box sx={paginationContainer}>
           <Pagination
             count={totalPages}
             page={page}
