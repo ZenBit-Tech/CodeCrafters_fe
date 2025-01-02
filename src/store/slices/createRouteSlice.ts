@@ -24,8 +24,14 @@ const createRouteSlice = createSlice({
     },
     removeOrder(store, action: PayloadAction<number>) {
       store.checkedOrders = store.checkedOrders.filter(
-        (order) => order !== action.payload
+        (id) => id !== action.payload
       );
+    },
+    clearCheckedOrders(state) {
+      state.checkedOrders = [];
+    },
+    addMultipleOrders(state, action: PayloadAction<number[]>) {
+      state.checkedOrders = action.payload;
     },
     addNewDriver(store, action: PayloadAction<number>) {
       store.drivers.push(action.payload);
@@ -49,6 +55,8 @@ export const {
   addNewOrder,
   removeDriver,
   removeOrder,
+  clearCheckedOrders,
+  addMultipleOrders,
   resetCreateRouteSettings,
 } = createRouteSlice.actions;
 export default createRouteSlice.reducer;
