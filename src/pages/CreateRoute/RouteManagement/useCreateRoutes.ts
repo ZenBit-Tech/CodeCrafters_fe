@@ -25,7 +25,7 @@ export const useCreateRoutes = (): {
     } else {
       getRoutesData([...checkedOrders], [...drivers]);
     }
-  }, [checkedOrders, drivers]);
+  }, [checkedOrders, drivers, navigate]);
 
   const mappedRoutes = routeData.map((orderToDriver) => {
     return {

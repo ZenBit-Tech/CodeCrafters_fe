@@ -47,7 +47,7 @@ export const ActionButtonsContainer = styled(Box)(({ theme }) => ({
 
 export const TableHeader = styled(Box)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: '1fr 1.5fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr',
+  gridTemplateColumns: '1fr 1.5fr 2fr 1fr 1.5fr 1fr 1fr 1.5fr',
   gap: theme.spacing(2),
   padding: theme.spacing(2),
   alignItems: 'center',

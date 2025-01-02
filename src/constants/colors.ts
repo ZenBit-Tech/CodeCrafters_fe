@@ -13,6 +13,8 @@ export const COLORS = {
     medium: 'rgb(75, 70, 92, 0.8)',
     dark: 'rgba(75, 70, 92, 1)',
     white: 'rgb(255, 255, 255)',
+    black: 'rgba(29, 27, 32, 1)',
+    schemesSecondary: 'rgba(98, 91, 113, 1)',
   },
   main: {
     dark: 'rgb(115, 103, 240)',
@@ -43,5 +45,6 @@ export const COLORS = {
   },
   background: {
     logoBlock: 'rgb(248, 247, 250)',
+    lightPurple: 'rgba(247, 242, 250, 1)',
   },
 };

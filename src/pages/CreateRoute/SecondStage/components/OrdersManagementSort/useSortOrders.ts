@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -8,6 +8,7 @@ import {
 import { ORDERS_SORTS } from '@/constants/ordersSorts';
 import { RootState } from '@/store/store';
 import { getOrders } from '@/pages/Orders/api/getOrders';
+import { useChooseOrder } from '../OrderManagementCard/useChooseOrder';
 
 interface SortingParamsType {
   sortBy: {
@@ -20,16 +21,35 @@ interface SortingParamsType {
 
 interface UseSortOrdersReturn {
   params: SortingParamsType;
+  isAllSelected: boolean;
+  toggleSelectAll: () => void;
   toggleSortOrder: (sortType: keyof typeof ORDERS_SORTS) => void;
   updateFilter: (filterValue: string) => void;
 }
 
-export const useSortOrders = (): UseSortOrdersReturn => {
+export const useSortOrders = (allOrderIds: number[]): UseSortOrdersReturn => {
   const dispatch = useDispatch();
   const { params } = useSelector((store: RootState) => store.ordersPageSlice);
   const { routeDate } = useSelector(
     (store: RootState) => store.createRoutSettings
   );
+  const { checkedOrders, selectAllOrders, deselectAllOrders } =
+    useChooseOrder();
+
+  const isAllSelected = useMemo(
+    () =>
+      allOrderIds.length > 0 &&
+      allOrderIds.every((id) => checkedOrders.includes(id)),
+    [allOrderIds, checkedOrders]
+  );
+
+  const toggleSelectAll = useCallback(() => {
+    if (isAllSelected) {
+      deselectAllOrders();
+    } else {
+      selectAllOrders(allOrderIds);
+    }
+  }, [isAllSelected, deselectAllOrders, selectAllOrders, allOrderIds]);
 
   const toggleSortOrder = useCallback(
     (sortType: keyof typeof ORDERS_SORTS) => {
@@ -75,6 +95,8 @@ export const useSortOrders = (): UseSortOrdersReturn => {
 
   return {
     params,
+    isAllSelected,
+    toggleSelectAll,
     toggleSortOrder,
     updateFilter,
   };

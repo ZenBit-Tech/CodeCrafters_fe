@@ -19,6 +19,10 @@ const Status: React.FC<StatusProps> = ({ status }) => {
       backgroundColor: COLORS.status.completed.bg,
       color: COLORS.status.completed.text,
     },
+    'On Time': {
+      backgroundColor: COLORS.status.completed.bg,
+      color: COLORS.status.completed.text,
+    },
     'Not arrived': {
       backgroundColor: COLORS.status.notArrived.bg,
       color: COLORS.status.notArrived.text,

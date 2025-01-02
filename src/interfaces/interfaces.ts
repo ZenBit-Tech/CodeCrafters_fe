@@ -80,6 +80,7 @@ export interface RouteInform {
     collection_time_start: Date;
     collection_time_end: Date;
     collection_address: string;
+    failed_reason: string | null;
     status: StatusEnum;
   }[];
 }

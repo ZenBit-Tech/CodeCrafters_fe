@@ -3,6 +3,8 @@ import { Divider } from '@mui/material';
 
 import RoutesRow from '@/components/RoutesRow';
 import { Container } from '@/pages/Routes/styles';
+import ConditionalWrapper from '@/components/ConditionalWrapper';
+
 import FilterHeader from './components/FilterHeader';
 import ActionsPanel from './components/ActionsPanel';
 import RouteTable from './components/RouteTable';
@@ -19,7 +21,6 @@ const RoutesPage: React.FC = () => {
     sortDirection,
     handleSort,
     handlePageChange,
-    handleDateChange,
     handleSearchChange,
     handleFilterChange,
     handleCreateRouteClick,
@@ -31,52 +32,50 @@ const RoutesPage: React.FC = () => {
 
       <Divider />
 
-      <ActionsPanel
-        onDateChange={handleDateChange}
-        onSearchChange={handleSearchChange}
-      />
+      <ActionsPanel onSearchChange={handleSearchChange} />
 
       <Divider />
+      <ConditionalWrapper
+        items={routes}
+        emptyContent={
+          <NoRoutesMessage onCreateRouteClick={handleCreateRouteClick} />
+        }
+      >
+        <RouteTable
+          sortField={sortField}
+          sortDirection={sortDirection}
+          onSort={handleSort}
+        />
 
-      {routes.length === 0 ? (
-        <NoRoutesMessage onCreateRouteClick={handleCreateRouteClick} />
-      ) : (
-        <>
-          <RouteTable
-            sortField={sortField}
-            sortDirection={sortDirection}
-            onSort={handleSort}
-          />
+        <Divider />
 
-          <Divider />
+        {routes
+          .slice((page - 1) * rowsPerPage, page * rowsPerPage)
+          .map((route) => (
+            <RoutesRow
+              key={route.routeId}
+              routeId={route.routeId}
+              date={route.date}
+              driverFirstName={route.driverFirstName}
+              driverLastName={route.driverLastName}
+              driverPhone={route.driverPhone}
+              stopsCount={route.stopsCount}
+              route_time={route.routeTime}
+              distance={route.distance}
+              status={route.status}
+              failedOrdersCount={route.failedOrdersCount}
+            />
+          ))}
 
-          {routes
-            .slice((page - 1) * rowsPerPage, page * rowsPerPage)
-            .map((route) => (
-              <RoutesRow
-                key={route.routeId}
-                routeId={route.routeId}
-                date={route.date}
-                driverFirstName={route.driverFirstName}
-                driverLastName={route.driverLastName}
-                driverPhone={route.driverPhone}
-                stopsCount={route.stopsCount}
-                route_time={route.routeTime}
-                distance={route.distance}
-                status={route.status}
-              />
-            ))}
-
-          <RoutePagination
-            page={page}
-            totalPages={Math.ceil(routes.length / rowsPerPage)}
-            start={(page - 1) * rowsPerPage + 1}
-            end={Math.min(page * rowsPerPage, routes.length)}
-            total={routes.length}
-            onPageChange={handlePageChange}
-          />
-        </>
-      )}
+        <RoutePagination
+          page={page}
+          totalPages={Math.ceil(routes.length / rowsPerPage)}
+          start={(page - 1) * rowsPerPage + 1}
+          end={Math.min(page * rowsPerPage, routes.length)}
+          total={routes.length}
+          onPageChange={handlePageChange}
+        />
+      </ConditionalWrapper>
     </Container>
   );
 };

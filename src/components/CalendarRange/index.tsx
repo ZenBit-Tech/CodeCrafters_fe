@@ -27,13 +27,10 @@ import { useCalendarRange } from './useCalendarRange';
 
 const NUM_MONTHS_TO_SHOW = 1;
 
-const CalendarRange: React.FC<{
-  onDateChange: (start: string, end: string) => void;
-}> = ({ onDateChange }) => {
+const CalendarRange: React.FC = () => {
   const {
     isCalendarOpen,
     currentMonth,
-    confirmedRange,
     tempRange,
     handleSelect,
     handleConfirm,
@@ -41,16 +38,16 @@ const CalendarRange: React.FC<{
     handlePrevMonth,
     handleNextMonth,
     openCalendar,
-  } = useCalendarRange(onDateChange);
+  } = useCalendarRange();
 
   return (
     <Container>
       <CalendarTrigger onClick={openCalendar}>
         <InputField
           value={`${format(
-            confirmedRange.startDate as Date,
+            tempRange.startDate as Date,
             DATE_FORMAT
-          )}-${format(confirmedRange.endDate as Date, DATE_FORMAT)}`}
+          )} - ${format(tempRange.endDate as Date, DATE_FORMAT)}`}
           readOnly
         />
         <CalendarIcon />

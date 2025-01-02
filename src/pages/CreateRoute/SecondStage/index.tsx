@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 
 const SecondStagePage: FC = () => {
   const { sendRequestByParams } = useSearchOrders();
-  const { viewOrdersData, currentPage, totalPages, fetchOrders } =
+  const { viewOrdersData, currentPage, totalPages, fetchOrders, allOrderIds } =
     useOrdersPagination();
   const { goToDriversStage } = useValidateChoosedOrders();
 
@@ -28,7 +28,6 @@ const SecondStagePage: FC = () => {
   return (
     <Box>
       <CreateRouteProgressBar choseRoute={CreateRouteStages.SECOND} />
-
       <Box sx={searchRow}>
         <SearchComponent onSearch={sendRequestByParams} />
         <BasicDatePicker
@@ -37,7 +36,8 @@ const SecondStagePage: FC = () => {
           dataFormat={''}
         />
       </Box>
-      <OrdersManagementSort />
+      <OrdersManagementSort allOrderIds={allOrderIds} />
+
       {viewOrdersData.orders.length > 0 ? (
         viewOrdersData.orders.map((order) => (
           <OrderManagementCard
@@ -54,7 +54,7 @@ const SecondStagePage: FC = () => {
           />
         ))
       ) : (
-        <EmptyOrdersComponent />
+        <EmptyOrdersComponent width={1126} />
       )}
 
       <Box sx={paginationWrapper}>

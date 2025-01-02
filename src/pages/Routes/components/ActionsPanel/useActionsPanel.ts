@@ -20,7 +20,6 @@ interface UseActionPanelHook {
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
   handleSearchClick: () => void;
-  onDateChange: (start: string, end: string) => void;
   handleCreateRouteClick: () => void;
   handleViewRoutes: (from: string, to: string) => Promise<void>;
   isMapVisible: boolean;
@@ -28,7 +27,6 @@ interface UseActionPanelHook {
 }
 
 const useActionsPanel = (
-  onDateChange: (start: string, end: string) => void,
   onSearchChange: (searchQuery: string) => void
 ): UseActionPanelHook => {
   const [isMapVisible, setIsMapVisible] = useState<boolean>(false);
@@ -57,16 +55,11 @@ const useActionsPanel = (
   const handleViewRoutes = async (from: string, to: string): Promise<void> => {
     try {
       store.dispatch(setisVisible(true));
-      console.log(from, to);
-      // console.log(
-      //   `${import.meta.env.VITE_BASE_URL}/route/by-date-range?from=${new Date(from)}&to=${new Date(to)}`
-      // );
+
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/route/by-date-range?from=${from}&to=${to}`,
         { headers: { authorization: accessToken } }
       );
-
-      console.log(response);
 
       store.dispatch(setChoseRoutes(response.data));
       setIsMapVisible(true);
@@ -83,7 +76,6 @@ const useActionsPanel = (
     handleInputChange,
     handleKeyDown,
     handleSearchClick,
-    onDateChange,
     handleCreateRouteClick,
     handleViewRoutes,
     isMapVisible,

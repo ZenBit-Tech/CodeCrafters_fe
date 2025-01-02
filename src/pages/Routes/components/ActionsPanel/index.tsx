@@ -33,9 +33,8 @@ import {
 import { RoutesOnTheMap } from '../RoutesOnTheMap';
 
 const ActionsPanel: React.FC<{
-  onDateChange: (start: string, end: string) => void;
   onSearchChange: (searchQuery: string) => void;
-}> = ({ onDateChange, onSearchChange }) => {
+}> = ({ onSearchChange }) => {
   const { t } = useTranslation();
   const {
     searchQuery,
@@ -46,7 +45,7 @@ const ActionsPanel: React.FC<{
     handleViewRoutes,
     isMapVisible,
     setIsMapVisible,
-  } = useActionsPanel(onDateChange, onSearchChange);
+  } = useActionsPanel(onSearchChange);
   const [isMapViewVisible, toggleIsMapViewVisible] = useToggleVisible(false);
   const today = dayjs();
   const plusMoth = dayjs().add(30, 'days');
@@ -70,7 +69,7 @@ const ActionsPanel: React.FC<{
         />
       </SearchContainer>
       <ActionButtonsContainer>
-        <CalendarRange onDateChange={onDateChange} />
+        <CalendarRange />
         <Box sx={mapDatePickerContainer}>
           <Button
             variant="lined"
