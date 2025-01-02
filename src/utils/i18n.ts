@@ -187,7 +187,7 @@ const resources = {
         invalidExpiredLink: 'Invalid or expired link.',
         verificationError:
           'An error occurred during verification. Please try again.',
-        missingEmail: 'User email is missing',
+        missingEmail: 'User email is missing. Please enter your email again.',
         tokenTitle: 'Token Expired',
         tokenDescription: 'Your Confirmation link was expired. ',
         buttonText: 'Send confirmation link again',
