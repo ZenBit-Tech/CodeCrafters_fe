@@ -26,6 +26,8 @@ const useTokenExpiredModal = (): UseTokenExpiredModalReturn => {
   const handleResendEmail = useCallback(async (): Promise<void> => {
     if (!userEmail) {
       toast(t('auth.missingEmail'));
+      dispatch(closeModal());
+      dispatch(logout());
       return;
     }
 
