@@ -27,8 +27,8 @@ const useFetchUsers = (
   sortOrder: Record<string, 'asc' | 'desc'>
 ): UseFetchUsersReturn => {
   const [users, setUsers] = useState<User[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
   const fetchUsers = async (): Promise<void> => {

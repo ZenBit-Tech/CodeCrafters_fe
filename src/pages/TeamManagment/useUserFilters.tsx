@@ -17,10 +17,10 @@ interface UseUserFiltersReturn {
 }
 
 const useUserFilters = (): UseUserFiltersReturn => {
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [pendingSearchTerm, setPendingSearchTerm] = useState('');
-  const [filterByRole, setFilterByRole] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [pendingSearchTerm, setPendingSearchTerm] = useState<string>('');
+  const [filterByRole, setFilterByRole] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<Record<string, 'asc' | 'desc'>>({
     full_name: 'asc',
     email: 'asc',
