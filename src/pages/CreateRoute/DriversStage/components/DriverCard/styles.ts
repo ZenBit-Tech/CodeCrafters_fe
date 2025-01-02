@@ -14,11 +14,11 @@ export const driverRowStyles: SxProps<Theme> = {
 };
 
 export const customerBlock: SxProps<Theme> = {
-  width: '250px',
-  padding: '10px 20px',
+  maxWidth: '300px',
+  marginLeft: '15px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-evenly',
+  justifyContent: 'space-between',
   position: 'relative',
 
   '&:hover': {
@@ -38,4 +38,8 @@ export const popup: SxProps<Theme> = {
   border: `1px solid ${COLORS.text.light}`,
   display: 'none',
   ...FONT,
+};
+
+export const driverInform: SxProps<Theme> = {
+  marginLeft: '10px',
 };

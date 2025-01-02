@@ -4,9 +4,15 @@ import { t } from 'i18next';
 
 import { emptyOrdersPageStyles } from './styles';
 
-const EmptyOrdersComponent: FC = () => {
+interface EmptyOrdersProps {
+  width: number;
+}
+
+const EmptyOrdersComponent: FC<EmptyOrdersProps> = ({ width }) => {
   return (
-    <Typography sx={emptyOrdersPageStyles}>
+    <Typography
+      sx={{ ...emptyOrdersPageStyles, width: `${width}px !important` }}
+    >
       {t('orderManagement.thereIsNoOrders')}
     </Typography>
   );

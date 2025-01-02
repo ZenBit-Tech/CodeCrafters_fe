@@ -46,7 +46,7 @@ function OrdersPage(): React.ReactElement {
           />
         ))
       ) : (
-        <EmptyOrdersComponent />
+        <EmptyOrdersComponent width={1238} />
       )}
       <Box sx={paginationWrapper}>
         <Pagination
