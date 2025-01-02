@@ -1,26 +1,35 @@
 import { FC } from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Checkbox, IconButton, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useTranslation } from 'react-i18next';
+
+import { orderRow } from '@/pages/CreateRoute/SecondStage/components/OrderManagementCard/styles';
 
 import { useSortOrders } from './useSortOrders';
 import {
   iconButtonStyles,
   sortingContainer,
   sortingTextStyles,
-  sortingRow,
   collectionAddressStyles,
   clientBlockStyles,
   luggagesBlockStyles,
 } from './styles';
 
-const OrdersManagementSort: FC = () => {
+const OrdersManagementSort: FC<{ allOrderIds: number[] }> = ({
+  allOrderIds,
+}) => {
   const { t } = useTranslation();
-  const { params, toggleSortOrder } = useSortOrders();
+  const { params, isAllSelected, toggleSelectAll, toggleSortOrder } =
+    useSortOrders(allOrderIds);
 
   return (
-    <Box sx={sortingRow}>
+    <Box sx={orderRow}>
+      <Checkbox
+        checked={isAllSelected}
+        onChange={toggleSelectAll}
+        inputProps={{ 'aria-label': 'select all orders' }}
+      />
       <Box sx={sortingContainer}>
         <Typography sx={sortingTextStyles}>{t('COLLECTION DATE')}</Typography>
         <IconButton

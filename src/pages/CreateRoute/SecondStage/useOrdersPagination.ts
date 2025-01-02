@@ -15,6 +15,7 @@ interface UseOrdersHook {
   currentPage: number;
   totalPages: number;
   fetchOrders: (page?: number) => void;
+  allOrderIds: number[];
 }
 
 export const useOrdersPagination = (): UseOrdersHook => {
@@ -25,6 +26,8 @@ export const useOrdersPagination = (): UseOrdersHook => {
   const { routeDate } = useSelector(
     (store: RootState) => store.createRoutSettings
   );
+
+  const allOrderIds = viewOrdersData.orders.map((order) => order.id);
 
   const fetchOrders = useCallback(
     (page: number = 1) => {
@@ -51,5 +54,6 @@ export const useOrdersPagination = (): UseOrdersHook => {
     currentPage: viewOrdersData.page,
     totalPages: viewOrdersData.pagesCount,
     fetchOrders,
+    allOrderIds,
   };
 };
