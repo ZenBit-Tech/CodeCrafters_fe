@@ -9,7 +9,7 @@ export const orderRow: SxProps<Theme> = {
   alignItems: 'center',
   justifyContent: 'space-between',
   background: COLORS.white,
-  padding: '10px 25px',
+  padding: '5px 25px',
   border: '0px',
   color: COLORS.text.medium,
 

@@ -51,7 +51,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
   return (
     <Box
       display="grid"
-      gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr"
+      gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1fr 1.5fr"
       padding="8px 16px"
       gap="16px"
       borderBottom={`1px solid ${COLORS.text.border}`}

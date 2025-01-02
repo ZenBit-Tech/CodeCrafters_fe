@@ -30,15 +30,15 @@ export const searchField: SxProps<Theme> = {
   '& .MuiOutlinedInput-root': {
     height: '100%',
   },
-  '& .MuiFormLabel-root': {
-    transform: (theme) =>
-      theme.typography.htmlFontSize === 16
-        ? 'translate(14px, -9px) scale(0.75)'
-        : 'translate(14px, 9px) scale(1)',
+  '& .MuiInputLabel-root': {
+    transform: 'translate(14px, 9px) scale(1)',
+    transition: 'transform 200ms ease-out',
   },
-  '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
+  '& .MuiInputLabel-root.Mui-focused': {
     transform: 'translate(14px, -9px) scale(0.75)',
-    maxWidth: 'calc(133% - 32px)',
+  },
+  '& .MuiInputLabel-root:not(.Mui-focused):not(.MuiInputLabel-shrink)': {
+    transform: 'translate(14px, 9px) scale(1)',
   },
 };
 
