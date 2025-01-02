@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@mui/material';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 import { TableHeader, ColumnHeader } from '@/pages/Routes/styles';
 import { COLORS } from '@/constants/colors';
 import { columns } from '@/constants/routes';
+
+import { ColumnItem } from './styles';
 
 interface Props {
   sortField: string | null;
@@ -32,14 +33,14 @@ const RouteTable: React.FC<Props> = ({ sortField, sortDirection, onSort }) => {
     <TableHeader>
       {columns.map(({ label, key }) => (
         <ColumnHeader key={key} onClick={() => onSort(label)}>
-          <Typography variant="body2">
+          <ColumnItem variant="body2">
             {t(`routesPage.columns.${key}`)}
-          </Typography>
+          </ColumnItem>
           {renderSortIcon(label)}
         </ColumnHeader>
       ))}
-      <Typography variant="body2">{t('routesPage.columns.status')}</Typography>
-      <Typography variant="body2">{t('routesPage.actions')}</Typography>
+      <ColumnItem variant="body2">{t('routesPage.columns.status')}</ColumnItem>
+      <ColumnItem variant="body2">{t('routesPage.actions')}</ColumnItem>
     </TableHeader>
   );
 };

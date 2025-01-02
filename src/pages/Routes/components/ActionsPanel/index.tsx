@@ -13,6 +13,7 @@ import {
   ActionButtonsContainer,
   RopeIcon,
   StyledTextField,
+  StyledButton,
 } from '@/pages/Routes/styles';
 import CalendarRange from '@/components/CalendarRange';
 import ropeIcon from '@/assets/icons/jump-rope.svg';
@@ -107,7 +108,7 @@ const ActionsPanel: React.FC<{
           )}
         </Box>
 
-        <Button
+        <StyledButton
           variant="lined"
           label={t('routesPage.createRoute')}
           onClick={handleCreateRouteClick}
