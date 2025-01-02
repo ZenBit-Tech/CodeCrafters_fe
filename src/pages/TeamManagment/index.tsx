@@ -5,6 +5,7 @@ import {
   Box,
   Divider,
   IconButton,
+  InputAdornment,
   MenuItem,
   Pagination,
   Select,
@@ -12,15 +13,26 @@ import {
   Typography,
 } from '@mui/material';
 import { t } from 'i18next';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Loader from '@/components/Loader/Loader';
 import UserRow from '@/components/UserRow';
-import { COLORS } from '@/constants/colors';
-import { FONT } from '@/constants/font';
 import ConditionalWrapper from '@/components/ConditionalWrapper';
 
+import {
+  container,
+  title,
+  filtersContainer,
+  searchField,
+  roleSelect,
+  columnsHeader,
+  columnLabel,
+  columnTypography,
+  paginationContainer,
+  buttonContainer,
+} from './styles';
 import useUsers from './useFetchUsers';
-import UserForm from './UserForm/UserForm';
+import UserForm from './UserForm';
 import useUserFilters from './useUserFilters';
 
 const columns = [
@@ -47,6 +59,9 @@ const TeamManagementPage: React.FC = () => {
     handleRoleFilterChange,
     toggleSortOrder,
     handlePageChange,
+    triggerSearch,
+    pendingSearchTerm,
+    handleKeyDown,
   } = useUserFilters();
 
   const { users, totalPages, fetchUsers, addUserToList } = useUsers(
@@ -59,99 +74,58 @@ const TeamManagementPage: React.FC = () => {
   return (
     <>
       <Loader />
-      <Box
-        sx={{
-          boxShadow: `0px 4px 18px 0px ${COLORS.text.extraLight}`,
-          borderRadius: 1,
-          backgroundColor: COLORS.text.white,
-          width: '100%',
-          padding: '24px',
-        }}
-      >
-        <Typography
-          sx={{ color: COLORS.text.dark, fontWeight: FONT.fontWeight.large }}
-        >
-          {t('settings.title')}
-        </Typography>
+      <Box sx={container}>
+        <Typography sx={title}>{t('settings.title')}</Typography>
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginBottom: '20px',
-            height: '38px',
-            gap: 2,
-          }}
-        >
+        <Box sx={filtersContainer}>
           <TextField
             label="Search"
             variant="outlined"
-            value={searchTerm}
+            value={pendingSearchTerm}
             onChange={handleSearchChange}
+            onKeyDown={handleKeyDown}
             placeholder="Search by name, email..."
-            sx={{
-              padding: 0,
-              '& .MuiOutlinedInput-root': {
-                height: '100%',
-              },
-              '& .MuiFormLabel-root': {
-                transform: searchTerm
-                  ? 'translate(14px, -9px) scale(0.75)'
-                  : 'translate(14px, 9px) scale(1)',
-              },
-              '& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused': {
-                transform: 'translate(14px, -9px) scale(0.75)',
-                maxWidth: 'calc(133% - 32px)',
-              },
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={triggerSearch}>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
+            sx={searchField}
           />
-          <Select
-            value={filterByRole}
-            onChange={(e) => handleRoleFilterChange(e.target.value)}
-            displayEmpty
-            variant="outlined"
-            sx={{ color: COLORS.text.dark }}
-          >
-            <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
-            <MenuItem value="DISPATCHER">
-              {t('settings.select.dispatcher')}
-            </MenuItem>
-            <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
-          </Select>
-          <UserForm
-            mode="create"
-            fetchUsers={fetchUsers}
-            addUserToList={addUserToList}
-          />
+
+          <Box sx={buttonContainer}>
+            <Select
+              value={filterByRole}
+              onChange={(e) => handleRoleFilterChange(e.target.value)}
+              displayEmpty
+              variant="outlined"
+              sx={roleSelect}
+            >
+              <MenuItem value="">{t('settings.select.allRoles')}</MenuItem>
+              <MenuItem value="DISPATCHER">
+                {t('settings.select.dispatcher')}
+              </MenuItem>
+              <MenuItem value="DRIVER">{t('settings.select.driver')}</MenuItem>
+              <MenuItem value="ADMIN">{t('settings.select.admin')}</MenuItem>
+            </Select>
+            <UserForm
+              mode="create"
+              fetchUsers={fetchUsers}
+              addUserToList={addUserToList}
+            />
+          </Box>
         </Box>
 
         <Divider />
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '10px 20px',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={columnsHeader}>
           {columns.map(({ key, label }) => (
-            <Box
-              key={key}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                width: key === 'role' ? '15%' : key === 'name' ? '25%' : '20%',
-              }}
-            >
-              <Typography
-                sx={{
-                  color: COLORS.text.dark,
-                  fontSize: FONT.fontSize.small,
-                }}
-              >
-                {label}
-              </Typography>
+            <Box key={key} sx={columnLabel(key)}>
+              <Typography sx={columnTypography}>{label}</Typography>
               <IconButton onClick={() => toggleSortOrder(key)}>
                 {sortOrder[validKeys[key] || key] === 'asc' ? (
                   <KeyboardArrowUpIcon />
@@ -161,9 +135,7 @@ const TeamManagementPage: React.FC = () => {
               </IconButton>
             </Box>
           ))}
-          <Typography
-            sx={{ color: COLORS.text.dark, fontSize: FONT.fontSize.small }}
-          >
+          <Typography sx={columnTypography}>
             {t('settings.columns.actions')}
           </Typography>
         </Box>
@@ -190,13 +162,7 @@ const TeamManagementPage: React.FC = () => {
             />
           ))}
         </ConditionalWrapper>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: '20px',
-          }}
-        >
+        <Box sx={paginationContainer}>
           <Pagination
             count={totalPages}
             page={page}

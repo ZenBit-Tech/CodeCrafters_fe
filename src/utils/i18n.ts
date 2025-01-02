@@ -118,6 +118,7 @@ const resources = {
           roles: {
             dispatcher: 'Dispatcher',
             driver: 'Driver',
+            admin: 'Admin',
           },
           validation: {
             fullNameRequired: 'Full name is required',
@@ -134,6 +135,7 @@ const resources = {
           allRoles: 'All Roles',
           dispatcher: 'Dispatcher',
           driver: 'Driver',
+          admin: 'Admin',
         },
         columns: {
           role: 'ROLE',
@@ -151,6 +153,10 @@ const resources = {
           error: 'Something went wrong. Try again later',
           errorDelete: 'Failed to delete user',
           noUsersFound: 'No users matching these conditions were found.',
+          unableToUpdate:
+            'It is not possible to update a user with the admin role.',
+          unableToDelete:
+            'It is not possible to delete a user with the admin role.',
         },
         popup: {
           heading: 'Confirm Deletion',
@@ -181,7 +187,7 @@ const resources = {
         invalidExpiredLink: 'Invalid or expired link.',
         verificationError:
           'An error occurred during verification. Please try again.',
-        missingEmail: 'User email is missing',
+        missingEmail: 'User email is missing. Please enter your email again.',
         tokenTitle: 'Token Expired',
         tokenDescription: 'Your Confirmation link was expired. ',
         buttonText: 'Send confirmation link again',

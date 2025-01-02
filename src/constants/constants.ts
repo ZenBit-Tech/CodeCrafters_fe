@@ -10,4 +10,6 @@ export const START_ROUTE_POINT = 'New York';
 
 export const STATUS_NOT_FOUND = 404;
 
+export const ROLE_STRING = 'role';
+
 export const STRING_TYPE = 'string';

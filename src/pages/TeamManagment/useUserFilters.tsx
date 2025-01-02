@@ -11,12 +11,16 @@ interface UseUserFiltersReturn {
   handleRoleFilterChange: (role: string) => void;
   toggleSortOrder: (key: string) => void;
   handlePageChange: (_: ChangeEvent<unknown>, value: number) => void;
+  triggerSearch: () => void;
+  pendingSearchTerm: string;
+  handleKeyDown: (event: React.KeyboardEvent) => void;
 }
 
 const useUserFilters = (): UseUserFiltersReturn => {
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterByRole, setFilterByRole] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [pendingSearchTerm, setPendingSearchTerm] = useState<string>('');
+  const [filterByRole, setFilterByRole] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<Record<string, 'asc' | 'desc'>>({
     full_name: 'asc',
     email: 'asc',
@@ -24,10 +28,15 @@ const useUserFilters = (): UseUserFiltersReturn => {
     role: 'asc',
   });
 
+  const triggerSearch = (): void => {
+    setSearchTerm(pendingSearchTerm);
+    setPage(1);
+  };
+
   const handleSearchChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setSearchTerm(event.target.value);
+    setPendingSearchTerm(event.target.value);
     setPage(1);
   };
 
@@ -58,6 +67,12 @@ const useUserFilters = (): UseUserFiltersReturn => {
     setPage(value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent): void => {
+    if (event.key === 'Enter') {
+      triggerSearch();
+    }
+  };
+
   return {
     page,
     searchTerm,
@@ -67,6 +82,9 @@ const useUserFilters = (): UseUserFiltersReturn => {
     handleRoleFilterChange,
     toggleSortOrder,
     handlePageChange,
+    triggerSearch,
+    pendingSearchTerm,
+    handleKeyDown,
   };
 };
 
