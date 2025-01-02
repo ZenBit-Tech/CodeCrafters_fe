@@ -6,7 +6,12 @@ import CustomCheckbox from '@/components/Checkbox/index.tsx';
 import UserAvatar from '@/components/UserAvatar/index.tsx';
 import { Customer } from '@/interfaces/interfaces.ts';
 
-import { customerBlock, driverRowStyles, popup } from './styles.ts';
+import {
+  customerBlock,
+  driverInform,
+  driverRowStyles,
+  popup,
+} from './styles.ts';
 
 const DriverCard: FC<{
   customer: Customer;
@@ -29,7 +34,7 @@ const DriverCard: FC<{
           <Typography>{t(customer.email)}</Typography>
         </Box>
         <UserAvatar firstName={customerNames[0]} lastName={customerNames[1]} />
-        <Box>
+        <Box sx={driverInform}>
           <Typography>{t(customer.full_name)}</Typography>
           <Typography>{t(customer.phone_number)}</Typography>
         </Box>
