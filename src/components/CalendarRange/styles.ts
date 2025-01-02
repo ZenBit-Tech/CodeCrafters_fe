@@ -9,7 +9,7 @@ export const CalendarTrigger = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: '0 16px',
-  height: '55px',
+  height: '38px',
   border: `1px solid ${theme.palette.grey[400]}`,
   borderRadius: '4px',
   cursor: 'pointer',

@@ -52,8 +52,8 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
     <Box
       display="grid"
       gridTemplateColumns="1fr 1.5fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr"
-      padding={2}
-      gap={2}
+      padding="8px 16px"
+      gap="16px"
       borderBottom={`1px solid ${COLORS.text.border}`}
       alignItems="center"
     >
@@ -72,7 +72,7 @@ const RoutesRow: React.FC<RoutesRowProps> = ({
             color={COLORS.text.medium}
             fontWeight={FONT.fontWeight.large}
           >{`${driverFirstName} ${driverLastName}`}</Typography>
-          <Typography variant="body2" color={COLORS.text.light}>
+          <Typography variant="subtitle2" color={COLORS.text.light}>
             {driverPhone}
           </Typography>
         </Box>

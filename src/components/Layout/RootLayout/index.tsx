@@ -32,7 +32,7 @@ const RootLayout: React.FC = () => {
       },
     ];
 
-    const adminOrDispatcherNavigation = [
+    const adminNavigation = [
       {
         segment: 'orders',
         title: t('navigation.orders'),
@@ -55,8 +55,9 @@ const RootLayout: React.FC = () => {
       case Roles.SUPERADMIN:
         return superAdminNavigation;
       case Roles.ADMIN:
+        return adminNavigation;
       case Roles.DISPATCHER:
-        return adminOrDispatcherNavigation;
+        return adminNavigation.filter((item) => item.segment !== 'settings');
       default:
         return [];
     }
