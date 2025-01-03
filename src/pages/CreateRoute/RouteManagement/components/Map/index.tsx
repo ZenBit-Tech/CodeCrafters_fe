@@ -8,6 +8,7 @@ import { store } from '@/store/store';
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
 import { useViewMap } from './useViewMap';
+import { customIcon } from '@/components/CustomMapPin';
 
 const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
   const { coordinates, mappedRoutes } = useViewMap();
@@ -47,6 +48,7 @@ const Map: FC<{ choseRoute: number | null }> = ({ choseRoute }) => {
       {coordinates !== null && (
         <Marker
           position={store.getState().chosePin.coordinates as LatLngExpression}
+          icon={customIcon}
         ></Marker>
       )}
     </MapContainer>
