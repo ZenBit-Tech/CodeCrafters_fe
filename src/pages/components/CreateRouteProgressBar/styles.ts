@@ -3,7 +3,7 @@ import { SxProps, Theme } from '@mui/material';
 
 export const progressBarStyles: SxProps<Theme> = {
   width: '1127px',
-  marginBottom: '36px',
+  marginBottom: '18px',
   display: 'flex',
   justifyContent: 'space-between',
   backgroundColor: COLORS.white,

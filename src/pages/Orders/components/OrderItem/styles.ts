@@ -10,7 +10,7 @@ export const orderRow: (isNew: boolean) => SxProps<Theme> = (isNew) => {
     alignItems: 'center',
     justifyContent: 'space-between',
     background: isNew ? COLORS.lightPurple : COLORS.white,
-    padding: '10px 25px',
+    padding: '5px 25px',
     border: isNew ? `1px solid ${COLORS.purple}` : '0px',
     color: COLORS.text.medium,
 
@@ -23,7 +23,7 @@ export const orderRow: (isNew: boolean) => SxProps<Theme> = (isNew) => {
 
 export const customerBlock: SxProps<Theme> = {
   width: '250px',
-  padding: '10px 20px',
+  padding: '5px 20px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-evenly',
