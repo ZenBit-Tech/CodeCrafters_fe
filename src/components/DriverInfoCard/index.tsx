@@ -9,7 +9,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 
 import UserAvatar from '../UserAvatar';
 
-interface DriverInfoProps {
+export interface DriverInfoProps {
   firstName: string;
   lastName: string;
   workingHours: string;
