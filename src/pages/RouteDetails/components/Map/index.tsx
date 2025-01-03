@@ -6,6 +6,7 @@ import { useRouteDetails } from '@/pages/RouteDetails';
 import RoutingComponent from './RoutingComponent';
 import './styles.css';
 import { MapContainerStyles } from './styles';
+import { customIcon } from '@/components/CustomMapPin';
 
 const Map: FC<{ locations: string[] }> = ({ locations }) => {
   const { pinCoordinates } = useRouteDetails();
@@ -21,7 +22,9 @@ const Map: FC<{ locations: string[] }> = ({ locations }) => {
         attribution={`&copy; <a href="${import.meta.env.VITE_BASE_OPEN_STREET_API}/copyright">OpenStreetMap</a> contributors`}
       />
       <RoutingComponent locations={locations} />
-      {pinCoordinates && <Marker position={pinCoordinates}></Marker>}
+      {pinCoordinates && (
+        <Marker position={pinCoordinates} icon={customIcon}></Marker>
+      )}
     </MapContainer>
   );
 };
