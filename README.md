@@ -1,50 +1,68 @@
-# React + TypeScript + Vite
+# Dispatcher APP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
+  Create your own delivery company, manage users, orders, routes, and much more.
 
-Currently, two official plugins are available:
+## Domain
+  The product enables users to efficiently create and manage their own delivery company by overseeing users, orders, routes, and other key operational aspects, providing tools for streamlined logistics and optimized processes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features:
+  1. Modular Architecture:
 
-## Expanding the ESLint configuration
+  Built with a well-structured folder system, the project ensures ease of navigation, scalability, and clear separation of concerns.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  2. Modern Frontend Stack:
 
-- Configure the top-level `parserOptions` property like this:
+   - Utilizes React.js for building dynamic and interactive user interfaces.
+   - TypeScript integration ensures type safety and reduces runtime errors.
+   - State management is implemented using best practices for efficiency and clarity.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+  3. Responsive Design:
+
+  The UI is designed to be fully responsive, providing seamless user experiences across devices and screen sizes.
+
+  4. Reusable Components:
+  Emphasis on reusability with a library of custom-designed components to speed up development and maintain consistency.
+
+  5. API Integration:
+  Ready for integration with backend services, featuring a clean and efficient system for handling data fetching, caching, and error management.
+
+## Requirements
+ - NodeJS (20.x.x);
+ - npm (10.x.x);
+
+## Folder structure
+
+```
+  ├── src/
+      ├── api/         
+      ├── components/  
+      ├── constants/    
+      ├── hooks/        
+      ├── interfaces/   
+      ├── pages/
+          ├── components/  
+          ├── PageExample/
+      ├── routes/
+      ├── services/
+      ├── store/
+      ├── test/
+      ├── utils/
+      ├── App.tsx
+      ├── global.d.ts
+      ├── main.tsx
+      ├── theme.ts
+      ├── vite-env.d.ts
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## How to run 
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+Create a .env file and populate it based on the .env.example file.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+After run the next command
+
 ```
+  npm install
+  npm run dev
+```
+
