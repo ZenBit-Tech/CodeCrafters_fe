@@ -7,7 +7,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NoteIcon from '@mui/icons-material/Note';
 import { Box, IconButton, Typography } from '@mui/material';
 
-interface RouteInfoProps {
+export interface RouteInfoProps {
   routeTime: string;
   city: string;
 }

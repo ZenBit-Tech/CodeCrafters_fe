@@ -4,9 +4,14 @@
     "plugin:react/recommended",
     "prettier",
     "eslint:recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
   ],
-  "plugins": ["react-hooks", "prettier", "import"],
+  "plugins": [
+    "react-hooks",
+    "prettier",
+    "import"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
@@ -23,7 +28,10 @@
           "index"
         ],
         "newlines-between": "always",
-        "alphabetize": { "order": "asc", "caseInsensitive": true }
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
       }
     ]
   }
