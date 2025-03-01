@@ -1,0 +1,11 @@
+import { SxProps, Theme } from '@mui/material/styles';
+export declare const orderRow: (isNew: boolean) => SxProps<Theme>;
+export declare const customerBlock: SxProps<Theme>;
+export declare const popup: SxProps<Theme>;
+export declare const luggageStyles: SxProps<Theme>;
+export declare const customerAvatar: SxProps<Theme>;
+export declare const collectionDateStyles: SxProps<Theme>;
+export declare const collectionTimeStyles: SxProps<Theme>;
+export declare const collectionAddressStyles: SxProps<Theme>;
+export declare const statusBlock: SxProps<Theme>;
+export declare const routeBlock: SxProps<Theme>;

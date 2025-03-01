@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import DriverRouteInfo, { RouteInfoProps } from './index';
 
 export default {
@@ -10,7 +10,9 @@ export default {
   },
 } as Meta;
 
-const Template: Story<RouteInfoProps> = (args) => <DriverRouteInfo {...args} />;
+const Template: StoryFn<RouteInfoProps> = (args) => (
+  <DriverRouteInfo {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,0 +1,11 @@
+import { SxProps, Theme } from '@mui/material';
+export declare const container: SxProps<Theme>;
+export declare const title: SxProps<Theme>;
+export declare const filtersContainer: SxProps<Theme>;
+export declare const searchField: SxProps<Theme>;
+export declare const roleSelect: SxProps<Theme>;
+export declare const buttonContainer: SxProps<Theme>;
+export declare const columnsHeader: SxProps<Theme>;
+export declare const columnLabel: (key: string) => SxProps<Theme>;
+export declare const columnTypography: SxProps<Theme>;
+export declare const paginationContainer: SxProps<Theme>;

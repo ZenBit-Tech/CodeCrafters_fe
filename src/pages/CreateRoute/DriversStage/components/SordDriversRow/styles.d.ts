@@ -1,0 +1,11 @@
+import { SxProps, Theme } from '@mui/material';
+export declare const sortingRow: SxProps<Theme>;
+export declare const sortingContainer: SxProps<Theme>;
+export declare const sortingTextStyles: SxProps<Theme>;
+export declare const iconButtonStyles: SxProps<Theme>;
+export declare const selectBoxContainer: SxProps<Theme>;
+export declare const collectionAddressStyles: SxProps<Theme>;
+export declare const luggagesBlockStyles: SxProps<Theme>;
+export declare const clientBlockStyles: SxProps<Theme>;
+export declare const selectStyles: SxProps<Theme>;
+export declare const routeBlock: SxProps<Theme>;

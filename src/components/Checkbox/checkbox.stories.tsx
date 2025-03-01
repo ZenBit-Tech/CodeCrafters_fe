@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useState } from 'react';
 import CustomCheckbox from './index';
 import 'normalize.css';
@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<{
+const Template: StoryFn<{
   id: number;
   isChecked: boolean;
   toggleCheckbox: (

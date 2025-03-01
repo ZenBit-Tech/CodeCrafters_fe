@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import Loader from './Loader';
@@ -10,7 +10,7 @@ export default {
   component: Loader,
 } as Meta;
 
-const Template: Story<{ isVisible: boolean }> = (args) => {
+const Template: StoryFn<{ isVisible: boolean }> = (args) => {
   const store = mockStore({
     loader: { isVisible: args.isVisible },
   });

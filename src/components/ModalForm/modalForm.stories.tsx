@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { useState } from 'react';
 import ModalForm from './index';
 import Button from '@/components/Button';
@@ -17,11 +17,17 @@ export default {
   },
 } as Meta;
 
-const Template: Story<{
+type ModalFormArgs = {
   isOpenBtn: boolean;
   btnContent: string;
   formTitle: string;
-}> = (args) => {
+};
+
+const Template: StoryFn<{
+  isOpenBtn: boolean;
+  btnContent: string;
+  formTitle: string;
+}> = (args: ModalFormArgs) => {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
