@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, UseFormRegister } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { updateMessage } from '@/store/exampleSlice';
+import { updateMessage } from '@/store/slices/exampleSlice';
 import { AppDispatch, RootState } from '@/store/store';
 
 interface FormData {
